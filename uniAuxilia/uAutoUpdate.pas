@@ -84,7 +84,7 @@ begin
    Height  := 285;
    lbStatus.Visible    := False;
    PanelButons.Visible := True;
-   //lbStatus.Caption := 'Existe uma nova versão do disponível.';
+   //lbStatus.Caption := 'Existe uma nova versï¿½o do disponï¿½vel.';
 end;
 
 procedure TFrmAutoUpdate.RESTClientPooler1Work(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
@@ -109,7 +109,7 @@ begin
    FBytesToTransfer := 0;
 end;
 
-// ------- Retorna o Número da Versão do Sistema ------- //
+// ------- Retorna o Nï¿½mero da Versï¿½o do Sistema ------- //
 procedure TFrmAutoUpdate.GetLocalVersion(out VerLocApp,VerLocDB:Integer);
 var
    QueAuxi:TRESTDWClientSQL;
@@ -151,8 +151,8 @@ begin
       except
          on E:Exception do
          begin
-            SalvaLog(USUARIO, PastaLog, '[ERRO] Não foi possível atualizar Schema do DB ao tentar abrir arqparametros.'+E.Message);
-            MostraMsg('Erro', 'Não foi possível atualizar Schema do Banco de Dados', mtError, [mbOk]);
+            SalvaLog(USUARIO, PastaLog, '[ERRO] Nï¿½o foi possï¿½vel atualizar Schema do DB ao tentar abrir arqparametros.'+E.Message);
+            MostraMsg('Erro', 'Nï¿½o foi possï¿½vel atualizar Schema do Banco de Dados', mtError, [mbOk]);
             Exit;
          end;
       end;
@@ -162,7 +162,7 @@ begin
    end;
 end;
 
-// ----- Retorna Número Versão Atualizada do Sistema ----- //
+// ----- Retorna Nï¿½mero Versï¿½o Atualizada do Sistema ----- //
 procedure TFrmAutoUpdate.GetNewVersion(out recVersaoApp,recVersaoDB:Integer);
 var
    vErrorMsg:String;
@@ -190,7 +190,7 @@ var
    DWParams:TRESTDWParams;
    StringStream:TStringStream;
 begin
-   lbStatus.Caption := 'Executando download da nova versão...';
+   lbStatus.Caption := 'Executando download da nova versï¿½o...';
    Application.ProcessMessages;
    Result   := True;
    DWParams := TRESTDWParams.Create;
@@ -218,7 +218,7 @@ begin
          on E:Exception do
          begin
             Result := False;
-            MessageDlg('Não foi possível atualizar.'+#10+E.Message,mtError,[mbOk], 0);
+            MessageDlg('Nï¿½o foi possï¿½vel atualizar.'+#10+E.Message,mtError,[mbOk], 0);
          end; //try
       end;
    finally
@@ -235,7 +235,7 @@ function TFrmAutoUpdate.UnZip:Boolean;
 var
    UnZipper: TZipFile;
 begin
-   lbStatus.Caption := 'Descompactando atualização...';
+   lbStatus.Caption := 'Descompactando atualizaï¿½ï¿½o...';
    Application.ProcessMessages;
    try
       if FileExists(DirDest+NomeExe) then DeleteFile(PWideChar(DirDest+NomeExe));
@@ -246,7 +246,7 @@ begin
       Result := True;
    except
       Result := False;
-      MessageDlg('Não foi possível atualizar.'+#10+'Arquivo compactado foi corrompido!',mtError,[mbOk], 0);
+      MessageDlg('Nï¿½o foi possï¿½vel atualizar.'+#10+'Arquivo compactado foi corrompido!',mtError,[mbOk], 0);
       Self.Close;
       Application.Terminate;
    end;
@@ -295,7 +295,7 @@ begin
    try
       if (VersaoApp <= VersaoAppLoc) and (VersaoDB <= VersaoDBLoc) then
       begin
-         ShowMessage('Versão já atualizada');
+         ShowMessage('Versï¿½o jï¿½ atualizada');
          Exit;
       end;
 
@@ -386,10 +386,10 @@ begin
     ConnSrc.Connected := True;
     ConnDst.Connected := True;
 
-    // Opções mínimas (sempre gera plano; aplicação fica aqui fora)
+    // Opï¿½ï¿½es mï¿½nimas (sempre gera plano; aplicaï¿½ï¿½o fica aqui fora)
     SetSyncDryRun(True);          // primeiro: DRY-RUN (apenas gera plano .sql)
     Opt.Execute := False;
-    Opt.DropExtras := True;       // <- necessário para ficar "EXATAMENTE IGUAL"
+    Opt.DropExtras := True;       // <- necessï¿½rio para ficar "EXATAMENTE IGUAL"
     Opt.IncludeTriggers := True;
     Opt.TargetDefaultEngine  := 'InnoDB';
     Opt.TargetDefaultCharset := 'utf8mb3';
@@ -403,15 +403,11 @@ begin
     // Aplica se solicitado
     if Apply and (Plan.Count > 0) then
     begin
-
-Plan.SaveToFile('.\PLAN.SQL');
-Exit;
-
       ConnDst.StartTransaction;
       try
         for i := 0 to Plan.Count - 1 do
         begin
-          // Por quê: manter ordem planejada reduz conflitos de dependência
+          // Por quï¿½: manter ordem planejada reduz conflitos de dependï¿½ncia
           ConnDst.ExecSQL(Plan[i]);
           Inc(Result.Applied);
         end;
