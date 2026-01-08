@@ -1,0 +1,1763 @@
+object FrmServer: TFrmServer
+  Left = 271
+  Top = 114
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'AIONE - Server Farma 8093'
+  ClientHeight = 200
+  ClientWidth = 620
+  Color = clWindow
+  Ctl3D = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnShow = FormShow
+  TextHeight = 13
+  object Label8: TLabel
+    Left = 8
+    Top = 15
+    Width = 3
+    Height = 13
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object imgLogo: TImage
+    Left = 168
+    Top = 48
+    Width = 70
+    Height = 70
+    Center = True
+    Picture.Data = {
+      0954506E67496D61676589504E470D0A1A0A0000000D49484452000000460000
+      00460806000000712EE284000000097048597300000B1300000B1301009A9C18
+      00000A4F6943435050686F746F73686F70204943432070726F66696C65000078
+      DA9D53675453E9163DF7DEF4424B8880944B6F5215082052428B801491262A21
+      09104A8821A1D91551C1114545041BC8A088038E8E808C15512C0C8A0AD807E4
+      21A28E83A3888ACAFBE17BA36BD6BCF7E6CDFEB5D73EE7ACF39DB3CF07C0080C
+      9648335135800CA9421E11E083C7C4C6E1E42E40810A2470001008B3642173FD
+      230100F87E3C3C2B22C007BE000178D30B0800C04D9BC0301C87FF0FEA42995C
+      01808401C07491384B08801400407A8E42A600404601809D98265300A0040060
+      CB6362E300502D0060277FE6D300809DF8997B01005B94211501A09100201365
+      884400683B00ACCF568A450058300014664BC43900D82D00304957664800B0B7
+      00C0CE100BB200080C00305188852900047B0060C8232378008499001446F257
+      3CF12BAE10E72A00007899B23CB9243945815B082D710757572E1E28CE49172B
+      14366102619A402EC27999193281340FE0F3CC0000A0911511E083F3FD78CE0E
+      AECECE368EB60E5F2DEABF06FF226262E3FEE5CFAB70400000E1747ED1FE2C2F
+      B31A803B06806DFEA225EE04685E0BA075F78B66B20F40B500A0E9DA57F370F8
+      7E3C3C45A190B9D9D9E5E4E4D84AC4425B61CA577DFE67C25FC057FD6CF97E3C
+      FCF7F5E0BEE22481325D814704F8E0C2CCF44CA51CCF92098462DCE68F47FCB7
+      0BFFFC1DD322C44962B9582A14E35112718E449A8CF332A52289429229C525D2
+      FF64E2DF2CFB033EDF3500B06A3E017B912DA85D6303F64B27105874C0E2F700
+      00F2BB6FC1D4280803806883E1CF77FFEF3FFD47A02500806649927100005E44
+      242E54CAB33FC708000044A0812AB0411BF4C1182CC0061CC105DCC10BFC6036
+      844224C4C24210420A64801C726029AC82422886CDB01D2A602FD4401D34C051
+      688693700E2EC255B80E3D700FFA61089EC128BC81090441C808136121DA8801
+      628A58238E08179985F821C14804128B2420C9881451224B91354831528A5420
+      55481DF23D720239875C46BA913BC8003282FC86BC47319481B2513DD40CB543
+      B9A8371A8446A20BD06474319A8F16A09BD072B41A3D8C36A1E7D0AB680FDA8F
+      3E43C730C0E8180733C46C302EC6C342B1382C099363CBB122AC0CABC61AB056
+      AC03BB89F563CFB17704128145C0093604774220611E4148584C584ED848A820
+      1C243411DA093709038451C2272293A84BB426BA11F9C4186232318758482C23
+      D6128F132F107B8843C437241289433227B9900249B1A454D212D246D26E5223
+      E92CA99B34481A2393C9DA646BB20739942C202BC885E49DE4C3E433E41BE421
+      F25B0A9D624071A4F853E22852CA6A4A19E510E534E5066598324155A39A52DD
+      A8A15411358F5A42ADA1B652AF5187A81334759A39CD8316494BA5ADA295D31A
+      681768F769AFE874BA11DD951E4E97D057D2CBE947E897E803F4770C0D861583
+      C7886728199B18071867197718AF984CA619D38B19C754303731EB98E7990F99
+      6F55582AB62A7C1591CA0A954A9526951B2A2F54A9AAA6AADEAA0B55F355CB54
+      8FA95E537DAE46553353E3A909D496AB55AA9D50EB531B5367A93BA887AA67A8
+      6F543FA47E59FD890659C34CC34F43A451A0B15FE3BCC6200B6319B3782C216B
+      0DAB86758135C426B1CDD97C762ABB98FD1DBB8B3DAAA9A13943334A3357B352
+      F394663F07E39871F89C744E09E728A797F37E8ADE14EF29E2291BA6344CB931
+      655C6BAA96979658AB48AB51AB47EBBD36AEEDA79DA6BD45BB59FB810E41C74A
+      275C2747678FCE059DE753D953DDA70AA7164D3D3AF5AE2EAA6BA51BA1BB4477
+      BF6EA7EE989EBE5E809E4C6FA7DE79BDE7FA1C7D2FFD54FD6DFAA7F5470C5806
+      B30C2406DB0CCE183CC535716F3C1D2FC7DBF151435DC34043A561956197E184
+      91B9D13CA3D5468D460F8C69C65CE324E36DC66DC6A326062621264B4DEA4DEE
+      9A524DB9A629A63B4C3B4CC7CDCCCDA2CDD699359B3D31D732E79BE79BD79BDF
+      B7605A785A2CB6A8B6B86549B2E45AA659EEB6BC6E855A3959A558555A5DB346
+      AD9DAD25D6BBADBBA711A7B94E934EAB9ED667C3B0F1B6C9B6A9B719B0E5D806
+      DBAEB66DB67D6167621767B7C5AEC3EE93BD937DBA7D8DFD3D070D87D90EAB1D
+      5A1D7E73B472143A563ADE9ACE9CEE3F7DC5F496E92F6758CF10CFD833E3B613
+      CB29C4699D539BD347671767B97383F3888B894B82CB2E973E2E9B1BC6DDC8BD
+      E44A74F5715DE17AD2F59D9BB39BC2EDA8DBAFEE36EE69EE87DC9FCC349F299E
+      593373D0C3C843E051E5D13F0B9F95306BDFAC7E4F434F8167B5E7232F632F91
+      57ADD7B0B7A577AAF761EF173EF63E729FE33EE33C37DE32DE595FCC37C0B7C8
+      B7CB4FC36F9E5F85DF437F23FF64FF7AFFD100A78025016703898141815B02FB
+      F87A7C21BF8E3F3ADB65F6B2D9ED418CA0B94115418F82AD82E5C1AD2168C8EC
+      90AD21F7E798CE91CE690E85507EE8D6D00761E6618BC37E0C2785878557863F
+      8E7088581AD131973577D1DC4373DF44FA449644DE9B67314F39AF2D4A352A3E
+      AA2E6A3CDA37BA34BA3FC62E6659CCD5589D58496C4B1C392E2AAE366E6CBEDF
+      FCEDF387E29DE20BE37B17982FC85D7079A1CEC2F485A716A92E122C3A96404C
+      884E3894F041102AA8168C25F21377258E0A79C21DC267222FD136D188D8435C
+      2A1E4EF2482A4D7A92EC91BC357924C533A52CE5B98427A990BC4C0D4CDD9B3A
+      9E169A76206D323D3ABD31839291907142AA214D93B667EA67E66676CBAC6585
+      B2FEC56E8BB72F1E9507C96BB390AC05592D0AB642A6E8545A28D72A07B26765
+      5766BFCD89CA3996AB9E2BCDEDCCB3CADB90379CEF9FFFED12C212E192B6A586
+      4B572D1D58E6BDAC6A39B23C7179DB0AE315052B865606AC3CB88AB62A6DD54F
+      ABED5797AE7EBD267A4D6B815EC1CA82C1B5016BEB0B550AE5857DEBDCD7ED5D
+      4F582F59DFB561FA869D1B3E15898AAE14DB1797157FD828DC78E51B876FCABF
+      99DC94B4A9ABC4B964CF66D266E9E6DE2D9E5B0E96AA97E6970E6E0DD9DAB40D
+      DF56B4EDF5F645DB2F97CD28DBBB83B643B9A3BF3CB8BC65A7C9CECD3B3F54A4
+      54F454FA5436EED2DDB561D7F86ED1EE1B7BBCF634ECD5DB5BBCF7FD3EC9BEDB
+      5501554DD566D565FB49FBB3F73FAE89AAE9F896FB6D5DAD4E6D71EDC703D203
+      FD07230EB6D7B9D4D51DD23D54528FD62BEB470EC71FBEFE9DEF772D0D360D55
+      8D9CC6E223704479E4E9F709DFF71E0D3ADA768C7BACE107D31F761D671D2F6A
+      429AF29A469B539AFB5B625BBA4FCC3ED1D6EADE7AFC47DB1F0F9C343C59794A
+      F354C969DAE982D39367F2CF8C9D959D7D7E2EF9DC60DBA2B67BE763CEDF6A0F
+      6FEFBA1074E1D245FF8BE73BBC3BCE5CF2B874F2B2DBE51357B8579AAF3A5F6D
+      EA74EA3CFE93D34FC7BB9CBB9AAEB95C6BB9EE7ABDB57B66F7E91B9E37CEDDF4
+      BD79F116FFD6D59E393DDDBDF37A6FF7C5F7F5DF16DD7E7227FDCECBBBD97727
+      EEADBC4FBC5FF440ED41D943DD87D53F5BFEDCD8EFDC7F6AC077A0F3D1DC47F7
+      068583CFFE91F58F0F43058F998FCB860D86EB9E383E3939E23F72FDE9FCA743
+      CF64CF269E17FEA2FECBAE17162F7EF8D5EBD7CED198D1A197F29793BF6D7CA5
+      FDEAC0EB19AFDBC6C2C61EBEC97833315EF456FBEDC177DC771DEFA3DF0F4FE4
+      7C207F28FF68F9B1F553D0A7FB93199393FF040398F3FC63332DDB0000123F49
+      44415478DAED5C097854D5D9FECE4CB64932992C104848484854A81BFDA1B216
+      456DA93F5AA84B5BB76AB5B640AD3E20D40D6DDDDA5215D11649E007144410AB
+      225AFEE0D252B1B2A92082756149080449603293CC2433C9CCDCDBF79E7BE7CE
+      BD3377F650699F9E879BB973CF72CF79CFB7BCDF396760EE37CB494D4CD4DCD3
+      78FC1D8BAB129799FEB39280AB05D7565C9B4919B6A81DBE0130C5B8EEC47525
+      C0394DCD0B56629A7B3278C634E55958B9F07A46EDB1B0F289B417EBFD46EF0C
+      956B44FE2BF87C1CD7B158C05C8ABFAB7015A63721FF76A90BD70DA20C520430
+      DF02BC6F45AD1A0BFD74CB2752365E993E68035997E3E355199837CAA4CF025C
+      765C19511B89A742FA17F03C4614530523CA19A991918A18144B088C68F7C1B6
+      18B726A5B83DCEDC1BCBA4428FE2CB2FC3FB63D42FDDA00CFA1CAFAE18361A46
+      06A644543A19631C89F48D197C8F652A497EF7627CCC60AE8DE5A351E4353C2A
+      359C92B8D310ED35890E2BD6B344DE9D7C59FDD3887EBAF1E70AE66A28BF0F37
+      0F27F8A6345234B7C2A294258AA32449BE2BA9F45BE6FAFFF23ADC4C3FF9C0FC
+      5BA525CCB5A17C116E667CD53D39C5523D73FDB97C216E6EFDAA7B728AA53AE6
+      7A3D0160D2B17751DCEC299E00CC6BD1810977BFF1524AE518EEC400093DA051
+      828F586601BF481422CA261221B044DF1BBB1C80595FBE500C03265E88912E01
+      55932983C49E76A25E3799FA8DC4571B055C9F91E03A4A266BB9029A18F73DC9
+      92F204521DEB7C355C62FA829FC71A02C9DF3168118090E027CBA8C594597D1D
+      CF113C2DD4B37B2EF51E5821832326C281D2494694540266DDA0936C7CA559F7
+      E35F3731B385C89CA94881C8252377C27300E5FA885A5D6F5F48FEB6BF932977
+      80DA8EE877F37A2CC3DAC7E0442400F3CA4904864155BA5B602EFC64CA1FCCEF
+      49B12162CF09629672B24EF9C2B0AAAFE905EAFEDB3564B2416A4C992476B510
+      CBE987364D247442D5F2FA23B2B370FB747280794901261A018D677D8D983D99
+      788703CEA3642EAEA59C11BFA38C01132101EF9267DBCF64D3E1835D293C93F2
+      27EF346CD6DFB281BADEBA8CAB93E0755046E918B28C7B1675CDD4F3E902EAD9
+      331FD2C738E09244460FCC0C9EC55B03E2C0FC290D893152779319B6C3855975
+      50D6D01F9265FC52084EBE9A2D01D3FB8FFF23965F4AA2D74EF9537691B9F09C
+      88A63DDBA7A3DC620CBC0C06F94BB25EB107E5CED600B791BAB7DC82F7B490B9
+      A852564FB1CFD4AB8E75BCD887AAC424509C50994EB28C7D82B2CF9A1551C4BD
+      612C05EC3B89C176885D6D50951ACAFBD6060030442DD3BB6F1979B640B22C25
+      683393DB22CB9805947DE64C5D5B626F0775FD650AF90F6F8664560017B1AF4C
+      3380595B0160C4F48181EECB92E2A4BC492B28ABF6065D76A0FD23F2BC370DA0
+      7C482CAF5CE62970D782EB10992C0350FE3AD890FEE43FBE8D7C8DEB014A1130
+      B1CAE5C06F44EF09CA3E7B0EE57C635E24D80D1791EFD02632F7835A097D6173
+      1880590389614C034C188D0A2E8CA8599A7C4974F92DE39D0F385B29F7C23ACA
+      1EA68F49BD1FFF9EBC3BEEE6F54DB62AD960069B51A44C7075C85E3C1B6524E0
+      F05C26798CAB27C1AB059CC72963E0D9943B71152464B8EE1DAED7C650E0CBED
+      642AAEE21440F6865156629866ACBC1F11B411C0ACAE485F95D0F1C0F14398CD
+      995CE4B5A9FB6F37029895B00F360CBA503FA3D2E0855E80F22524C42683D4DD
+      0EB52A953D8EAE2CE35219701EE2B7F997BE491983BE1D9A4E18F3CE35559C16
+      98724B55E69C620230CFA7090C0623B80EC3C39C41053FF8540FCAE65BC8BB73
+      1965F42F97675DB70C8FD1057A61585BE1B5E650F6D09FF0B67A0FAE25EFF6FB
+      61838AA14AF911036450BF801B6EDFE7A3FCCBDF81049DAFE6F98FBC41AE7597
+      409ACA64D0D3026655C542F4F7D6A084C55B96E4791A0D92388AD0718CACDFDF
+      0A973C462DEBDDF920A4E50132979673172BD556EB49C964823D698691BE17CC
+      F737BA5EF57C520FA33A83324ACA51CB14411B4C4C02E708DA13C876ED01B8F4
+      EAD0646CFA11EA4BAA1652D92079E61F466BA99A812A96A28E3957A6213112D9
+      723453D6D7AE866759A33E0EB4EDA08ED5A3A13EFD141216E627203D0254C2DC
+      7F38A4EC23C3A6DD1BBF47BD9FAF8741AD566C4658920CB7BD89322AC790F5F2
+      ADEA63C1D34A9DCF5513CBCA03CFB1A42E31CE1595A97B2510AB80EB18D9AED9
+      4DE69273D5C7AE3F8D205F2BF849D0D0EAD1E4764074DBA9E0FABD98D9B38C9B
+      F6B69373E510CCA01FF6A71FC99B87E14D31F2B71E26EB65CB296BD84DEAE3EE
+      77A69377D762B43D58532F29470E609E0530625062C228AE4EA7943C8DE849FC
+      22A3722259A7BEAD56E9DDBF167A7E35986AA566949A7625153A7688F22E7E84
+      7246CE0D1591F88FBF0B867350A8AD032F93FB95AB205983B87446B25580EC41
+      68916303C8FB4124737996BFF57D72AD1D45A682F290AD31DC991495085E3B5E
+      5E10C02CAF4C4D95D060E04433E57EFB29CA197EBB465AC692FFCB1DE8548581
+      0AC136381A29A36C1415FC70BB2EAB7BD334EA6D6CA0C29B9B75CFBBDE84CDD8
+      0D9B513AC458A50098BFED10E55FB60C04F066F571E7DA91E04C9F802395263D
+      34E212B3AC92AFC7C4DA97D2E01BB2599C7439A8E0EAF76107644AEF6FDB49AE
+      D52341F7CBB8F7081B0177A902DC71E14DFBE0C542DBE282E373723E3B0C1248
+      64FDDE1F29FBDC5F84DEE9F752C7F221083A9D70E30322BC94C475850ED8B99A
+      4B287F6A4308E8CDB3C19D9E50D4498C3F1EFDB8EB9863A9223149AE3E490B4C
+      9237B05DBF5B76C548DE0F1F43E0772744BF2A9247482A7414337BC93CF09DBB
+      74599D6BC781D66FC5C08B11303AA9F016B0E1FC0A35DFD7D4409DAB27A3DD32
+      1E224474062A28F5C176C3279C3D4BA9F7B3D5E47EFD3A32155552C229344E00
+      B324355592B84B56ED54CCD2ABEA3377C3F5D4BBF779484358672415B2375266
+      C5182AB876AB2ECBF3C1A3D4B5F12EF091C132816B6F92CB5DA32FD7F5F634F2
+      EC58024A501D49FBA1B242E711B25EB59132ABBFC31F054EEC05E11B4D945580
+      6633931D1E80A9AF944382A08164626853D968E54C91BD40FB61CCFCCFE1A69F
+      0ECDFC0B13605FB681D297291D66CA4A9D8BAB50D1744842C1E010B88E7DE458
+      7206A4A34426738A31E49275E9E3687FB666F044CE25D52480DCC9F64B1356E0
+      4FC0DE4CF993118E0C97C311D1D34E1DABBEC15590655949D750B06F5AE3CB74
+      CA0460EA06A72431817618DE0973C932E11165943EEA583102FADE04712ED648
+      8BA4424D308E4F60A0FA68BBF3F9F1E46BDE02573F242405CA92A7D86D27DBF4
+      0370F9356A79FF9177C9F9CCF9207E03D16EB66EE2787F2E7C048451F67462A0
+      873A578E427F0EEAFB93B0C42C1AAC1A5F15D37036185E0DF97E10BBBC0B1F26
+      CBB8FBE447184CC78AF330A347794CC4EB98A142C70F5246D558B2FD688BAE09
+      EF074FC206CC8287AA0A2D17281328ADFC05DA516FD07964BB7187AE5EF75F67
+      81513F893C801908A81DE4C09C7F3F26EA21A58F02FA330ACF3F83672A090957
+      628797EA58FBC290C424438124D1CD9D781F3AF3B02A31CEE5231589299267BE
+      A71322DD41453F076D2FAC0ED575EE27E7D3A713CB830A65E51B2F30C198FA5B
+      1AA11E908271737559CEFAA1E46FDF4FE6A22A55D2A4FEE45D8C891AAF4C94BF
+      87032338539498F63FA6AE4A9651B03197846C4CC7731760305BF9AA5BD05658
+      AFAC4390A85F86E858310E2AB4152A5463CC4D9469137DDD30F2C7A970C61E04
+      A29AD5BBB6DDE45CF475805D0AE192697FE004ECD2947ABC6B9A3C4F1E3BDCFC
+      790636265160FE50150A098C82AB503F4309794227BCD2D0A9081ED7A98FDDEB
+      6F24EF472BC16B6A102F1DA4CCDA0970A19B75CD783F5848AE976F832A54A311
+      C1B06D753F498A87A052E6B2AF53E14F77E9DAE97EE757D4D5F0306554C8F649
+      E23205D7BD4199359364F08EC32B2D1F03B52E5076269476836B3091F3A02533
+      00E6C9AA942446B2FA927A144EDBA5D26EEFC7CF91FBC51BE0358A40FE3AA9F0
+      B67D10F7D09265C071901C0B87C16E5A21DE05612A1465C59D1BEF46CAFBDF07
+      A0B6BFD66539EACFA5C0B13DF082257CD7C0F6D30FE1DDE4B0A067EF1A72BD78
+      2DA4B22AD9A12912B3A02AB4ECA031BADAA505DE6DED52031FA51FE0D83193DB
+      C83C405E4D7337DC46DEEDF52476F9C97AED32CAF99F9B756FEB583A967C8750
+      BE7F2D5721D5D812E9EF359328AB9407A0B652D16D1FC2588F08016DDF4F8EA7
+      4E47046F06005FA3A25BF7A8795D6FDC01F6BB002A58CD1BD778F688650CD55B
+      07A74832BEF6F9A9490CE70E6D70C35317C045CEA4DE7D0DD0E9C93C276BE845
+      64FBF15F74A5BD3B1651E78BB72AA29FE4EA9AB44C01E2672E3D938A7EB14797
+      E579EF3104AD77F225D1DC0BE650DEA4C7F873E792510826F74292528C95EC8F
+      A70A0CC6D77194B2CEB90A9EE32972D68DE4A48F656653F1ECFD320953CB3593
+      7DFE6964CAB1CA3A9FCA3ABEE4A58E1C844ADD0B52A95FD8722E86241EDCC667
+      BFF8AE037C21DDFE5031E2A44A392A4F099847010C2363E31B6BF38A7F170044
+      1E44241F7CE55318E42E50FEA59433F227BA8A8EA74792EFC02EA8D04079732C
+      BCCDE0170C82DB08A6D565525F2C059401FB312ABA7D1B65568E5673A488DD31
+      7F2854CE4759674CE4CB0D3D7BD721961BC8FB98D4F140F91980F97D5062123D
+      3FA0C9938C2E5CAAC432F906DB5993A1421B74A53DEFCE27D74B73A042D5E8A3
+      A86F467FC3ED8E00EE63CAEB67B00D222F860BCEC3642AAEA6E23B3ED3498317
+      7154E79A6930F636F4A717E00C0262BED8FD8F9E0760E655CB0B55B10E9E447F
+      2CCFA4C78131F550C9DD4DF20ABF2649069265E4C065EA29BC5C95E9DA216989
+      E1F91F90BF111CA7F4B4284B9A50A9C30728EF3BB329EFD2C775591D4B2751CF
+      3FDE8281AE8DBDBF14433394AF75ECC46FABD3DBA245F21F6E22DB4DCF2016FA
+      714ACDE8806C6F24FBBCD3657B94576C60A825FEDF034277948A66BD479955E3
+      D41C69B3DFFEBB1A10BA5C6E67D2D8420130BF4903185218F0F9B79375CA8254
+      9B8848BEE66D60B61711CB45CC95911D5940F2528EC35CE54AE636421AB34275
+      9BB6906311EC8C15ACD89CF47283069847A20013EB38B52A86E0073D6ECA3E7B
+      2A276C527C123B85E9B7A1E16364CA2DA19E8F5F06AD6F97D5D0A86F66891537
+      83E97E133C6A98BAAE6CB214A2EE4BB0556ED4CDD2D78976843DB27D00F39006
+      98440F6C6B1A951681021061D1DB658C452A67916153CD8583F9E0756143F8F2
+      901432385B10D97BF4758BAA39634E9A2F85DE03601E1CA20093CA51C42868A9
+      3B6366CE75444F77440DC9A1B05C1B9734C69746B51650E02185D0E5D0ED9AA8
+      822B355D381075AD8AE749E4D7042CCA6778399E00CC0343220E27A693D4D749
+      21033C43EED89B10300EA7807666A5AD97CE56B0E5BF823DEF833A7AB99D549D
+      54A61954FE34CA1A36894CB632D075B9C322D034E5F70349CC23CFF615E43FF4
+      BEBCE71DFEEE687D4A3CD5B1E3BF1EA2D95732002FD1A3FE119139EC8FD74D99
+      D5A32977D23D94553B3EB2199F97FC2DBBF97AB0D065E72E96590AC058AB41E0
+      46C881A641EADEF407EA7E17DDF6BAE0812CD16D60787F63F559FF0CC0DC3FE4
+      E49CC1536DC05112DC5D947DD60564993083B2CFF92E77A7C9267FEBE7D4F3FE
+      6AEAFE7B3D806CA38C52841C9939A99F87892D4600E6BE93048CDA01794A24B7
+      2EFAFC9459712682CC8BE14DC641C5CE45545C6D0894E06A839A7D01D7BD937A
+      BFD844BDFB3703E4761856A892A5B08F0E08C502666E4DDF9CA88A8F1071F5EA
+      064B763B65DB6C2DE1A7324DD6FEB2DA484618EA25195DC1D5CA3D8EE0F10238
+      D8960218DB4C4BBAE75E9200E6DE7F15309189F31E1864E953E4DE458480C15D
+      817F48207020F88E663AA7EA523A9557C7DAEEA9D1B8EB60436AD7D5EFCA7C53
+      B420439F6FEC0E99524FCE6586A5448377273254E35D3051B967617DD7BE23D4
+      174DBF01CCDD35A7E6CF72FAFA971DC9250073578D3EBAEE8BC124D3D9647E32
+      92EECF6112EF1780B933418939393373AA2600F3CB9AFFFEF42F3C8954CFDAE6
+      D4FCF7C7A29169096B9D5DF32B68C8835F754F4EB1348FB5DE51331EC0AC8709
+      29919E24B2161E197A849E26722A4B9B6FB4F119ED59F4A3B68CC430076EF8F3
+      AC387D53DE2945BA57B2D659B5D27769F96DA631244629C8448CA853BCE11AF5
+      32EC90604AEE2D5A1FC201317073FA813C832FB700187EFEA418B9F6947E6197
+      E8D468418837D858FBE7629C3289A4986313A563A34759EBCCE0C11C76190ABF
+      1E31D86813106F0F2A56F968DF8962BFD3701C31DE156B09C268DD8AC46BF0E7
+      059EDD36B3365447A4EFE363252E8385D6FFE82445A637121357051F840323A5
+      4140F01E7C5E81AB2CE17DB874D3C9784FFC76DA70AD23F9BF8939A8DDD93702
+      26D89874D044DA07957EC69AD206F0299C0405940F7035A831A406987F02BC20
+      0D1769D3C6310000000049454E44AE426082}
+    Stretch = True
+  end
+  object LMDLabel1: TLMDLabel
+    Left = 257
+    Top = 72
+    Width = 156
+    Height = 21
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 4934475
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    Options = []
+    ParentFont = False
+    Caption = 'SERVIDOR  AI ONE'
+  end
+  object ctiPrincipal: TTrayIcon
+    Hint = 'AIONE - Server Farma 8093'
+    PopupMenu = pmMenu
+    OnDblClick = ctiPrincipalDblClick
+    Left = 97
+    Top = 13
+  end
+  object pmMenu: TPopupMenu
+    Left = 18
+    Top = 85
+    object RestaurarAplicao1: TMenuItem
+      Caption = 'Restaurar Aplica'#231#227'o'
+      OnClick = RestaurarAplicao1Click
+    end
+    object N5: TMenuItem
+      Caption = '-'
+    end
+    object SairdaAplicao1: TMenuItem
+      Caption = 'Sair da Aplica'#231#227'o'
+      OnClick = SairdaAplicao1Click
+    end
+  end
+  object Timer: TTimer
+    Enabled = False
+    Interval = 1800000
+    OnTimer = TimerTimer
+    Left = 424
+    Top = 4
+  end
+  object DWDataBase: TRESTDWIdDatabase
+    Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    ContentType = 'application/x-www-form-urlencoded'
+    Charset = 'utf8'
+    ContentEncoding = 'gzip, identity'
+    Active = False
+    Compression = True
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    IgnoreEchoPooler = False
+    AuthenticationOptions.AuthorizationOption = rdwAOBasic
+    AuthenticationOptions.OptionParams.AuthDialog = True
+    AuthenticationOptions.OptionParams.CustomDialogAuthMessage = 'Protected Space...'
+    AuthenticationOptions.OptionParams.Custom404TitleMessage = '(404) The address you are looking for does not exist'
+    AuthenticationOptions.OptionParams.Custom404BodyMessage = '404'
+    AuthenticationOptions.OptionParams.Custom404FooterMessage = 'Take me back to <a href="./">Home REST Dataware'
+    AuthenticationOptions.OptionParams.Username = 'useraione'
+    AuthenticationOptions.OptionParams.Password = 'one@556838'
+    Proxy = False
+    ProxyOptions.Port = 8888
+    PoolerService = 'localhost'
+    PoolerPort = 8092
+    PoolerName = 'TDMServer.RESTDWPoolerDB'
+    StateConnection.AutoCheck = False
+    StateConnection.InTime = 1000
+    RequestTimeOut = 60000
+    ConnectTimeOut = 60000
+    EncodedStrings = True
+    Encoding = esUtf8
+    StrsTrim = False
+    StrsEmpty2Null = False
+    StrsTrim2Len = True
+    PoolerNotFoundMessage = 'WebService inativo'
+    HandleRedirects = False
+    RedirectMaximum = 0
+    ParamCreate = True
+    FailOver = False
+    FailOverConnections = <>
+    FailOverReplaceDefaults = False
+    ClientConnectionDefs.Active = False
+    UseSSL = False
+    SSLVersions = []
+    UserAgent = 
+      'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, l' +
+      'ike Gecko) Chrome/41.0.2227.0 Safari/537.36'
+    SSLMode = sslmUnassigned
+    Left = 558
+    Top = 9
+  end
+  object DWClientPoolerCon: TRESTDWIdClientPooler
+    DataCompression = True
+    Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    ContentEncoding = 'gzip, identity'
+    ContentType = 'application/x-www-form-urlencoded'
+    Charset = 'utf8'
+    DataRoute = '/'
+    Encoding = esUtf8
+    EncodedStrings = True
+    ThreadRequest = False
+    Host = 'localhost'
+    Port = 9090
+    AuthenticationOptions.AuthorizationOption = rdwAOBasic
+    AuthenticationOptions.OptionParams.AuthDialog = True
+    AuthenticationOptions.OptionParams.CustomDialogAuthMessage = 'Protected Space...'
+    AuthenticationOptions.OptionParams.Custom404TitleMessage = '(404) The address you are looking for does not exist'
+    AuthenticationOptions.OptionParams.Custom404BodyMessage = '404'
+    AuthenticationOptions.OptionParams.Custom404FooterMessage = 'Take me back to <a href="./">Home REST Dataware'
+    AuthenticationOptions.OptionParams.Username = 'apiwebconv'
+    AuthenticationOptions.OptionParams.Password = 'webcon415263'
+    RequestTimeOut = 15000
+    ConnectTimeOut = 15000
+    AllowCookies = False
+    RedirectMaximum = 0
+    HandleRedirects = False
+    ProxyOptions.ProxyPort = 0
+    FailOver = False
+    UseSSL = False
+    FailOverConnections = <>
+    FailOverReplaceDefaults = False
+    BinaryRequest = True
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    UserAgent = 
+      'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, l' +
+      'ike Gecko) Chrome/41.0.2227.0 Safari/537.36'
+    PoolerNotFoundMessage = 'Pooler not found'
+    SSLVersions = []
+    SSLMode = sslmUnassigned
+    Left = 423
+    Top = 65
+  end
+  object DWClientEventsCon: TRESTDWClientEvents
+    ServerEventName = 'TServerAIConv.DWServerEvents'
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    RESTClientPooler = DWClientPoolerCon
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Email'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'pasword'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'login'
+        EventName = 'login'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ULT_ATUALIZA'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getfarmacia'
+        EventName = 'getfarmacia'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ULT_ATUALIZA'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getconvenio'
+        EventName = 'getconvenio'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CPF_CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ULT_ATUALIZA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_FECHA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ATIVOS'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getconveniado'
+        EventName = 'getconveniado'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getfiliais'
+        EventName = 'getfiliais'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_VEN_INICIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_VEN_FINAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_FEC_INICIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_FEC_FINAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'STATUS'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getfechamento'
+        EventName = 'getfechamento'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CPF_CNPJ'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getconvresumo'
+        EventName = 'getconvresumo'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CPF_CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_FECHAMENTO'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getconsumo'
+        EventName = 'getconsumo'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_FECHAMENTO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'TIPO'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'getarquivo'
+        EventName = 'getarquivo'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Nome'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Endereco'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NumEnd'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ComplEnd'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Bairro'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CEP'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CidadeIBGE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Telefone'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Excluir'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postfarmacia'
+        EventName = 'postfarmacia'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CPF_CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odINOUT
+            ObjectValue = ovString
+            ParamName = 'DATA_HORA_ALT'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Nome'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Endereco'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NumEnd'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ComplEnd'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Bairro'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CEP'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CidadeIBGE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Telefone'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Matricula'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Cartao'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Valor_Limite'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Autorizado'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Ativo'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Excluir'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postconveniado'
+        EventName = 'postconveniado'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CPF_CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'VALOR_LIMITE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ATIVO'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postconvresumo'
+        EventName = 'postconvresumo'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CPF_CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DOCUMENTO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DATA_HORA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'VALOR'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'EXCLUIR'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postconsumo'
+        EventName = 'postconsumo'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postfechamento'
+        EventName = 'postfechamento'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FILIAL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NOME'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ENDERECO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NUM_END'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'COMP_END'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'BAIRRO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CEP'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CIDADE_IBGE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'TELEFONE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'EXCLUIR'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postfilial'
+        EventName = 'postfilial'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_FARMACIA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CNPJ_CONVENIO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NOME_CONV'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NOME_MATRIZ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'ENDERECO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'NUM_END'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'COMP_END'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'BAIRRO'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CEP'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'CIDADE_IBGE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'TELEFONE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DIA_FECHA'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'DIA_VENCE'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'EMAIL_LOGIN'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'SENHA_LOGIN'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'EXCLUIR'
+            Encoded = True
+          end>
+        DataMode = dmRAW
+        Name = 'postconvenio'
+        EventName = 'postconvenio'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <>
+        DataMode = dmRAW
+        Name = 'uploadfiles'
+        EventName = 'uploadfiles'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <>
+        DataMode = dmRAW
+        Name = 'downloadfile'
+        EventName = 'downloadfile'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end>
+    Left = 419
+    Top = 118
+  end
+  object timSincr: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = timSincrTimer
+    Left = 96
+    Top = 84
+  end
+  object DWClientPooler: TRESTDWIdClientPooler
+    DataCompression = True
+    Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    ContentEncoding = 'gzip, identity'
+    ContentType = 'application/x-www-form-urlencoded'
+    Charset = 'utf8'
+    DataRoute = '/'
+    Encoding = esUtf8
+    EncodedStrings = True
+    ThreadRequest = False
+    Host = 'localhost'
+    Port = 8092
+    AuthenticationOptions.AuthorizationOption = rdwAOBasic
+    AuthenticationOptions.OptionParams.AuthDialog = True
+    AuthenticationOptions.OptionParams.CustomDialogAuthMessage = 'Protected Space...'
+    AuthenticationOptions.OptionParams.Custom404TitleMessage = '(404) The address you are looking for does not exist'
+    AuthenticationOptions.OptionParams.Custom404BodyMessage = '404'
+    AuthenticationOptions.OptionParams.Custom404FooterMessage = 'Take me back to <a href="./">Home REST Dataware'
+    AuthenticationOptions.OptionParams.Username = 'useraione'
+    AuthenticationOptions.OptionParams.Password = 'one@556838'
+    RequestTimeOut = 15000
+    ConnectTimeOut = 15000
+    AllowCookies = False
+    RedirectMaximum = 0
+    HandleRedirects = False
+    ProxyOptions.ProxyPort = 0
+    FailOver = False
+    UseSSL = False
+    FailOverConnections = <>
+    FailOverReplaceDefaults = False
+    BinaryRequest = True
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    UserAgent = 
+      'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, l' +
+      'ike Gecko) Chrome/41.0.2227.0 Safari/537.36'
+    PoolerNotFoundMessage = 'Pooler not found'
+    SSLVersions = []
+    SSLMode = sslmUnassigned
+    Left = 555
+    Top = 70
+  end
+  object DWClientEvents: TRESTDWClientEvents
+    ServerEventName = 'TDMServer.DWServerEvents'
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    RESTClientPooler = DWClientPooler
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'usuario'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'senha'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovString
+            ParamName = 'IDUsuario'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odINOUT
+            ObjectValue = ovBoolean
+            ParamName = 'IndMaster'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovBoolean
+            ParamName = 'result'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'Login'
+        EventName = 'Login'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Arquivo'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovBlob
+            ParamName = 'Result'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'DownloadFile'
+        EventName = 'DownloadFile'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'arquivo'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'diretorio'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovBlob
+            ParamName = 'filesend'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odINOUT
+            ObjectValue = ovBoolean
+            ParamName = 'result'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'UpLoadFile'
+        EventName = 'UpLoadFile'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovDateTime
+            ParamName = 'DataNow'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'DataServer'
+        EventName = 'DataServer'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Campo'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovString
+            ParamName = 'Versao'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'VersaoApp'
+        EventName = 'VersaoApp'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Etapa'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovInteger
+            ParamName = 'IndSub'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovWideString
+            ParamName = 'Frase'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'FraseIA'
+        EventName = 'FraseIA'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'recSQL'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovString
+            ParamName = 'Result'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'SincroConv'
+        EventName = 'SincroConv'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        Params = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Farmacia'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'Filial'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovString
+            ParamName = 'Empresa'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovString
+            ParamName = 'CNPJ'
+            Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odOUT
+            ObjectValue = ovString
+            ParamName = 'Result'
+            Encoded = True
+          end>
+        DataMode = dmDataware
+        Name = 'ValidaKey'
+        EventName = 'ValidaKey'
+        BaseURL = '/'
+        DefaultContentType = 'application/json'
+        CallbackEvent = False
+        OnlyPreDefinedParams = False
+      end>
+    Left = 556
+    Top = 131
+  end
+  object DWPooler: TRESTDWIdServicePooler
+    Active = False
+    CORS = True
+    CORS_CustomHeaders.Strings = (
+      'Access-Control-Allow-Origin=*'
+      
+        'Access-Control-Allow-Methods=GET, POST, PATCH, PUT, DELETE, OPTI' +
+        'ONS'
+      
+        'Access-Control-Allow-Headers=Content-Type, Origin, Accept, Autho' +
+        'rization, X-CUSTOM-HEADER')
+    PathTraversalRaiseError = True
+    RequestTimeout = -1
+    ServicePort = 8093
+    ProxyOptions.ProxyPort = 0
+    AuthenticationOptions.AuthorizationOption = rdwAOBasic
+    AuthenticationOptions.OptionParams.AuthDialog = True
+    AuthenticationOptions.OptionParams.CustomDialogAuthMessage = 'Protected Space...'
+    AuthenticationOptions.OptionParams.Custom404TitleMessage = '(404) The address you are looking for does not exist'
+    AuthenticationOptions.OptionParams.Custom404BodyMessage = '404'
+    AuthenticationOptions.OptionParams.Custom404FooterMessage = 'Take me back to <a href="./">Home REST Dataware'
+    AuthenticationOptions.OptionParams.Username = 'useraione'
+    AuthenticationOptions.OptionParams.Password = 'one@556838'
+    Encoding = esUtf8
+    RootPath = '/'
+    ForceWelcomeAccess = False
+    CriptOptions.Use = False
+    CriptOptions.Key = 'RDWBASEKEY256'
+    EncodeErrors = False
+    SSLVersions = []
+    SSLVerifyMode = []
+    SSLVerifyDepth = 0
+    SSLMode = sslmUnassigned
+    SSLMethod = sslvSSLv3
+    Left = 18
+    Top = 17
+  end
+end

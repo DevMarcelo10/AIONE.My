@@ -1,0 +1,3873 @@
+object FrmBanCart: TFrmBanCart
+  Left = 0
+  Top = 0
+  Margins.Top = 8
+  BorderStyle = bsNone
+  Caption = 'Financeiro - Cart'#245'es'
+  ClientHeight = 596
+  ClientWidth = 552
+  Color = 10329501
+  TransparentColorValue = clNone
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clBlack
+  Font.Height = -12
+  Font.Name = 'Roboto'
+  Font.Style = []
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  TextHeight = 14
+  object LMDSimplePanel1: TLMDSimplePanel
+    AlignWithMargins = True
+    Left = 2
+    Top = 2
+    Width = 548
+    Height = 592
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Align = alClient
+    Bevel.StyleOuter = bvNormal
+    Bevel.WidthInner = 0
+    Bevel.WidthOuter = 0
+    Bevel.BorderColor = 15263976
+    Bevel.BorderWidth = 1
+    Color = 16250100
+    TabOrder = 0
+    object LMDSimplePanel6: TLMDSimplePanel
+      Left = 1
+      Top = 301
+      Width = 546
+      Height = 145
+      Align = alBottom
+      Bevel.BorderColor = 15129563
+      Color = 16250100
+      TabOrder = 1
+      object LMDSimplePanel5: TLMDSimplePanel
+        Left = 0
+        Top = 0
+        Width = 259
+        Height = 145
+        Margins.Left = 0
+        Margins.Top = 1
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alLeft
+        Bevel.WidthInner = 0
+        Bevel.WidthOuter = 0
+        Bevel.BorderWidth = 1
+        Color = clWhite
+        TabOrder = 0
+        object DBGrid1: TDBGrid
+          Tag = 2
+          AlignWithMargins = True
+          Left = 1
+          Top = 26
+          Width = 257
+          Height = 116
+          Margins.Left = 0
+          Margins.Top = 1
+          Margins.Right = 0
+          Margins.Bottom = 2
+          Align = alClient
+          BorderStyle = bsNone
+          Color = clWhite
+          Ctl3D = False
+          DataSource = SouBand
+          DrawingStyle = gdsGradient
+          FixedColor = 16447736
+          GradientEndColor = 16447736
+          GradientStartColor = 16447736
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleHotTrack]
+          ParentCtl3D = False
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = 5131854
+          TitleFont.Height = -15
+          TitleFont.Name = 'Roboto'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGrid1DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Desban'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Roboto'
+              Font.Style = []
+              Title.Alignment = taCenter
+              Title.Caption = 'NOME'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 175
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IndAntecipa'
+              Title.Alignment = taCenter
+              Title.Caption = 'ANTE.'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 38
+              Visible = True
+            end
+            item
+              Expanded = False
+              Width = 22
+              Visible = True
+            end>
+        end
+        object LMDSimplePanel4: TLMDSimplePanel
+          AlignWithMargins = True
+          Left = 1
+          Top = 1
+          Width = 257
+          Height = 24
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alTop
+          Bevel.StyleOuter = bvNormal
+          Bevel.WidthInner = 0
+          Bevel.WidthOuter = 0
+          Bevel.BorderColor = 15129563
+          Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+          Bevel.BorderWidth = 1
+          Color = 15461355
+          TabOrder = 1
+          object LMDLabel2: TLMDLabel
+            AlignWithMargins = True
+            Left = 1
+            Top = 4
+            Width = 255
+            Height = 16
+            Margins.Left = 0
+            Margins.Right = 0
+            Bevel.BorderColor = 15129563
+            Align = alClient
+            Alignment = agCenter
+            Color = 4159487
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 19967
+            Font.Height = -12
+            Font.Name = 'Roboto'
+            Font.Style = [fsBold]
+            Options = []
+            ParentColor = False
+            ParentFont = False
+            Caption = 'BANDEIRAS'
+            ExplicitLeft = 0
+            ExplicitTop = 3
+            ExplicitWidth = 602
+          end
+        end
+      end
+      object LMDSimplePanel3: TLMDSimplePanel
+        AlignWithMargins = True
+        Left = 260
+        Top = 1
+        Width = 286
+        Height = 144
+        Margins.Left = 2
+        Margins.Top = 1
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alRight
+        Bevel.WidthInner = 0
+        Bevel.WidthOuter = 0
+        Bevel.BorderWidth = 1
+        Color = clWhite
+        TabOrder = 1
+        object DBGrid2: TDBGrid
+          Tag = 3
+          AlignWithMargins = True
+          Left = 1
+          Top = 26
+          Width = 284
+          Height = 117
+          Margins.Left = 0
+          Margins.Top = 1
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          BorderStyle = bsNone
+          Color = clWhite
+          Ctl3D = False
+          DrawingStyle = gdsGradient
+          FixedColor = 16447736
+          GradientEndColor = 16447736
+          GradientStartColor = 16447736
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleHotTrack]
+          ParentCtl3D = False
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = 5131854
+          TitleFont.Height = -15
+          TitleFont.Name = 'Roboto'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGrid1DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Roboto'
+              Font.Style = []
+              Title.Alignment = taCenter
+              Title.Caption = 'PLANO'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 137
+              Visible = True
+            end
+            item
+              Expanded = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Roboto'
+              Font.Style = []
+              Title.Alignment = taCenter
+              Title.Caption = 'TARIFA'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 54
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Roboto'
+              Font.Style = []
+              Title.Alignment = taCenter
+              Title.Caption = 'VEZES'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 50
+              Visible = True
+            end
+            item
+              Expanded = False
+              Width = 22
+              Visible = True
+            end>
+        end
+        object LMDSimplePanel2: TLMDSimplePanel
+          AlignWithMargins = True
+          Left = 1
+          Top = 1
+          Width = 284
+          Height = 24
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alTop
+          Bevel.StyleOuter = bvNormal
+          Bevel.WidthInner = 0
+          Bevel.WidthOuter = 0
+          Bevel.BorderColor = 15129563
+          Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+          Bevel.BorderWidth = 1
+          Color = 15461355
+          TabOrder = 1
+          object LMDLabel1: TLMDLabel
+            AlignWithMargins = True
+            Left = 1
+            Top = 4
+            Width = 282
+            Height = 16
+            Margins.Left = 0
+            Margins.Right = 0
+            Bevel.BorderColor = 15129563
+            Align = alClient
+            Alignment = agCenter
+            Color = 4159487
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 19967
+            Font.Height = -12
+            Font.Name = 'Roboto'
+            Font.Style = [fsBold]
+            Options = []
+            ParentColor = False
+            ParentFont = False
+            Caption = 'TAXAS'
+            ExplicitLeft = 0
+            ExplicitWidth = 795
+          end
+        end
+      end
+    end
+    object PanelBckBut: TLMDSimplePanel
+      AlignWithMargins = True
+      Left = 1
+      Top = 27
+      Width = 546
+      Height = 33
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alTop
+      Bevel.StyleOuter = bvNormal
+      Bevel.WidthInner = 0
+      Bevel.WidthOuter = 0
+      Bevel.BorderColor = 12572415
+      Bevel.BorderWidth = 1
+      Color = 14674687
+      TabOrder = 0
+      object edBusca: TLMDLabeledEdit
+        AlignWithMargins = True
+        Left = 144
+        Top = 6
+        Width = 258
+        Height = 21
+        Hint = 'Busca natureza financeira'
+        Margins.Top = 0
+        Margins.Bottom = 0
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthInner = 0
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 12500670
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        CharCase = ecUpperCase
+        ParentFont = False
+        CustomButtons = <
+          item
+            Color = clWhite
+            Cursor = crHandPoint
+            ParentFont = False
+            PngGlyph.Data = {
+              89504E470D0A1A0A0000000D494844520000001200000014080600000080976D
+              4A000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00097048597300000EC300000EC301C76FA864000001C44944415478DAD592BD
+              CB816114C6AF6751468324B37C44A48430B029038A0C2CFE006236C83FC0C840
+              210C762329313019503E2265A0641386F77DEF3328799EB7F76B79CF76779FF3
+              3BE75CE7E2DE3E027F10DCFF02CD6633E4723974BB5D5CAF57701C07B7DB8D44
+              2201A3D1F835102B0E068390C96454ACD3E930994C301C0EB15C2E51A954E0F7
+              FB3F076D361B58AD562A6E369B904AA58F3F3659281442A7D341BFDF87C16010
+              06259349D46A352C160B48249297692F970B012C160BE5F1824EA7136C361BEC
+              763BCAE5B2A0B8A9540AAD560BBBDD8E1FB4DD6EA1D7EB91C9642859288AC522
+              D2E9348EC7233FE876BBC1E17040A954A25EAF0B82E2F138DAED36092FA8513E
+              9F47369BC56030805AAD7E819CCF67984C26B85C2E944A256110EB140E874927
+              0655A9548FBFF57A4DC7604D7ABD1EB45A2D3F68341A21128960BFDFD35B2C16
+              231008D0AAABD58AAEC42EC934F2783CFC3E1A8FC7E4112620F34EA150C0743A
+              45A3D1C07C3E8742A180D7EB452C168346A379DAE20162A346A3511C0E077233
+              33A2D96CA6A4FBFD4E676693F0F9EA09C40CC6F697CBE5A856ABE4ECEFC403E4
+              F3F9A82B13D7E9747E0B2278B59FC4138899512412FD1EF49B7807C22803D414
+              9A2D2C0000000049454E44AE426082}
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Index = 0
+            DisplayName = 'TLMDSpecialButton'
+            UsePngGlyph = True
+          end>
+        CustomButtonWidth = 18
+        PasswordChar = #0
+        Spelling.LiveSpell = True
+        TabOnEnter = True
+        Text = ''
+        LabelPosition = lpLeft
+        LabelSync = True
+        EditLabel.Width = 41
+        EditLabel.Height = 21
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 4210752
+        EditLabel.Font.Height = -12
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'BUSCA'
+      end
+    end
+    object LMDSimplePanel7: TLMDSimplePanel
+      Left = 1
+      Top = 446
+      Width = 546
+      Height = 111
+      Align = alBottom
+      Color = 16250100
+      TabOrder = 2
+      object LMDSimplePanel8: TLMDSimplePanel
+        Left = 0
+        Top = 0
+        Width = 257
+        Height = 111
+        Margins.Left = 0
+        Margins.Top = 1
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alLeft
+        Bevel.WidthInner = 0
+        Bevel.WidthOuter = 0
+        Bevel.BorderWidth = 1
+        Color = clWhite
+        TabOrder = 0
+        object DBGrid3: TDBGrid
+          Tag = 3
+          AlignWithMargins = True
+          Left = 1
+          Top = 26
+          Width = 255
+          Height = 82
+          Margins.Left = 0
+          Margins.Top = 1
+          Margins.Right = 0
+          Margins.Bottom = 2
+          Align = alClient
+          BorderStyle = bsNone
+          Color = clWhite
+          Ctl3D = False
+          DrawingStyle = gdsGradient
+          FixedColor = 16447736
+          GradientEndColor = 16447736
+          GradientStartColor = 16447736
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleHotTrack]
+          ParentCtl3D = False
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = 5131854
+          TitleFont.Height = -15
+          TitleFont.Name = 'Roboto'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGrid1DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Roboto'
+              Font.Style = []
+              Title.Alignment = taCenter
+              Title.Caption = 'DESCRI'#199#195'O'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 136
+              Visible = True
+            end
+            item
+              Expanded = False
+              Title.Alignment = taCenter
+              Title.Caption = 'NRO.S'#201'RIE'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 75
+              Visible = True
+            end
+            item
+              Expanded = False
+              Width = 22
+              Visible = True
+            end>
+        end
+        object LMDSimplePanel9: TLMDSimplePanel
+          AlignWithMargins = True
+          Left = 1
+          Top = 1
+          Width = 255
+          Height = 24
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alTop
+          Bevel.StyleOuter = bvNormal
+          Bevel.WidthInner = 0
+          Bevel.WidthOuter = 0
+          Bevel.BorderColor = 15129563
+          Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+          Bevel.BorderWidth = 1
+          Color = 15461355
+          TabOrder = 1
+          object LMDLabel3: TLMDLabel
+            AlignWithMargins = True
+            Left = 1
+            Top = 4
+            Width = 253
+            Height = 16
+            Margins.Left = 0
+            Margins.Right = 0
+            Bevel.BorderColor = 15129563
+            Align = alClient
+            Alignment = agCenter
+            Color = 4159487
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 19967
+            Font.Height = -12
+            Font.Name = 'Roboto'
+            Font.Style = [fsBold]
+            Options = []
+            ParentColor = False
+            ParentFont = False
+            Caption = 'POS'
+            ExplicitLeft = 0
+            ExplicitTop = 3
+            ExplicitWidth = 602
+          end
+        end
+      end
+      object LMDSimplePanel10: TLMDSimplePanel
+        AlignWithMargins = True
+        Left = 260
+        Top = 1
+        Width = 286
+        Height = 110
+        Margins.Left = 2
+        Margins.Top = 1
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alRight
+        Bevel.WidthInner = 0
+        Bevel.WidthOuter = 0
+        Bevel.BorderWidth = 1
+        Color = clWhite
+        TabOrder = 1
+        object DBGrid4: TDBGrid
+          Tag = 1
+          AlignWithMargins = True
+          Left = 1
+          Top = 26
+          Width = 284
+          Height = 83
+          Margins.Left = 0
+          Margins.Top = 1
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          BorderStyle = bsNone
+          Color = clWhite
+          Ctl3D = False
+          DrawingStyle = gdsGradient
+          FixedColor = 16447736
+          GradientEndColor = 16447736
+          GradientStartColor = 16447736
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleHotTrack]
+          ParentCtl3D = False
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = 5131854
+          TitleFont.Height = -15
+          TitleFont.Name = 'Roboto'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGrid1DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -12
+              Font.Name = 'Roboto'
+              Font.Style = []
+              Title.Alignment = taCenter
+              Title.Caption = 'DESCRI'#199#195'O DA REDE TEF'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 5131854
+              Title.Font.Height = -12
+              Title.Font.Name = 'Roboto'
+              Title.Font.Style = [fsBold]
+              Width = 243
+              Visible = True
+            end
+            item
+              Expanded = False
+              Width = 22
+              Visible = True
+            end>
+        end
+        object LMDSimplePanel11: TLMDSimplePanel
+          AlignWithMargins = True
+          Left = 1
+          Top = 1
+          Width = 284
+          Height = 24
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alTop
+          Bevel.StyleOuter = bvNormal
+          Bevel.WidthInner = 0
+          Bevel.WidthOuter = 0
+          Bevel.BorderColor = 15129563
+          Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+          Bevel.BorderWidth = 1
+          Color = 15461355
+          TabOrder = 1
+          object LMDLabel4: TLMDLabel
+            AlignWithMargins = True
+            Left = 1
+            Top = 4
+            Width = 282
+            Height = 16
+            Margins.Left = 0
+            Margins.Right = 0
+            Bevel.BorderColor = 15129563
+            Align = alClient
+            Alignment = agCenter
+            Color = 4159487
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 19967
+            Font.Height = -12
+            Font.Name = 'Roboto'
+            Font.Style = [fsBold]
+            Options = []
+            ParentColor = False
+            ParentFont = False
+            Caption = 'TEF'
+            ExplicitLeft = 0
+            ExplicitWidth = 795
+          end
+        end
+      end
+    end
+    object PanelRodape: TLMDSimplePanel
+      AlignWithMargins = True
+      Left = 1
+      Top = 558
+      Width = 546
+      Height = 32
+      Margins.Left = 0
+      Margins.Top = 1
+      Margins.Right = 0
+      Margins.Bottom = 1
+      Align = alBottom
+      Color = 16382200
+      TabOrder = 3
+      object PanelButtons: TLMDSimplePanel
+        AlignWithMargins = True
+        Left = 114
+        Top = 3
+        Width = 319
+        Height = 26
+        ParentColor = True
+        TabOrder = 0
+        object btSalvar: TAdvGlowButton
+          AlignWithMargins = True
+          Left = 219
+          Top = 0
+          Width = 100
+          Height = 26
+          Cursor = crHandPoint
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alRight
+          Caption = 'Salvar'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 7039851
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          Font.Quality = fqClearType
+          NotesFont.Charset = DEFAULT_CHARSET
+          NotesFont.Color = clWindowText
+          NotesFont.Height = -12
+          NotesFont.Name = 'Tahoma'
+          NotesFont.Style = []
+          ParentFont = False
+          Picture.Data = {
+            89504E470D0A1A0A0000000D49484452000000180000001810040000001AEE29
+            30000000206348524D00007A26000080840000FA00000080E8000075300000EA
+            6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+            485973000000600000006000F06B42CF0000000774494D4507E70719150F0A25
+            04D1D50000017F4944415448C763601805A3801450FF9F89095D8C891C83D041
+            EE3665E5AC3BB76EBDE17CF62C779BB232B21C0B350CFF9773E000A3A78C0C43
+            3203C3DF2F86860C0C77EF52C50730C3193C6564181818181884B66DFBB37BE3
+            46AAF820FDBF82C2BF977BF6C00DF7DEB1E38B6770F042C6DFBF91D561F82097
+            D3CC2C779B96162197B3281F3ECCD0ACA0007339134340C042C61F3FD0D5A258
+            90B9CCDEFE5FD2C993FF122F5ECCC90E0D253658982C8382267BFDFC894D3D8A
+            054C5BFEFF6760606060086161F9BF66D932744B48359C81818181199973FAF2
+            C387A62E9F3E31FE747767D0626262700E0A32DF7FE7CEA9AF972FA7FF575060
+            E4DBB78FE1999C1C3CCCD3828266A9E1361CC30206060686D3474E9C305DF2E5
+            0BE349373786FB4C4C0CD7FDFD4DF3BE7C614E9B3D1B6EB8D0B66D4CB2818184
+            0C6760606060C42591555958C8F8A9AF0F43C27BC78E2F9E8181D82294281FA0
+            F804165C641A4E14C849CDCFCF7AF3F367F6C9D5AB73B7B1B353CD606480AD10
+            1B05A3000E006DFDA65FD6E403700000000049454E44AE426082}
+          Rounded = True
+          TabOrder = 0
+          Appearance.BorderColor = 8695039
+          Appearance.BorderColorHot = 2846975
+          Appearance.BorderColorCheckedHot = 8695039
+          Appearance.BorderColorDown = 8695039
+          Appearance.BorderColorChecked = 8695039
+          Appearance.BorderColorDisabled = 8695039
+          Appearance.BorderColorFocused = 8695039
+          Appearance.Color = 14017279
+          Appearance.ColorTo = 9943551
+          Appearance.ColorChecked = 9943551
+          Appearance.ColorCheckedTo = 9943551
+          Appearance.ColorDisabled = 9943551
+          Appearance.ColorDisabledTo = 9943551
+          Appearance.ColorDown = 9943551
+          Appearance.ColorDownTo = 9943551
+          Appearance.ColorHot = 7972351
+          Appearance.ColorHotTo = 10337791
+          Appearance.ColorMirror = 9943551
+          Appearance.ColorMirrorTo = 9943551
+          Appearance.ColorMirrorHot = 7972351
+          Appearance.ColorMirrorHotTo = 7972351
+          Appearance.ColorMirrorDown = 9943551
+          Appearance.ColorMirrorDownTo = 9943551
+          Appearance.ColorMirrorChecked = 9943551
+          Appearance.ColorMirrorCheckedTo = 9943551
+          Appearance.ColorMirrorDisabled = 9943551
+          Appearance.ColorMirrorDisabledTo = 9943551
+          Appearance.GradientHot = ggVertical
+          Appearance.GradientMirrorHot = ggVertical
+          Appearance.GradientDown = ggVertical
+          Appearance.GradientMirrorDown = ggVertical
+          Appearance.GradientChecked = ggVertical
+          Appearance.TextColorChecked = 3750459
+          Appearance.TextColorDown = 2303013
+          Appearance.TextColorHot = 2303013
+          Appearance.TextColorDisabled = 13948116
+        end
+        object AdvGlowButton6: TAdvGlowButton
+          AlignWithMargins = True
+          Left = 110
+          Top = 0
+          Width = 100
+          Height = 26
+          Cursor = crHandPoint
+          Margins.Left = 2
+          Margins.Top = 0
+          Margins.Right = 6
+          Margins.Bottom = 0
+          Align = alRight
+          Caption = 'Excluir'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 5723991
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          Font.Quality = fqClearType
+          NotesFont.Charset = DEFAULT_CHARSET
+          NotesFont.Color = clWindowText
+          NotesFont.Height = -12
+          NotesFont.Name = 'Tahoma'
+          NotesFont.Style = []
+          ParentFont = False
+          Picture.Data = {
+            89504E470D0A1A0A0000000D49484452000000180000001810040000001AEE29
+            30000000206348524D00007A26000080840000FA00000080E8000075300000EA
+            6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+            485973000000600000006000F06B42CF0000000774494D4507E707191513379B
+            1BC099000001DF4944415448C7ED92C14BDB501CC7BF2F31B8BCD246DB9332D8
+            6105C18BBB889A0E0423AD4118B2BF6196D557D97AF4B4D3987737E786B7E18E
+            22281AA9DE66A0D8EE2E7408C23C0CA4A6264889E6ED3283B8B689DB4DFC1EDF
+            EFF73E9FFCF27BC07DEE7CC4568557BCAB6BE0B8B3B3F2BDD1680798DD8CC59E
+            4444B15271DD6675A1D961C18CC72F5E54AB52FFE1218B0E0DB582E7E752294F
+            3A3A92760E0E0AA62C871600007E4A12AADDDD58DDDECE2587879BC1F9ECD616
+            D614855728151785D6AC6661A591113661598C71CE44DBCE7D1D1DBDAAE54E54
+            951DD7EB8C71CE8AA7A7EDA6244112BC310C3C8EC5B0E438DE97C949645C5768
+            1806DE46A398B22C3CCF643E9C954AFF24F84BF2EDFC1CAF394799D230F05002
+            5FA2168B781989000059711C7EA9694170A0DD92AFC54B128265E27F0C7F2408
+            5CA734CCDD4041EE4455858661A04C2964DBC692E3E0A92C137D6323FF796CEC
+            BF043EFC6AA19FC6C7BD5FE9347ED4EB2853CAA5F5F52089101AFE67A11F13A6
+            E9ADE8FA75C98CAB69617E979F6CB6A7C77FE70F6BB5196D70F0664F7E2E95F2
+            7B44DBCE3FEBED0D3DC183794982DED18164ADC6FBD2E9C5DDFDFD9B3DEFDFED
+            ED91055DC794656199908B4B12EA45FA61A544223BAD2881D34E2B4AC18CC76F
+            05BFCFDDCA6FE813D275370C23920000000049454E44AE426082}
+          Rounded = True
+          TabOrder = 1
+          Appearance.BorderColor = 2412287
+          Appearance.BorderColorHot = 50943
+          Appearance.BorderColorCheckedHot = 50175
+          Appearance.BorderColorDown = 46826
+          Appearance.BorderColorChecked = 50175
+          Appearance.BorderColorDisabled = 50175
+          Appearance.BorderColorFocused = 50175
+          Appearance.Color = 11792127
+          Appearance.ColorTo = 50175
+          Appearance.ColorChecked = 50175
+          Appearance.ColorCheckedTo = 50175
+          Appearance.ColorDisabled = 50175
+          Appearance.ColorDisabledTo = 50175
+          Appearance.ColorDown = 50175
+          Appearance.ColorDownTo = 50175
+          Appearance.ColorHot = 1887487
+          Appearance.ColorHotTo = 1887487
+          Appearance.ColorMirror = 50175
+          Appearance.ColorMirrorTo = 50175
+          Appearance.ColorMirrorHot = 1887487
+          Appearance.ColorMirrorHotTo = 1887487
+          Appearance.ColorMirrorDown = 50175
+          Appearance.ColorMirrorDownTo = 50175
+          Appearance.ColorMirrorChecked = 50175
+          Appearance.ColorMirrorCheckedTo = 50175
+          Appearance.ColorMirrorDisabled = 50175
+          Appearance.ColorMirrorDisabledTo = 50175
+          Appearance.GradientHot = ggVertical
+          Appearance.GradientMirrorHot = ggVertical
+          Appearance.GradientDown = ggVertical
+          Appearance.GradientMirrorDown = ggVertical
+          Appearance.GradientChecked = ggVertical
+          Appearance.TextColorChecked = 3750459
+          Appearance.TextColorDown = 2303013
+          Appearance.TextColorHot = 2303013
+          Appearance.TextColorDisabled = 13948116
+        end
+        object btNovo: TAdvGlowButton
+          AlignWithMargins = True
+          Left = 2
+          Top = 0
+          Width = 100
+          Height = 26
+          Cursor = crHandPoint
+          Margins.Top = 0
+          Margins.Right = 6
+          Margins.Bottom = 0
+          Align = alRight
+          Caption = 'Novo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 7039851
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          Font.Quality = fqClearType
+          NotesFont.Charset = DEFAULT_CHARSET
+          NotesFont.Color = clWindowText
+          NotesFont.Height = -12
+          NotesFont.Name = 'Tahoma'
+          NotesFont.Style = []
+          ParentFont = False
+          Picture.Data = {
+            89504E470D0A1A0A0000000D4948445200000010000000101004000000E56AEB
+            A9000000206348524D00007A26000080840000FA00000080E8000075300000EA
+            6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+            485973000000600000006000F06B42CF0000000774494D4507E70802140117DC
+            0BBDFA000000EA4944415438CBC5933B0AC2401445EFC4A4B410ADD3650D621B
+            45F103B6EE40C8C82CC12CC14234B8035BC10F8ABDB885D1CE3EB682669E8536
+            EA0CA820DEEAC2BB1CDE87C76090885DF712AFD70040996231CA1E0EBA9C6D02
+            24AD7A9D799E07006CD7680051A4CB592600368EA3F56F03DED4FF01B6885D37
+            1996CB685B8FB085EF637BF703DFE7D5D3E9A13E522A15AC562CD84BC97AB76D
+            7FACA39416EB127DDD7F4864AB7EA9644595CAEB08B51AB6CD2600203F99A03A
+            9F3F8FA072CBA511CED342704EC439114F0B61CAFDFF8C3F0414CE67AD7F92F1
+            1B53E3D92CE948899048E5A65364F5B92B4C674F3CED4A6AC10000000049454E
+            44AE426082}
+          Rounded = True
+          Spacing = 3
+          TabOrder = 2
+          Appearance.BorderColor = 8695039
+          Appearance.BorderColorHot = 2846975
+          Appearance.BorderColorCheckedHot = 8695039
+          Appearance.BorderColorDown = 8695039
+          Appearance.BorderColorChecked = 8695039
+          Appearance.BorderColorDisabled = 8695039
+          Appearance.BorderColorFocused = 8695039
+          Appearance.Color = 14017279
+          Appearance.ColorTo = 9943551
+          Appearance.ColorChecked = 9943551
+          Appearance.ColorCheckedTo = 9943551
+          Appearance.ColorDisabled = 9943551
+          Appearance.ColorDisabledTo = 9943551
+          Appearance.ColorDown = 9943551
+          Appearance.ColorDownTo = 9943551
+          Appearance.ColorHot = 7972351
+          Appearance.ColorHotTo = 10337791
+          Appearance.ColorMirror = 9943551
+          Appearance.ColorMirrorTo = 9943551
+          Appearance.ColorMirrorHot = 7972351
+          Appearance.ColorMirrorHotTo = 7972351
+          Appearance.ColorMirrorDown = 9943551
+          Appearance.ColorMirrorDownTo = 9943551
+          Appearance.ColorMirrorChecked = 9943551
+          Appearance.ColorMirrorCheckedTo = 9943551
+          Appearance.ColorMirrorDisabled = 9943551
+          Appearance.ColorMirrorDisabledTo = 9943551
+          Appearance.GradientHot = ggVertical
+          Appearance.GradientMirrorHot = ggVertical
+          Appearance.GradientDown = ggVertical
+          Appearance.GradientMirrorDown = ggVertical
+          Appearance.GradientChecked = ggVertical
+          Appearance.TextColorChecked = 3750459
+          Appearance.TextColorDown = 2303013
+          Appearance.TextColorHot = 2303013
+          Appearance.TextColorDisabled = 13948116
+        end
+      end
+    end
+    object LMDSimplePanel12: TLMDSimplePanel
+      Left = 1
+      Top = 60
+      Width = 546
+      Height = 243
+      Align = alTop
+      Color = 16250100
+      TabOrder = 4
+      object LMDDBLabeledEdit1: TLMDDBLabeledEdit
+        Left = 13
+        Top = 30
+        Width = 282
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 0
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        EditLabel.Width = 68
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'ADQUIRENTE'
+      end
+      object LMDDBLabeledEdit2: TLMDDBLabeledEdit
+        Left = 308
+        Top = 30
+        Width = 122
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 1
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 122
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'CNPJ'
+      end
+      object LMDDBLabeledEdit11: TLMDDBLabeledEdit
+        Left = 13
+        Top = 168
+        Width = 282
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        TabOrder = 10
+        ValidationMsgString = 'a Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 2236186
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        CharCase = ecLowerCase
+        ParentFont = False
+        CustomButtons = <
+          item
+            Color = clWhite
+            Cursor = crHandPoint
+            ParentFont = False
+            PngGlyph.Data = {
+              89504E470D0A1A0A0000000D4948445200000010000000100804000000B5FA37
+              EA000000097048597300000B1300000B1301009A9C1800000319694343505068
+              6F746F73686F70204943432070726F66696C65000078DA6360609EE0E8E2E4CA
+              24C0C050505452E41EE418191119A5C07E9E818D819981818181812131B9B8C0
+              3120C087818181212F3F2F9501037CBBC6C0C8C0C0C07059D7D1C5C9958134C0
+              9A5C5054C2C0C070808181C12825B538998181E10B0303437A79494109030363
+              0C03038348527641090303630103038348764890330303630B0303134F496A45
+              0903030383737E416551667A468982A1A5A5A582634A7E52AA42706571496A6E
+              B182675E727E51417E5162496A0A030303D40E060606065E97FC1205F7C4CC3C
+              05435355062A8388C82805F4F0418821407269511984C5C8C0C0C020C0A0C5E0
+              C750C9B08AE101A3346314E33CC6A74C864C0D4C979835981B99EFB2D8B0CC63
+              6566CD66BDCAE6C4B6895D857D2687004727272B67331733571B3737F7441E29
+              9EA5BCC6BC87F882F99EF1570B0809AC1674137C24D428AC287C58245D945774
+              AB589C38A7F85689144961C9A35215D2BAD24F64E6C886CA09CA9D95EF51F051
+              E455BCA03445394A4549E5B5EA56B546753F0D598DB79AFBB4266AA7EA58EB0A
+              E9BED23BA23FDFA0C630CAC8D258D2F8B7C93DD3C3662BCCFB2D2A2C13AD7CAC
+              2D6C546D45EC58ECBEDA3F77B8ED78C1E998F35E97ADAEEBDD56BA2FF558E4B9
+              D06B81F7429FC5BECBFC56F9AF0FD81AB837E858F0F9905BA1CFC2BE4430450A
+              4629451BC7B8C546C5E5C5B724CC4EDC9C7436F9792A539A5CBA4D46546655D6
+              ACEC3D39F7F298F2D50B7C0A8B8B66171F2E795B2651EE52515839AFEA6CF5DF
+              5ABDBAF8FA490DC71A7F371BB4A4B7CE6BBBDE21D8E9DDD5DE7DB897A1CFBEBF
+              6EC2BE89FF273B4E699D7A623AEF8CE099B3663D9AA335B764DEBE055C0BC316
+              2D5EFC71A9C3B209CB1FAE345ED5BAFAE65ADD754DEB6F6E34D8D4B1F9C156AB
+              6D53B77FD8E9BB6BD51E8EBDE9FB8E1F503FD879E8F511BFA39B8F8B9FA83DF9
+              E4B4F7992DE764CFB75FF87429EEF2A9AB16D796DD10BDD97AEBEB9DF4BB37EF
+              FB3C38F0C8F4F1EAA78ACF66BE107CD9F59AF94DDDDB9FEF4B3F7CFA54F0F9DD
+              D7BC6FEF7EE4FFFCF0BBF8CFB77F55FFFF03002ABF1D8AF36F515B00003F6E69
+              545874584D4C3A636F6D2E61646F62652E786D7000000000003C3F787061636B
+              657420626567696E3D22EFBBBF222069643D2257354D304D7043656869487A72
+              65537A4E54637A6B633964223F3E0A3C783A786D706D65746120786D6C6E733A
+              783D2261646F62653A6E733A6D6574612F2220783A786D70746B3D2241646F62
+              6520584D5020436F726520352E352D633031342037392E3135313438312C2032
+              3031332F30332F31332D31323A30393A31352020202020202020223E0A202020
+              3C7264663A52444620786D6C6E733A7264663D22687474703A2F2F7777772E77
+              332E6F72672F313939392F30322F32322D7264662D73796E7461782D6E732322
+              3E0A2020202020203C7264663A4465736372697074696F6E207264663A61626F
+              75743D22220A202020202020202020202020786D6C6E733A786D703D22687474
+              703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F220A2020202020
+              20202020202020786D6C6E733A64633D22687474703A2F2F7075726C2E6F7267
+              2F64632F656C656D656E74732F312E312F220A20202020202020202020202078
+              6D6C6E733A786D704D4D3D22687474703A2F2F6E732E61646F62652E636F6D2F
+              7861702F312E302F6D6D2F220A202020202020202020202020786D6C6E733A73
+              744576743D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E
+              302F73547970652F5265736F757263654576656E7423220A2020202020202020
+              20202020786D6C6E733A73745265663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F7861702F312E302F73547970652F5265736F757263655265662322
+              0A202020202020202020202020786D6C6E733A70686F746F73686F703D226874
+              74703A2F2F6E732E61646F62652E636F6D2F70686F746F73686F702F312E302F
+              220A202020202020202020202020786D6C6E733A746966663D22687474703A2F
+              2F6E732E61646F62652E636F6D2F746966662F312E302F220A20202020202020
+              2020202020786D6C6E733A657869663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F657869662F312E302F223E0A2020202020202020203C786D703A43
+              726561746F72546F6F6C3E41646F62652050686F746F73686F70204343202857
+              696E646F7773293C2F786D703A43726561746F72546F6F6C3E0A202020202020
+              2020203C786D703A437265617465446174653E323031352D31302D3234543132
+              3A30333A33372D30323A30303C2F786D703A437265617465446174653E0A2020
+              202020202020203C786D703A4D65746164617461446174653E323031352D3130
+              2D32345431323A30363A31352D30323A30303C2F786D703A4D65746164617461
+              446174653E0A2020202020202020203C786D703A4D6F64696679446174653E32
+              3031352D31302D32345431323A30363A31352D30323A30303C2F786D703A4D6F
+              64696679446174653E0A2020202020202020203C64633A666F726D61743E696D
+              6167652F706E673C2F64633A666F726D61743E0A2020202020202020203C786D
+              704D4D3A496E7374616E636549443E786D702E6969643A61653336656435332D
+              386636342D313034372D383066622D6463346431383831336436313C2F786D70
+              4D4D3A496E7374616E636549443E0A2020202020202020203C786D704D4D3A44
+              6F63756D656E7449443E786D702E6469643A31386631313431362D343262652D
+              373834312D623735332D6365373435653361663734643C2F786D704D4D3A446F
+              63756D656E7449443E0A2020202020202020203C786D704D4D3A4F726967696E
+              616C446F63756D656E7449443E786D702E6469643A31386631313431362D3432
+              62652D373834312D623735332D6365373435653361663734643C2F786D704D4D
+              3A4F726967696E616C446F63756D656E7449443E0A2020202020202020203C78
+              6D704D4D3A486973746F72793E0A2020202020202020202020203C7264663A53
+              65713E0A2020202020202020202020202020203C7264663A6C69207264663A70
+              61727365547970653D225265736F75726365223E0A2020202020202020202020
+              202020202020203C73744576743A616374696F6E3E637265617465643C2F7374
+              4576743A616374696F6E3E0A2020202020202020202020202020202020203C73
+              744576743A696E7374616E636549443E786D702E6969643A3138663131343136
+              2D343262652D373834312D623735332D6365373435653361663734643C2F7374
+              4576743A696E7374616E636549443E0A20202020202020202020202020202020
+              20203C73744576743A7768656E3E323031352D31302D32345431323A30333A33
+              372D30323A30303C2F73744576743A7768656E3E0A2020202020202020202020
+              202020202020203C73744576743A736F6674776172654167656E743E41646F62
+              652050686F746F73686F70204343202857696E646F7773293C2F73744576743A
+              736F6674776172654167656E743E0A2020202020202020202020202020203C2F
+              7264663A6C693E0A2020202020202020202020202020203C7264663A6C692072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020202020202020203C73744576743A616374696F6E3E73617665643C2F
+              73744576743A616374696F6E3E0A202020202020202020202020202020202020
+              3C73744576743A696E7374616E636549443E786D702E6969643A626439623339
+              31372D353438372D353634612D383838312D6466663930363364396135383C2F
+              73744576743A696E7374616E636549443E0A2020202020202020202020202020
+              202020203C73744576743A7768656E3E323031352D31302D32345431323A3036
+              3A31352D30323A30303C2F73744576743A7768656E3E0A202020202020202020
+              2020202020202020203C73744576743A736F6674776172654167656E743E4164
+              6F62652050686F746F73686F70204343202857696E646F7773293C2F73744576
+              743A736F6674776172654167656E743E0A202020202020202020202020202020
+              2020203C73744576743A6368616E6765643E2F3C2F73744576743A6368616E67
+              65643E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E636F6E7665727465643C2F73744576743A61
+              6374696F6E3E0A2020202020202020202020202020202020203C73744576743A
+              706172616D65746572733E66726F6D206170706C69636174696F6E2F766E642E
+              61646F62652E70686F746F73686F7020746F20696D6167652F706E673C2F7374
+              4576743A706172616D65746572733E0A2020202020202020202020202020203C
+              2F7264663A6C693E0A2020202020202020202020202020203C7264663A6C6920
+              7264663A7061727365547970653D225265736F75726365223E0A202020202020
+              2020202020202020202020203C73744576743A616374696F6E3E646572697665
+              643C2F73744576743A616374696F6E3E0A202020202020202020202020202020
+              2020203C73744576743A706172616D65746572733E636F6E7665727465642066
+              726F6D206170706C69636174696F6E2F766E642E61646F62652E70686F746F73
+              686F7020746F20696D6167652F706E673C2F73744576743A706172616D657465
+              72733E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E73617665643C2F73744576743A616374696F
+              6E3E0A2020202020202020202020202020202020203C73744576743A696E7374
+              616E636549443E786D702E6969643A61653336656435332D386636342D313034
+              372D383066622D6463346431383831336436313C2F73744576743A696E737461
+              6E636549443E0A2020202020202020202020202020202020203C73744576743A
+              7768656E3E323031352D31302D32345431323A30363A31352D30323A30303C2F
+              73744576743A7768656E3E0A2020202020202020202020202020202020203C73
+              744576743A736F6674776172654167656E743E41646F62652050686F746F7368
+              6F70204343202857696E646F7773293C2F73744576743A736F66747761726541
+              67656E743E0A2020202020202020202020202020202020203C73744576743A63
+              68616E6765643E2F3C2F73744576743A6368616E6765643E0A20202020202020
+              20202020202020203C2F7264663A6C693E0A2020202020202020202020203C2F
+              7264663A5365713E0A2020202020202020203C2F786D704D4D3A486973746F72
+              793E0A2020202020202020203C786D704D4D3A4465726976656446726F6D2072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020203C73745265663A696E7374616E636549443E786D702E6969643A62
+              643962333931372D353438372D353634612D383838312D646666393036336439
+              6135383C2F73745265663A696E7374616E636549443E0A202020202020202020
+              2020203C73745265663A646F63756D656E7449443E786D702E6469643A313866
+              31313431362D343262652D373834312D623735332D6365373435653361663734
+              643C2F73745265663A646F63756D656E7449443E0A2020202020202020202020
+              203C73745265663A6F726967696E616C446F63756D656E7449443E786D702E64
+              69643A31386631313431362D343262652D373834312D623735332D6365373435
+              653361663734643C2F73745265663A6F726967696E616C446F63756D656E7449
+              443E0A2020202020202020203C2F786D704D4D3A4465726976656446726F6D3E
+              0A2020202020202020203C70686F746F73686F703A436F6C6F724D6F64653E31
+              3C2F70686F746F73686F703A436F6C6F724D6F64653E0A202020202020202020
+              3C70686F746F73686F703A49434350726F66696C653E446F74204761696E2031
+              35253C2F70686F746F73686F703A49434350726F66696C653E0A202020202020
+              2020203C746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269
+              656E746174696F6E3E0A2020202020202020203C746966663A585265736F6C75
+              74696F6E3E3732303030302F31303030303C2F746966663A585265736F6C7574
+              696F6E3E0A2020202020202020203C746966663A595265736F6C7574696F6E3E
+              3732303030302F31303030303C2F746966663A595265736F6C7574696F6E3E0A
+              2020202020202020203C746966663A5265736F6C7574696F6E556E69743E323C
+              2F746966663A5265736F6C7574696F6E556E69743E0A2020202020202020203C
+              657869663A436F6C6F7253706163653E36353533353C2F657869663A436F6C6F
+              7253706163653E0A2020202020202020203C657869663A506978656C5844696D
+              656E73696F6E3E31363C2F657869663A506978656C5844696D656E73696F6E3E
+              0A2020202020202020203C657869663A506978656C5944696D656E73696F6E3E
+              31363C2F657869663A506978656C5944696D656E73696F6E3E0A202020202020
+              3C2F7264663A4465736372697074696F6E3E0A2020203C2F7264663A5244463E
+              0A3C2F783A786D706D6574613E0A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A202020202020202020202020202020202020202020202020202020200A3C3F
+              787061636B657420656E643D2277223F3E1A6F5CDF0000013D4944415478DA8D
+              91CD2B446118C5CFB9C534DC292C68523E9A58A048623376D869941A8BD1A459
+              51B62CEC9562291FFF828F856616C466146533EA6A9A51938D449429F35E5673
+              1F773EEE98849CD55BCFEF3DEFF39E43C1DF623550D7C3656D425C849C604325
+              BE01FA1863F2C8531832403FBA39F3B65F05D4776A3734F201ED0510D08528C6
+              AD41F3BA02E85B8CD06B658922007133635D98C132A037D190B8846CCBC2B074
+              6793A15CA30374F00E2BB2569A141C6C2D723DE776805A26702BD3CEC21A2CC8
+              8E16C8792B3B7896B02AFD4C890334208D3335FBB5E4248FE49C0B922AFEDE87
+              6D8CE687DE93CE13233C44AB7DF8C09EA4D98508B21256B1720EFA30A368C633
+              E6D02761F6CABDEDB6AB92E524753F0FD082279952577660355A9BF56A66ABBA
+              F064E0930704D5E52F65E9C76C977915FF479B3FE913A5217A01191813C00000
+              000049454E44AE426082}
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Index = 0
+            DisplayName = 'TLMDSpecialButton'
+            UsePngGlyph = True
+          end>
+        CustomButtonsStyle = ubsExplorer
+        CustomButtonWidth = 18
+        CustomButtonParentCtlXP = False
+        TabOnEnter = True
+        EditLabel.Width = 173
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = ANSI_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'NATUREZA FINANCEIRA TAXA TEF'
+      end
+      object LMDDBLabeledEdit12: TLMDDBLabeledEdit
+        Left = 13
+        Top = 76
+        Width = 282
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        TabOrder = 2
+        ValidationMsgString = 'a Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 2236186
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        CharCase = ecLowerCase
+        ParentFont = False
+        CustomButtons = <
+          item
+            Color = clWhite
+            Cursor = crHandPoint
+            ParentFont = False
+            PngGlyph.Data = {
+              89504E470D0A1A0A0000000D4948445200000010000000100804000000B5FA37
+              EA000000097048597300000B1300000B1301009A9C1800000319694343505068
+              6F746F73686F70204943432070726F66696C65000078DA6360609EE0E8E2E4CA
+              24C0C050505452E41EE418191119A5C07E9E818D819981818181812131B9B8C0
+              3120C087818181212F3F2F9501037CBBC6C0C8C0C0C07059D7D1C5C9958134C0
+              9A5C5054C2C0C070808181C12825B538998181E10B0303437A79494109030363
+              0C03038348527641090303630103038348764890330303630B0303134F496A45
+              0903030383737E416551667A468982A1A5A5A582634A7E52AA42706571496A6E
+              B182675E727E51417E5162496A0A030303D40E060606065E97FC1205F7C4CC3C
+              05435355062A8388C82805F4F0418821407269511984C5C8C0C0C020C0A0C5E0
+              C750C9B08AE101A3346314E33CC6A74C864C0D4C979835981B99EFB2D8B0CC63
+              6566CD66BDCAE6C4B6895D857D2687004727272B67331733571B3737F7441E29
+              9EA5BCC6BC87F882F99EF1570B0809AC1674137C24D428AC287C58245D945774
+              AB589C38A7F85689144961C9A35215D2BAD24F64E6C886CA09CA9D95EF51F051
+              E455BCA03445394A4549E5B5EA56B546753F0D598DB79AFBB4266AA7EA58EB0A
+              E9BED23BA23FDFA0C630CAC8D258D2F8B7C93DD3C3662BCCFB2D2A2C13AD7CAC
+              2D6C546D45EC58ECBEDA3F77B8ED78C1E998F35E97ADAEEBDD56BA2FF558E4B9
+              D06B81F7429FC5BECBFC56F9AF0FD81AB837E858F0F9905BA1CFC2BE4430450A
+              4629451BC7B8C546C5E5C5B724CC4EDC9C7436F9792A539A5CBA4D46546655D6
+              ACEC3D39F7F298F2D50B7C0A8B8B66171F2E795B2651EE52515839AFEA6CF5DF
+              5ABDBAF8FA490DC71A7F371BB4A4B7CE6BBBDE21D8E9DDD5DE7DB897A1CFBEBF
+              6EC2BE89FF273B4E699D7A623AEF8CE099B3663D9AA335B764DEBE055C0BC316
+              2D5EFC71A9C3B209CB1FAE345ED5BAFAE65ADD754DEB6F6E34D8D4B1F9C156AB
+              6D53B77FD8E9BB6BD51E8EBDE9FB8E1F503FD879E8F511BFA39B8F8B9FA83DF9
+              E4B4F7992DE764CFB75FF87429EEF2A9AB16D796DD10BDD97AEBEB9DF4BB37EF
+              FB3C38F0C8F4F1EAA78ACF66BE107CD9F59AF94DDDDB9FEF4B3F7CFA54F0F9DD
+              D7BC6FEF7EE4FFFCF0BBF8CFB77F55FFFF03002ABF1D8AF36F515B00003F6E69
+              545874584D4C3A636F6D2E61646F62652E786D7000000000003C3F787061636B
+              657420626567696E3D22EFBBBF222069643D2257354D304D7043656869487A72
+              65537A4E54637A6B633964223F3E0A3C783A786D706D65746120786D6C6E733A
+              783D2261646F62653A6E733A6D6574612F2220783A786D70746B3D2241646F62
+              6520584D5020436F726520352E352D633031342037392E3135313438312C2032
+              3031332F30332F31332D31323A30393A31352020202020202020223E0A202020
+              3C7264663A52444620786D6C6E733A7264663D22687474703A2F2F7777772E77
+              332E6F72672F313939392F30322F32322D7264662D73796E7461782D6E732322
+              3E0A2020202020203C7264663A4465736372697074696F6E207264663A61626F
+              75743D22220A202020202020202020202020786D6C6E733A786D703D22687474
+              703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F220A2020202020
+              20202020202020786D6C6E733A64633D22687474703A2F2F7075726C2E6F7267
+              2F64632F656C656D656E74732F312E312F220A20202020202020202020202078
+              6D6C6E733A786D704D4D3D22687474703A2F2F6E732E61646F62652E636F6D2F
+              7861702F312E302F6D6D2F220A202020202020202020202020786D6C6E733A73
+              744576743D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E
+              302F73547970652F5265736F757263654576656E7423220A2020202020202020
+              20202020786D6C6E733A73745265663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F7861702F312E302F73547970652F5265736F757263655265662322
+              0A202020202020202020202020786D6C6E733A70686F746F73686F703D226874
+              74703A2F2F6E732E61646F62652E636F6D2F70686F746F73686F702F312E302F
+              220A202020202020202020202020786D6C6E733A746966663D22687474703A2F
+              2F6E732E61646F62652E636F6D2F746966662F312E302F220A20202020202020
+              2020202020786D6C6E733A657869663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F657869662F312E302F223E0A2020202020202020203C786D703A43
+              726561746F72546F6F6C3E41646F62652050686F746F73686F70204343202857
+              696E646F7773293C2F786D703A43726561746F72546F6F6C3E0A202020202020
+              2020203C786D703A437265617465446174653E323031352D31302D3234543132
+              3A30333A33372D30323A30303C2F786D703A437265617465446174653E0A2020
+              202020202020203C786D703A4D65746164617461446174653E323031352D3130
+              2D32345431323A30363A31352D30323A30303C2F786D703A4D65746164617461
+              446174653E0A2020202020202020203C786D703A4D6F64696679446174653E32
+              3031352D31302D32345431323A30363A31352D30323A30303C2F786D703A4D6F
+              64696679446174653E0A2020202020202020203C64633A666F726D61743E696D
+              6167652F706E673C2F64633A666F726D61743E0A2020202020202020203C786D
+              704D4D3A496E7374616E636549443E786D702E6969643A61653336656435332D
+              386636342D313034372D383066622D6463346431383831336436313C2F786D70
+              4D4D3A496E7374616E636549443E0A2020202020202020203C786D704D4D3A44
+              6F63756D656E7449443E786D702E6469643A31386631313431362D343262652D
+              373834312D623735332D6365373435653361663734643C2F786D704D4D3A446F
+              63756D656E7449443E0A2020202020202020203C786D704D4D3A4F726967696E
+              616C446F63756D656E7449443E786D702E6469643A31386631313431362D3432
+              62652D373834312D623735332D6365373435653361663734643C2F786D704D4D
+              3A4F726967696E616C446F63756D656E7449443E0A2020202020202020203C78
+              6D704D4D3A486973746F72793E0A2020202020202020202020203C7264663A53
+              65713E0A2020202020202020202020202020203C7264663A6C69207264663A70
+              61727365547970653D225265736F75726365223E0A2020202020202020202020
+              202020202020203C73744576743A616374696F6E3E637265617465643C2F7374
+              4576743A616374696F6E3E0A2020202020202020202020202020202020203C73
+              744576743A696E7374616E636549443E786D702E6969643A3138663131343136
+              2D343262652D373834312D623735332D6365373435653361663734643C2F7374
+              4576743A696E7374616E636549443E0A20202020202020202020202020202020
+              20203C73744576743A7768656E3E323031352D31302D32345431323A30333A33
+              372D30323A30303C2F73744576743A7768656E3E0A2020202020202020202020
+              202020202020203C73744576743A736F6674776172654167656E743E41646F62
+              652050686F746F73686F70204343202857696E646F7773293C2F73744576743A
+              736F6674776172654167656E743E0A2020202020202020202020202020203C2F
+              7264663A6C693E0A2020202020202020202020202020203C7264663A6C692072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020202020202020203C73744576743A616374696F6E3E73617665643C2F
+              73744576743A616374696F6E3E0A202020202020202020202020202020202020
+              3C73744576743A696E7374616E636549443E786D702E6969643A626439623339
+              31372D353438372D353634612D383838312D6466663930363364396135383C2F
+              73744576743A696E7374616E636549443E0A2020202020202020202020202020
+              202020203C73744576743A7768656E3E323031352D31302D32345431323A3036
+              3A31352D30323A30303C2F73744576743A7768656E3E0A202020202020202020
+              2020202020202020203C73744576743A736F6674776172654167656E743E4164
+              6F62652050686F746F73686F70204343202857696E646F7773293C2F73744576
+              743A736F6674776172654167656E743E0A202020202020202020202020202020
+              2020203C73744576743A6368616E6765643E2F3C2F73744576743A6368616E67
+              65643E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E636F6E7665727465643C2F73744576743A61
+              6374696F6E3E0A2020202020202020202020202020202020203C73744576743A
+              706172616D65746572733E66726F6D206170706C69636174696F6E2F766E642E
+              61646F62652E70686F746F73686F7020746F20696D6167652F706E673C2F7374
+              4576743A706172616D65746572733E0A2020202020202020202020202020203C
+              2F7264663A6C693E0A2020202020202020202020202020203C7264663A6C6920
+              7264663A7061727365547970653D225265736F75726365223E0A202020202020
+              2020202020202020202020203C73744576743A616374696F6E3E646572697665
+              643C2F73744576743A616374696F6E3E0A202020202020202020202020202020
+              2020203C73744576743A706172616D65746572733E636F6E7665727465642066
+              726F6D206170706C69636174696F6E2F766E642E61646F62652E70686F746F73
+              686F7020746F20696D6167652F706E673C2F73744576743A706172616D657465
+              72733E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E73617665643C2F73744576743A616374696F
+              6E3E0A2020202020202020202020202020202020203C73744576743A696E7374
+              616E636549443E786D702E6969643A61653336656435332D386636342D313034
+              372D383066622D6463346431383831336436313C2F73744576743A696E737461
+              6E636549443E0A2020202020202020202020202020202020203C73744576743A
+              7768656E3E323031352D31302D32345431323A30363A31352D30323A30303C2F
+              73744576743A7768656E3E0A2020202020202020202020202020202020203C73
+              744576743A736F6674776172654167656E743E41646F62652050686F746F7368
+              6F70204343202857696E646F7773293C2F73744576743A736F66747761726541
+              67656E743E0A2020202020202020202020202020202020203C73744576743A63
+              68616E6765643E2F3C2F73744576743A6368616E6765643E0A20202020202020
+              20202020202020203C2F7264663A6C693E0A2020202020202020202020203C2F
+              7264663A5365713E0A2020202020202020203C2F786D704D4D3A486973746F72
+              793E0A2020202020202020203C786D704D4D3A4465726976656446726F6D2072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020203C73745265663A696E7374616E636549443E786D702E6969643A62
+              643962333931372D353438372D353634612D383838312D646666393036336439
+              6135383C2F73745265663A696E7374616E636549443E0A202020202020202020
+              2020203C73745265663A646F63756D656E7449443E786D702E6469643A313866
+              31313431362D343262652D373834312D623735332D6365373435653361663734
+              643C2F73745265663A646F63756D656E7449443E0A2020202020202020202020
+              203C73745265663A6F726967696E616C446F63756D656E7449443E786D702E64
+              69643A31386631313431362D343262652D373834312D623735332D6365373435
+              653361663734643C2F73745265663A6F726967696E616C446F63756D656E7449
+              443E0A2020202020202020203C2F786D704D4D3A4465726976656446726F6D3E
+              0A2020202020202020203C70686F746F73686F703A436F6C6F724D6F64653E31
+              3C2F70686F746F73686F703A436F6C6F724D6F64653E0A202020202020202020
+              3C70686F746F73686F703A49434350726F66696C653E446F74204761696E2031
+              35253C2F70686F746F73686F703A49434350726F66696C653E0A202020202020
+              2020203C746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269
+              656E746174696F6E3E0A2020202020202020203C746966663A585265736F6C75
+              74696F6E3E3732303030302F31303030303C2F746966663A585265736F6C7574
+              696F6E3E0A2020202020202020203C746966663A595265736F6C7574696F6E3E
+              3732303030302F31303030303C2F746966663A595265736F6C7574696F6E3E0A
+              2020202020202020203C746966663A5265736F6C7574696F6E556E69743E323C
+              2F746966663A5265736F6C7574696F6E556E69743E0A2020202020202020203C
+              657869663A436F6C6F7253706163653E36353533353C2F657869663A436F6C6F
+              7253706163653E0A2020202020202020203C657869663A506978656C5844696D
+              656E73696F6E3E31363C2F657869663A506978656C5844696D656E73696F6E3E
+              0A2020202020202020203C657869663A506978656C5944696D656E73696F6E3E
+              31363C2F657869663A506978656C5944696D656E73696F6E3E0A202020202020
+              3C2F7264663A4465736372697074696F6E3E0A2020203C2F7264663A5244463E
+              0A3C2F783A786D706D6574613E0A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A202020202020202020202020202020202020202020202020202020200A3C3F
+              787061636B657420656E643D2277223F3E1A6F5CDF0000013D4944415478DA8D
+              91CD2B446118C5CFB9C534DC292C68523E9A58A048623376D869941A8BD1A459
+              51B62CEC9562291FFF828F856616C466146533EA6A9A51938D449429F35E5673
+              1F773EEE98849CD55BCFEF3DEFF39E43C1DF623550D7C3656D425C849C604325
+              BE01FA1863F2C8531832403FBA39F3B65F05D4776A3734F201ED0510D08528C6
+              AD41F3BA02E85B8CD06B658922007133635D98C132A037D190B8846CCBC2B074
+              6793A15CA30374F00E2BB2569A141C6C2D723DE776805A26702BD3CEC21A2CC8
+              8E16C8792B3B7896B02AFD4C890334208D3335FBB5E4248FE49C0B922AFEDE87
+              6D8CE687DE93CE13233C44AB7DF8C09EA4D98508B21256B1720EFA30A368C633
+              E6D02761F6CABDEDB6AB92E524753F0FD082279952577660355A9BF56A66ABBA
+              F064E0930704D5E52F65E9C76C977915FF479B3FE913A5217A01191813C00000
+              000049454E44AE426082}
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Index = 0
+            DisplayName = 'TLMDSpecialButton'
+            UsePngGlyph = True
+          end>
+        CustomButtonsStyle = ubsExplorer
+        CustomButtonWidth = 18
+        CustomButtonParentCtlXP = False
+        TabOnEnter = True
+        EditLabel.Width = 177
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = ANSI_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'NATUREZA FINANCEIRA TAXA POS'
+      end
+      object LMDDBLabeledEdit13: TLMDDBLabeledEdit
+        Left = 13
+        Top = 122
+        Width = 282
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        TabOrder = 6
+        ValidationMsgString = 'a Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 2236186
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        CharCase = ecLowerCase
+        ParentFont = False
+        CustomButtons = <
+          item
+            Color = clWhite
+            Cursor = crHandPoint
+            ParentFont = False
+            PngGlyph.Data = {
+              89504E470D0A1A0A0000000D4948445200000010000000100804000000B5FA37
+              EA000000097048597300000B1300000B1301009A9C1800000319694343505068
+              6F746F73686F70204943432070726F66696C65000078DA6360609EE0E8E2E4CA
+              24C0C050505452E41EE418191119A5C07E9E818D819981818181812131B9B8C0
+              3120C087818181212F3F2F9501037CBBC6C0C8C0C0C07059D7D1C5C9958134C0
+              9A5C5054C2C0C070808181C12825B538998181E10B0303437A79494109030363
+              0C03038348527641090303630103038348764890330303630B0303134F496A45
+              0903030383737E416551667A468982A1A5A5A582634A7E52AA42706571496A6E
+              B182675E727E51417E5162496A0A030303D40E060606065E97FC1205F7C4CC3C
+              05435355062A8388C82805F4F0418821407269511984C5C8C0C0C020C0A0C5E0
+              C750C9B08AE101A3346314E33CC6A74C864C0D4C979835981B99EFB2D8B0CC63
+              6566CD66BDCAE6C4B6895D857D2687004727272B67331733571B3737F7441E29
+              9EA5BCC6BC87F882F99EF1570B0809AC1674137C24D428AC287C58245D945774
+              AB589C38A7F85689144961C9A35215D2BAD24F64E6C886CA09CA9D95EF51F051
+              E455BCA03445394A4549E5B5EA56B546753F0D598DB79AFBB4266AA7EA58EB0A
+              E9BED23BA23FDFA0C630CAC8D258D2F8B7C93DD3C3662BCCFB2D2A2C13AD7CAC
+              2D6C546D45EC58ECBEDA3F77B8ED78C1E998F35E97ADAEEBDD56BA2FF558E4B9
+              D06B81F7429FC5BECBFC56F9AF0FD81AB837E858F0F9905BA1CFC2BE4430450A
+              4629451BC7B8C546C5E5C5B724CC4EDC9C7436F9792A539A5CBA4D46546655D6
+              ACEC3D39F7F298F2D50B7C0A8B8B66171F2E795B2651EE52515839AFEA6CF5DF
+              5ABDBAF8FA490DC71A7F371BB4A4B7CE6BBBDE21D8E9DDD5DE7DB897A1CFBEBF
+              6EC2BE89FF273B4E699D7A623AEF8CE099B3663D9AA335B764DEBE055C0BC316
+              2D5EFC71A9C3B209CB1FAE345ED5BAFAE65ADD754DEB6F6E34D8D4B1F9C156AB
+              6D53B77FD8E9BB6BD51E8EBDE9FB8E1F503FD879E8F511BFA39B8F8B9FA83DF9
+              E4B4F7992DE764CFB75FF87429EEF2A9AB16D796DD10BDD97AEBEB9DF4BB37EF
+              FB3C38F0C8F4F1EAA78ACF66BE107CD9F59AF94DDDDB9FEF4B3F7CFA54F0F9DD
+              D7BC6FEF7EE4FFFCF0BBF8CFB77F55FFFF03002ABF1D8AF36F515B00003F6E69
+              545874584D4C3A636F6D2E61646F62652E786D7000000000003C3F787061636B
+              657420626567696E3D22EFBBBF222069643D2257354D304D7043656869487A72
+              65537A4E54637A6B633964223F3E0A3C783A786D706D65746120786D6C6E733A
+              783D2261646F62653A6E733A6D6574612F2220783A786D70746B3D2241646F62
+              6520584D5020436F726520352E352D633031342037392E3135313438312C2032
+              3031332F30332F31332D31323A30393A31352020202020202020223E0A202020
+              3C7264663A52444620786D6C6E733A7264663D22687474703A2F2F7777772E77
+              332E6F72672F313939392F30322F32322D7264662D73796E7461782D6E732322
+              3E0A2020202020203C7264663A4465736372697074696F6E207264663A61626F
+              75743D22220A202020202020202020202020786D6C6E733A786D703D22687474
+              703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F220A2020202020
+              20202020202020786D6C6E733A64633D22687474703A2F2F7075726C2E6F7267
+              2F64632F656C656D656E74732F312E312F220A20202020202020202020202078
+              6D6C6E733A786D704D4D3D22687474703A2F2F6E732E61646F62652E636F6D2F
+              7861702F312E302F6D6D2F220A202020202020202020202020786D6C6E733A73
+              744576743D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E
+              302F73547970652F5265736F757263654576656E7423220A2020202020202020
+              20202020786D6C6E733A73745265663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F7861702F312E302F73547970652F5265736F757263655265662322
+              0A202020202020202020202020786D6C6E733A70686F746F73686F703D226874
+              74703A2F2F6E732E61646F62652E636F6D2F70686F746F73686F702F312E302F
+              220A202020202020202020202020786D6C6E733A746966663D22687474703A2F
+              2F6E732E61646F62652E636F6D2F746966662F312E302F220A20202020202020
+              2020202020786D6C6E733A657869663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F657869662F312E302F223E0A2020202020202020203C786D703A43
+              726561746F72546F6F6C3E41646F62652050686F746F73686F70204343202857
+              696E646F7773293C2F786D703A43726561746F72546F6F6C3E0A202020202020
+              2020203C786D703A437265617465446174653E323031352D31302D3234543132
+              3A30333A33372D30323A30303C2F786D703A437265617465446174653E0A2020
+              202020202020203C786D703A4D65746164617461446174653E323031352D3130
+              2D32345431323A30363A31352D30323A30303C2F786D703A4D65746164617461
+              446174653E0A2020202020202020203C786D703A4D6F64696679446174653E32
+              3031352D31302D32345431323A30363A31352D30323A30303C2F786D703A4D6F
+              64696679446174653E0A2020202020202020203C64633A666F726D61743E696D
+              6167652F706E673C2F64633A666F726D61743E0A2020202020202020203C786D
+              704D4D3A496E7374616E636549443E786D702E6969643A61653336656435332D
+              386636342D313034372D383066622D6463346431383831336436313C2F786D70
+              4D4D3A496E7374616E636549443E0A2020202020202020203C786D704D4D3A44
+              6F63756D656E7449443E786D702E6469643A31386631313431362D343262652D
+              373834312D623735332D6365373435653361663734643C2F786D704D4D3A446F
+              63756D656E7449443E0A2020202020202020203C786D704D4D3A4F726967696E
+              616C446F63756D656E7449443E786D702E6469643A31386631313431362D3432
+              62652D373834312D623735332D6365373435653361663734643C2F786D704D4D
+              3A4F726967696E616C446F63756D656E7449443E0A2020202020202020203C78
+              6D704D4D3A486973746F72793E0A2020202020202020202020203C7264663A53
+              65713E0A2020202020202020202020202020203C7264663A6C69207264663A70
+              61727365547970653D225265736F75726365223E0A2020202020202020202020
+              202020202020203C73744576743A616374696F6E3E637265617465643C2F7374
+              4576743A616374696F6E3E0A2020202020202020202020202020202020203C73
+              744576743A696E7374616E636549443E786D702E6969643A3138663131343136
+              2D343262652D373834312D623735332D6365373435653361663734643C2F7374
+              4576743A696E7374616E636549443E0A20202020202020202020202020202020
+              20203C73744576743A7768656E3E323031352D31302D32345431323A30333A33
+              372D30323A30303C2F73744576743A7768656E3E0A2020202020202020202020
+              202020202020203C73744576743A736F6674776172654167656E743E41646F62
+              652050686F746F73686F70204343202857696E646F7773293C2F73744576743A
+              736F6674776172654167656E743E0A2020202020202020202020202020203C2F
+              7264663A6C693E0A2020202020202020202020202020203C7264663A6C692072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020202020202020203C73744576743A616374696F6E3E73617665643C2F
+              73744576743A616374696F6E3E0A202020202020202020202020202020202020
+              3C73744576743A696E7374616E636549443E786D702E6969643A626439623339
+              31372D353438372D353634612D383838312D6466663930363364396135383C2F
+              73744576743A696E7374616E636549443E0A2020202020202020202020202020
+              202020203C73744576743A7768656E3E323031352D31302D32345431323A3036
+              3A31352D30323A30303C2F73744576743A7768656E3E0A202020202020202020
+              2020202020202020203C73744576743A736F6674776172654167656E743E4164
+              6F62652050686F746F73686F70204343202857696E646F7773293C2F73744576
+              743A736F6674776172654167656E743E0A202020202020202020202020202020
+              2020203C73744576743A6368616E6765643E2F3C2F73744576743A6368616E67
+              65643E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E636F6E7665727465643C2F73744576743A61
+              6374696F6E3E0A2020202020202020202020202020202020203C73744576743A
+              706172616D65746572733E66726F6D206170706C69636174696F6E2F766E642E
+              61646F62652E70686F746F73686F7020746F20696D6167652F706E673C2F7374
+              4576743A706172616D65746572733E0A2020202020202020202020202020203C
+              2F7264663A6C693E0A2020202020202020202020202020203C7264663A6C6920
+              7264663A7061727365547970653D225265736F75726365223E0A202020202020
+              2020202020202020202020203C73744576743A616374696F6E3E646572697665
+              643C2F73744576743A616374696F6E3E0A202020202020202020202020202020
+              2020203C73744576743A706172616D65746572733E636F6E7665727465642066
+              726F6D206170706C69636174696F6E2F766E642E61646F62652E70686F746F73
+              686F7020746F20696D6167652F706E673C2F73744576743A706172616D657465
+              72733E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E73617665643C2F73744576743A616374696F
+              6E3E0A2020202020202020202020202020202020203C73744576743A696E7374
+              616E636549443E786D702E6969643A61653336656435332D386636342D313034
+              372D383066622D6463346431383831336436313C2F73744576743A696E737461
+              6E636549443E0A2020202020202020202020202020202020203C73744576743A
+              7768656E3E323031352D31302D32345431323A30363A31352D30323A30303C2F
+              73744576743A7768656E3E0A2020202020202020202020202020202020203C73
+              744576743A736F6674776172654167656E743E41646F62652050686F746F7368
+              6F70204343202857696E646F7773293C2F73744576743A736F66747761726541
+              67656E743E0A2020202020202020202020202020202020203C73744576743A63
+              68616E6765643E2F3C2F73744576743A6368616E6765643E0A20202020202020
+              20202020202020203C2F7264663A6C693E0A2020202020202020202020203C2F
+              7264663A5365713E0A2020202020202020203C2F786D704D4D3A486973746F72
+              793E0A2020202020202020203C786D704D4D3A4465726976656446726F6D2072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020203C73745265663A696E7374616E636549443E786D702E6969643A62
+              643962333931372D353438372D353634612D383838312D646666393036336439
+              6135383C2F73745265663A696E7374616E636549443E0A202020202020202020
+              2020203C73745265663A646F63756D656E7449443E786D702E6469643A313866
+              31313431362D343262652D373834312D623735332D6365373435653361663734
+              643C2F73745265663A646F63756D656E7449443E0A2020202020202020202020
+              203C73745265663A6F726967696E616C446F63756D656E7449443E786D702E64
+              69643A31386631313431362D343262652D373834312D623735332D6365373435
+              653361663734643C2F73745265663A6F726967696E616C446F63756D656E7449
+              443E0A2020202020202020203C2F786D704D4D3A4465726976656446726F6D3E
+              0A2020202020202020203C70686F746F73686F703A436F6C6F724D6F64653E31
+              3C2F70686F746F73686F703A436F6C6F724D6F64653E0A202020202020202020
+              3C70686F746F73686F703A49434350726F66696C653E446F74204761696E2031
+              35253C2F70686F746F73686F703A49434350726F66696C653E0A202020202020
+              2020203C746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269
+              656E746174696F6E3E0A2020202020202020203C746966663A585265736F6C75
+              74696F6E3E3732303030302F31303030303C2F746966663A585265736F6C7574
+              696F6E3E0A2020202020202020203C746966663A595265736F6C7574696F6E3E
+              3732303030302F31303030303C2F746966663A595265736F6C7574696F6E3E0A
+              2020202020202020203C746966663A5265736F6C7574696F6E556E69743E323C
+              2F746966663A5265736F6C7574696F6E556E69743E0A2020202020202020203C
+              657869663A436F6C6F7253706163653E36353533353C2F657869663A436F6C6F
+              7253706163653E0A2020202020202020203C657869663A506978656C5844696D
+              656E73696F6E3E31363C2F657869663A506978656C5844696D656E73696F6E3E
+              0A2020202020202020203C657869663A506978656C5944696D656E73696F6E3E
+              31363C2F657869663A506978656C5944696D656E73696F6E3E0A202020202020
+              3C2F7264663A4465736372697074696F6E3E0A2020203C2F7264663A5244463E
+              0A3C2F783A786D706D6574613E0A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A202020202020202020202020202020202020202020202020202020200A3C3F
+              787061636B657420656E643D2277223F3E1A6F5CDF0000013D4944415478DA8D
+              91CD2B446118C5CFB9C534DC292C68523E9A58A048623376D869941A8BD1A459
+              51B62CEC9562291FFF828F856616C466146533EA6A9A51938D449429F35E5673
+              1F773EEE98849CD55BCFEF3DEFF39E43C1DF623550D7C3656D425C849C604325
+              BE01FA1863F2C8531832403FBA39F3B65F05D4776A3734F201ED0510D08528C6
+              AD41F3BA02E85B8CD06B658922007133635D98C132A037D190B8846CCBC2B074
+              6793A15CA30374F00E2BB2569A141C6C2D723DE776805A26702BD3CEC21A2CC8
+              8E16C8792B3B7896B02AFD4C890334208D3335FBB5E4248FE49C0B922AFEDE87
+              6D8CE687DE93CE13233C44AB7DF8C09EA4D98508B21256B1720EFA30A368C633
+              E6D02761F6CABDEDB6AB92E524753F0FD082279952577660355A9BF56A66ABBA
+              F064E0930704D5E52F65E9C76C977915FF479B3FE913A5217A01191813C00000
+              000049454E44AE426082}
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Index = 0
+            DisplayName = 'TLMDSpecialButton'
+            UsePngGlyph = True
+          end>
+        CustomButtonsStyle = ubsExplorer
+        CustomButtonWidth = 18
+        CustomButtonParentCtlXP = False
+        TabOnEnter = True
+        DataField = 'Desnat'
+        EditLabel.Width = 194
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = ANSI_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'NATUREZA FINANCEIRA TAXA PINPAD'
+      end
+      object LMDDBLabeledEdit3: TLMDDBLabeledEdit
+        Left = 486
+        Top = 76
+        Width = 48
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 5
+        Alignment = taCenter
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 48
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'QTD.POS'
+      end
+      object LMDDBLabeledEdit4: TLMDDBLabeledEdit
+        Left = 309
+        Top = 76
+        Width = 80
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 3
+        Alignment = taCenter
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 80
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'TAXA / POS'
+      end
+      object LMDDBLabeledEdit6: TLMDDBLabeledEdit
+        Left = 404
+        Top = 76
+        Width = 65
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 4
+        Alignment = taCenter
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 65
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'LAN.TAX.DIA'
+      end
+      object LMDDBLabeledEdit7: TLMDDBLabeledEdit
+        Left = 309
+        Top = 122
+        Width = 80
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 7
+        Alignment = taRightJustify
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 80
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'TAXA / PINPAD'
+      end
+      object LMDDBLabeledEdit8: TLMDDBLabeledEdit
+        Left = 404
+        Top = 122
+        Width = 65
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 8
+        Alignment = taCenter
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 65
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'LAN.TAX.DIA'
+      end
+      object LMDDBLabeledEdit9: TLMDDBLabeledEdit
+        Left = 309
+        Top = 168
+        Width = 80
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 11
+        Alignment = taRightJustify
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 80
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'TAX.CONE.TEF'
+      end
+      object LMDDBLabeledEdit10: TLMDDBLabeledEdit
+        Left = 404
+        Top = 168
+        Width = 65
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 12
+        Alignment = taCenter
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 65
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'LAN.TAX.DIA'
+      end
+      object LMDDBLabeledEdit5: TLMDDBLabeledEdit
+        Left = 486
+        Top = 122
+        Width = 48
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 9
+        Alignment = taCenter
+        CustomButtons = <>
+        TabOnEnter = True
+        LabelSpacing = 2
+        LabelSync = True
+        EditLabel.Width = 48
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'QTD.PIN'
+      end
+      object LMDDBLabeledEdit14: TLMDDBLabeledEdit
+        Left = 13
+        Top = 215
+        Width = 282
+        Height = 23
+        Bevel.StyleOuter = bvNormal
+        Bevel.WidthOuter = 0
+        Bevel.BorderColor = 15657192
+        Bevel.BorderWidth = 1
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        Color = clWhite
+        TabOrder = 13
+        ValidationMsgString = 'a Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 2236186
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        CharCase = ecLowerCase
+        ParentFont = False
+        CustomButtons = <
+          item
+            Color = clWhite
+            Cursor = crHandPoint
+            ParentFont = False
+            PngGlyph.Data = {
+              89504E470D0A1A0A0000000D4948445200000010000000100804000000B5FA37
+              EA000000097048597300000B1300000B1301009A9C1800000319694343505068
+              6F746F73686F70204943432070726F66696C65000078DA6360609EE0E8E2E4CA
+              24C0C050505452E41EE418191119A5C07E9E818D819981818181812131B9B8C0
+              3120C087818181212F3F2F9501037CBBC6C0C8C0C0C07059D7D1C5C9958134C0
+              9A5C5054C2C0C070808181C12825B538998181E10B0303437A79494109030363
+              0C03038348527641090303630103038348764890330303630B0303134F496A45
+              0903030383737E416551667A468982A1A5A5A582634A7E52AA42706571496A6E
+              B182675E727E51417E5162496A0A030303D40E060606065E97FC1205F7C4CC3C
+              05435355062A8388C82805F4F0418821407269511984C5C8C0C0C020C0A0C5E0
+              C750C9B08AE101A3346314E33CC6A74C864C0D4C979835981B99EFB2D8B0CC63
+              6566CD66BDCAE6C4B6895D857D2687004727272B67331733571B3737F7441E29
+              9EA5BCC6BC87F882F99EF1570B0809AC1674137C24D428AC287C58245D945774
+              AB589C38A7F85689144961C9A35215D2BAD24F64E6C886CA09CA9D95EF51F051
+              E455BCA03445394A4549E5B5EA56B546753F0D598DB79AFBB4266AA7EA58EB0A
+              E9BED23BA23FDFA0C630CAC8D258D2F8B7C93DD3C3662BCCFB2D2A2C13AD7CAC
+              2D6C546D45EC58ECBEDA3F77B8ED78C1E998F35E97ADAEEBDD56BA2FF558E4B9
+              D06B81F7429FC5BECBFC56F9AF0FD81AB837E858F0F9905BA1CFC2BE4430450A
+              4629451BC7B8C546C5E5C5B724CC4EDC9C7436F9792A539A5CBA4D46546655D6
+              ACEC3D39F7F298F2D50B7C0A8B8B66171F2E795B2651EE52515839AFEA6CF5DF
+              5ABDBAF8FA490DC71A7F371BB4A4B7CE6BBBDE21D8E9DDD5DE7DB897A1CFBEBF
+              6EC2BE89FF273B4E699D7A623AEF8CE099B3663D9AA335B764DEBE055C0BC316
+              2D5EFC71A9C3B209CB1FAE345ED5BAFAE65ADD754DEB6F6E34D8D4B1F9C156AB
+              6D53B77FD8E9BB6BD51E8EBDE9FB8E1F503FD879E8F511BFA39B8F8B9FA83DF9
+              E4B4F7992DE764CFB75FF87429EEF2A9AB16D796DD10BDD97AEBEB9DF4BB37EF
+              FB3C38F0C8F4F1EAA78ACF66BE107CD9F59AF94DDDDB9FEF4B3F7CFA54F0F9DD
+              D7BC6FEF7EE4FFFCF0BBF8CFB77F55FFFF03002ABF1D8AF36F515B00003F6E69
+              545874584D4C3A636F6D2E61646F62652E786D7000000000003C3F787061636B
+              657420626567696E3D22EFBBBF222069643D2257354D304D7043656869487A72
+              65537A4E54637A6B633964223F3E0A3C783A786D706D65746120786D6C6E733A
+              783D2261646F62653A6E733A6D6574612F2220783A786D70746B3D2241646F62
+              6520584D5020436F726520352E352D633031342037392E3135313438312C2032
+              3031332F30332F31332D31323A30393A31352020202020202020223E0A202020
+              3C7264663A52444620786D6C6E733A7264663D22687474703A2F2F7777772E77
+              332E6F72672F313939392F30322F32322D7264662D73796E7461782D6E732322
+              3E0A2020202020203C7264663A4465736372697074696F6E207264663A61626F
+              75743D22220A202020202020202020202020786D6C6E733A786D703D22687474
+              703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F220A2020202020
+              20202020202020786D6C6E733A64633D22687474703A2F2F7075726C2E6F7267
+              2F64632F656C656D656E74732F312E312F220A20202020202020202020202078
+              6D6C6E733A786D704D4D3D22687474703A2F2F6E732E61646F62652E636F6D2F
+              7861702F312E302F6D6D2F220A202020202020202020202020786D6C6E733A73
+              744576743D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E
+              302F73547970652F5265736F757263654576656E7423220A2020202020202020
+              20202020786D6C6E733A73745265663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F7861702F312E302F73547970652F5265736F757263655265662322
+              0A202020202020202020202020786D6C6E733A70686F746F73686F703D226874
+              74703A2F2F6E732E61646F62652E636F6D2F70686F746F73686F702F312E302F
+              220A202020202020202020202020786D6C6E733A746966663D22687474703A2F
+              2F6E732E61646F62652E636F6D2F746966662F312E302F220A20202020202020
+              2020202020786D6C6E733A657869663D22687474703A2F2F6E732E61646F6265
+              2E636F6D2F657869662F312E302F223E0A2020202020202020203C786D703A43
+              726561746F72546F6F6C3E41646F62652050686F746F73686F70204343202857
+              696E646F7773293C2F786D703A43726561746F72546F6F6C3E0A202020202020
+              2020203C786D703A437265617465446174653E323031352D31302D3234543132
+              3A30333A33372D30323A30303C2F786D703A437265617465446174653E0A2020
+              202020202020203C786D703A4D65746164617461446174653E323031352D3130
+              2D32345431323A30363A31352D30323A30303C2F786D703A4D65746164617461
+              446174653E0A2020202020202020203C786D703A4D6F64696679446174653E32
+              3031352D31302D32345431323A30363A31352D30323A30303C2F786D703A4D6F
+              64696679446174653E0A2020202020202020203C64633A666F726D61743E696D
+              6167652F706E673C2F64633A666F726D61743E0A2020202020202020203C786D
+              704D4D3A496E7374616E636549443E786D702E6969643A61653336656435332D
+              386636342D313034372D383066622D6463346431383831336436313C2F786D70
+              4D4D3A496E7374616E636549443E0A2020202020202020203C786D704D4D3A44
+              6F63756D656E7449443E786D702E6469643A31386631313431362D343262652D
+              373834312D623735332D6365373435653361663734643C2F786D704D4D3A446F
+              63756D656E7449443E0A2020202020202020203C786D704D4D3A4F726967696E
+              616C446F63756D656E7449443E786D702E6469643A31386631313431362D3432
+              62652D373834312D623735332D6365373435653361663734643C2F786D704D4D
+              3A4F726967696E616C446F63756D656E7449443E0A2020202020202020203C78
+              6D704D4D3A486973746F72793E0A2020202020202020202020203C7264663A53
+              65713E0A2020202020202020202020202020203C7264663A6C69207264663A70
+              61727365547970653D225265736F75726365223E0A2020202020202020202020
+              202020202020203C73744576743A616374696F6E3E637265617465643C2F7374
+              4576743A616374696F6E3E0A2020202020202020202020202020202020203C73
+              744576743A696E7374616E636549443E786D702E6969643A3138663131343136
+              2D343262652D373834312D623735332D6365373435653361663734643C2F7374
+              4576743A696E7374616E636549443E0A20202020202020202020202020202020
+              20203C73744576743A7768656E3E323031352D31302D32345431323A30333A33
+              372D30323A30303C2F73744576743A7768656E3E0A2020202020202020202020
+              202020202020203C73744576743A736F6674776172654167656E743E41646F62
+              652050686F746F73686F70204343202857696E646F7773293C2F73744576743A
+              736F6674776172654167656E743E0A2020202020202020202020202020203C2F
+              7264663A6C693E0A2020202020202020202020202020203C7264663A6C692072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020202020202020203C73744576743A616374696F6E3E73617665643C2F
+              73744576743A616374696F6E3E0A202020202020202020202020202020202020
+              3C73744576743A696E7374616E636549443E786D702E6969643A626439623339
+              31372D353438372D353634612D383838312D6466663930363364396135383C2F
+              73744576743A696E7374616E636549443E0A2020202020202020202020202020
+              202020203C73744576743A7768656E3E323031352D31302D32345431323A3036
+              3A31352D30323A30303C2F73744576743A7768656E3E0A202020202020202020
+              2020202020202020203C73744576743A736F6674776172654167656E743E4164
+              6F62652050686F746F73686F70204343202857696E646F7773293C2F73744576
+              743A736F6674776172654167656E743E0A202020202020202020202020202020
+              2020203C73744576743A6368616E6765643E2F3C2F73744576743A6368616E67
+              65643E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E636F6E7665727465643C2F73744576743A61
+              6374696F6E3E0A2020202020202020202020202020202020203C73744576743A
+              706172616D65746572733E66726F6D206170706C69636174696F6E2F766E642E
+              61646F62652E70686F746F73686F7020746F20696D6167652F706E673C2F7374
+              4576743A706172616D65746572733E0A2020202020202020202020202020203C
+              2F7264663A6C693E0A2020202020202020202020202020203C7264663A6C6920
+              7264663A7061727365547970653D225265736F75726365223E0A202020202020
+              2020202020202020202020203C73744576743A616374696F6E3E646572697665
+              643C2F73744576743A616374696F6E3E0A202020202020202020202020202020
+              2020203C73744576743A706172616D65746572733E636F6E7665727465642066
+              726F6D206170706C69636174696F6E2F766E642E61646F62652E70686F746F73
+              686F7020746F20696D6167652F706E673C2F73744576743A706172616D657465
+              72733E0A2020202020202020202020202020203C2F7264663A6C693E0A202020
+              2020202020202020202020203C7264663A6C69207264663A7061727365547970
+              653D225265736F75726365223E0A202020202020202020202020202020202020
+              3C73744576743A616374696F6E3E73617665643C2F73744576743A616374696F
+              6E3E0A2020202020202020202020202020202020203C73744576743A696E7374
+              616E636549443E786D702E6969643A61653336656435332D386636342D313034
+              372D383066622D6463346431383831336436313C2F73744576743A696E737461
+              6E636549443E0A2020202020202020202020202020202020203C73744576743A
+              7768656E3E323031352D31302D32345431323A30363A31352D30323A30303C2F
+              73744576743A7768656E3E0A2020202020202020202020202020202020203C73
+              744576743A736F6674776172654167656E743E41646F62652050686F746F7368
+              6F70204343202857696E646F7773293C2F73744576743A736F66747761726541
+              67656E743E0A2020202020202020202020202020202020203C73744576743A63
+              68616E6765643E2F3C2F73744576743A6368616E6765643E0A20202020202020
+              20202020202020203C2F7264663A6C693E0A2020202020202020202020203C2F
+              7264663A5365713E0A2020202020202020203C2F786D704D4D3A486973746F72
+              793E0A2020202020202020203C786D704D4D3A4465726976656446726F6D2072
+              64663A7061727365547970653D225265736F75726365223E0A20202020202020
+              20202020203C73745265663A696E7374616E636549443E786D702E6969643A62
+              643962333931372D353438372D353634612D383838312D646666393036336439
+              6135383C2F73745265663A696E7374616E636549443E0A202020202020202020
+              2020203C73745265663A646F63756D656E7449443E786D702E6469643A313866
+              31313431362D343262652D373834312D623735332D6365373435653361663734
+              643C2F73745265663A646F63756D656E7449443E0A2020202020202020202020
+              203C73745265663A6F726967696E616C446F63756D656E7449443E786D702E64
+              69643A31386631313431362D343262652D373834312D623735332D6365373435
+              653361663734643C2F73745265663A6F726967696E616C446F63756D656E7449
+              443E0A2020202020202020203C2F786D704D4D3A4465726976656446726F6D3E
+              0A2020202020202020203C70686F746F73686F703A436F6C6F724D6F64653E31
+              3C2F70686F746F73686F703A436F6C6F724D6F64653E0A202020202020202020
+              3C70686F746F73686F703A49434350726F66696C653E446F74204761696E2031
+              35253C2F70686F746F73686F703A49434350726F66696C653E0A202020202020
+              2020203C746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269
+              656E746174696F6E3E0A2020202020202020203C746966663A585265736F6C75
+              74696F6E3E3732303030302F31303030303C2F746966663A585265736F6C7574
+              696F6E3E0A2020202020202020203C746966663A595265736F6C7574696F6E3E
+              3732303030302F31303030303C2F746966663A595265736F6C7574696F6E3E0A
+              2020202020202020203C746966663A5265736F6C7574696F6E556E69743E323C
+              2F746966663A5265736F6C7574696F6E556E69743E0A2020202020202020203C
+              657869663A436F6C6F7253706163653E36353533353C2F657869663A436F6C6F
+              7253706163653E0A2020202020202020203C657869663A506978656C5844696D
+              656E73696F6E3E31363C2F657869663A506978656C5844696D656E73696F6E3E
+              0A2020202020202020203C657869663A506978656C5944696D656E73696F6E3E
+              31363C2F657869663A506978656C5944696D656E73696F6E3E0A202020202020
+              3C2F7264663A4465736372697074696F6E3E0A2020203C2F7264663A5244463E
+              0A3C2F783A786D706D6574613E0A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A20202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020200A2020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020200A202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020200A20202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020200A2020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020200A202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020200A20
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020200A20202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020200A2020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020200A202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020200A20202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020200A2020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020200A202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              200A202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020200A20202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020200A2020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020200A202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020200A20202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020200A2020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020202020202020202020200A
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020200A202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020200A20202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020200A2020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020200A202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020200A20202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020202020202020202020202020200A2020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20200A2020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020200A202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020200A20202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              20202020202020202020202020202020200A2020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              202020202020202020202020202020202020202020200A202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020200A20202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              2020202020202020202020202020202020202020202020202020202020202020
+              0A202020202020202020202020202020202020202020202020202020200A3C3F
+              787061636B657420656E643D2277223F3E1A6F5CDF0000013D4944415478DA8D
+              91CD2B446118C5CFB9C534DC292C68523E9A58A048623376D869941A8BD1A459
+              51B62CEC9562291FFF828F856616C466146533EA6A9A51938D449429F35E5673
+              1F773EEE98849CD55BCFEF3DEFF39E43C1DF623550D7C3656D425C849C604325
+              BE01FA1863F2C8531832403FBA39F3B65F05D4776A3734F201ED0510D08528C6
+              AD41F3BA02E85B8CD06B658922007133635D98C132A037D190B8846CCBC2B074
+              6793A15CA30374F00E2BB2569A141C6C2D723DE776805A26702BD3CEC21A2CC8
+              8E16C8792B3B7896B02AFD4C890334208D3335FBB5E4248FE49C0B922AFEDE87
+              6D8CE687DE93CE13233C44AB7DF8C09EA4D98508B21256B1720EFA30A368C633
+              E6D02761F6CABDEDB6AB92E524753F0FD082279952577660355A9BF56A66ABBA
+              F064E0930704D5E52F65E9C76C977915FF479B3FE913A5217A01191813C00000
+              000049454E44AE426082}
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Index = 0
+            DisplayName = 'TLMDSpecialButton'
+            UsePngGlyph = True
+          end>
+        CustomButtonsStyle = ubsExplorer
+        CustomButtonWidth = 18
+        CustomButtonParentCtlXP = False
+        TabOnEnter = True
+        EditLabel.Width = 228
+        EditLabel.Height = 15
+        EditLabel.AutoSize = False
+        EditLabel.Font.Charset = ANSI_CHARSET
+        EditLabel.Font.Color = 9600112
+        EditLabel.Font.Height = -11
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = [fsBold]
+        EditLabel.ParentFont = False
+        EditLabel.Caption = 'NATUREZA FINANCEIRA TAXA ANTECIPA'#199#195'O'
+      end
+    end
+    object PanelTop: TLMDSimplePanel
+      AlignWithMargins = True
+      Left = 1
+      Top = 1
+      Width = 546
+      Height = 25
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 1
+      Align = alTop
+      Bevel.StyleOuter = bvNormal
+      Bevel.WidthInner = 0
+      Bevel.WidthOuter = 0
+      Bevel.BorderColor = 13553358
+      Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+      Bevel.BorderWidth = 1
+      Color = 15461355
+      TabOrder = 5
+      object lbTitulo: TLMDLabel
+        AlignWithMargins = True
+        Left = 16
+        Top = 6
+        Width = 505
+        Height = 15
+        Margins.Left = 15
+        Margins.Top = 5
+        Margins.Right = 0
+        Align = alClient
+        Alignment = agCenter
+        AutoSize = False
+        Color = 4159487
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 19967
+        Font.Height = -15
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        Options = []
+        ParentColor = False
+        ParentFont = False
+        Caption = 'CART'#213'ES'
+        ExplicitLeft = 0
+        ExplicitTop = 7
+        ExplicitWidth = 501
+      end
+      object btFechar: TAdvGlowButton
+        Tag = 3099
+        AlignWithMargins = True
+        Left = 521
+        Top = 1
+        Width = 24
+        Height = 23
+        Cursor = crHandPoint
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alRight
+        AntiAlias = aaAntiAlias
+        BorderStyle = bsNone
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        Font.Quality = fqClearType
+        HotPicture.Data = {
+          89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+          F8000000097048597300000EC300000EC301C76FA8640000001974455874536F
+          667477617265007777772E696E6B73636170652E6F72679BEE3C1A0000015B49
+          4441544889ED543B6E0231149CB776012847400469D3A700459BDD14E4007006
+          EEC401C819481B09A4C8BB8A024DEA2045842B0428EC750A58F2E1D959A5444C
+          65D9CF33EF337AC009470FE22EEDB87386DAAA0F6146D49E2D7C0476DA6AC088
+          1E2A9B215DBE7CFC7E0FD85FB5551F9606D0525915874E721587D052C1D200EB
+          6A9F8BE1058419015802A84398092762551C429809803A8025827C545A80DAB3
+          058CB801F0B61749AF2FF6E459D484300F7BF23CB8A5ABE777968BADE02BCBF3
+          5D96CD82086435C88EBFDF519CBDBA38BC023B919FADD8627B36A243493AF7FD
+          FF5380A904289179017EC8075179A944FE2560551C82EC238A9E17EE0AF2B1CF
+          C2A50438B7F8DCC5C159BACDA2A6CB2D9CBB5CF3E057C5B4D580960A1EB71CB8
+          4BEA845B2B7C8B8CE8F9C8018092740E233A2866A26597A392AC406533C4BA6A
+          21F53D454FCE6547493AB7D356022DBBA8AEEF5C71271C393E017EACA8007609
+          F2770000000049454E44AE426082}
+        MarginVert = 0
+        MarginHorz = 0
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -12
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        Picture.Data = {
+          89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+          F8000000097048597300000EC300000EC301C76FA8640000001974455874536F
+          667477617265007777772E696E6B73636170652E6F72679BEE3C1A0000017749
+          4441544889ED93DD4A02511485D739676C087A0431617A0BBB30E8369F411006
+          114123060C14820914EC0711BA181083DEC0EB40217C8B84325F218498737617
+          39E1CF9971E8325C57C3F959DFD97BAF0176FAF762BAC552E9EAC037CD3C141B
+          789DDA34CAC0AEB452E0949B0BA3FF74E37CAEEF73DD25DF34F360D4055763DB
+          71AD5073C7B5C0D5188CBAFBEA2BAF3BA30540B10108333024E18B910E623BAE
+          055F8CC0900461668006B1015EA736955C1D03780B2085F3E651B05FAC36D390
+          E239309760270F77F50F9D977606810A17D78782F808403A304A107CC569B8BC
+          D6BBBF7C0DF38804009BAD58DCFAF93664D66B372651F7B702362A0110E7E581
+          F4435E53428A580FF913C0765C4B317AC1A2E741BA04681815E158005D5AA2D2
+          A55368E9C56A331D96165DBAC2E6A1ADC0AEB4522B6D316476D9A0775B7F8790
+          A72BEDAAB452B101E094DB1645AFDD98C090D9DF3F5EC8B3D880B930FA0095A1
+          78262AE75EBB3181E21980CA73BEF718766EA77FAE6F167DBB96DA8EA7150000
+          000049454E44AE426082}
+        Rounded = True
+        Spacing = 3
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnClick = btFecharClick
+        Appearance.BorderColor = 15461355
+        Appearance.BorderColorHot = 15461355
+        Appearance.BorderColorCheckedHot = 15461355
+        Appearance.BorderColorDown = 15461355
+        Appearance.BorderColorChecked = 15461355
+        Appearance.BorderColorDisabled = 15461355
+        Appearance.BorderColorFocused = 15461355
+        Appearance.Color = 15461355
+        Appearance.ColorTo = 15461355
+        Appearance.ColorChecked = 15461355
+        Appearance.ColorCheckedTo = 15461355
+        Appearance.ColorDisabled = 15461355
+        Appearance.ColorDisabledTo = 15461355
+        Appearance.ColorDown = 15461355
+        Appearance.ColorDownTo = 15461355
+        Appearance.ColorHot = 15461355
+        Appearance.ColorHotTo = 15461355
+        Appearance.ColorMirror = 15461355
+        Appearance.ColorMirrorTo = 15461355
+        Appearance.ColorMirrorHot = 15461355
+        Appearance.ColorMirrorHotTo = 15461355
+        Appearance.ColorMirrorDown = 15461355
+        Appearance.ColorMirrorDownTo = 15461355
+        Appearance.ColorMirrorChecked = 15461355
+        Appearance.ColorMirrorCheckedTo = 15461355
+        Appearance.ColorMirrorDisabled = 15461355
+        Appearance.ColorMirrorDisabledTo = 15461355
+        Appearance.GradientHot = ggVertical
+        Appearance.GradientMirrorHot = ggVertical
+        Appearance.GradientDown = ggVertical
+        Appearance.GradientMirrorDown = ggVertical
+        Appearance.GradientChecked = ggVertical
+        Appearance.TextColorChecked = 3750459
+        Appearance.TextColorDown = 2303013
+        Appearance.TextColorHot = 2303013
+        Appearance.TextColorDisabled = 13948116
+      end
+    end
+  end
+  object TabBand: TRESTDWClientSQL
+    Active = False
+    Filtered = False
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    BinaryCompatibleMode = False
+    MasterCascadeDelete = True
+    BinaryRequest = True
+    Datapacks = -1
+    DataCache = False
+    MassiveType = mtMassiveCache
+    Params = <>
+    DataBase = DM.DWDataBase
+    SQL.Strings = (
+      'SELECT * FROM arqbandeira order by Desban')
+    UpdateTableName = 'arqbandeira'
+    CacheUpdateRecords = False
+    AutoCommitData = True
+    AutoRefreshAfterCommit = False
+    ThreadRequest = False
+    RaiseErrors = True
+    ReflectChanges = False
+    Left = 80
+    Top = 375
+    object TabBandIDBan: TIntegerField
+      FieldName = 'IDBan'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TabBandDesban: TWideStringField
+      FieldName = 'Desban'
+      Size = 40
+    end
+    object TabBandIndAntecipa: TBooleanField
+      FieldName = 'IndAntecipa'
+    end
+  end
+  object SouBand: TDataSource
+    AutoEdit = False
+    DataSet = TabBand
+    Left = 143
+    Top = 375
+  end
+end

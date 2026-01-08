@@ -1,0 +1,95 @@
+unit uConEsto;
+
+interface
+
+uses
+   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+   Data.DB, Vcl.ComCtrls, LMDBaseControl, LMDLabel, LMDBaseGraphicControl,
+   LMDBaseLabel, LMDCustomLabel, LMDControl, LMDCustomControl, MarcLib,
+   LMDCustomPanel, LMDSimplePanel, LMDBaseEdit, LMDEdit, LMDCustomBevelPanel,
+   AdvGlowButton, LMDCustomEdit, LMDDBEdit, LMDButtonControl, LMDCustomCheckBox,
+   LMDDBCheckBox, Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uRESTDWBasicTypes,
+   uRESTDWBasicDB, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFrmConEsto = class(TForm)
+    PanelTop: TLMDSimplePanel;
+    LMDLabel4: TLMDLabel;
+    btFechar: TAdvGlowButton;
+    TabEsto: TRESTDWClientSQL;
+    SouEsto: TDataSource;
+    TabEstoCodmun: TIntegerField;
+    TabEstoCodbai: TIntegerField;
+    TabEstoNombai: TWideStringField;
+    LMDSimplePanel1: TLMDSimplePanel;
+    DBGrid1: TDBGrid;
+    procedure FormShow(Sender: TObject);
+    procedure btFecharClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+ private
+    { Private declarations }
+ public
+    { Public declarations }
+    recIDProd:Integer;
+ end;
+
+var
+   FrmConEsto: TFrmConEsto;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM, uConst, uLibFarm;
+
+procedure TFrmConEsto.FormCreate(Sender: TObject);
+begin
+   AdjustZoom(Self);
+end;
+
+procedure TFrmConEsto.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   if Key = VK_ESCAPE then Close;
+end;
+
+procedure TFrmConEsto.FormShow(Sender: TObject);
+begin
+   TStringGrid(DBGrid1).DefaultRowHeight := BaseRowHeight - 5;
+   DBGrid1.Width := DBGrid1.Width - 10;
+   DBGrid1.Width := DBGrid1.Width + 10;
+end;
+
+procedure TFrmConEsto.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+   if (gdSelected in State) or (gdFocused in State) then
+   begin
+      TDBGrid(Sender).Canvas.Brush.Color := $00E1EBFF;
+      TDBGrid(Sender).Canvas.Font.Color  := clBlack;
+   end;
+   TDBGrid(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
+   if not Column.FieldName.IsEmpty then
+   begin
+      if Column.Alignment = taCenter       then (Sender as TDBGrid).Canvas.TextRect(Rect,Rect.Left + (Rect.Width - (Sender as TDBGrid).Canvas.TextWidth(Column.Field.DisplayText)) div 2, Rect.Top+4, Column.Field.DisplayText) else
+      if Column.Alignment = taRightJustify then (Sender as TDBGrid).Canvas.TextRect(Rect,Rect.Left + Rect.Width  - (Sender as TDBGrid).Canvas.TextWidth(Column.Field.DisplayText) -3, Rect.Top+4, Column.Field.DisplayText) else
+      if Column.Alignment = taLeftJustify  then (Sender as TDBGrid).Canvas.TextRect(Rect, Rect.Left+5, Rect.Top+4, Column.Field.DisplayText);
+   end;
+end;
+
+procedure TFrmConEsto.btFecharClick(Sender: TObject);
+begin
+   Close;
+end;
+
+procedure TFrmConEsto.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   TabEsto.Close;
+   Action := caFree;
+end;
+
+end.

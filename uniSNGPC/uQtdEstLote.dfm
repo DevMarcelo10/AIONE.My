@@ -1,0 +1,302 @@
+object FrmQtdEstLote: TFrmQtdEstLote
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'Tela de quantidade lote no SNGPC'
+  ClientHeight = 106
+  ClientWidth = 215
+  Color = clWhite
+  Ctl3D = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poDesigned
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  TextHeight = 15
+  object PanelTop: TLMDSimplePanel
+    AlignWithMargins = True
+    Left = 0
+    Top = 0
+    Width = 215
+    Height = 106
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Align = alClient
+    Bevel.StyleOuter = bvNormal
+    Bevel.WidthInner = 0
+    Bevel.WidthOuter = 0
+    Bevel.BorderColor = 13553358
+    Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+    Bevel.BorderWidth = 1
+    Color = 16382975
+    TabOrder = 0
+    object pnQtdLot: TLMDSimplePanel
+      Left = 53
+      Top = 34
+      Width = 94
+      Height = 23
+      Margins.Top = 2
+      Bevel.WidthOuter = 0
+      Bevel.BorderColor = 15129563
+      Bevel.BorderWidth = 1
+      Color = clWhite
+      TabOrder = 0
+      object edQtdLot: TLMDMaskEdit
+        Tag = 1
+        Left = 1
+        Top = 1
+        Width = 92
+        Height = 21
+        Margins.Right = 5
+        Align = alClient
+        Bevel.Mode = bmCustom
+        Caret.BlinkRate = 530
+        TabOrder = 0
+        OnKeyDown = edQtdLotKeyDown
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 7039851
+        Font.Height = -14
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+        Alignment = taRightJustify
+        CurrencySettings.SystemDefaults = cmUser
+        CurrencySettings.PositiveFormatStr = ' 1,1'
+        CurrencySettings.NegativeFormatStr = '- 1,1'
+        CurrencySettings.Symbol = 'R$'
+        CustomButtons = <>
+        Decimals = 2
+        MaskType = meCurrency
+        TabOnEnter = True
+        TimeSettings.AMSign = 'am'
+        TimeSettings.PMSign = 'pm'
+        TimeSettings.MSign = 'm'
+        Value = 0.000000000000000000
+      end
+    end
+    object LMDSimplePanel2: TLMDSimplePanel
+      AlignWithMargins = True
+      Left = 1
+      Top = 1
+      Width = 213
+      Height = 24
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alTop
+      Bevel.StyleOuter = bvNormal
+      Bevel.WidthInner = 0
+      Bevel.WidthOuter = 0
+      Bevel.BorderColor = 13553358
+      Bevel.BorderSides = [fsLeft, fsRight, fsTop]
+      Bevel.BorderWidth = 1
+      Color = 16382975
+      TabOrder = 1
+      object lbCabecalho: TLMDLabel
+        AlignWithMargins = True
+        Left = 38
+        Top = 5
+        Width = 135
+        Height = 15
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 8811110
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        Options = []
+        ParentFont = False
+        Caption = 'QUANTIDADE DO LOTE'
+      end
+    end
+    object btConfirmar: TAdvGlowButton
+      Tag = 1
+      AlignWithMargins = True
+      Left = 5
+      Top = 71
+      Width = 98
+      Height = 24
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Caption = 'CONFIRMA'
+      Default = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 5855577
+      Font.Height = -11
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      Font.Quality = fqClearType
+      MarginVert = 0
+      MarginHorz = 0
+      ModalResult = 1
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -12
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000000473424954080808087C086488000000017352474200AECE1CE90000
+        000467414D410000B18F0BFC6105000000097048597300000074000000740131
+        85E5810000001974455874536F667477617265007777772E696E6B7363617065
+        2E6F72679BEE3C1A0000018769545874584D4C3A636F6D2E61646F62652E786D
+        7000000000003C3F787061636B657420626567696E3D27EFBBBF272069643D27
+        57354D304D7043656869487A7265537A4E54637A6B633964273F3E0D0A3C783A
+        786D706D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F22
+        3E3C7264663A52444620786D6C6E733A7264663D22687474703A2F2F7777772E
+        77332E6F72672F313939392F30322F32322D7264662D73796E7461782D6E7323
+        223E3C7264663A4465736372697074696F6E207264663A61626F75743D227575
+        69643A66616635626464352D626133642D313164612D616433312D6433336437
+        353138326631622220786D6C6E733A746966663D22687474703A2F2F6E732E61
+        646F62652E636F6D2F746966662F312E302F223E3C746966663A4F7269656E74
+        6174696F6E3E313C2F746966663A4F7269656E746174696F6E3E3C2F7264663A
+        4465736372697074696F6E3E3C2F7264663A5244463E3C2F783A786D706D6574
+        613E0D0A3C3F787061636B657420656E643D2777273F3E2C94980B000000BA49
+        444154384FD5924D0AC2301085BF36203D8582E2CE163CCEBB9607105DCD6DDC
+        A82B17A2971041A88B26250DAD3F3BFD762F6F26339909FC2B4E520D2CF3D4F9
+        00076C0024EDB2D47D8393F408C2CC16DF74E0807510665601C76EC8300ED84A
+        AAFDDBCB6064FE00339B00D74E5A43DA76091C82CECD6C4533900B300E86A71D
+        183DC900193092748F82A6C0B9A77205ECDB4C4FD8427AC95CD229D2BDC94417
+        0014926E918681B663D27F90763258F91585DFCC2C357E9327B3E342CFDEC09E
+        BF0000000049454E44AE426082}
+      Rounded = True
+      TabOrder = 2
+      TabStop = True
+      OnClick = btConfirmarClick
+      Appearance.BorderColor = 8695039
+      Appearance.BorderColorHot = 2846975
+      Appearance.BorderColorCheckedHot = 8695039
+      Appearance.BorderColorDown = 8695039
+      Appearance.BorderColorChecked = 8695039
+      Appearance.BorderColorDisabled = 8695039
+      Appearance.BorderColorFocused = 8695039
+      Appearance.Color = 14017279
+      Appearance.ColorTo = 9943551
+      Appearance.ColorChecked = 9943551
+      Appearance.ColorCheckedTo = 9943551
+      Appearance.ColorDisabled = 9943551
+      Appearance.ColorDisabledTo = 9943551
+      Appearance.ColorDown = 9943551
+      Appearance.ColorDownTo = 9943551
+      Appearance.ColorHot = 7972351
+      Appearance.ColorHotTo = 10337791
+      Appearance.ColorMirror = 9943551
+      Appearance.ColorMirrorTo = 9943551
+      Appearance.ColorMirrorHot = 7972351
+      Appearance.ColorMirrorHotTo = 7972351
+      Appearance.ColorMirrorDown = 9943551
+      Appearance.ColorMirrorDownTo = 9943551
+      Appearance.ColorMirrorChecked = 9943551
+      Appearance.ColorMirrorCheckedTo = 9943551
+      Appearance.ColorMirrorDisabled = 9943551
+      Appearance.ColorMirrorDisabledTo = 9943551
+      Appearance.GradientHot = ggVertical
+      Appearance.GradientMirrorHot = ggVertical
+      Appearance.GradientDown = ggVertical
+      Appearance.GradientMirrorDown = ggVertical
+      Appearance.GradientChecked = ggVertical
+      Appearance.TextColorChecked = 3750459
+      Appearance.TextColorDown = 2303013
+      Appearance.TextColorHot = 2303013
+      Appearance.TextColorDisabled = 13948116
+    end
+    object btCancelar: TAdvGlowButton
+      Tag = 1
+      AlignWithMargins = True
+      Left = 111
+      Top = 71
+      Width = 98
+      Height = 24
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Caption = 'CANCELA'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 5855577
+      Font.Height = -11
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      Font.Quality = fqClearType
+      MarginVert = 0
+      MarginHorz = 0
+      ModalResult = 2
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -12
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D4948445200000010000000101004000000E56AEB
+        A9000000206348524D00007A26000080840000FA00000080E8000075300000EA
+        6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+        485973000000600000006000F06B42CF0000000774494D4507E70913001308E7
+        1DD23A000001BD4944415438CBAD92314B235110C7FF6FA3C4B85B5C6921A25B
+        C8711BB0102160B23146D040E266D626C55557F809AC0EE12CC4CA46C817D03A
+        2212DC2A040B6D140B1344B138FC00278AFBF2D6A0D96795BBC44B620AA77C33
+        BFFFCCFCE7019F15F65224625774FDC3BA8AAED35A38FC1F4C7BBE4F63AE6BE7
+        4DB31B9C8D26936408917D6A3456728601000A00B0F2FD3D7E7B1EA6354D261C
+        8716E2F14E307B281631190AB1B010CAABEBB61558A5588CC65C97484ADAA8D5
+        B2D164F2EF8479D3A42BCE89A4A42BCE2D3937D7CCB1F722CA0FC7C1B4A6614A
+        08595A5E56722F2F32E1385857556CD66AFEB774FA901D1F7735A96D923BCFA3
+        3BCFEBD4B96758A5588C0C2188A46C0A7583954E8F811BC66481FD5B4F0D0494
+        3FAADA97809D374D99701CF67368486E3D3FE3D6F3B03A3888DDFDFDEC753ADD
+        53A009370D935F53297F677111179CE33418644785827596C974DCBBD7A9DA8C
+        8DD4EBAD220C00567286E157CFCF31190AE182733CA552078F2727AD0D686D7E
+        1E5AB188CBE161CCD6EBFEC8CCCCE1F76A550180C6AF89895E30001C6C97CBE0
+        990CA684C06930C80646475BD28CD1423C6EC9F1F18F4E6C57749DBE44A37DFD
+        877EE20D53CEDA02451D39260000000049454E44AE426082}
+      Rounded = True
+      TabOrder = 3
+      TabStop = True
+      OnClick = btCancelarClick
+      Appearance.BorderColor = 8695039
+      Appearance.BorderColorHot = 2846975
+      Appearance.BorderColorCheckedHot = 8695039
+      Appearance.BorderColorDown = 8695039
+      Appearance.BorderColorChecked = 8695039
+      Appearance.BorderColorDisabled = 8695039
+      Appearance.BorderColorFocused = 8695039
+      Appearance.Color = 14017279
+      Appearance.ColorTo = 9943551
+      Appearance.ColorChecked = 9943551
+      Appearance.ColorCheckedTo = 9943551
+      Appearance.ColorDisabled = 9943551
+      Appearance.ColorDisabledTo = 9943551
+      Appearance.ColorDown = 9943551
+      Appearance.ColorDownTo = 9943551
+      Appearance.ColorHot = 7972351
+      Appearance.ColorHotTo = 10337791
+      Appearance.ColorMirror = 9943551
+      Appearance.ColorMirrorTo = 9943551
+      Appearance.ColorMirrorHot = 7972351
+      Appearance.ColorMirrorHotTo = 7972351
+      Appearance.ColorMirrorDown = 9943551
+      Appearance.ColorMirrorDownTo = 9943551
+      Appearance.ColorMirrorChecked = 9943551
+      Appearance.ColorMirrorCheckedTo = 9943551
+      Appearance.ColorMirrorDisabled = 9943551
+      Appearance.ColorMirrorDisabledTo = 9943551
+      Appearance.GradientHot = ggVertical
+      Appearance.GradientMirrorHot = ggVertical
+      Appearance.GradientDown = ggVertical
+      Appearance.GradientMirrorDown = ggVertical
+      Appearance.GradientChecked = ggVertical
+      Appearance.TextColorChecked = 3750459
+      Appearance.TextColorDown = 2303013
+      Appearance.TextColorHot = 2303013
+      Appearance.TextColorDisabled = 13948116
+    end
+  end
+end
