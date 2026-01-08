@@ -810,6 +810,7 @@ object FrmGestaoPBM: TFrmGestaoPBM
         Rounded = True
         Spacing = 1
         TabOrder = 12
+        OnClick = btBuscarClick
         Appearance.BorderColor = 8695039
         Appearance.BorderColorHot = 2846975
         Appearance.BorderColorCheckedHot = 8695039
@@ -1304,6 +1305,69 @@ object FrmGestaoPBM: TFrmGestaoPBM
           ValueUnchecked = 'False'
         end>
       RowHeightExStored = 23
+      OnDrawColumnCell = DBGridEx1DrawColumnCell
     end
+  end
+  object TabPBM: TRESTDWClientSQL
+    Active = False
+    Aggregates = <>
+    Params = <>
+    PoolerService = 'PDV'
+    RESTDataBase = DM.DWDataBase
+    Left = 1016
+    Top = 224
+    object TabPBMIDPed: TIntegerField
+      FieldName = 'IDPed'
+    end
+    object TabPBMNroAutor: TWideStringField
+      FieldName = 'NroAutor'
+      Size = 50
+    end
+    object TabPBMDesPro: TWideStringField
+      FieldName = 'DesPro'
+      Size = 150
+    end
+    object TabPBMNomGru: TWideStringField
+      FieldName = 'NomGru'
+      Size = 50
+    end
+    object TabPBMNomCli: TWideStringField
+      FieldName = 'NomCli'
+      Size = 100
+    end
+    object TabPBMQtde: TFloatField
+      FieldName = 'Qtde'
+    end
+    object TabPBMValor: TCurrencyField
+      FieldName = 'Valor'
+    end
+    object TabPBMCRUF: TWideStringField
+      FieldName = 'CRUF'
+      Size = 20
+    end
+    object TabPBMDatVenda: TDateField
+      FieldName = 'DatVenda'
+    end
+    object TabPBMNomPBM: TWideStringField
+      FieldName = 'NomPBM'
+      Size = 50
+    end
+    object TabPBMIDPBM: TSmallintField
+      FieldName = 'IDPBM'
+    end
+    object TabPBMIDFilial: TIntegerField
+      FieldName = 'IDFilial'
+    end
+    object TabPBMIDPro: TIntegerField
+      FieldName = 'IDPro'
+    end
+    object TabPBMIDCli: TIntegerField
+      FieldName = 'IDCli'
+    end
+  end
+  object SouPBM: TDataSource
+    DataSet = TabPBM
+    Left = 1048
+    Top = 224
   end
 end
