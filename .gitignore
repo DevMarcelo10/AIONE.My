@@ -1,0 +1,75 @@
+# Delphi compiled files
+*.dcu
+*.exe
+*.dll
+*.bpl
+*.bpi
+*.dcp
+*.so
+*.apk
+*.drc
+*.map
+*.dres
+*.rsm
+*.tds
+*.lib
+*.a
+*.o
+*.ocx
+*.res
+
+# Delphi local files
+*.local
+*.identcache
+*.projdata
+*.tvsconfig
+*.dsk
+*.stat
+
+# Delphi history
+__history/
+__recovery/
+
+# Delphi resource files (optional - keep if needed)
+# *.res
+
+# IDE files
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
+doc/*.dat
+
+# Temporary files
+*.tmp
+*.~*
+*~
+*.bak
+*.orig
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Archives
+*.zip
+*.rar
+*.7z
+
+# Excel temporary files
+~$*.xls*
+
+# Specific project exclusions
+Server/doc/*.dat
+ServerFar/doc/*.dat
+
+# Claude Code internal files (keep commands, skills, settings)
+.claude/history.jsonl
+.claude/ide/
+.claude/plugins/
+.claude/projects/
+.claude/*.lock
