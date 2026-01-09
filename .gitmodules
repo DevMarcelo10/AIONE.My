@@ -1,0 +1,3 @@
+[submodule "PharmaCopilot"]
+	path = PharmaCopilot
+	url = https://github.com/DevMarcelo10/Copiloto.git
