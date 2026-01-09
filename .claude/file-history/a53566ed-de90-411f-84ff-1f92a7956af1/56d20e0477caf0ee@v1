@@ -1,0 +1,206 @@
+"""
+Endpoints de configuração do terminal.
+Permite configurar como identificar a venda atual de cada terminal.
+"""
+
+import json
+from pathlib import Path
+from typing import Optional
+
+from fastapi import APIRouter, HTTPException
+import structlog
+
+from config.settings import settings
+from models.terminal_config import (
+    TerminalConfig,
+    TerminalConfigResponse,
+    TerminalTestResult,
+    TableInfo,
+    ColumnInfo,
+)
+from integrations.terminal_detector import (
+    TerminalDetector,
+    get_tables,
+    get_columns,
+)
+
+logger = structlog.get_logger()
+router = APIRouter(prefix="/api/v1/config", tags=["config"])
+
+# Arquivo de configuração do terminal
+CONFIG_FILE = Path(__file__).parent.parent / "data" / "terminal_config.json"
+
+
+def _ensure_data_dir():
+    """Garante que o diretório de dados existe."""
+    CONFIG_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+
+def _load_config() -> TerminalConfig:
+    """Carrega configuração do arquivo."""
+    if CONFIG_FILE.exists():
+        try:
+            with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return TerminalConfig(**data)
+        except Exception as e:
+            logger.warning("config_load_error", error=str(e))
+
+    # Retorna configuração padrão
+    return TerminalConfig()
+
+
+def _save_config(config: TerminalConfig) -> bool:
+    """Salva configuração no arquivo."""
+    try:
+        _ensure_data_dir()
+        with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+            json.dump(config.model_dump(), f, indent=2, ensure_ascii=False)
+        return True
+    except Exception as e:
+        logger.error("config_save_error", error=str(e))
+        return False
+
+
+# Instância global do detector (será recriada quando config mudar)
+_terminal_detector: Optional[TerminalDetector] = None
+
+
+def get_terminal_detector() -> TerminalDetector:
+    """Retorna instância do detector de terminal."""
+    global _terminal_detector
+    if _terminal_detector is None:
+        config = _load_config()
+        _terminal_detector = TerminalDetector(
+            config,
+            settings.erp_connection_string
+        )
+    return _terminal_detector
+
+
+def reset_terminal_detector():
+    """Reseta o detector para recarregar configuração."""
+    global _terminal_detector
+    _terminal_detector = None
+
+
+# ===========================================
+# ENDPOINTS DE CONFIGURAÇÃO DO TERMINAL
+# ===========================================
+
+@router.get("/terminal", response_model=TerminalConfigResponse)
+async def get_terminal_config():
+    """
+    Retorna configuração atual do terminal.
+    """
+    config = _load_config()
+    return TerminalConfigResponse(config=config, saved=CONFIG_FILE.exists())
+
+
+@router.post("/terminal", response_model=TerminalConfigResponse)
+async def save_terminal_config(config: TerminalConfig):
+    """
+    Salva configuração do terminal.
+    """
+    if _save_config(config):
+        reset_terminal_detector()
+        logger.info("terminal_config_saved", config=config.model_dump())
+        return TerminalConfigResponse(config=config, saved=True)
+    else:
+        raise HTTPException(
+            status_code=500,
+            detail="Erro ao salvar configuracao"
+        )
+
+
+@router.post("/terminal/test", response_model=TerminalTestResult)
+async def test_terminal_config(config: TerminalConfig):
+    """
+    Testa se a configuração do terminal funciona.
+
+    Executa a query configurada e retorna informações sobre a venda encontrada.
+    """
+    detector = TerminalDetector(config, settings.erp_connection_string)
+    result = detector.test_config()
+    logger.info(
+        "terminal_config_test",
+        success=result.success,
+        venda_id=result.venda_id
+    )
+    return result
+
+
+# ===========================================
+# ENDPOINTS DE DESCOBERTA DO BANCO
+# ===========================================
+
+@router.get("/tables", response_model=list[TableInfo])
+async def list_tables():
+    """
+    Lista todas as tabelas do banco do ERP.
+
+    Útil para o usuário selecionar a tabela de vendas.
+    """
+    tables = get_tables(settings.erp_connection_string)
+    return [TableInfo(name=t) for t in sorted(tables)]
+
+
+@router.get("/columns/{tabela}", response_model=list[ColumnInfo])
+async def list_columns(tabela: str):
+    """
+    Lista colunas de uma tabela específica.
+
+    Args:
+        tabela: Nome da tabela
+
+    Útil para o usuário selecionar os campos corretos.
+    """
+    columns = get_columns(settings.erp_connection_string, tabela)
+    if not columns:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Tabela '{tabela}' nao encontrada ou sem colunas"
+        )
+    return [ColumnInfo(**c) for c in columns]
+
+
+@router.get("/tables/vendas")
+async def suggest_venda_tables():
+    """
+    Sugere tabelas que provavelmente são de vendas.
+
+    Busca por padrões comuns: venda, pedido, cupom, nfce, etc.
+    """
+    all_tables = get_tables(settings.erp_connection_string)
+    patterns = ["venda", "pedido", "cupom", "nfce", "nfe", "ordem", "mov"]
+
+    suggestions = []
+    for table in all_tables:
+        table_lower = table.lower()
+        for pattern in patterns:
+            if pattern in table_lower:
+                suggestions.append(table)
+                break
+
+    return {"tables": sorted(suggestions)}
+
+
+# ===========================================
+# ENDPOINT AUXILIAR - DETECTAR VENDA ATUAL
+# ===========================================
+
+@router.get("/terminal/venda-atual")
+async def get_venda_atual():
+    """
+    Detecta a venda atual usando a configuração salva.
+
+    Retorna o ID da venda e cliente se encontrar.
+    """
+    detector = get_terminal_detector()
+    venda_id, cliente_id = detector.get_venda_atual()
+
+    return {
+        "venda_id": venda_id,
+        "cliente_id": cliente_id,
+        "detected": venda_id is not None,
+    }

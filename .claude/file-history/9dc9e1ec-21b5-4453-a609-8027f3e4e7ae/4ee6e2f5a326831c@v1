@@ -1,0 +1,47 @@
+========================================
+  INSTALAR PYTHON - GUIA RAPIDO
+========================================
+
+PROBLEMA DETECTADO:
+  Python nao esta instalado ou configurado corretamente no sistema.
+
+SOLUCAO RAPIDA:
+
+1. BAIXAR PYTHON
+   Acesse: https://www.python.org/downloads/
+
+   Ou baixe diretamente:
+   https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe
+
+2. INSTALAR
+   a) Execute o instalador baixado
+   b) *** IMPORTANTE *** Marque a opcao:
+      [X] Add Python 3.12 to PATH
+   c) Clique em "Install Now"
+   d) Aguarde a instalacao
+   e) Clique em "Close"
+
+3. VERIFICAR INSTALACAO
+   a) Abra um NOVO prompt de comando (CMD ou PowerShell)
+   b) Digite: py --version
+   c) Deve mostrar: Python 3.12.x
+
+4. INSTALAR MCP
+   Depois que o Python estiver instalado:
+   a) Volte para esta pasta
+   b) Execute: instalar.bat
+
+========================================
+
+ALTERNATIVA - Microsoft Store:
+
+1. Abra a Microsoft Store
+2. Busque: "Python 3.12"
+3. Clique em "Obter"
+4. Aguarde a instalacao
+5. Execute: instalar.bat
+
+========================================
+
+DUVIDAS?
+Consulte: INSTALACAO.md

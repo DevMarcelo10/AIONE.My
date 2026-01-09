@@ -31,6 +31,7 @@ type
     procedure btVendaClick(Sender: TObject);
     procedure btCaixaClick(Sender: TObject);
     procedure btComprasClick(Sender: TObject);
+    procedure btEstoqueClick(Sender: TObject);
     procedure btFinanceiroClick(Sender: TObject);
     procedure btFiscalClick(Sender: TObject);
     procedure btIAgptClick(Sender: TObject);
@@ -52,7 +53,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uConst, uMenu, uLibFarm, uInfoIni, uMenCad, uMenFin,
+uses uDM, uConst, uMenu, uLibFarm, uInfoIni, uMenCad, uMenFin, uMenEstoq,
      uVendas, uMenComp, uCaixa, uConfig, uFiscal, uCompras;  // uIAgpt,
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
@@ -146,6 +147,15 @@ begin
    FrmMenComp.Parent := PanelBas;
    CentralizarControl(FrmMenComp, PanelBas);
    FrmMenComp.Show;
+end;
+
+procedure TFrmPrincipal.btEstoqueClick(Sender: TObject);
+begin
+   FechaForms;
+   FrmMenEsto := TFrmMenEsto.Create(Application);
+   FrmMenEsto.Parent := PanelBas;
+   CentralizarControl(FrmMenEsto, PanelBas);
+   FrmMenEsto.Show;
 end;
 
 procedure TFrmPrincipal.btCadastroClick(Sender: TObject);

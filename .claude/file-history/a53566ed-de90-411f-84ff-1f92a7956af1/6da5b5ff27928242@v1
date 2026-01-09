@@ -1,0 +1,23 @@
+# PharmaCopilot - Configuracao
+
+# ERP Database (READ-ONLY)
+ERP_TYPE=aione
+ERP_DB_HOST=localhost
+ERP_DB_PORT=3307
+ERP_DB_NAME=dbaione
+ERP_DB_USER=root
+ERP_DB_PASSWORD=f68interdb
+
+# Copilot Database (READ-WRITE)
+COPILOT_DB_URL=mysql+pymysql://root:f68interdb@localhost:3307/copilot
+
+# LLM Provider
+LLM_PROVIDER=deepseek
+DEEPSEEK_API_KEY=sk-bac6c602d5c04d358015f3d0411e1aff
+LLM_MODEL=deepseek-chat
+
+# Features
+ENABLE_CROSS_SELL=true
+
+# Debug
+DEBUG=true

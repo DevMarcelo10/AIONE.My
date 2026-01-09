@@ -1,0 +1,29 @@
+2025-12-22T20:26:54.823Z [DEBUG] Watching for changes in setting files C:\Users\DevDelphi\.claude...
+2025-12-22T20:26:54.858Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-22T20:26:54.905Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2025-12-22T20:26:54.907Z [DEBUG] MCP server "local-mcp": Initializing HTTP transport to http://127.0.0.1:9001/mcp
+2025-12-22T20:26:54.907Z [DEBUG] MCP server "local-mcp": Node version: v24.12.0, Platform: win32
+2025-12-22T20:26:54.907Z [DEBUG] MCP server "local-mcp": Environment: {"NODE_OPTIONS":"not set","UV_THREADPOOL_SIZE":"default","HTTP_PROXY":"not set","HTTPS_PROXY":"not set","NO_PROXY":"not set"}
+2025-12-22T20:26:54.907Z [DEBUG] MCP server "local-mcp": Proxy options: default
+2025-12-22T20:26:54.908Z [DEBUG] MCP server "local-mcp": HTTP transport options: {"url":"http://127.0.0.1:9001/mcp","headers":{"User-Agent":"claude-code/2.0.75"},"hasAuthProvider":true,"timeoutMs":60000}
+2025-12-22T20:26:54.908Z [DEBUG] MCP server "local-mcp": HTTP transport created successfully
+2025-12-22T20:26:54.911Z [DEBUG] MCP server "local-mcp": Client created, setting up request handler
+2025-12-22T20:26:54.911Z [DEBUG] MCP server "local-mcp": Starting connection with timeout of 30000ms
+2025-12-22T20:26:54.911Z [DEBUG] MCP server "local-mcp": Testing basic HTTP connectivity to http://127.0.0.1:9001/mcp
+2025-12-22T20:26:54.911Z [DEBUG] MCP server "local-mcp": Parsed URL: host=127.0.0.1, port=9001, protocol=http:
+2025-12-22T20:26:54.911Z [DEBUG] MCP server "local-mcp": Using loopback address: 127.0.0.1
+2025-12-22T20:26:54.912Z [DEBUG] MCP server "local-mcp": No token data found
+2025-12-22T20:26:54.923Z [DEBUG] MCP server "local-mcp": HTTP Connection failed after 16ms: fetch failed (code: none, errno: none)
+2025-12-22T20:26:54.923Z [ERROR] MCP server "local-mcp" TypeError: fetch failed
+2025-12-22T20:26:54.939Z [DEBUG] MCP server "local-mcp": Connection failed after 32ms: fetch failed
+2025-12-22T20:26:54.939Z [ERROR] MCP server "local-mcp" Connection failed: fetch failed
+2025-12-22T20:26:54.942Z [DEBUG] MCP server "context7": Starting connection with timeout of 30000ms
+2025-12-22T20:26:54.978Z [DEBUG] Git remote URL: null
+2025-12-22T20:26:54.978Z [DEBUG] No git remote URL found
+2025-12-22T20:26:54.978Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-22T20:26:55.123Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.38060.1766435215123
+2025-12-22T20:26:55.123Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T20:26:55.127Z [DEBUG] Temp file written successfully, size: 62573 bytes
+2025-12-22T20:26:55.127Z [DEBUG] Applied original permissions to temp file
+2025-12-22T20:26:55.127Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.38060.1766435215123 to C:\Users\DevDelphi\.claude.json
+2025-12-22T20:26:55.128Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically

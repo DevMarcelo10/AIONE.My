@@ -59,7 +59,6 @@ object FrmMenFin: TFrmMenFin
     Version = '1.7.1.6'
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 6
     TMSStyle = 0
   end
   object PanelBtMenu: TAdvSmoothPanel
@@ -106,8 +105,6 @@ object FrmMenFin: TFrmMenFin
     Version = '1.7.1.6'
     Align = alLeft
     TabOrder = 1
-    ExplicitLeft = 6
-    ExplicitTop = -4
     TMSStyle = 0
     object AdvSmoothPanel3: TAdvSmoothPanel
       AlignWithMargins = True
@@ -152,8 +149,6 @@ object FrmMenFin: TFrmMenFin
       Version = '1.7.1.6'
       Align = alRight
       TabOrder = 0
-      ExplicitTop = 581
-      ExplicitHeight = 62
       TMSStyle = 0
     end
     object btTitulos: TAdvGlowButton
@@ -265,7 +260,7 @@ object FrmMenFin: TFrmMenFin
       TabOrder = 1
       OnClick = btTitulosClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -279,12 +274,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -301,7 +296,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 8
     end
     object btBaixas: TAdvGlowButton
       AlignWithMargins = True
@@ -428,7 +422,7 @@ object FrmMenFin: TFrmMenFin
       TabOrder = 2
       OnClick = btBaixasClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -442,12 +436,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -464,7 +458,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 176
     end
     object btPlacon: TAdvGlowButton
       AlignWithMargins = True
@@ -553,7 +546,7 @@ object FrmMenFin: TFrmMenFin
       TabOrder = 3
       OnClick = btPlaconClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -567,12 +560,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -589,7 +582,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 232
     end
     object btNatFin: TAdvGlowButton
       AlignWithMargins = True
@@ -697,7 +689,7 @@ object FrmMenFin: TFrmMenFin
       TabOrder = 4
       OnClick = btNatFinClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -711,12 +703,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -733,7 +725,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 469
     end
     object btBancos: TAdvGlowButton
       AlignWithMargins = True
@@ -847,7 +838,7 @@ object FrmMenFin: TFrmMenFin
       TabOrder = 5
       OnClick = btBancosClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -861,12 +852,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -883,7 +874,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 469
     end
     object btCartao: TAdvGlowButton
       AlignWithMargins = True
@@ -1012,7 +1002,7 @@ object FrmMenFin: TFrmMenFin
       TabOrder = 6
       OnClick = btCartaoClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -1026,12 +1016,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -1048,7 +1038,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 469
     end
     object btAnalises: TAdvGlowButton
       AlignWithMargins = True
@@ -1135,7 +1124,7 @@ object FrmMenFin: TFrmMenFin
       Transparent = True
       TabOrder = 7
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -1149,12 +1138,12 @@ object FrmMenFin: TFrmMenFin
       Appearance.ColorDisabledTo = 12046079
       Appearance.ColorDown = 12046079
       Appearance.ColorDownTo = 12046079
-      Appearance.ColorHot = 12046079
-      Appearance.ColorHotTo = 12046079
+      Appearance.ColorHot = 14674687
+      Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
       Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 12046079
-      Appearance.ColorMirrorHotTo = 12046079
+      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
       Appearance.ColorMirrorChecked = 12046079
@@ -1171,7 +1160,6 @@ object FrmMenFin: TFrmMenFin
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 469
     end
   end
   object timAlpha: TTimer

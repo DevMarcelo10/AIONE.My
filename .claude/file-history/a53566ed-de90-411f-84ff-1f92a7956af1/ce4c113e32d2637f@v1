@@ -1,0 +1,51 @@
+"""Endpoints de chat com IA."""
+
+from fastapi import APIRouter, HTTPException
+from uuid import uuid4
+
+from models.schemas import ChatRequest, ChatResponse
+from services.chat_service import ChatService
+
+router = APIRouter()
+
+# Instância do serviço
+chat_service = ChatService()
+
+
+@router.post("/", response_model=ChatResponse)
+async def send_message(request: ChatRequest):
+    """
+    Envia mensagem para o assistente IA.
+
+    O assistente tem contexto sobre:
+    - Venda atual (se venda_id fornecido)
+    - Cliente (se cliente_id fornecido)
+    - Histórico de compras
+    - Estoque e promoções
+    """
+    try:
+        # Gera session_id se não fornecido
+        session_id = request.session_id or str(uuid4())
+
+        response = await chat_service.process_message(
+            message=request.message,
+            session_id=session_id,
+            venda_id=request.venda_id,
+            cliente_id=request.cliente_id,
+            context=request.context,
+        )
+
+        return response
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.delete("/{session_id}")
+async def clear_session(session_id: str):
+    """Limpa histórico de uma sessão de chat."""
+    try:
+        await chat_service.clear_session(session_id)
+        return {"status": "cleared", "session_id": session_id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

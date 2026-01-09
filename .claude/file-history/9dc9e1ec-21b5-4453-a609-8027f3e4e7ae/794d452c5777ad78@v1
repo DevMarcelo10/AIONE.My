@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+import mysql.connector
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+DB_CONFIG = {
+    'host': config.get('Database', 'host'),
+    'port': config.getint('Database', 'port'),
+    'user': config.get('Database', 'user'),
+    'password': config.get('Database', 'password'),
+    'database': config.get('Database', 'database'),
+    'charset': config.get('Database', 'charset', fallback='utf8mb4'),
+    'collation': config.get('Database', 'collation', fallback='utf8mb4_general_ci')
+}
+
+print("=" * 50)
+print("  TESTE DE CONEXAO MCP MySQL - AIONE.My")
+print("=" * 50)
+print(f"\nHost: {DB_CONFIG['host']}:{DB_CONFIG['port']}")
+print(f"Database: {DB_CONFIG['database']}")
+print(f"Usuario: {DB_CONFIG['user']}\n")
+
+try:
+    connection = mysql.connector.connect(**DB_CONFIG)
+
+    if connection.is_connected():
+        print("[OK] CONEXAO ESTABELECIDA COM SUCESSO!")
+        print(f"Versao MySQL: {connection.server_info}")
+
+        cursor = connection.cursor()
+
+        # Testa query
+        cursor.execute("SELECT DATABASE()")
+        db = cursor.fetchone()[0]
+        print(f"Banco ativo: {db}")
+
+        # Lista tabelas
+        cursor.execute("SHOW TABLES LIMIT 10")
+        tables = cursor.fetchall()
+        print(f"\nPrimeiras {len(tables)} tabelas:")
+        for i, table in enumerate(tables, 1):
+            print(f"  {i}. {table[0]}")
+
+        # Testa uma query simples
+        cursor.execute("SELECT COUNT(*) FROM arqproduto")
+        count = cursor.fetchone()[0]
+        print(f"\nTotal de produtos: {count}")
+
+        cursor.close()
+        connection.close()
+
+        print("\n" + "=" * 50)
+        print("  TESTE CONCLUIDO COM SUCESSO!")
+        print("=" * 50)
+        print("\nPROXIMO PASSO:")
+        print("  Reinicie o Claude Code para ativar o MCP")
+        print("=" * 50)
+
+except Exception as e:
+    print(f"[ERRO] Falha na conexao: {str(e)}")

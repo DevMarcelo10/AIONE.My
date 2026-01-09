@@ -58,7 +58,7 @@ var
 begin
    QueAuxi := TRESTDWClientSQL.Create(nil);
    QueAuxi.DataBase := DM.DWDataBase;
-   try
+   {try
       try
          auxIDComp := -1;
          QueAuxi.SQL.Text := 'SELECT IDComp,COUNT(*) AS TotReg FROM arqcompra WHERE FIND_IN_SET(Status,'+Aspas('0,1')+')';
@@ -69,14 +69,14 @@ begin
    finally
       QueAuxi.Close;
       FreeAndNil(QueAuxi);
-   end;
+   end;}
 end;
 
 procedure TFrmMenComp.btComprasClick(Sender: TObject);
 begin
    FechaForms;
    FrmCompras := TFrmCompras.Create(Application);
-   FrmCompras.Parent  := PanelShow;
+   FrmCompras.Parent := PanelShow;
    FrmCompras.Show;
 
    //FrmCompraCad := TFrmCompraCad.Create(Application);

@@ -1,0 +1,844 @@
+"""
+Conector para ERP AIONE.My
+READ-ONLY - Apenas consultas SELECT permitidas.
+"""
+
+from datetime import date, datetime, timedelta
+from decimal import Decimal
+from typing import Optional
+import logging
+
+# Wrapper para compatibilidade structlog/logging padrao
+class LoggerWrapper:
+    def __init__(self, logger):
+        self._logger = logger
+        self._is_structlog = hasattr(logger, 'bind')
+
+    def info(self, msg, **kwargs):
+        if self._is_structlog:
+            self._logger.info(msg, **kwargs)
+        else:
+            self._logger.info(f"{msg} {kwargs}" if kwargs else msg)
+
+    def error(self, msg, **kwargs):
+        if self._is_structlog:
+            self._logger.error(msg, **kwargs)
+        else:
+            self._logger.error(f"{msg} {kwargs}" if kwargs else msg)
+
+    def warning(self, msg, **kwargs):
+        if self._is_structlog:
+            self._logger.warning(msg, **kwargs)
+        else:
+            self._logger.warning(f"{msg} {kwargs}" if kwargs else msg)
+
+try:
+    import structlog
+    logger = LoggerWrapper(structlog.get_logger())
+except ImportError:
+    logging.basicConfig(level=logging.INFO)
+    logger = LoggerWrapper(logging.getLogger(__name__))
+
+from sqlalchemy import create_engine, text
+from sqlalchemy.engine import Engine
+
+from models.schemas import (
+    Cliente,
+    Produto,
+    LoteEstoque,
+    ItemVenda,
+    Venda,
+)
+from integrations.base_connector import BaseERPConnector
+
+
+class AIONEConnector(BaseERPConnector):
+    """
+    Conector para banco MySQL do AIONE.My.
+
+    IMPORTANTE: Este conector é READ-ONLY.
+    Nunca executa INSERT, UPDATE ou DELETE no banco do ERP.
+    """
+
+    def __init__(self, connection_string: str, mapping: dict):
+        super().__init__(connection_string, mapping)
+        self._engine: Optional[Engine] = None
+        self._filial_id: int = mapping.get("filial_id", 1)
+
+    def _get_engine(self) -> Engine:
+        """Retorna engine SQLAlchemy com pool de conexões."""
+        if self._engine is None:
+            self._engine = create_engine(
+                self.connection_string,
+                pool_size=5,
+                max_overflow=10,
+                pool_recycle=3600,
+                echo=False,
+            )
+        return self._engine
+
+    def test_connection(self) -> bool:
+        """Testa conexão com o banco AIONE."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                result = conn.execute(text("SELECT 1"))
+                return result.fetchone() is not None
+        except Exception as e:
+            logger.error("aione_connection_test_failed", error=str(e))
+            return False
+
+    # ==========================================
+    # CLIENTES
+    # ==========================================
+
+    def get_cliente(self, cliente_id: int) -> Optional[Cliente]:
+        """Busca cliente por ID."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT
+                        p.IDPess,
+                        p.Nompes,
+                        p.CpfCnpjPes,
+                        p.FonePes,
+                        p.CelularPes,
+                        p.EmailPes,
+                        p.DatnasPes,
+                        CONCAT(p.Endpes, ', ', COALESCE(p.NroEnd, 's/n')) as Endereco,
+                        m.Nommun as Cidade,
+                        m.Estmun as UF,
+                        pc.IDConv,
+                        c.Nomcon,
+                        COALESCE(pc.VlrLimite, c.LimCreCli, 0) as LimiteCredito,
+                        COALESCE((
+                            SELECT SUM(t.Saltit)
+                            FROM arqtitulo t
+                            WHERE t.IDPess = p.IDPess
+                            AND t.PagRec = 'R'
+                            AND t.Saltit > 0
+                        ), 0) as SaldoDevedor
+                    FROM arqpessoa p
+                    LEFT JOIN arqmuni m ON m.Codmun = p.Codmun
+                    LEFT JOIN arqpessconv pc ON pc.IDPess = p.IDPess AND pc.IndAtivo = '1'
+                    LEFT JOIN arqconvenio c ON c.IDConv = pc.IDConv
+                    WHERE p.IDPess = :cliente_id
+                    AND p.IDEsppes = 1
+                    AND p.IndAtivo = '1'
+                    LIMIT 1
+                """)
+
+                result = conn.execute(query, {"cliente_id": cliente_id})
+                row = result.fetchone()
+
+                if not row:
+                    return None
+
+                return Cliente(
+                    id=row.IDPess,
+                    nome=row.Nompes or "",
+                    cpf_cnpj=row.CpfCnpjPes,
+                    telefone=row.CelularPes or row.FonePes,
+                    email=row.EmailPes,
+                    data_nascimento=row.DatnasPes,
+                    endereco=row.Endereco,
+                    cidade=row.Cidade,
+                    uf=row.UF,
+                    convenio_id=row.IDConv,
+                    convenio_nome=row.Nomcon,
+                    limite_credito=Decimal(str(row.LimiteCredito or 0)),
+                    saldo_devedor=Decimal(str(row.SaldoDevedor or 0)),
+                )
+
+        except Exception as e:
+            logger.error("aione_get_cliente_error", cliente_id=cliente_id, error=str(e))
+            return None
+
+    def search_cliente(self, termo: str, limit: int = 10) -> list[Cliente]:
+        """Pesquisa clientes por nome, CPF ou telefone."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT
+                        p.IDPess,
+                        p.Nompes,
+                        p.CpfCnpjPes,
+                        p.CelularPes,
+                        p.FonePes,
+                        p.EmailPes,
+                        pc.IDConv,
+                        c.Nomcon
+                    FROM arqpessoa p
+                    LEFT JOIN arqpessconv pc ON pc.IDPess = p.IDPess AND pc.IndAtivo = '1'
+                    LEFT JOIN arqconvenio c ON c.IDConv = pc.IDConv
+                    WHERE p.IDEsppes = 1
+                    AND p.IndAtivo = '1'
+                    AND (
+                        p.Nompes LIKE :termo
+                        OR p.CpfCnpjPes LIKE :termo_limpo
+                        OR p.CelularPes LIKE :termo_limpo
+                        OR p.FonePes LIKE :termo_limpo
+                    )
+                    ORDER BY p.Nompes
+                    LIMIT :limit
+                """)
+
+                termo_limpo = termo.replace(".", "").replace("-", "").replace("/", "")
+                result = conn.execute(query, {
+                    "termo": f"%{termo}%",
+                    "termo_limpo": f"%{termo_limpo}%",
+                    "limit": limit,
+                })
+
+                clientes = []
+                for row in result:
+                    clientes.append(Cliente(
+                        id=row.IDPess,
+                        nome=row.Nompes or "",
+                        cpf_cnpj=row.CpfCnpjPes,
+                        telefone=row.CelularPes or row.FonePes,
+                        email=row.EmailPes,
+                        convenio_id=row.IDConv,
+                        convenio_nome=row.Nomcon,
+                    ))
+
+                return clientes
+
+        except Exception as e:
+            logger.error("aione_search_cliente_error", termo=termo, error=str(e))
+            return []
+
+    # ==========================================
+    # PRODUTOS
+    # ==========================================
+
+    def get_produto(self, produto_id: int) -> Optional[Produto]:
+        """Busca produto por ID."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT
+                        p.IDProd,
+                        p.IDProd as Codigo,
+                        p.CodEANpri,
+                        p.Despro,
+                        d.DesDCB as PrincipioAtivo,
+                        f.Nompes as Laboratorio,
+                        g.Desgru as Grupo,
+                        s.DesgruSub as Subgrupo,
+                        p.PrecoVen,
+                        p.CustoMed,
+                        COALESCE((
+                            SELECT SUM(l.Qtdest)
+                            FROM arqprodutolot l
+                            WHERE l.IDProd = p.IDProd
+                            AND l.IDFilial = :filial_id
+                        ), 0) as Estoque,
+                        p.Estmin,
+                        p.IndControle,
+                        r.Desrece as TipoReceita,
+                        CASE WHEN p.TipoPro = 'G' THEN 1 ELSE 0 END as Generico,
+                        CASE WHEN p.TipoPro = 'S' THEN 1 ELSE 0 END as Similar,
+                        CASE WHEN p.TipoPro = 'R' THEN 1 ELSE 0 END as Referencia
+                    FROM arqproduto p
+                    LEFT JOIN arqdcb d ON d.IDDCB = CAST(SUBSTRING(p.RegistoMS, 1, 5) AS UNSIGNED)
+                    LEFT JOIN arqpessoa f ON f.IDPess = p.IDFabr
+                    LEFT JOIN arqgrupo g ON g.IDGrupo = p.IDGrupo
+                    LEFT JOIN arqgruposub s ON s.IDGruSub = p.IDGruSub
+                    LEFT JOIN arqreceitas r ON r.IDRece = p.IDRece
+                    WHERE p.IDProd = :produto_id
+                    AND p.Ativo = '1'
+                    LIMIT 1
+                """)
+
+                result = conn.execute(query, {
+                    "produto_id": produto_id,
+                    "filial_id": self._filial_id,
+                })
+                row = result.fetchone()
+
+                if not row:
+                    return None
+
+                return self._row_to_produto(row)
+
+        except Exception as e:
+            logger.error("aione_get_produto_error", produto_id=produto_id, error=str(e))
+            return None
+
+    def get_produto_by_ean(self, ean: str) -> Optional[Produto]:
+        """Busca produto por código de barras."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                # Primeiro tenta pelo EAN principal
+                query = text("""
+                    SELECT p.IDProd
+                    FROM arqproduto p
+                    WHERE p.CodEANpri = :ean
+                    AND p.Ativo = '1'
+                    LIMIT 1
+                """)
+
+                result = conn.execute(query, {"ean": ean})
+                row = result.fetchone()
+
+                # Se não encontrou, tenta na tabela de EANs adicionais
+                if not row:
+                    query = text("""
+                        SELECT e.IDProd
+                        FROM arqprodutoean e
+                        INNER JOIN arqproduto p ON p.IDProd = e.IDProd
+                        WHERE e.CodEAN = :ean
+                        AND p.Ativo = '1'
+                        LIMIT 1
+                    """)
+                    result = conn.execute(query, {"ean": ean})
+                    row = result.fetchone()
+
+                if not row:
+                    return None
+
+                return self.get_produto(row.IDProd)
+
+        except Exception as e:
+            logger.error("aione_get_produto_by_ean_error", ean=ean, error=str(e))
+            return None
+
+    def search_produto(self, termo: str, limit: int = 20) -> list[Produto]:
+        """Pesquisa produtos por nome, código ou princípio ativo."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT
+                        p.IDProd,
+                        p.IDProd as Codigo,
+                        p.CodEANpri,
+                        p.Despro,
+                        d.DesDCB as PrincipioAtivo,
+                        f.Nompes as Laboratorio,
+                        g.Desgru as Grupo,
+                        p.PrecoVen,
+                        p.CustoMed,
+                        COALESCE((
+                            SELECT SUM(l.Qtdest)
+                            FROM arqprodutolot l
+                            WHERE l.IDProd = p.IDProd
+                            AND l.IDFilial = :filial_id
+                        ), 0) as Estoque,
+                        p.Estmin,
+                        p.IndControle,
+                        r.Desrece as TipoReceita,
+                        CASE WHEN p.TipoPro = 'G' THEN 1 ELSE 0 END as Generico,
+                        CASE WHEN p.TipoPro = 'S' THEN 1 ELSE 0 END as Similar,
+                        CASE WHEN p.TipoPro = 'R' THEN 1 ELSE 0 END as Referencia
+                    FROM arqproduto p
+                    LEFT JOIN arqdcb d ON d.IDDCB = CAST(SUBSTRING(p.RegistoMS, 1, 5) AS UNSIGNED)
+                    LEFT JOIN arqpessoa f ON f.IDPess = p.IDFabr
+                    LEFT JOIN arqgrupo g ON g.IDGrupo = p.IDGrupo
+                    LEFT JOIN arqreceitas r ON r.IDRece = p.IDRece
+                    WHERE p.Ativo = '1'
+                    AND (
+                        p.Despro LIKE :termo
+                        OR p.CodEANpri LIKE :termo
+                        OR d.DesDCB LIKE :termo
+                        OR CAST(p.IDProd AS CHAR) = :termo_exato
+                    )
+                    ORDER BY
+                        CASE WHEN p.Despro LIKE :termo_inicio THEN 0 ELSE 1 END,
+                        p.Despro
+                    LIMIT :limit
+                """)
+
+                result = conn.execute(query, {
+                    "termo": f"%{termo}%",
+                    "termo_exato": termo,
+                    "termo_inicio": f"{termo}%",
+                    "filial_id": self._filial_id,
+                    "limit": limit,
+                })
+
+                produtos = []
+                for row in result:
+                    produtos.append(self._row_to_produto(row))
+
+                return produtos
+
+        except Exception as e:
+            logger.error("aione_search_produto_error", termo=termo, error=str(e))
+            return []
+
+    def get_genericos(self, principio_ativo: str) -> list[Produto]:
+        """Busca genéricos para um princípio ativo."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT
+                        p.IDProd,
+                        p.IDProd as Codigo,
+                        p.CodEANpri,
+                        p.Despro,
+                        d.DesDCB as PrincipioAtivo,
+                        f.Nompes as Laboratorio,
+                        g.Desgru as Grupo,
+                        p.PrecoVen,
+                        p.CustoMed,
+                        COALESCE((
+                            SELECT SUM(l.Qtdest)
+                            FROM arqprodutolot l
+                            WHERE l.IDProd = p.IDProd
+                            AND l.IDFilial = :filial_id
+                        ), 0) as Estoque,
+                        p.Estmin,
+                        p.IndControle,
+                        r.Desrece as TipoReceita,
+                        1 as Generico,
+                        0 as Similar,
+                        0 as Referencia
+                    FROM arqproduto p
+                    INNER JOIN arqdcb d ON d.IDDCB = CAST(SUBSTRING(p.RegistoMS, 1, 5) AS UNSIGNED)
+                    LEFT JOIN arqpessoa f ON f.IDPess = p.IDFabr
+                    LEFT JOIN arqgrupo g ON g.IDGrupo = p.IDGrupo
+                    LEFT JOIN arqreceitas r ON r.IDRece = p.IDRece
+                    WHERE p.Ativo = '1'
+                    AND p.TipoPro = 'G'
+                    AND d.DesDCB LIKE :principio
+                    AND COALESCE((
+                        SELECT SUM(l.Qtdest)
+                        FROM arqprodutolot l
+                        WHERE l.IDProd = p.IDProd
+                        AND l.IDFilial = :filial_id
+                    ), 0) > 0
+                    ORDER BY p.PrecoVen ASC
+                    LIMIT 10
+                """)
+
+                result = conn.execute(query, {
+                    "principio": f"%{principio_ativo}%",
+                    "filial_id": self._filial_id,
+                })
+
+                produtos = []
+                for row in result:
+                    produtos.append(self._row_to_produto(row))
+
+                return produtos
+
+        except Exception as e:
+            logger.error("aione_get_genericos_error", principio=principio_ativo, error=str(e))
+            return []
+
+    def get_similares(self, produto_id: int) -> list[Produto]:
+        """Busca produtos similares (mesmo princípio ativo)."""
+        try:
+            # Primeiro busca o princípio ativo do produto
+            produto = self.get_produto(produto_id)
+            if not produto or not produto.principio_ativo:
+                return []
+
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT
+                        p.IDProd,
+                        p.IDProd as Codigo,
+                        p.CodEANpri,
+                        p.Despro,
+                        d.DesDCB as PrincipioAtivo,
+                        f.Nompes as Laboratorio,
+                        g.Desgru as Grupo,
+                        p.PrecoVen,
+                        p.CustoMed,
+                        COALESCE((
+                            SELECT SUM(l.Qtdest)
+                            FROM arqprodutolot l
+                            WHERE l.IDProd = p.IDProd
+                            AND l.IDFilial = :filial_id
+                        ), 0) as Estoque,
+                        p.Estmin,
+                        p.IndControle,
+                        r.Desrece as TipoReceita,
+                        CASE WHEN p.TipoPro = 'G' THEN 1 ELSE 0 END as Generico,
+                        CASE WHEN p.TipoPro = 'S' THEN 1 ELSE 0 END as Similar,
+                        CASE WHEN p.TipoPro = 'R' THEN 1 ELSE 0 END as Referencia
+                    FROM arqproduto p
+                    INNER JOIN arqdcb d ON d.IDDCB = CAST(SUBSTRING(p.RegistoMS, 1, 5) AS UNSIGNED)
+                    LEFT JOIN arqpessoa f ON f.IDPess = p.IDFabr
+                    LEFT JOIN arqgrupo g ON g.IDGrupo = p.IDGrupo
+                    LEFT JOIN arqreceitas r ON r.IDRece = p.IDRece
+                    WHERE p.Ativo = '1'
+                    AND p.IDProd != :produto_id
+                    AND d.DesDCB LIKE :principio
+                    AND COALESCE((
+                        SELECT SUM(l.Qtdest)
+                        FROM arqprodutolot l
+                        WHERE l.IDProd = p.IDProd
+                        AND l.IDFilial = :filial_id
+                    ), 0) > 0
+                    ORDER BY p.PrecoVen ASC
+                    LIMIT 10
+                """)
+
+                result = conn.execute(query, {
+                    "produto_id": produto_id,
+                    "principio": f"%{produto.principio_ativo}%",
+                    "filial_id": self._filial_id,
+                })
+
+                produtos = []
+                for row in result:
+                    produtos.append(self._row_to_produto(row))
+
+                return produtos
+
+        except Exception as e:
+            logger.error("aione_get_similares_error", produto_id=produto_id, error=str(e))
+            return []
+
+    # ==========================================
+    # ESTOQUE
+    # ==========================================
+
+    def get_estoque(self, produto_id: int) -> float:
+        """Retorna estoque atual de um produto."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                query = text("""
+                    SELECT COALESCE(SUM(Qtdest), 0) as Estoque
+                    FROM arqprodutolot
+                    WHERE IDProd = :produto_id
+                    AND IDFilial = :filial_id
+                """)
+
+                result = conn.execute(query, {
+                    "produto_id": produto_id,
+                    "filial_id": self._filial_id,
+                })
+                row = result.fetchone()
+
+                return float(row.Estoque) if row else 0.0
+
+        except Exception as e:
+            logger.error("aione_get_estoque_error", produto_id=produto_id, error=str(e))
+            return 0.0
+
+    def get_lotes_vencendo(self, dias: int = 90) -> list[LoteEstoque]:
+        """Lista lotes próximos do vencimento."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                data_limite = date.today() + timedelta(days=dias)
+
+                query = text("""
+                    SELECT
+                        l.IDProd,
+                        p.Despro,
+                        l.Nrolot,
+                        l.Datven,
+                        l.Qtdest,
+                        DATEDIFF(l.Datven, CURDATE()) as DiasParaVencer
+                    FROM arqprodutolot l
+                    INNER JOIN arqproduto p ON p.IDProd = l.IDProd
+                    WHERE l.IDFilial = :filial_id
+                    AND l.Qtdest > 0
+                    AND l.Datven IS NOT NULL
+                    AND l.Datven <= :data_limite
+                    AND l.Datven >= CURDATE()
+                    ORDER BY l.Datven ASC
+                    LIMIT 100
+                """)
+
+                result = conn.execute(query, {
+                    "filial_id": self._filial_id,
+                    "data_limite": data_limite,
+                })
+
+                lotes = []
+                for row in result:
+                    lotes.append(LoteEstoque(
+                        produto_id=row.IDProd,
+                        produto_nome=row.Despro,
+                        lote=row.Nrolot,
+                        validade=row.Datven,
+                        quantidade=Decimal(str(row.Qtdest)),
+                        dias_para_vencer=row.DiasParaVencer,
+                    ))
+
+                return lotes
+
+        except Exception as e:
+            logger.error("aione_get_lotes_vencendo_error", dias=dias, error=str(e))
+            return []
+
+    # ==========================================
+    # VENDAS
+    # ==========================================
+
+    def get_venda_atual(self, venda_id: int) -> Optional[Venda]:
+        """Busca venda em andamento (aberta)."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                # Busca cabeçalho do pedido
+                query = text("""
+                    SELECT
+                        ped.IDPed,
+                        ped.Datped,
+                        ped.IDPess,
+                        cli.Nompes as NomeCliente,
+                        ped.IDVend,
+                        vnd.Nompes as NomeVendedor,
+                        ped.TotDesc,
+                        ped.TotPedido,
+                        ped.Status
+                    FROM arqpedido ped
+                    LEFT JOIN arqpessoa cli ON cli.IDPess = ped.IDPess
+                    LEFT JOIN arqpessoa vnd ON vnd.IDPess = ped.IDVend
+                    WHERE ped.IDFilial = :filial_id
+                    AND ped.IDPed = :venda_id
+                    LIMIT 1
+                """)
+
+                result = conn.execute(query, {
+                    "filial_id": self._filial_id,
+                    "venda_id": venda_id,
+                })
+                ped_row = result.fetchone()
+
+                if not ped_row:
+                    return None
+
+                # Busca itens do pedido
+                query_itens = text("""
+                    SELECT
+                        i.IDProd,
+                        p.Despro,
+                        i.Qtdped,
+                        i.PrecoVen,
+                        i.VlrDesc,
+                        i.VlrVenda
+                    FROM arqpedidoite i
+                    INNER JOIN arqproduto p ON p.IDProd = i.IDProd
+                    WHERE i.IDFilial = :filial_id
+                    AND i.IDPed = :venda_id
+                    ORDER BY i.Nroite
+                """)
+
+                result_itens = conn.execute(query_itens, {
+                    "filial_id": self._filial_id,
+                    "venda_id": venda_id,
+                })
+
+                itens = []
+                subtotal = Decimal("0")
+                for row in result_itens:
+                    item = ItemVenda(
+                        produto_id=row.IDProd,
+                        produto_nome=row.Despro,
+                        quantidade=Decimal(str(row.Qtdped)),
+                        preco_unitario=Decimal(str(row.PrecoVen)),
+                        desconto=Decimal(str(row.VlrDesc or 0)),
+                        total=Decimal(str(row.VlrVenda)),
+                    )
+                    itens.append(item)
+                    subtotal += Decimal(str(row.PrecoVen)) * Decimal(str(row.Qtdped))
+
+                return Venda(
+                    id=ped_row.IDPed,
+                    data=ped_row.Datped,
+                    cliente_id=ped_row.IDPess,
+                    cliente_nome=ped_row.NomeCliente,
+                    vendedor_id=ped_row.IDVend,
+                    vendedor_nome=ped_row.NomeVendedor,
+                    itens=itens,
+                    subtotal=subtotal,
+                    desconto=Decimal(str(ped_row.TotDesc or 0)),
+                    total=Decimal(str(ped_row.TotPedido or 0)),
+                    status="aberta" if ped_row.Status == "A" else "fechada",
+                )
+
+        except Exception as e:
+            logger.error("aione_get_venda_atual_error", venda_id=venda_id, error=str(e))
+            return None
+
+    def get_historico_cliente(
+        self,
+        cliente_id: int,
+        dias: int = 365
+    ) -> list[Venda]:
+        """Busca histórico de compras do cliente."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                data_inicio = datetime.now() - timedelta(days=dias)
+
+                query = text("""
+                    SELECT
+                        ped.IDFilial,
+                        ped.IDPed,
+                        ped.Datped,
+                        ped.TotDesc,
+                        ped.TotPedido,
+                        ped.Status
+                    FROM arqpedido ped
+                    WHERE ped.IDPess = :cliente_id
+                    AND ped.Datped >= :data_inicio
+                    AND ped.Status = 'F'
+                    AND ped.IndDelete = '0'
+                    ORDER BY ped.Datped DESC
+                    LIMIT 50
+                """)
+
+                result = conn.execute(query, {
+                    "cliente_id": cliente_id,
+                    "data_inicio": data_inicio,
+                })
+
+                vendas = []
+                for ped_row in result:
+                    # Busca itens de cada pedido
+                    query_itens = text("""
+                        SELECT
+                            i.IDProd,
+                            p.Despro,
+                            i.Qtdped,
+                            i.PrecoVen,
+                            i.VlrDesc,
+                            i.VlrVenda
+                        FROM arqpedidoite i
+                        INNER JOIN arqproduto p ON p.IDProd = i.IDProd
+                        WHERE i.IDFilial = :filial_id
+                        AND i.IDPed = :venda_id
+                    """)
+
+                    result_itens = conn.execute(query_itens, {
+                        "filial_id": ped_row.IDFilial,
+                        "venda_id": ped_row.IDPed,
+                    })
+
+                    itens = []
+                    subtotal = Decimal("0")
+                    for item_row in result_itens:
+                        item = ItemVenda(
+                            produto_id=item_row.IDProd,
+                            produto_nome=item_row.Despro,
+                            quantidade=Decimal(str(item_row.Qtdped)),
+                            preco_unitario=Decimal(str(item_row.PrecoVen)),
+                            desconto=Decimal(str(item_row.VlrDesc or 0)),
+                            total=Decimal(str(item_row.VlrVenda)),
+                        )
+                        itens.append(item)
+                        subtotal += Decimal(str(item_row.PrecoVen)) * Decimal(str(item_row.Qtdped))
+
+                    vendas.append(Venda(
+                        id=ped_row.IDPed,
+                        data=ped_row.Datped,
+                        cliente_id=cliente_id,
+                        itens=itens,
+                        subtotal=subtotal,
+                        desconto=Decimal(str(ped_row.TotDesc or 0)),
+                        total=Decimal(str(ped_row.TotPedido or 0)),
+                        status="fechada",
+                    ))
+
+                return vendas
+
+        except Exception as e:
+            logger.error("aione_get_historico_cliente_error", cliente_id=cliente_id, error=str(e))
+            return []
+
+    def get_produtos_mais_vendidos(
+        self,
+        cliente_id: Optional[int] = None,
+        dias: int = 90,
+        limit: int = 10
+    ) -> list[Produto]:
+        """Lista produtos mais vendidos."""
+        try:
+            engine = self._get_engine()
+            with engine.connect() as conn:
+                data_inicio = datetime.now() - timedelta(days=dias)
+
+                if cliente_id:
+                    query = text("""
+                        SELECT
+                            i.IDProd,
+                            SUM(i.Qtdped) as TotalVendido
+                        FROM arqpedidoite i
+                        INNER JOIN arqpedido ped ON ped.IDFilial = i.IDFilial AND ped.IDPed = i.IDPed
+                        WHERE ped.IDPess = :cliente_id
+                        AND ped.Datped >= :data_inicio
+                        AND ped.Status = 'F'
+                        GROUP BY i.IDProd
+                        ORDER BY TotalVendido DESC
+                        LIMIT :limit
+                    """)
+                    params = {
+                        "cliente_id": cliente_id,
+                        "data_inicio": data_inicio,
+                        "limit": limit,
+                    }
+                else:
+                    query = text("""
+                        SELECT
+                            i.IDProd,
+                            SUM(i.Qtdped) as TotalVendido
+                        FROM arqpedidoite i
+                        INNER JOIN arqpedido ped ON ped.IDFilial = i.IDFilial AND ped.IDPed = i.IDPed
+                        WHERE i.IDFilial = :filial_id
+                        AND ped.Datped >= :data_inicio
+                        AND ped.Status = 'F'
+                        GROUP BY i.IDProd
+                        ORDER BY TotalVendido DESC
+                        LIMIT :limit
+                    """)
+                    params = {
+                        "filial_id": self._filial_id,
+                        "data_inicio": data_inicio,
+                        "limit": limit,
+                    }
+
+                result = conn.execute(query, params)
+
+                produtos = []
+                for row in result:
+                    produto = self.get_produto(row.IDProd)
+                    if produto:
+                        produtos.append(produto)
+
+                return produtos
+
+        except Exception as e:
+            logger.error("aione_get_produtos_mais_vendidos_error", error=str(e))
+            return []
+
+    # ==========================================
+    # HELPERS
+    # ==========================================
+
+    def _row_to_produto(self, row) -> Produto:
+        """Converte row do banco para objeto Produto."""
+        return Produto(
+            id=row.IDProd,
+            codigo=str(row.Codigo),
+            ean=row.CodEANpri,
+            nome=row.Despro or "",
+            principio_ativo=row.PrincipioAtivo,
+            laboratorio=row.Laboratorio,
+            grupo=row.Grupo,
+            preco_venda=Decimal(str(row.PrecoVen or 0)),
+            preco_custo=Decimal(str(row.CustoMed or 0)),
+            estoque=Decimal(str(row.Estoque or 0)),
+            estoque_minimo=Decimal(str(row.Estmin or 0)),
+            controlado=row.IndControle == "1",
+            tipo_receita=row.TipoReceita,
+            generico=bool(row.Generico),
+            similar=bool(row.Similar),
+            referencia=bool(row.Referencia),
+        )

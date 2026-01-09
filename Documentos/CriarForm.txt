@@ -1,0 +1,23 @@
+Agora quando você solicitar a criação de um novo formulário use /create-form
+
+Exemplos:
+/create-form Cadastro de Fornecedores com campos: código, razão social, CNPJ, telefone, email, e um grid de contatos
+
+Exemplos de como solicitar:
+
+  | Tipo              | Exemplo de comando                                                                      |
+  |-------------------|-----------------------------------------------------------------------------------------|
+  | Cadastro simples  | Cadastro de Unidades com código e descrição                                             |
+  | Cadastro completo | Cadastro de Fornecedores com CNPJ, razão social, telefone, email, endereço              |
+  | Master-Detail     | Pedido de Compra com cabeçalho (fornecedor, data) e grid de itens (produto, qtd, valor) |
+  | Consulta/Lista    | Lista de Produtos com filtros por grupo e nome, grid com código, descrição, preço       |
+  | Tela de processo  | Tela de Transferência entre Filiais com origem, destino e grid de produtos              |
+  | Tela à partir Img | Gerar à partir da imagem que está em: C:\...\Imagem.png, crie na pasta tal.             |  
+  
+  Descreva o formulário que deseja criar, incluindo:
+  - Nome/propósito
+  - Campos necessários
+  - Se tem grid/lista
+  - Se é master-detail (cabeçalho + itens)
+  
+  

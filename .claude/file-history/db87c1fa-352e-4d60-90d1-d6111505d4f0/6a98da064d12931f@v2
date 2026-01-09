@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import mysql.connector
+
+# Monkey patch para evitar erro de collation
+original_set_charset_collation = mysql.connector.connection.MySQLConnection.set_charset_collation
+
+def patched_set_charset_collation(self, charset=None, collation=None):
+    try:
+        original_set_charset_collation(self, charset, collation)
+    except mysql.connector.errors.DatabaseError as e:
+        if '1273' in str(e):  # Unknown collation error
+            pass  # Ignora o erro
+        else:
+            raise
+
+mysql.connector.connection.MySQLConnection.set_charset_collation = patched_set_charset_collation
+
+try:
+    conn = mysql.connector.connect(
+        host='localhost',
+        port=3307,
+        user='root',
+        password='f68interdb',
+        database='dbaione',
+        use_pure=True
+    )
+    cursor = conn.cursor()
+
+    # Total de clientes (IDEsppes = 1)
+    cursor.execute('SELECT COUNT(*) FROM arqpessoa WHERE IDEsppes = 1')
+    total_clientes = cursor.fetchone()[0]
+
+    # Total geral de pessoas
+    cursor.execute('SELECT COUNT(*) FROM arqpessoa')
+    total_pessoas = cursor.fetchone()[0]
+
+    # Breakdown por tipo
+    cursor.execute('''
+        SELECT IDEsppes, COUNT(*) as Total
+        FROM arqpessoa
+        GROUP BY IDEsppes
+        ORDER BY IDEsppes
+    ''')
+    breakdown = cursor.fetchall()
+
+    print("TOTAL DE CLIENTES:", total_clientes)
+    print("TOTAL DE PESSOAS:", total_pessoas)
+    print("\nBREAKDOWN POR TIPO:")
+    for tipo, total in breakdown:
+        tipo_nome = {
+            1: "Cliente",
+            2: "Fornecedor",
+            3: "Fornecedor/Fabricante",
+            4: "Prescritor",
+            9: "Vendedor",
+            10: "Prescritor (Outros)"
+        }.get(tipo, f"Tipo {tipo}")
+        print(f"  {tipo_nome}: {total}")
+
+    cursor.close()
+    conn.close()
+
+except Exception as e:
+    print("ERRO:", str(e))
+    import traceback
+    traceback.print_exc()

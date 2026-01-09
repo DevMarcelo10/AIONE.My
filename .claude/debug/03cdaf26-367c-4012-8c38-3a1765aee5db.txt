@@ -1,0 +1,1000 @@
+2025-12-11T14:11:50.348Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-11T14:11:50.389Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-11T14:11:50.389Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-11T14:11:50.389Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-11T14:11:50.389Z [DEBUG] [LSP SERVER MANAGER] initialize() called
+2025-12-11T14:11:50.389Z [DEBUG] [LSP SERVER MANAGER] Calling getAllLspServers()
+2025-12-11T14:11:50.410Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2025-12-11T14:11:50.412Z [DEBUG] Total LSP servers loaded: 0
+2025-12-11T14:11:50.412Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2025-12-11T14:11:50.412Z [DEBUG] LSP manager initialized with 0 servers
+2025-12-11T14:11:50.412Z [DEBUG] LSP server manager initialized successfully
+2025-12-11T14:11:50.412Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-11T14:11:50.430Z [DEBUG] Loading skills from directories: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\DevDelphi\.claude\skills, project=[]
+2025-12-11T14:11:50.430Z [DEBUG] >>>>> getPluginSkills CALLED <<<<<
+2025-12-11T14:11:50.764Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (318.7ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T14:11:50.767Z [DEBUG] Loaded 0 installed plugins from C:\Users\DevDelphi\.claude\plugins\installed_plugins.json (schema version 1)
+2025-12-11T14:11:50.767Z [DEBUG] Official marketplace auto-install already attempted, skipping
+2025-12-11T14:11:50.798Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-11T14:11:50.798Z [DEBUG] Looking for shell config file: C:\Users\DevDelphi\.bashrc
+2025-12-11T14:11:50.798Z [DEBUG] Shell config file not found: C:\Users\DevDelphi\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-11T14:11:50.798Z [DEBUG] Snapshots directory: C:\Users\DevDelphi\.claude\shell-snapshots
+2025-12-11T14:11:50.812Z [DEBUG] Creating snapshot at: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1765462310798-8wp7cw.sh
+2025-12-11T14:11:50.812Z [DEBUG] Shell binary exists: true
+2025-12-11T14:11:50.812Z [DEBUG] Execution timeout: 10000ms
+2025-12-11T14:11:50.818Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\03cdaf26-367c-4012-8c38-3a1765aee5db-agent-03cdaf26-367c-4012-8c38-3a1765aee5db.json.tmp.24616.1765462310818
+2025-12-11T14:11:50.824Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.3ms)
+2025-12-11T14:11:50.824Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-11T14:11:50.824Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\03cdaf26-367c-4012-8c38-3a1765aee5db-agent-03cdaf26-367c-4012-8c38-3a1765aee5db.json.tmp.24616.1765462310818 to C:\Users\DevDelphi\.claude\todos\03cdaf26-367c-4012-8c38-3a1765aee5db-agent-03cdaf26-367c-4012-8c38-3a1765aee5db.json
+2025-12-11T14:11:50.825Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\03cdaf26-367c-4012-8c38-3a1765aee5db-agent-03cdaf26-367c-4012-8c38-3a1765aee5db.json written atomically
+2025-12-11T14:11:50.829Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2025-12-11T14:11:50.829Z [DEBUG] Total plugin skills loaded: 0
+2025-12-11T14:11:50.829Z [DEBUG] Total plugin commands loaded: 0
+2025-12-11T14:11:50.829Z [DEBUG] Registered 0 hooks from 0 plugins
+2025-12-11T14:11:51.026Z [DEBUG] Loaded 0 unique skills (managed: 0, user: 0, project: 0, duplicates removed: 0)
+2025-12-11T14:11:51.046Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills
+2025-12-11T14:11:51.050Z [DEBUG] Total plugin agents loaded: 0
+2025-12-11T14:11:51.117Z [DEBUG] Git remote URL: null
+2025-12-11T14:11:51.117Z [DEBUG] No git remote URL found
+2025-12-11T14:11:51.117Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-11T14:11:51.118Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\DevDelphi\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2025-12-11T14:11:51.321Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462311321
+2025-12-11T14:11:51.321Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:51.325Z [DEBUG] Temp file written successfully, size: 48850 bytes
+2025-12-11T14:11:51.325Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:51.325Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462311321 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:51.326Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:51.389Z [DEBUG] Shell snapshot created successfully (346 bytes)
+2025-12-11T14:11:51.429Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462311429
+2025-12-11T14:11:51.430Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:51.433Z [DEBUG] Temp file written successfully, size: 48856 bytes
+2025-12-11T14:11:51.433Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:51.433Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462311429 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:51.434Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:57.126Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462317126
+2025-12-11T14:11:57.126Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:57.128Z [DEBUG] Temp file written successfully, size: 49252 bytes
+2025-12-11T14:11:57.128Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:57.128Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462317126 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:57.128Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:58.304Z [DEBUG] Loaded 0 installed plugins from V2 file at C:\Users\DevDelphi\.claude\plugins\installed_plugins_v2.json
+2025-12-11T14:11:58.304Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2025-12-11T14:11:58.312Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318312
+2025-12-11T14:11:58.312Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:58.316Z [DEBUG] Temp file written successfully, size: 49252 bytes
+2025-12-11T14:11:58.316Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:58.316Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318312 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:58.317Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:58.332Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2025-12-11T14:11:58.332Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:11:58.332Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2025-12-11T14:11:58.342Z [DEBUG] Skills and commands included in Skill tool:
+2025-12-11T14:11:58.342Z [DEBUG] Slash commands included in SlashCommand tool:
+2025-12-11T14:11:58.397Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318397
+2025-12-11T14:11:58.398Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:58.402Z [DEBUG] Temp file written successfully, size: 49179 bytes
+2025-12-11T14:11:58.402Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:58.402Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318397 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:58.402Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:58.409Z [DEBUG] performStartupChecks called
+2025-12-11T14:11:58.410Z [DEBUG] Starting background plugin installations
+2025-12-11T14:11:58.410Z [DEBUG] performBackgroundPluginInstallations called
+2025-12-11T14:11:58.421Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:11:58.426Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318426
+2025-12-11T14:11:58.426Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:58.427Z [DEBUG] Temp file written successfully, size: 49252 bytes
+2025-12-11T14:11:58.427Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:58.427Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318426 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:58.428Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:58.429Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2025-12-11T14:11:58.429Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2025-12-11T14:11:58.444Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-11T14:11:58.444Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:11:58.444Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-11T14:11:58.459Z [DEBUG] Getting matching hook commands for SubagentStart with query: Plan
+2025-12-11T14:11:58.459Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:11:58.459Z [DEBUG] Matched 0 unique hooks for query "Plan" (0 before deduplication)
+2025-12-11T14:11:58.523Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318523
+2025-12-11T14:11:58.523Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:11:58.526Z [DEBUG] Temp file written successfully, size: 49433 bytes
+2025-12-11T14:11:58.526Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:11:58.526Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462318523 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:11:58.527Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:11:59.300Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:12:00.144Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:12:00.853Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-11T14:12:00.853Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:12:00.853Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-11T14:12:05.360Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-11T14:12:05.360Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:12:05.360Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-11T14:12:48.815Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:12:48.843Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-11T14:12:49.280Z [DEBUG] FileHistory: Added snapshot for 42d43614-b7ab-4cef-bbca-53d755349ca6, tracking 0 files
+2025-12-11T14:12:49.291Z [DEBUG] UserCommandMessage rendering: "context" (args: "none")
+2025-12-11T14:12:49.291Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-11T14:12:49.784Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (446.3ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T14:12:49.786Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:12:50.136Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (335.7ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T14:12:50.149Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462370149
+2025-12-11T14:12:50.149Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:12:50.153Z [DEBUG] Temp file written successfully, size: 49458 bytes
+2025-12-11T14:12:50.153Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:12:50.153Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462370149 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:12:50.153Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:12:50.162Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462370162
+2025-12-11T14:12:50.162Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:12:50.165Z [DEBUG] Temp file written successfully, size: 49483 bytes
+2025-12-11T14:12:50.165Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:12:50.165Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462370162 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:12:50.166Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:13:55.748Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:15:02.044Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (462.6ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T14:15:02.059Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462502059
+2025-12-11T14:15:02.060Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:15:02.063Z [DEBUG] Temp file written successfully, size: 49507 bytes
+2025-12-11T14:15:02.063Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:15:02.063Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462502059 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:15:02.064Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:15:02.069Z [DEBUG] UserCommandMessage rendering: "model" (args: "none")
+2025-12-11T14:15:02.069Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-11T14:15:02.384Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (277.3ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T14:15:02.385Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:15:02.709Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (311.5ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T14:15:02.720Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462502720
+2025-12-11T14:15:02.720Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:15:02.722Z [DEBUG] Temp file written successfully, size: 49529 bytes
+2025-12-11T14:15:02.722Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:15:02.722Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462502720 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:15:02.723Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:15:02.732Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765462502732
+2025-12-11T14:15:02.732Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T14:15:02.735Z [DEBUG] Temp file written successfully, size: 49556 bytes
+2025-12-11T14:15:02.735Z [DEBUG] Applied original permissions to temp file
+2025-12-11T14:15:02.735Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765462502732 to C:\Users\DevDelphi\.claude.json
+2025-12-11T14:15:02.736Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T14:15:16.314Z [DEBUG] Metadata string for init:
+2025-12-11T14:15:16.314Z [DEBUG] <command-message>init is analyzing your codebase…</command-message>
+<command-name>/init</command-name>
+2025-12-11T14:15:16.314Z [DEBUG] command-message tags in metadata: 1
+2025-12-11T14:15:16.327Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:15:16.328Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T14:15:16.328Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T14:15:16.328Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T14:15:16.328Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T14:15:16.411Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:15:16.411Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:15:16.500Z [DEBUG] processPromptSlashCommand creating 3 messages for init
+2025-12-11T14:15:16.500Z [DEBUG] Message 1: <command-message>init is analyzing your codebase…</command-message>
+<command-name>/init</command-name>
+2025-12-11T14:15:16.500Z [DEBUG] Message 2 [META]: [{"type":"text","text":"Please analyze this codebase and create a CLAUDE.md file, which will be given to future instances of Claude Code to operate in this repository.\n\nWhat to add:\n1. Commands tha
+2025-12-11T14:15:16.500Z [DEBUG] Message 3: [ATTACHMENT]
+2025-12-11T14:15:16.514Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-11T14:15:16.514Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:16.514Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-11T14:15:16.516Z [DEBUG] FileHistory: Making snapshot for message 723c56fb-f5af-4a58-835c-4e48f51ad34e
+2025-12-11T14:15:16.516Z [DEBUG] FileHistory: Added snapshot for 723c56fb-f5af-4a58-835c-4e48f51ad34e, tracking 0 files
+2025-12-11T14:15:16.519Z [DEBUG] UserCommandMessage rendering: "init is analyzing your codebase…" (args: "none")
+2025-12-11T14:15:16.519Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-11T14:15:18.516Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:21.810Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:15:21.810Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:15:21.811Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:15:21.829Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:15:21.829Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:21.829Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:15:21.829Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:15:21.829Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:21.829Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:15:21.829Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:15:21.829Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:21.829Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:15:25.008Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:15:25.008Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:25.008Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:15:25.046Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:15:25.046Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:25.046Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:15:25.057Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:15:25.057Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:25.057Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:15:25.112Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T14:15:25.112Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T14:15:25.112Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T14:15:25.112Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T14:15:25.129Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:15:25.129Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:15:28.161Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:28.806Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:15:28.813Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:15:28.813Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:28.813Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:15:28.859Z [DEBUG] tree-sitter: loaded from disk
+2025-12-11T14:15:29.280Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:15:29.970Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:15:29.970Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:29.970Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:15:29.997Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T14:15:29.997Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T14:15:29.997Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T14:15:29.997Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T14:15:30.009Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:15:30.009Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:15:30.782Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:36.689Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:42.559Z [DEBUG] executePreToolHooks called for tool: Task
+2025-12-11T14:15:42.592Z [DEBUG] Getting matching hook commands for PreToolUse with query: Task
+2025-12-11T14:15:42.592Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:42.592Z [DEBUG] Matched 0 unique hooks for query "Task" (0 before deduplication)
+2025-12-11T14:15:42.592Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:15:42.594Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:15:42.624Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:15:42.624Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:42.624Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:15:42.624Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:15:42.624Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:42.624Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:15:47.963Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-11T14:15:47.963Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:47.963Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-11T14:15:48.090Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:15:48.090Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:48.090Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:15:48.422Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:15:48.422Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:48.422Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:15:49.201Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:50.119Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:15:50.187Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:15:50.187Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:50.187Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:15:52.671Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:15:53.991Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:15:53.991Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:53.991Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:15:54.180Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:15:54.180Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:15:54.870Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:55.163Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:15:55.918Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:15:55.993Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:15:55.993Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:15:55.993Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:15:58.715Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:16:00.111Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:16:00.111Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:00.111Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:16:00.306Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:16:00.306Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:16:00.733Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:01.748Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:03.622Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:16:03.671Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:16:03.671Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:03.671Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:16:06.079Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:16:07.324Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:16:07.324Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:07.324Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:16:07.478Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:16:07.478Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:16:08.139Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:08.358Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:11.139Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:16:11.139Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:16:11.958Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:13.535Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:16:13.537Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:16:13.894Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:16:13.894Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:13.894Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:16:13.894Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:16:13.894Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:13.894Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:16:21.488Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:16:21.488Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:21.488Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:16:21.853Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:16:21.853Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:21.853Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:16:22.035Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:16:22.035Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:16:23.749Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:25.341Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:16:25.383Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:16:25.383Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:25.383Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:16:27.992Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:16:27.992Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:27.992Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:16:28.086Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:16:28.104Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:16:28.104Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:28.104Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:16:31.159Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:31.353Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:31.441Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:16:32.826Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "ls:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-11T14:16:32.896Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:16:32.930Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:16:32.930Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:32.930Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:16:38.917Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T14:16:38.917Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:16:38.917Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T14:30:58.110Z [DEBUG] Persisting permission update: addRules to source 'localSettings'
+2025-12-11T14:30:58.110Z [DEBUG] Persisting 1 allow rule(s) to localSettings
+2025-12-11T14:30:58.116Z [DEBUG] Writing to temp file: c:\Fontes\AIONE.My\.claude\settings.local.json.tmp.24616.1765463458116
+2025-12-11T14:30:58.143Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (26.4ms)
+2025-12-11T14:30:58.143Z [DEBUG] Temp file written successfully, size: 67 bytes
+2025-12-11T14:30:58.143Z [DEBUG] Renaming c:\Fontes\AIONE.My\.claude\settings.local.json.tmp.24616.1765463458116 to c:\Fontes\AIONE.My\.claude\settings.local.json
+2025-12-11T14:30:58.144Z [DEBUG] File c:\Fontes\AIONE.My\.claude\settings.local.json written atomically
+2025-12-11T14:30:58.175Z [DEBUG] Applying permission update: Adding 1 allow rule(s) to destination 'localSettings': ["Bash(ls:*)"]
+2025-12-11T14:30:58.933Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:30:59.031Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:31:00.959Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (9.1ms)
+2025-12-11T14:31:01.553Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (13.1ms)
+2025-12-11T14:31:02.102Z [DEBUG] [SLOW OPERATION DETECTED] fs.statSync (14.1ms)
+2025-12-11T14:31:03.131Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (7.2ms)
+2025-12-11T14:31:03.667Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (5.2ms)
+2025-12-11T14:31:05.322Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (19.4ms)
+2025-12-11T14:31:06.074Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (31.7ms)
+2025-12-11T14:31:07.526Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (28.3ms)
+2025-12-11T14:31:10.860Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (12.1ms)
+2025-12-11T14:31:11.067Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (11.8ms)
+2025-12-11T14:31:11.653Z [DEBUG] [SLOW OPERATION DETECTED] fs.statSync (5.0ms)
+2025-12-11T14:31:15.221Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (21.3ms)
+2025-12-11T14:31:16.067Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:31:16.067Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:16.067Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:31:17.177Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:31:17.177Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:31:17.202Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:31:18.464Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:31:19.748Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (9.0ms)
+2025-12-11T14:31:22.526Z [DEBUG] [SLOW OPERATION DETECTED] fs.statSync (5.7ms)
+2025-12-11T14:31:22.548Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:31:22.550Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:31:22.551Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:31:22.593Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (5.0ms)
+2025-12-11T14:31:22.602Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:31:22.602Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:22.602Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:31:22.602Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:31:22.602Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:22.602Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:31:22.602Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:31:22.602Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:22.602Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:31:22.708Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (20.0ms)
+2025-12-11T14:31:22.819Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (64.7ms)
+2025-12-11T14:31:34.239Z [ERROR] Error: Error: 1P event logging: 25 events failed to export
+    at y_1.queueFailedEvents (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:329:39606)
+    at y_1.doExport (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:329:38705)
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+2025-12-11T14:31:34.241Z [ERROR] Error: Error: {"stack":"Error: Failed to export 25 events\n    at y_1.doExport (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:329:38795)\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at listOnTimeout (node:internal/timers:567:9)\n    at process.processTimers (node:internal/timers:541:7)","message":"Failed to export 25 events","name":"Error"}
+    at kf1.error (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:831:35476)
+    at sR1.error (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:328:55165)
+    at file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:328:86513
+    at TR6 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:328:87059)
+    at file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:329:20014
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+2025-12-11T14:31:34.506Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:31:34.506Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:34.506Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:31:34.506Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:31:34.506Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:34.506Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:31:34.507Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:31:34.507Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:34.507Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:31:35.974Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:31:35.974Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:31:38.320Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:31:41.268Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:31:41.271Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:31:41.272Z [DEBUG] executePreToolHooks called for tool: Grep
+2025-12-11T14:31:41.350Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (11.9ms)
+2025-12-11T14:31:41.852Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (14.5ms)
+2025-12-11T14:31:41.863Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (7.8ms)
+2025-12-11T14:31:41.917Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:31:41.917Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:41.917Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:31:41.918Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:31:41.918Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:41.918Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:31:41.919Z [DEBUG] Getting matching hook commands for PreToolUse with query: Grep
+2025-12-11T14:31:41.920Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:41.920Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:31:42.389Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (5.6ms)
+2025-12-11T14:31:42.416Z [DEBUG] [SLOW OPERATION DETECTED] fs.statSync (7.7ms)
+2025-12-11T14:31:42.528Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (6.6ms)
+2025-12-11T14:31:50.895Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:31:51.270Z [DEBUG] Getting matching hook commands for PostToolUse with query: Grep
+2025-12-11T14:31:51.270Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:51.270Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:31:51.270Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:31:51.421Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:31:51.421Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:51.421Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:31:52.187Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:31:52.187Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:52.188Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:31:53.350Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:31:57.315Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T14:31:57.315Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:31:57.315Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T14:39:51.469Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:39:51.499Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:39:51.976Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:39:51.976Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:39:51.976Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:39:52.059Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:39:52.059Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:39:53.214Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:39:53.620Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:39:56.220Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:39:56.222Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:39:56.274Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:39:56.274Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:39:56.274Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:39:56.274Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:39:56.274Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:39:56.274Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:39:56.274Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:39:56.324Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:39:56.324Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:39:56.324Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:40:01.266Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:40:01.266Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:40:01.266Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:40:01.328Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:40:01.544Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:40:01.607Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:40:01.607Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:40:01.607Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:40:02.155Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:40:02.155Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:40:02.155Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:40:02.930Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:40:07.589Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T14:40:07.589Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:40:07.589Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T14:40:07.720Z [ERROR] MaxFileReadTokenExceededError: MaxFileReadTokenExceededError: File content (34744 tokens) exceeds maximum allowed tokens (25000). Please use offset and limit parameters to read specific portions of the file, or use the GrepTool to search for specific content.
+    at FyB (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1422:10569)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1431:963)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1625:1463
+2025-12-11T14:40:09.375Z [DEBUG] [SLOW OPERATION DETECTED] fs.statSync (5.5ms)
+2025-12-11T14:43:16.896Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:43:17.022Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:43:17.987Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:43:17.987Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:17.987Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:26.121Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:43:26.121Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:43:26.169Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:28.573Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:30.225Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:43:30.300Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:43:30.300Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:30.300Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:33.472Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:33.691Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:34.319Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:34.550Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Read",
+        "ruleContent": "//c/Fontes/AIONE.My/**"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "session"
+  },
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "done"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-11T14:43:34.615Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:43:34.653Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:43:34.653Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:34.653Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:39.069Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:43:39.092Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:43:42.382Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:43:42.382Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:42.382Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:42.452Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:43:42.452Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:43:43.584Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:44.184Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:45.577Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:43:45.601Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:43:45.601Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:45.601Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:46.184Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "done"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-11T14:43:46.208Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:43:46.217Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:43:46.217Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:46.217Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:47.492Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:43:47.511Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:43:48.552Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:43:48.552Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:48.552Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:43:48.642Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:43:48.643Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:43:49.320Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:50.000Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:43:51.191Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:43:51.191Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:43:51.192Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:43:51.326Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:43:51.326Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:51.326Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:43:51.326Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:43:51.326Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:51.326Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:43:51.326Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:43:51.326Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:51.326Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:43:55.550Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:43:55.550Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:55.550Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:43:55.698Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:43:55.698Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:55.698Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:43:55.781Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:43:55.781Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:43:55.781Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:43:55.875Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:43:55.875Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:43:58.710Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:44:00.750Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:44:00.751Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:44:00.752Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:44:01.066Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:44:01.066Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:01.066Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:44:01.066Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:44:01.066Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:01.066Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:44:01.066Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:44:01.066Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:01.066Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:44:06.331Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:44:06.331Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:06.331Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:44:06.480Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:44:06.480Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:06.480Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:44:06.577Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:44:06.577Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:06.577Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:44:06.691Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:44:06.691Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:44:10.279Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:44:12.257Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:44:12.299Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:44:12.299Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:12.299Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:44:12.299Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:44:12.319Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:44:12.319Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:12.319Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:44:17.000Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:44:17.000Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:17.000Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:44:17.285Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:44:18.449Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:44:18.449Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:18.449Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:44:18.868Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:44:18.868Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:44:21.620Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:44:24.017Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:44:24.019Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:44:24.089Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:44:24.089Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:24.089Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:44:24.089Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:44:24.089Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:24.089Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:44:24.089Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:44:24.109Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:44:24.109Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:24.109Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:44:30.015Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:44:30.015Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:30.015Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:44:30.065Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:44:30.345Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:44:30.429Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:44:30.429Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:30.429Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:44:31.525Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:44:31.525Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:31.525Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:44:33.445Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:44:35.384Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:44:36.399Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T14:44:36.399Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:44:36.400Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T14:45:50.584Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:45:50.605Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:45:51.485Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:45:51.485Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:45:51.485Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:45:51.699Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:45:51.699Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:45:52.348Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:45:53.565Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:45:55.579Z [DEBUG] executePreToolHooks called for tool: Grep
+2025-12-11T14:45:55.648Z [DEBUG] Getting matching hook commands for PreToolUse with query: Grep
+2025-12-11T14:45:55.648Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:45:55.648Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:45:55.648Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:45:55.714Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:45:55.714Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:45:55.714Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:46:01.110Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:46:01.110Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:01.110Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:46:01.268Z [DEBUG] Getting matching hook commands for PostToolUse with query: Grep
+2025-12-11T14:46:01.268Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:01.268Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:46:01.604Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:46:01.604Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:46:04.108Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:46:06.743Z [DEBUG] executePreToolHooks called for tool: Grep
+2025-12-11T14:46:06.855Z [DEBUG] Getting matching hook commands for PreToolUse with query: Grep
+2025-12-11T14:46:06.855Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:06.855Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:46:06.855Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:46:06.965Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:46:06.965Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:06.965Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:46:12.015Z [ERROR] AxiosError: AxiosError: timeout of 5000ms exceeded
+    at vC.<anonymous> (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:188:10436)
+    at vC.emit (node:events:508:28)
+    at vC.emit (node:domain:489:12)
+    at Timeout.<anonymous> (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:187:5600)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+    at XKA.request (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:190:2130)
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at listOnTimeout (node:internal/timers:567:9)
+    at process.processTimers (node:internal/timers:541:7)
+    at async SZ0 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4553:4053)
+2025-12-11T14:46:12.386Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:46:12.386Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:12.386Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:46:12.538Z [DEBUG] Getting matching hook commands for PostToolUse with query: Grep
+2025-12-11T14:46:12.538Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:12.538Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:46:12.856Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:46:12.856Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:46:14.636Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:46:16.818Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:46:16.851Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:46:16.851Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:16.851Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:46:17.452Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:46:17.476Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:46:17.476Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:17.476Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:46:23.470Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T14:46:23.470Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:46:23.470Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T14:55:10.220Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:55:10.251Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:55:10.762Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:55:10.762Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:10.762Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:10.841Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:55:10.855Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:55:10.855Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:10.855Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:11.885Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:12.006Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:55:12.468Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:55:12.468Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:12.468Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:12.529Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:55:12.542Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:55:12.542Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:12.542Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:13.436Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:13.582Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:55:19.090Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:55:19.090Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:19.090Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:19.162Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:55:19.162Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:55:20.290Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:20.917Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:23.164Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:55:23.164Z [DEBUG] executePreToolHooks called for tool: Grep
+2025-12-11T14:55:23.248Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:55:23.248Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:23.248Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:23.248Z [DEBUG] Getting matching hook commands for PreToolUse with query: Grep
+2025-12-11T14:55:23.248Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:23.248Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:55:26.283Z [DEBUG] rg error (signal=null, code=2, stderr: rg: unrecognized file type: pas
+), 0 results
+2025-12-11T14:55:26.457Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:55:26.533Z [DEBUG] Getting matching hook commands for PostToolUse with query: Grep
+2025-12-11T14:55:26.533Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:26.533Z [DEBUG] Matched 0 unique hooks for query "Grep" (0 before deduplication)
+2025-12-11T14:55:27.007Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:55:27.007Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:27.007Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:27.396Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:55:27.396Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:55:28.590Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:30.105Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:30.542Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:55:30.555Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:55:30.555Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:30.555Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:55:31.649Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:55:31.649Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:31.649Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:55:31.717Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:55:31.726Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:55:31.726Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:31.726Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:32.306Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:55:32.316Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:55:32.316Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:32.316Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:34.634Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:55:34.654Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:55:35.119Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:55:35.120Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:55:35.120Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:55:35.315Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:55:35.315Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:55:35.796Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:55:36.481Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:56:06.553Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-11T14:56:06.553Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:06.553Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-11T14:56:06.573Z [DEBUG] Getting matching hook commands for PostToolUse with query: Task
+2025-12-11T14:56:06.573Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:06.573Z [DEBUG] Matched 0 unique hooks for query "Task" (0 before deduplication)
+2025-12-11T14:56:06.604Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T14:56:06.605Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T14:56:06.605Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T14:56:06.605Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T14:56:06.830Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:56:06.830Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:56:11.787Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:56:16.326Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:56:16.326Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:56:16.327Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-11T14:56:16.337Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:56:16.337Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:16.337Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:56:16.337Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:56:16.337Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:16.337Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:56:16.337Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-11T14:56:16.337Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:16.337Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:56:16.337Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:56:16.344Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:56:16.344Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:16.344Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:56:22.385Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:56:22.385Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:22.385Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:56:22.712Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:56:22.712Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:22.712Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:56:22.799Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:56:22.799Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:22.799Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:56:22.822Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-11T14:56:22.822Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:22.822Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-11T14:56:22.882Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:56:22.940Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:56:22.940Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:22.940Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:56:24.446Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:56:24.733Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "dir /b:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-11T14:56:24.771Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-11T14:56:24.799Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-11T14:56:24.799Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:24.799Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:56:30.785Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T14:56:30.785Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:56:30.785Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T14:58:42.158Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:58:42.187Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T14:58:42.882Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:58:42.882Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:58:42.882Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:58:42.918Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T14:58:42.918Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T14:58:42.918Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T14:58:42.918Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T14:58:43.069Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:58:43.069Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:58:43.834Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:58:46.122Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:58:48.399Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-11T14:58:48.415Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-11T14:58:48.415Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:58:48.415Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:58:48.415Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-11T14:58:48.422Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-11T14:58:48.422Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:58:48.422Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:58:49.768Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-11T14:58:49.768Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:58:49.768Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-11T14:58:49.901Z [DEBUG] Session environment not yet supported on Windows
+2025-12-11T14:58:50.485Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-11T14:58:50.485Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T14:58:50.485Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-11T14:58:50.510Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T14:58:50.510Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T14:58:50.510Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T14:58:50.510Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T14:58:50.637Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T14:58:50.637Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T14:58:51.234Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:58:54.221Z [DEBUG] Stream started - received first chunk
+2025-12-11T14:59:59.477Z [WARN] Streaming stall detected: 63.4s gap between events (stall #1)
+2025-12-11T15:00:07.089Z [WARN] Streaming completed with 1 stall(s), total stall time: 63.4s
+2025-12-11T15:00:07.172Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-11T15:00:07.178Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-11T15:00:07.178Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:00:07.178Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-11T15:00:08.012Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-11T15:00:08.197Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-11T15:00:08.344Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-11T15:00:08.344Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:00:08.344Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-11T15:00:14.225Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-11T15:00:14.225Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:00:14.225Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-11T15:00:16.473Z [DEBUG] FileHistory: Tracked file modification for c:\Fontes\AIONE.My\CLAUDE.md
+2025-12-11T15:00:16.484Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-11T15:00:17.458Z [DEBUG] rg error (signal=undefined, code=ABORT_ERR, stderr: rg: c:\Fontes\AIONE.My\nul: Função incorreta. (os error 1)
+), 65 results
+2025-12-11T15:00:17.459Z [ERROR] AbortError: AbortError: The operation was aborted
+    at abortChildProcess (node:child_process:759:27)
+    at AbortSignal.onAbortListener (node:child_process:829:7)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at AbortSignal.dispatchEvent (node:internal/event_target:778:26)
+    at runAbort (node:internal/abort_controller:488:10)
+    at abortSignal (node:internal/abort_controller:459:3)
+    at AbortController.abort (node:internal/abort_controller:507:5)
+    at Timeout._onTimeout (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4360:2084)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+2025-12-11T15:00:17.473Z [DEBUG] Writing to temp file: c:\Fontes\AIONE.My\CLAUDE.md.tmp.24616.1765465217473
+2025-12-11T15:00:17.476Z [DEBUG] Temp file written successfully, size: 9054 bytes
+2025-12-11T15:00:17.476Z [DEBUG] Renaming c:\Fontes\AIONE.My\CLAUDE.md.tmp.24616.1765465217473 to c:\Fontes\AIONE.My\CLAUDE.md
+2025-12-11T15:00:17.476Z [DEBUG] File c:\Fontes\AIONE.My\CLAUDE.md written atomically
+2025-12-11T15:00:17.494Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-11T15:00:17.494Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:00:17.494Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-11T15:00:17.532Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-11T15:00:17.532Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-11T15:00:17.532Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-11T15:00:17.532Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-11T15:00:17.623Z [DEBUG] [TeammateMailbox] getTeammateMailboxAttachments called: envAgentName=undefined, isTeamLead=false, resolved agentName=undefined, teamName=undefined
+2025-12-11T15:00:17.623Z [DEBUG] [TeammateMailbox] Not checking inbox - not a teammate or team lead
+2025-12-11T15:00:20.160Z [DEBUG] Stream started - received first chunk
+2025-12-11T15:00:28.928Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-11T15:00:28.928Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:00:28.928Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-11T15:00:29.835Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (876.5ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T15:00:30.512Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (630.8ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T15:00:30.563Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765465230563
+2025-12-11T15:00:30.563Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T15:00:30.569Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.8ms)
+2025-12-11T15:00:30.569Z [DEBUG] Temp file written successfully, size: 49579 bytes
+2025-12-11T15:00:30.570Z [DEBUG] Applied original permissions to temp file
+2025-12-11T15:00:30.570Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765465230563 to C:\Users\DevDelphi\.claude.json
+2025-12-11T15:00:30.572Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T15:00:30.612Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765465230612
+2025-12-11T15:00:30.612Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T15:00:30.617Z [DEBUG] Temp file written successfully, size: 49616 bytes
+2025-12-11T15:00:30.618Z [DEBUG] Applied original permissions to temp file
+2025-12-11T15:00:30.618Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765465230612 to C:\Users\DevDelphi\.claude.json
+2025-12-11T15:00:30.619Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T15:01:30.678Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-11T15:01:30.678Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:01:30.678Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2025-12-11T15:03:18.455Z [DEBUG] Getting matching hook commands for SessionEnd with query: prompt_input_exit
+2025-12-11T15:03:18.455Z [DEBUG] Found 0 hook matchers in settings
+2025-12-11T15:03:18.455Z [DEBUG] Matched 0 unique hooks for query "prompt_input_exit" (0 before deduplication)
+2025-12-11T15:03:18.460Z [DEBUG] Cleaned up session snapshot: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1765462310798-8wp7cw.sh
+2025-12-11T15:03:18.461Z [DEBUG] LSP server manager shut down successfully
+2025-12-11T15:03:18.464Z [DEBUG] FileHistory: Making snapshot for message bb3a97f1-f68c-47fb-b6a6-067e67100fdd
+2025-12-11T15:03:18.468Z [DEBUG] FileHistory: Added snapshot for bb3a97f1-f68c-47fb-b6a6-067e67100fdd, tracking 1 files
+2025-12-11T15:03:18.472Z [DEBUG] UserCommandMessage rendering: "exit" (args: "none")
+2025-12-11T15:03:18.472Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-11T15:03:18.501Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765465398501
+2025-12-11T15:03:18.501Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T15:03:18.504Z [DEBUG] Temp file written successfully, size: 49661 bytes
+2025-12-11T15:03:18.504Z [DEBUG] Applied original permissions to temp file
+2025-12-11T15:03:18.504Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765465398501 to C:\Users\DevDelphi\.claude.json
+2025-12-11T15:03:18.504Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T15:03:19.006Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (485.5ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T15:03:19.307Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (288.1ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-11T15:03:19.321Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765465399321
+2025-12-11T15:03:19.321Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T15:03:19.324Z [DEBUG] Temp file written successfully, size: 49681 bytes
+2025-12-11T15:03:19.324Z [DEBUG] Applied original permissions to temp file
+2025-12-11T15:03:19.324Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765465399321 to C:\Users\DevDelphi\.claude.json
+2025-12-11T15:03:19.325Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-11T15:03:19.333Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.24616.1765465399333
+2025-12-11T15:03:19.333Z [DEBUG] Preserving file permissions: 100666
+2025-12-11T15:03:19.335Z [DEBUG] Temp file written successfully, size: 49704 bytes
+2025-12-11T15:03:19.335Z [DEBUG] Applied original permissions to temp file
+2025-12-11T15:03:19.335Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.24616.1765465399333 to C:\Users\DevDelphi\.claude.json
+2025-12-11T15:03:19.335Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically

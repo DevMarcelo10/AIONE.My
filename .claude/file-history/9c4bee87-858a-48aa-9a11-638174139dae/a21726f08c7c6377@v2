@@ -1,0 +1,819 @@
+unit uCopilotPanel;
+
+interface
+
+uses
+   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, System.JSON,
+   System.Generics.Collections, System.Threading, Vcl.Graphics, Vcl.Controls,
+   Vcl.Forms, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, uCopilotAPI, uCopilotConfig;
+
+type
+   TChatMessage = record
+      IsUser: Boolean;
+      Text: string;
+      Timestamp: TDateTime;
+   end;
+
+   TFrmCopilotPanel = class(TForm)
+      pnlHeader: TPanel;
+      lblTitle: TLabel;
+      btnClose: TButton;
+      btnMinimize: TButton;
+      btnRefresh: TButton;
+      pnlChat: TPanel;
+      memoChat: TRichEdit;
+      pnlInput: TPanel;
+      edtMessage: TEdit;
+      btnSend: TButton;
+      pnlSuggestions: TPanel;
+      lblSuggestions: TLabel;
+      pnlSuggestionsContent: TScrollBox;
+      pnlAlerts: TPanel;
+      lblAlerts: TLabel;
+      pnlAlertsContent: TScrollBox;
+      pnlMedInfo: TPanel;
+      lblMedInfo: TLabel;
+      memoMedInfo: TRichEdit;
+      tmrAnimShow: TTimer;
+      tmrAnimHide: TTimer;
+      tmrHideMedInfo: TTimer;
+      tmrMonitorVenda: TTimer;
+      procedure FormCreate(Sender: TObject);
+      procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+      procedure btnCloseClick(Sender: TObject);
+      procedure btnMinimizeClick(Sender: TObject);
+      procedure btnRefreshClick(Sender: TObject);
+      procedure btnSendClick(Sender: TObject);
+      procedure edtMessageKeyPress(Sender: TObject; var Key: Char);
+      procedure tmrAnimShowTimer(Sender: TObject);
+      procedure tmrAnimHideTimer(Sender: TObject);
+      procedure tmrHideMedInfoTimer(Sender: TObject);
+      procedure tmrMonitorVendaTimer(Sender: TObject);
+      procedure pnlHeaderMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+   private
+      FMessages: TArray<TChatMessage>;
+      FTargetLeft: Integer;
+      FAnimating: Boolean;
+      FLastProdutoID: Integer;
+      FLastItemSeq: Integer;
+      FMonitorando: Boolean;
+      procedure AddMessage(const AText: string; AIsUser: Boolean);
+      procedure UpdateChatDisplay;
+      procedure DoSendMessage;
+      procedure ProcessResponse(const AResponse: string);
+      procedure LoadSuggestions;
+      procedure LoadAlerts;
+      procedure CreateSuggestionButton(const AText: string; AIndex: Integer);
+      procedure CreateAlertLabel(const AText: string; AAlertType: string);
+      procedure OnSuggestionClick(Sender: TObject);
+      procedure PositionPanel;
+      procedure DisplayMedicamentoInfo(const AResponse: string);
+   public
+      procedure ShowPanel;
+      procedure HidePanel;
+      procedure SetContext(const AClienteID: Integer; const AVendaID: Integer);
+      procedure ShowMedicamentoInfo(const AProdutoID: Integer); overload;
+      procedure ShowMedicamentoInfo(const AEAN: string); overload;
+      procedure HideMedicamentoInfo;
+   end;
+
+var
+   FrmCopilotPanel: TFrmCopilotPanel;
+
+implementation
+
+uses uCopilotIcon;
+
+{$R *.dfm}
+
+const
+   PANEL_WIDTH  = 380;
+   PANEL_MARGIN = 10;
+   ANIM_STEP    = 40;
+
+procedure TFrmCopilotPanel.FormCreate(Sender: TObject);
+begin
+   // Configura janela
+   BorderStyle     := bsNone;
+   FormStyle       := fsStayOnTop;
+   Width           := PANEL_WIDTH;
+   Height          := Screen.WorkAreaHeight - (PANEL_MARGIN * 2);
+   AlphaBlend      := True;
+   AlphaBlendValue := 245;
+
+   // Posiciona fora da tela (para animacao)
+   PositionPanel;
+   Left           := Screen.WorkAreaWidth;
+   FTargetLeft    := Screen.WorkAreaWidth - Width - PANEL_MARGIN;
+   FAnimating     := False;
+   FLastProdutoID := 0;
+   FLastItemSeq   := 0;
+   FMonitorando   := False;
+
+   // Inicializa
+   SetLength(FMessages, 0);
+
+   if Assigned(pnlMedInfo) then pnlMedInfo.Visible := False;
+
+   // Mensagem inicial
+   AddMessage('Ola! Sou o PharmaCopilot, seu assistente de vendas. ' + 'Como posso ajudar?', False);
+end;
+
+procedure TFrmCopilotPanel.PositionPanel;
+begin
+   Top := PANEL_MARGIN;
+   FTargetLeft := Screen.WorkAreaWidth - Width - PANEL_MARGIN;
+end;
+
+procedure TFrmCopilotPanel.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   if Key = VK_ESCAPE then HidePanel;
+end;
+
+procedure TFrmCopilotPanel.ShowPanel;
+begin
+   if FAnimating then Exit;
+   PositionPanel;
+   Left := Screen.WorkAreaWidth;
+   Show;
+   BringToFront;
+   FAnimating := True;
+   tmrAnimShow.Enabled := True;
+   if edtMessage.CanFocus then edtMessage.SetFocus;
+   LoadSuggestions;
+   LoadAlerts;
+end;
+
+procedure TFrmCopilotPanel.HidePanel;
+begin
+   if FAnimating then Exit;
+   FAnimating := True;
+   tmrAnimHide.Enabled := True;
+end;
+
+procedure TFrmCopilotPanel.tmrAnimShowTimer(Sender: TObject);
+begin
+   if Left > FTargetLeft then
+   begin
+      Left := Left - ANIM_STEP;
+      if Left < FTargetLeft then Left := FTargetLeft;
+   end else
+   begin
+      tmrAnimShow.Enabled := False;
+      FAnimating := False;
+   end;
+end;
+
+procedure TFrmCopilotPanel.tmrAnimHideTimer(Sender: TObject);
+begin
+   if Left < Screen.WorkAreaWidth then
+   begin
+      Left := Left + ANIM_STEP;
+   end else
+   begin
+      tmrAnimHide.Enabled := False;
+      FAnimating := False;
+      Hide;
+   end;
+end;
+
+procedure TFrmCopilotPanel.btnCloseClick(Sender: TObject);
+begin
+   HidePanel;
+end;
+
+procedure TFrmCopilotPanel.btnMinimizeClick(Sender: TObject);
+begin
+   HidePanel;
+end;
+
+procedure TFrmCopilotPanel.btnRefreshClick(Sender: TObject);
+begin
+   // Forca atualizacao de sugestoes e alertas
+   AddMessage(Format('Atualizando... (VendaID=%d, ClienteID=%d)', [CopilotAPI.VendaID, CopilotAPI.ClienteID]), False);
+   LoadSuggestions;
+   LoadAlerts;
+end;
+
+procedure TFrmCopilotPanel.pnlHeaderMouseDown(Sender: TObject;
+   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+   // Permite arrastar pelo header
+   if Button = mbLeft then
+   begin
+      ReleaseCapture;
+      Winapi.Windows.SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+   end;
+end;
+
+procedure TFrmCopilotPanel.AddMessage(const AText: string; AIsUser: Boolean);
+var
+   Msg: TChatMessage;
+begin
+   Msg.IsUser    := AIsUser;
+   Msg.Text      := AText;
+   Msg.Timestamp := Now;
+   SetLength(FMessages, Length(FMessages) + 1);
+   FMessages[High(FMessages)] := Msg;
+   UpdateChatDisplay;
+end;
+
+procedure TFrmCopilotPanel.UpdateChatDisplay;
+var
+   I: Integer;
+   Msg: TChatMessage;
+   Prefix: string;
+begin
+   memoChat.Clear;
+
+   for I := 0 to High(FMessages) do
+   begin
+      Msg := FMessages[I];
+      if Msg.IsUser then
+      begin
+         Prefix := 'Voc�: ';
+         memoChat.SelAttributes.Color := clNavy;
+         memoChat.SelAttributes.Style := [fsBold];
+      end else
+      begin
+         Prefix := 'Copilot: ';
+         memoChat.SelAttributes.Color := clGreen;
+         memoChat.SelAttributes.Style := [fsBold];
+      end;
+      memoChat.SelText := Prefix;
+      memoChat.SelAttributes.Color := clBlack;
+      memoChat.SelAttributes.Style := [];
+      memoChat.SelText := Msg.Text + #13#10#13#10;
+   end;
+
+   // Scroll para o final
+   Winapi.Windows.SendMessage(memoChat.Handle, WM_VSCROLL, SB_BOTTOM, 0);
+end;
+
+procedure TFrmCopilotPanel.edtMessageKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   begin
+      Key := #0;
+      DoSendMessage;
+   end;
+end;
+
+procedure TFrmCopilotPanel.btnSendClick(Sender: TObject);
+begin
+   DoSendMessage;
+end;
+
+procedure TFrmCopilotPanel.DoSendMessage;
+var
+   UserMessage: string;
+begin
+   UserMessage := Trim(edtMessage.Text);
+   if UserMessage = '' then Exit;
+   AddMessage(UserMessage, True);
+   edtMessage.Clear;
+
+   // Desabilita input enquanto processa
+   edtMessage.Enabled := False;
+   btnSend.Enabled    := False;
+
+   // Envia para o backend em thread separada
+   TTask.Run(
+   procedure
+   var
+      Response: string;
+   begin
+      try
+         Response := CopilotAPI.SendChatMessage(UserMessage);
+         TThread.Synchronize(nil,
+         procedure
+         begin
+            ProcessResponse(Response);
+            edtMessage.Enabled := True;
+            btnSend.Enabled := True;
+            edtMessage.SetFocus;
+         end);
+      except
+         on E: Exception do
+         begin
+            TThread.Synchronize(nil,
+            procedure
+            begin
+               AddMessage('Erro ao conectar com o servidor: '+E.Message, False);
+               edtMessage.Enabled := True;
+               btnSend.Enabled := True;
+            end);
+         end;
+      end;
+   end);
+end;
+
+procedure TFrmCopilotPanel.ProcessResponse(const AResponse: string);
+var
+   JSON: TJSONObject;
+   ResponseText: string;
+   Suggestions: TJSONArray;
+   I: Integer;
+begin
+   try
+      JSON := TJSONObject.ParseJSONValue(AResponse) as TJSONObject;
+      try
+         if Assigned(JSON) then
+         begin
+            ResponseText := JSON.GetValue<string>('message', '');
+            AddMessage(ResponseText, False);
+
+            if JSON.TryGetValue<TJSONArray>('suggestions', Suggestions) then
+            begin
+               while pnlSuggestionsContent.ControlCount > 0 do pnlSuggestionsContent.Controls[0].Free;
+
+               for I := 0 to Suggestions.Count - 1 do CreateSuggestionButton(Suggestions.Items[I].Value, I);
+            end;
+         end
+         else AddMessage('Resposta invalida do servidor.', False);
+      finally
+         JSON.Free;
+      end;
+   except
+      on E: Exception do
+      begin
+         AddMessage('Erro ao processar resposta: ' + E.Message, False);
+      end;
+   end;
+end;
+
+procedure TFrmCopilotPanel.LoadSuggestions;
+begin
+   // Carrega sugestoes do backend em thread separada
+   TTask.Run(
+   procedure
+   var
+      Response: string;
+      JSON: TJSONArray;
+      Item, ProdutoObj: TJSONObject;
+      Tipo, Motivo, ProdutoNome, TextoSugestao: string;
+   begin
+      try
+         Response := CopilotAPI.GetSuggestions;
+         TThread.Synchronize(nil,
+         procedure
+         begin
+            try
+               while pnlSuggestionsContent.ControlCount > 0 do
+                  pnlSuggestionsContent.Controls[0].Free;
+
+               JSON := TJSONObject.ParseJSONValue(Response) as TJSONArray;
+               if Assigned(JSON) then
+               begin
+                  try
+                     for var I := 0 to JSON.Count - 1 do
+                     begin
+                        Item := JSON.Items[I] as TJSONObject;
+
+                        // Extrai campos do schema Suggestion
+                        Tipo        := Item.GetValue<string>('tipo', '');
+                        Motivo      := Item.GetValue<string>('motivo', '');
+                        ProdutoNome := '';
+
+                        // Produto e um objeto aninhado
+                        if Item.TryGetValue<TJSONObject>('produto', ProdutoObj) then
+                           ProdutoNome := ProdutoObj.GetValue<string>('nome', '');
+
+                        if ProdutoNome <> '' then
+                        begin
+                           TextoSugestao := ProdutoNome;
+                           if Motivo <> '' then TextoSugestao := TextoSugestao+' - '+Motivo;
+                        end
+                        else TextoSugestao := Motivo;
+
+                        if TextoSugestao <> '' then CreateSuggestionButton(TextoSugestao, I);
+                     end;
+
+                     if JSON.Count > 0 then
+                          AddMessage(Format('%d sugestao(oes) carregada(s)', [JSON.Count]), False)
+                     else AddMessage('Nenhuma sugestao disponivel no momento.', False);
+                  finally
+                     JSON.Free;
+                  end;
+               end
+               else AddMessage('Resposta vazia do servidor de sugestoes.', False);
+            except
+               on E: Exception do
+               begin
+                  AddMessage('Erro ao carregar sugestoes: ' + E.Message, False);
+               end;
+            end;
+         end);
+      except
+         // Silencioso
+      end;
+   end);
+end;
+
+procedure TFrmCopilotPanel.LoadAlerts;
+begin
+   // Carrega alertas do backend em thread separada
+   TTask.Run(
+   procedure
+   var
+      Response: string;
+      JSON: TJSONArray;
+      Item: TJSONObject;
+      Titulo, Mensagem, Severidade, TextoAlerta: string;
+   begin
+      try
+         Response := CopilotAPI.GetAlerts;
+         TThread.Synchronize(nil,
+         procedure
+         begin
+            try
+               while pnlAlertsContent.ControlCount > 0 do
+                  pnlAlertsContent.Controls[0].Free;
+
+               JSON := TJSONObject.ParseJSONValue(Response) as TJSONArray;
+               if Assigned(JSON) then
+               begin
+                  try
+                     for var I := 0 to JSON.Count - 1 do
+                     begin
+                        Item := JSON.Items[I] as TJSONObject;
+
+                        // Extrai campos do schema Alert
+                        Titulo := Item.GetValue<string>('titulo', '');
+                        Mensagem := Item.GetValue<string>('mensagem', '');
+                        Severidade := Item.GetValue<string>('severidade', 'info');
+
+                        if Titulo <> '' then
+                        begin
+                           TextoAlerta := Titulo;
+                           if Mensagem <> '' then TextoAlerta := TextoAlerta + ': ' + Mensagem;
+                        end
+                        else TextoAlerta := Mensagem;
+
+                        if TextoAlerta <> '' then
+                        begin
+                           if Severidade = 'danger' then Severidade := 'error';
+                           CreateAlertLabel(TextoAlerta, Severidade);
+                        end;
+                     end;
+                     if (JSON.Count > 0) and Assigned(FrmCopilotIcon) then
+                        FrmCopilotIcon.ShowNotification('PharmaCopilot',IntToStr(JSON.Count)+' alerta(s) ativo(s)');
+                  finally
+                     JSON.Free;
+                  end;
+               end;
+            except
+               // Silencioso
+            end;
+         end);
+      except
+         // Silencioso
+      end;
+   end);
+end;
+
+procedure TFrmCopilotPanel.CreateSuggestionButton(const AText: string; AIndex: Integer);
+var
+   Btn: TButton;
+begin
+   Btn         := TButton.Create(pnlSuggestionsContent);
+   Btn.Parent  := pnlSuggestionsContent;
+   Btn.Caption := AText;
+   Btn.Tag     := AIndex;
+   Btn.Left    := 5;
+   Btn.Top     := 5 + (AIndex * 30);
+   Btn.Width   := pnlSuggestionsContent.Width - 10;
+   Btn.Height  := 25;
+   Btn.OnClick := OnSuggestionClick;
+end;
+
+procedure TFrmCopilotPanel.CreateAlertLabel(const AText: string; AAlertType: string);
+var
+   Lbl: TLabel;
+   Top: Integer;
+begin
+   Top := 5;
+   if pnlAlertsContent.ControlCount > 0 then
+   begin
+      Top := pnlAlertsContent.Controls[pnlAlertsContent.ControlCount - 1].Top +
+         pnlAlertsContent.Controls[pnlAlertsContent.ControlCount - 1].Height + 5;
+   end;
+   Lbl          := TLabel.Create(pnlAlertsContent);
+   Lbl.Parent   := pnlAlertsContent;
+   Lbl.Caption  := '- ' + AText;
+   Lbl.Left     := 5;
+   Lbl.Top      := Top;
+   Lbl.Width    := pnlAlertsContent.Width - 10;
+   Lbl.WordWrap := True;
+   Lbl.AutoSize := True;
+   if AAlertType = 'warning'    then Lbl.Font.Color := clOlive
+   else if AAlertType = 'error' then Lbl.Font.Color := clMaroon
+   else Lbl.Font.Color := clNavy;
+end;
+
+procedure TFrmCopilotPanel.OnSuggestionClick(Sender: TObject);
+var
+   Btn: TButton;
+begin
+   Btn := Sender as TButton;
+   edtMessage.Text := Btn.Caption;
+   DoSendMessage;
+end;
+
+procedure TFrmCopilotPanel.SetContext(const AClienteID: Integer; const AVendaID: Integer);
+begin
+   // Se mudou a venda, reseta o monitoramento
+   if CopilotAPI.VendaID <> AVendaID then
+   begin
+      FLastItemSeq   := 0;
+      FLastProdutoID := 0;
+   end;
+
+   CopilotAPI.ClienteID := AClienteID;
+   CopilotAPI.VendaID   := AVendaID;
+
+   // Recarrega sugestoes com novo contexto
+   LoadSuggestions;
+   LoadAlerts;
+end;
+
+// ============================================
+// INFORMACOES FARMACEUTICAS
+// ============================================
+
+procedure TFrmCopilotPanel.ShowMedicamentoInfo(const AProdutoID: Integer);
+begin
+   if (AProdutoID = FLastProdutoID) and pnlMedInfo.Visible then Exit;
+
+   // Busca info em thread separada
+   TTask.Run(
+   procedure
+   var
+      Response: string;
+   begin
+      try
+         Response := CopilotAPI.GetMedicamentoInfo(AProdutoID);
+         TThread.Synchronize(nil,
+         procedure
+         begin
+            DisplayMedicamentoInfo(Response);
+         end);
+      except
+         // Silencioso - nao exibe erro
+      end;
+   end);
+end;
+
+procedure TFrmCopilotPanel.ShowMedicamentoInfo(const AEAN: string);
+begin
+   // Busca info em thread separada
+   TTask.Run(
+   procedure
+   var
+      Response: string;
+   begin
+      try
+         Response := CopilotAPI.GetMedicamentoInfoByEAN(AEAN);
+         TThread.Synchronize(nil,
+         procedure
+         begin
+            DisplayMedicamentoInfo(Response);
+         end);
+      except
+         // Silencioso
+      end;
+   end);
+end;
+
+procedure TFrmCopilotPanel.DisplayMedicamentoInfo(const AResponse: string);
+var
+   JSON, InfoObj: TJSONObject;
+   Found: Boolean;
+   ProdutoNome: string;
+   PrincipioAtivo, NomeComercial: string;
+   Posologia, Orientacao, HorarioIdeal: string;
+   EfeitosColaterais, InteracaoAlimentos: string;
+   AlertaIdoso, AlertaPediatrico, AlertaGestante: string;
+   TipoReceita: string;
+   RetemReceita: Boolean;
+begin
+   if not Assigned(pnlMedInfo) or not Assigned(memoMedInfo) then Exit;
+
+   try
+      JSON := TJSONObject.ParseJSONValue(AResponse) as TJSONObject;
+      if not Assigned(JSON) then Exit;
+
+      try
+         Found := JSON.GetValue<Boolean>('found', False);
+         if not Found then
+         begin
+            pnlMedInfo.Visible := False;
+            Exit;
+         end;
+
+         ProdutoNome := JSON.GetValue<string>('produto_nome', '');
+
+         if not JSON.TryGetValue<TJSONObject>('info', InfoObj) then
+         begin
+            pnlMedInfo.Visible := False;
+            Exit;
+         end;
+
+         // Extrai campos
+         PrincipioAtivo     := InfoObj.GetValue<string>('principio_ativo', '');
+         NomeComercial      := InfoObj.GetValue<string>('nome_comercial', '');
+         Posologia          := InfoObj.GetValue<string>('posologia_padrao', '');
+         Orientacao         := InfoObj.GetValue<string>('orientacao_uso', '');
+         HorarioIdeal       := InfoObj.GetValue<string>('horario_ideal', '');
+         EfeitosColaterais  := InfoObj.GetValue<string>('efeitos_colaterais', '');
+         InteracaoAlimentos := InfoObj.GetValue<string>('interacao_alimentos', '');
+         AlertaIdoso        := InfoObj.GetValue<string>('alerta_idoso', '');
+         AlertaPediatrico   := InfoObj.GetValue<string>('alerta_pediatrico', '');
+         AlertaGestante     := InfoObj.GetValue<string>('alerta_gestante', '');
+         TipoReceita        := InfoObj.GetValue<string>('tipo_receita', 'livre');
+         RetemReceita       := InfoObj.GetValue<Boolean>('retem_receita', False);
+
+         // Monta texto formatado
+         memoMedInfo.Clear;
+
+         // Titulo
+         memoMedInfo.SelAttributes.Style := [fsBold];
+         memoMedInfo.SelAttributes.Color := clNavy;
+         memoMedInfo.SelAttributes.Size  := 10;
+         if ProdutoNome <> '' then memoMedInfo.SelText := ProdutoNome + #13#10
+         else memoMedInfo.SelText := PrincipioAtivo + #13#10;
+
+         memoMedInfo.SelAttributes.Style := [];
+         memoMedInfo.SelAttributes.Color := clGray;
+         memoMedInfo.SelAttributes.Size := 8;
+         if (PrincipioAtivo <> '') and (ProdutoNome <> '') then memoMedInfo.SelText := PrincipioAtivo + #13#10;
+         memoMedInfo.SelText := #13#10;
+
+         // Posologia
+         if Posologia <> '' then
+         begin
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelAttributes.Color := clBlack;
+            memoMedInfo.SelAttributes.Size  := 9;
+            memoMedInfo.SelText             := 'POSOLOGIA: ';
+            memoMedInfo.SelAttributes.Style := [];
+            memoMedInfo.SelText := Posologia + #13#10;
+         end;
+
+         // Orientacao de Uso
+         if Orientacao <> '' then
+         begin
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelAttributes.Color := clBlack;
+            memoMedInfo.SelText             := 'USO: ';
+            memoMedInfo.SelAttributes.Style := [];
+            memoMedInfo.SelText := Orientacao + #13#10;
+         end;
+
+         // Horario Ideal
+         if HorarioIdeal <> '' then
+         begin
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelText             := 'HORARIO: ';
+            memoMedInfo.SelAttributes.Style := [];
+            memoMedInfo.SelText := HorarioIdeal + #13#10;
+         end;
+
+         // Receita
+         if TipoReceita <> 'livre' then
+         begin
+            memoMedInfo.SelText := #13#10;
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelAttributes.Color := clMaroon;
+            memoMedInfo.SelText := 'RECEITA: ' + UpperCase(TipoReceita);
+            if RetemReceita then memoMedInfo.SelText := ' (RETER)';
+            memoMedInfo.SelText := #13#10;
+         end;
+
+         // Efeitos Colaterais
+         if EfeitosColaterais <> '' then
+         begin
+            memoMedInfo.SelText := #13#10;
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelAttributes.Color := clOlive;
+            memoMedInfo.SelText             := 'EFEITOS: ';
+            memoMedInfo.SelAttributes.Style := [];
+            memoMedInfo.SelAttributes.Color := clBlack;
+            memoMedInfo.SelText := EfeitosColaterais + #13#10;
+         end;
+
+         // Interacao com Alimentos
+         if InteracaoAlimentos <> '' then
+         begin
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelAttributes.Color := clOlive;
+            memoMedInfo.SelText             := 'ALIMENTOS: ';
+            memoMedInfo.SelAttributes.Style := [];
+            memoMedInfo.SelAttributes.Color := clBlack;
+            memoMedInfo.SelText := InteracaoAlimentos + #13#10;
+         end;
+
+         // Alertas especiais
+         if (AlertaIdoso <> '') or (AlertaPediatrico <> '') or (AlertaGestante <> '') then
+         begin
+            memoMedInfo.SelText := #13#10;
+            memoMedInfo.SelAttributes.Style := [fsBold];
+            memoMedInfo.SelAttributes.Color := clRed;
+            memoMedInfo.SelText := 'ALERTAS ESPECIAIS:' + #13#10;
+            memoMedInfo.SelAttributes.Style := [];
+            memoMedInfo.SelAttributes.Color := clMaroon;
+            if AlertaIdoso <> ''      then memoMedInfo.SelText := '  Idoso: ' + AlertaIdoso + #13#10;
+            if AlertaPediatrico <> '' then memoMedInfo.SelText := '  Crianca: ' + AlertaPediatrico + #13#10;
+            if AlertaGestante <> ''   then memoMedInfo.SelText := '  Gestante: ' + AlertaGestante + #13#10;
+         end;
+
+         // Mostra painel
+         pnlMedInfo.Visible := True;
+
+         // Atualiza FLastProdutoID com o ID do produto exibido
+         FLastProdutoID := JSON.GetValue<Integer>('produto_id', 0);
+
+         // Inicia timer para esconder automaticamente apos 30 segundos
+         if Assigned(tmrHideMedInfo) then
+         begin
+            tmrHideMedInfo.Enabled  := False;
+            tmrHideMedInfo.Interval := 30000;
+            tmrHideMedInfo.Enabled  := True;
+         end;
+      finally
+         JSON.Free;
+      end;
+   except
+      // Silencioso
+   end;
+end;
+
+procedure TFrmCopilotPanel.HideMedicamentoInfo;
+begin
+   if Assigned(pnlMedInfo)     then pnlMedInfo.Visible    := False;
+   if Assigned(tmrHideMedInfo) then tmrHideMedInfo.Enabled := False;
+   FLastProdutoID := 0;
+end;
+
+procedure TFrmCopilotPanel.tmrHideMedInfoTimer(Sender: TObject);
+begin
+   HideMedicamentoInfo;
+end;
+
+procedure TFrmCopilotPanel.tmrMonitorVendaTimer(Sender: TObject);
+var
+   Response: string;
+   JSON: TJSONObject;
+   ProdutoID, ItemSeq: Integer;
+begin
+   if FMonitorando then Exit;
+   if CopilotAPI.VendaID = 0 then Exit;
+
+   FMonitorando := True;
+   try
+      // Busca ultimo produto da venda em thread separada
+      TTask.Run(
+      procedure
+      begin
+         try
+            Response := CopilotAPI.GetUltimoProduto;
+            TThread.Synchronize(nil,
+            procedure
+            begin
+               try
+                  JSON := TJSONObject.ParseJSONValue(Response) as TJSONObject;
+                  if Assigned(JSON) then
+                  begin
+                     try
+                        ProdutoID := JSON.GetValue<Integer>('produto_id', 0);
+                        ItemSeq   := JSON.GetValue<Integer>('item_seq', 0);
+
+                        // Se mudou o item, mostra info do novo produto
+                        if (ItemSeq > 0) and (ItemSeq <> FLastItemSeq) and (ProdutoID > 0) then
+                        begin
+                           FLastItemSeq := ItemSeq;
+                           ShowMedicamentoInfo(ProdutoID);
+                        end;
+                     finally
+                        JSON.Free;
+                     end;
+                  end;
+               except
+                  // Silencioso
+               end;
+               FMonitorando := False;
+            end);
+         except
+            TThread.Synchronize(nil,
+            procedure
+            begin
+               FMonitorando := False;
+            end);
+         end;
+      end);
+   except
+      FMonitorando := False;
+   end;
+end;
+
+end.

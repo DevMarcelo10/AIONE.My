@@ -1,0 +1,249 @@
+2026-01-05T15:50:59.897Z [DEBUG] Watching for changes in setting files C:\Users\DevDelphi\.claude, C:\Users\DevDelphi\.claude...
+2026-01-05T15:50:59.930Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-01-05T15:50:59.971Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-01-05T15:50:59.971Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-01-05T15:50:59.971Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-01-05T15:50:59.979Z [DEBUG] LSP server manager initialized successfully
+2026-01-05T15:50:59.979Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-01-05T15:50:59.980Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-01-05T15:50:59.989Z [DEBUG] Stats cache is up to date
+2026-01-05T15:51:00.003Z [DEBUG] Loading skills from: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\DevDelphi\.claude\skills, project=[]
+2026-01-05T15:51:00.011Z [DEBUG] [SLOW OPERATION DETECTED] fs.readFileSync (6.8ms)
+2026-01-05T15:51:00.018Z [DEBUG] Passes: Using fresh cached eligibility data
+2026-01-05T15:51:00.036Z [DEBUG] Loaded 0 installed plugins from C:\Users\DevDelphi\.claude\plugins\installed_plugins.json
+2026-01-05T15:51:00.092Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2026-01-05T15:51:00.093Z [DEBUG] Looking for shell config file: C:\Users\DevDelphi\.bashrc
+2026-01-05T15:51:00.093Z [DEBUG] Shell config file not found: C:\Users\DevDelphi\.bashrc, creating snapshot with Claude Code defaults only
+2026-01-05T15:51:00.093Z [DEBUG] Snapshots directory: C:\Users\DevDelphi\.claude\shell-snapshots
+2026-01-05T15:51:00.105Z [DEBUG] Creating snapshot at: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1767628260093-v2i4dp.sh
+2026-01-05T15:51:00.106Z [DEBUG] Shell binary exists: true
+2026-01-05T15:51:00.106Z [DEBUG] Execution timeout: 10000ms
+2026-01-05T15:51:00.111Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\bce139da-5cef-4f1d-ae6d-65db0fcd9cf4-agent-bce139da-5cef-4f1d-ae6d-65db0fcd9cf4.json.tmp.42568.1767628260111
+2026-01-05T15:51:00.114Z [DEBUG] Temp file written successfully, size: 2 bytes
+2026-01-05T15:51:00.114Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\bce139da-5cef-4f1d-ae6d-65db0fcd9cf4-agent-bce139da-5cef-4f1d-ae6d-65db0fcd9cf4.json.tmp.42568.1767628260111 to C:\Users\DevDelphi\.claude\todos\bce139da-5cef-4f1d-ae6d-65db0fcd9cf4-agent-bce139da-5cef-4f1d-ae6d-65db0fcd9cf4.json
+2026-01-05T15:51:00.115Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\bce139da-5cef-4f1d-ae6d-65db0fcd9cf4-agent-bce139da-5cef-4f1d-ae6d-65db0fcd9cf4.json written atomically
+2026-01-05T15:51:00.117Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-01-05T15:51:00.117Z [DEBUG] Total plugin skills loaded: 0
+2026-01-05T15:51:00.117Z [DEBUG] Total plugin commands loaded: 0
+2026-01-05T15:51:00.117Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-01-05T15:51:00.184Z [DEBUG] Total plugin agents loaded: 0
+2026-01-05T15:51:00.199Z [DEBUG] Git remote URL: null
+2026-01-05T15:51:00.199Z [DEBUG] No git remote URL found
+2026-01-05T15:51:00.199Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2026-01-05T15:51:00.225Z [DEBUG] [SLOW OPERATION DETECTED] fs.readdirSync (8.2ms)
+2026-01-05T15:51:00.250Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\DevDelphi\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2026-01-05T15:51:00.260Z [DEBUG] Loaded 6 unique skills (managed: 0, user: 3, project: 0, legacy commands: 3)
+2026-01-05T15:51:00.260Z [DEBUG] getSkills returning: 6 skill dir commands, 0 plugin skills
+2026-01-05T15:51:00.375Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628260375
+2026-01-05T15:51:00.375Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:00.379Z [DEBUG] Temp file written successfully, size: 62846 bytes
+2026-01-05T15:51:00.379Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:00.379Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628260375 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:00.381Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:00.607Z [DEBUG] Shell snapshot created successfully (346 bytes)
+2026-01-05T15:51:00.786Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2026-01-05T15:51:00.786Z [DEBUG] Plugin autoupdate: checking installed plugins
+2026-01-05T15:51:07.938Z [DEBUG] Passes: Using fresh cached eligibility data
+2026-01-05T15:51:07.949Z [DEBUG] MCP server "mysql-aione": Starting connection with timeout of 30000ms
+2026-01-05T15:51:08.021Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-01-05T15:51:08.032Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628268032
+2026-01-05T15:51:08.032Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:08.035Z [DEBUG] Temp file written successfully, size: 62846 bytes
+2026-01-05T15:51:08.036Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:08.036Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628268032 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:08.036Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:08.053Z [DEBUG] Skipping SessionStart:startup hook execution - workspace trust not accepted
+2026-01-05T15:51:08.084Z [DEBUG] Skipping SubagentStart:Explore hook execution - workspace trust not accepted
+2026-01-05T15:51:08.109Z [DEBUG] Skipping SubagentStart:Plan hook execution - workspace trust not accepted
+2026-01-05T15:51:08.206Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628268206
+2026-01-05T15:51:08.206Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:08.209Z [DEBUG] Temp file written successfully, size: 62773 bytes
+2026-01-05T15:51:08.209Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:08.209Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628268206 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:08.210Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:08.219Z [DEBUG] Official marketplace auto-install skipped: already_attempted
+2026-01-05T15:51:08.220Z [DEBUG] performStartupChecks called
+2026-01-05T15:51:08.220Z [DEBUG] Trust not accepted for current directory - skipping plugin installations
+2026-01-05T15:51:08.276Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:51:08.286Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628268286
+2026-01-05T15:51:08.286Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:08.288Z [DEBUG] Temp file written successfully, size: 62846 bytes
+2026-01-05T15:51:08.288Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:08.288Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628268286 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:08.289Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:09.220Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (926.7ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=40280\").Pare
+2026-01-05T15:51:09.876Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (656.0ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=26280\").Pare
+2026-01-05T15:51:09.877Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2026-01-05T15:51:10.564Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (686.1ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=40280\").Pare
+2026-01-05T15:51:11.220Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (656.4ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=26280\").Pare
+2026-01-05T15:51:11.236Z [DEBUG] MCP server "mysql-aione": Successfully connected to stdio server in 3290ms
+2026-01-05T15:51:11.237Z [DEBUG] MCP server "mysql-aione": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"mysql-aione","version":"1.0.0"}}
+2026-01-05T15:51:11.323Z [DEBUG] MCP server "ide": Starting connection with timeout of 30000ms
+2026-01-05T15:51:11.330Z [DEBUG] Summarizing all 56 messages (~37225 tokens)
+2026-01-05T15:51:11.462Z [DEBUG] MCP server "ide": Successfully connected to ws-ide server in 141ms
+2026-01-05T15:51:11.463Z [DEBUG] MCP server "ide": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Claude Code VSCode MCP","version":"2.0.75"}}
+2026-01-05T15:51:11.523Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628271523
+2026-01-05T15:51:11.523Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:11.527Z [DEBUG] Temp file written successfully, size: 63422 bytes
+2026-01-05T15:51:11.527Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:11.527Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628271523 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:11.529Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:11.816Z [DEBUG] Skills and commands included in Skill tool: delphi-patterns, rest-dw, ui-components, investigate, review-staged, create-form
+2026-01-05T15:51:12.923Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:51:13.620Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (668.3ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=40280\").Pare
+2026-01-05T15:51:14.290Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (670.0ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=26280\").Pare
+2026-01-05T15:51:14.972Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (681.5ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=40280\").Pare
+2026-01-05T15:51:15.598Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (625.8ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=26280\").Pare
+2026-01-05T15:51:15.623Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:51:15.626Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:51:17.070Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2026-01-05T15:51:17.832Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2026-01-05T15:51:40.647Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-01-05T15:51:40.647Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-01-05T15:51:40.648Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-01-05T15:51:40.648Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-01-05T15:51:40.886Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2026-01-05T15:51:40.896Z [DEBUG] FileHistory: Added snapshot for dd9500d5-ec70-4f57-a00f-b1b3575c1682, tracking 0 files
+2026-01-05T15:51:40.916Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2026-01-05T15:51:40.952Z [DEBUG] Total plugin output styles loaded: 0
+2026-01-05T15:51:40.962Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 46ms
+2026-01-05T15:51:41.611Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:51:43.319Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:51:49.905Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2026-01-05T15:51:50.065Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628310065
+2026-01-05T15:51:50.065Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:50.070Z [DEBUG] Temp file written successfully, size: 63422 bytes
+2026-01-05T15:51:50.070Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:50.070Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628310065 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:50.071Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:50.102Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628310102
+2026-01-05T15:51:50.102Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:51:50.105Z [DEBUG] Temp file written successfully, size: 63422 bytes
+2026-01-05T15:51:50.105Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:51:50.105Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628310102 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:51:50.106Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:51:52.651Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:51:57.161Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2026-01-05T15:52:50.096Z [DEBUG] Skipping Notification:idle_prompt hook execution - workspace trust not accepted
+2026-01-05T15:54:44.898Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:54:47.603Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:54:48.433Z [DEBUG] FileHistory: Making snapshot for message e2b64916-95f4-4f51-85ee-a51fb48b4df3
+2026-01-05T15:54:48.433Z [DEBUG] FileHistory: Added snapshot for e2b64916-95f4-4f51-85ee-a51fb48b4df3, tracking 0 files
+2026-01-05T15:54:48.438Z [DEBUG] UserCommandMessage rendering: "context" (args: "none")
+2026-01-05T15:54:48.438Z [DEBUG] isSkillFormat: false
+2026-01-05T15:54:48.489Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:54:48.562Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.42568.1767628488562
+2026-01-05T15:54:48.562Z [DEBUG] Preserving file permissions: 100666
+2026-01-05T15:54:48.565Z [DEBUG] Temp file written successfully, size: 63422 bytes
+2026-01-05T15:54:48.565Z [DEBUG] Applied original permissions to temp file
+2026-01-05T15:54:48.565Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.42568.1767628488562 to C:\Users\DevDelphi\.claude.json
+2026-01-05T15:54:48.566Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2026-01-05T15:55:48.558Z [DEBUG] Skipping Notification:idle_prompt hook execution - workspace trust not accepted
+2026-01-05T15:58:34.068Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2026-01-05T15:58:34.069Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-01-05T15:58:34.069Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-01-05T15:58:34.069Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-01-05T15:58:34.069Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-01-05T15:58:34.138Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 70ms
+2026-01-05T15:58:34.140Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2026-01-05T15:58:34.144Z [DEBUG] FileHistory: Making snapshot for message eeeac144-8a9a-4ce6-82ef-3503a70ba521
+2026-01-05T15:58:34.145Z [DEBUG] FileHistory: Added snapshot for eeeac144-8a9a-4ce6-82ef-3503a70ba521, tracking 0 files
+2026-01-05T15:58:34.162Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2026-01-05T15:58:34.210Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 48ms
+2026-01-05T15:58:34.995Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:58:37.106Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:58:41.296Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2026-01-05T15:58:41.355Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2026-01-05T15:58:44.064Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:58:48.359Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2026-01-05T15:59:00.184Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:01.053Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:01.828Z [DEBUG] FileHistory: Making snapshot for message d572e3b8-9387-4e6d-8098-90211f95a9bd
+2026-01-05T15:59:01.829Z [DEBUG] FileHistory: Added snapshot for d572e3b8-9387-4e6d-8098-90211f95a9bd, tracking 0 files
+2026-01-05T15:59:01.835Z [DEBUG] UserCommandMessage rendering: "context" (args: "none")
+2026-01-05T15:59:01.835Z [DEBUG] isSkillFormat: false
+2026-01-05T15:59:01.887Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:04.452Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:05.555Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:06.314Z [DEBUG] FileHistory: Making snapshot for message cc1347f1-1f42-443e-a57a-171fb760e795
+2026-01-05T15:59:06.315Z [DEBUG] FileHistory: Added snapshot for cc1347f1-1f42-443e-a57a-171fb760e795, tracking 0 files
+2026-01-05T15:59:06.319Z [DEBUG] UserCommandMessage rendering: "context" (args: "none")
+2026-01-05T15:59:06.319Z [DEBUG] isSkillFormat: false
+2026-01-05T15:59:06.368Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:12.379Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:16.667Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:18.463Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:20.633Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2026-01-05T15:59:20.633Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-01-05T15:59:20.634Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-01-05T15:59:20.634Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-01-05T15:59:20.634Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-01-05T15:59:20.704Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 71ms
+2026-01-05T15:59:20.707Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2026-01-05T15:59:20.711Z [DEBUG] FileHistory: Making snapshot for message a9cc0156-18c2-4c9d-90c2-8dce197123d4
+2026-01-05T15:59:20.711Z [DEBUG] FileHistory: Added snapshot for a9cc0156-18c2-4c9d-90c2-8dce197123d4, tracking 0 files
+2026-01-05T15:59:20.730Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2026-01-05T15:59:20.773Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 43ms
+2026-01-05T15:59:21.799Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:59:23.776Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:59:26.358Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-01-05T15:59:26.359Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2026-01-05T15:59:26.414Z [DEBUG] tree-sitter: loaded from disk
+2026-01-05T15:59:27.085Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:59:27.099Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:59:27.223Z [DEBUG] Stream started - received first chunk
+2026-01-05T15:59:27.630Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "claude cost"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2026-01-05T15:59:27.651Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2026-01-05T15:59:27.652Z [DEBUG] Skipping PermissionRequest:Bash hook execution - workspace trust not accepted
+2026-01-05T15:59:33.673Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2026-01-05T15:59:34.956Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T15:59:35.075Z [DEBUG] Session environment not yet supported on Windows
+2026-01-05T16:01:35.392Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2026-01-05T16:01:35.417Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2026-01-05T16:01:35.418Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-01-05T16:01:35.418Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-01-05T16:01:35.418Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-01-05T16:01:35.418Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-01-05T16:01:35.493Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 76ms
+2026-01-05T16:01:36.144Z [DEBUG] Stream started - received first chunk
+2026-01-05T16:01:38.012Z [DEBUG] Stream started - received first chunk
+2026-01-05T16:01:39.131Z [DEBUG] executePreToolHooks called for tool: TaskOutput
+2026-01-05T16:01:39.132Z [DEBUG] Skipping PreToolUse:TaskOutput hook execution - workspace trust not accepted
+2026-01-05T16:02:09.233Z [DEBUG] Skipping PostToolUse:TaskOutput hook execution - workspace trust not accepted
+2026-01-05T16:02:09.254Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2026-01-05T16:02:09.255Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-01-05T16:02:09.255Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-01-05T16:02:09.255Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-01-05T16:02:09.255Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-01-05T16:02:09.316Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 62ms
+2026-01-05T16:02:12.053Z [DEBUG] Stream started - received first chunk
+2026-01-05T16:02:16.164Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2026-01-05T16:02:16.270Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2026-01-05T16:02:20.133Z [DEBUG] Stream started - received first chunk
+2026-01-05T16:02:22.945Z [DEBUG] Streaming aborted by user: Request was aborted.
+2026-01-05T16:02:22.945Z [ERROR] Error in non-streaming fallback: Request was aborted.
+2026-01-05T16:02:22.945Z [ERROR] Error: Error: Request was aborted.
+    at _0A._createMessage (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:514:3157)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-01-05T16:02:27.753Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T16:02:31.569Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T16:02:32.366Z [DEBUG] FileHistory: Making snapshot for message 1929abf1-8741-4fda-b38b-20886dc11ce2
+2026-01-05T16:02:32.366Z [DEBUG] FileHistory: Added snapshot for 1929abf1-8741-4fda-b38b-20886dc11ce2, tracking 0 files
+2026-01-05T16:02:32.371Z [DEBUG] UserCommandMessage rendering: "context" (args: "none")
+2026-01-05T16:02:32.371Z [DEBUG] isSkillFormat: false
+2026-01-05T16:02:32.417Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T16:02:56.398Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T16:02:57.003Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2026-01-05T16:02:58.953Z [DEBUG] Skipping SessionEnd:prompt_input_exit hook execution - workspace trust not accepted

@@ -1,0 +1,404 @@
+#!/usr/bin/env python3
+"""
+MCP Server para acesso ao banco de dados MySQL do projeto AIONE.My
+Fornece ferramentas para consultar e manipular dados via Claude Code
+"""
+
+import asyncio
+import json
+import sys
+from typing import Any, Optional
+import mysql.connector
+from mysql.connector import Error
+from mcp.server.models import InitializationOptions
+from mcp.server import NotificationOptions, Server
+from mcp.server.stdio import stdio_server
+from mcp.types import (
+    Resource,
+    Tool,
+    TextContent,
+    ImageContent,
+    EmbeddedResource,
+    LoggingLevel
+)
+import configparser
+import os
+
+# Configuração do banco de dados
+DB_CONFIG = {
+    'host': 'localhost',
+    'port': 3307,
+    'user': 'root',
+    'password': '',
+    'database': 'aione'
+}
+
+class MySQLMCPServer:
+    def __init__(self):
+        self.server = Server("mysql-aione")
+        self.connection = None
+        self.load_config()
+
+        # Registrar handlers
+        self.setup_handlers()
+
+    def load_config(self):
+        """Carrega configuração do arquivo config.ini"""
+        config_path = os.path.join(os.path.dirname(__file__), '..', 'config.ini')
+        if os.path.exists(config_path):
+            config = configparser.ConfigParser()
+            config.read(config_path)
+            if 'Database' in config:
+                DB_CONFIG['host'] = config.get('Database', 'host', fallback=DB_CONFIG['host'])
+                DB_CONFIG['port'] = config.getint('Database', 'port', fallback=DB_CONFIG['port'])
+                DB_CONFIG['user'] = config.get('Database', 'user', fallback=DB_CONFIG['user'])
+                DB_CONFIG['password'] = config.get('Database', 'password', fallback=DB_CONFIG['password'])
+                DB_CONFIG['database'] = config.get('Database', 'database', fallback=DB_CONFIG['database'])
+
+    def get_connection(self):
+        """Obtém ou cria uma conexão com o banco de dados"""
+        try:
+            if self.connection is None or not self.connection.is_connected():
+                self.connection = mysql.connector.connect(**DB_CONFIG)
+            return self.connection
+        except Error as e:
+            raise Exception(f"Erro ao conectar ao MySQL: {str(e)}")
+
+    def setup_handlers(self):
+        """Configura os handlers do servidor MCP"""
+
+        @self.server.list_resources()
+        async def handle_list_resources() -> list[Resource]:
+            """Lista os recursos disponíveis (tabelas do banco)"""
+            try:
+                conn = self.get_connection()
+                cursor = conn.cursor()
+                cursor.execute("SHOW TABLES")
+                tables = cursor.fetchall()
+                cursor.close()
+
+                resources = []
+                for table in tables:
+                    table_name = table[0]
+                    resources.append(
+                        Resource(
+                            uri=f"mysql://table/{table_name}",
+                            name=f"Tabela: {table_name}",
+                            description=f"Tabela {table_name} do banco AIONE",
+                            mimeType="application/json"
+                        )
+                    )
+                return resources
+            except Exception as e:
+                return []
+
+        @self.server.read_resource()
+        async def handle_read_resource(uri: str) -> str:
+            """Lê dados de uma tabela específica"""
+            try:
+                # Extrai nome da tabela da URI
+                table_name = uri.split('/')[-1]
+
+                conn = self.get_connection()
+                cursor = conn.cursor(dictionary=True)
+                cursor.execute(f"SELECT * FROM {table_name} LIMIT 100")
+                rows = cursor.fetchall()
+                cursor.close()
+
+                return json.dumps(rows, indent=2, default=str)
+            except Exception as e:
+                return json.dumps({"error": str(e)})
+
+        @self.server.list_tools()
+        async def handle_list_tools() -> list[Tool]:
+            """Lista as ferramentas disponíveis"""
+            return [
+                Tool(
+                    name="query_select",
+                    description="Executa uma query SELECT no banco de dados MySQL. Retorna os resultados em formato JSON.",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "query": {
+                                "type": "string",
+                                "description": "Query SQL SELECT a ser executada"
+                            },
+                            "limit": {
+                                "type": "integer",
+                                "description": "Limite de registros a retornar (padrão: 100)",
+                                "default": 100
+                            }
+                        },
+                        "required": ["query"]
+                    }
+                ),
+                Tool(
+                    name="query_execute",
+                    description="Executa uma query INSERT, UPDATE ou DELETE no banco de dados MySQL. Retorna o número de linhas afetadas.",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "query": {
+                                "type": "string",
+                                "description": "Query SQL (INSERT/UPDATE/DELETE) a ser executada"
+                            }
+                        },
+                        "required": ["query"]
+                    }
+                ),
+                Tool(
+                    name="list_tables",
+                    description="Lista todas as tabelas disponíveis no banco de dados",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {}
+                    }
+                ),
+                Tool(
+                    name="describe_table",
+                    description="Mostra a estrutura de uma tabela específica (colunas, tipos, chaves)",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "table_name": {
+                                "type": "string",
+                                "description": "Nome da tabela a descrever"
+                            }
+                        },
+                        "required": ["table_name"]
+                    }
+                ),
+                Tool(
+                    name="get_table_count",
+                    description="Retorna o número de registros em uma tabela",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "table_name": {
+                                "type": "string",
+                                "description": "Nome da tabela"
+                            }
+                        },
+                        "required": ["table_name"]
+                    }
+                ),
+                Tool(
+                    name="search_table",
+                    description="Busca registros em uma tabela por um valor em qualquer coluna",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "table_name": {
+                                "type": "string",
+                                "description": "Nome da tabela"
+                            },
+                            "search_value": {
+                                "type": "string",
+                                "description": "Valor a buscar"
+                            },
+                            "limit": {
+                                "type": "integer",
+                                "description": "Limite de resultados (padrão: 50)",
+                                "default": 50
+                            }
+                        },
+                        "required": ["table_name", "search_value"]
+                    }
+                )
+            ]
+
+        @self.server.call_tool()
+        async def handle_call_tool(name: str, arguments: dict | None) -> list[TextContent | ImageContent | EmbeddedResource]:
+            """Executa uma ferramenta"""
+            try:
+                if name == "query_select":
+                    return await self.execute_select(arguments)
+                elif name == "query_execute":
+                    return await self.execute_dml(arguments)
+                elif name == "list_tables":
+                    return await self.list_tables()
+                elif name == "describe_table":
+                    return await self.describe_table(arguments)
+                elif name == "get_table_count":
+                    return await self.get_table_count(arguments)
+                elif name == "search_table":
+                    return await self.search_table(arguments)
+                else:
+                    raise ValueError(f"Ferramenta desconhecida: {name}")
+            except Exception as e:
+                return [TextContent(
+                    type="text",
+                    text=f"Erro ao executar ferramenta: {str(e)}"
+                )]
+
+    async def execute_select(self, arguments: dict) -> list[TextContent]:
+        """Executa uma query SELECT"""
+        query = arguments.get("query", "")
+        limit = arguments.get("limit", 100)
+
+        # Adiciona LIMIT se não existir
+        if "LIMIT" not in query.upper():
+            query = f"{query} LIMIT {limit}"
+
+        conn = self.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        cursor.close()
+
+        result = {
+            "success": True,
+            "row_count": len(rows),
+            "data": rows
+        }
+
+        return [TextContent(
+            type="text",
+            text=json.dumps(result, indent=2, default=str, ensure_ascii=False)
+        )]
+
+    async def execute_dml(self, arguments: dict) -> list[TextContent]:
+        """Executa uma query INSERT, UPDATE ou DELETE"""
+        query = arguments.get("query", "")
+
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+        rows_affected = cursor.rowcount
+        cursor.close()
+
+        result = {
+            "success": True,
+            "rows_affected": rows_affected,
+            "message": f"{rows_affected} linha(s) afetada(s)"
+        }
+
+        return [TextContent(
+            type="text",
+            text=json.dumps(result, indent=2, ensure_ascii=False)
+        )]
+
+    async def list_tables(self) -> list[TextContent]:
+        """Lista todas as tabelas"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SHOW TABLES")
+        tables = cursor.fetchall()
+        cursor.close()
+
+        table_list = [table[0] for table in tables]
+
+        result = {
+            "success": True,
+            "table_count": len(table_list),
+            "tables": table_list
+        }
+
+        return [TextContent(
+            type="text",
+            text=json.dumps(result, indent=2, ensure_ascii=False)
+        )]
+
+    async def describe_table(self, arguments: dict) -> list[TextContent]:
+        """Descreve a estrutura de uma tabela"""
+        table_name = arguments.get("table_name", "")
+
+        conn = self.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(f"DESCRIBE {table_name}")
+        columns = cursor.fetchall()
+        cursor.close()
+
+        result = {
+            "success": True,
+            "table": table_name,
+            "columns": columns
+        }
+
+        return [TextContent(
+            type="text",
+            text=json.dumps(result, indent=2, ensure_ascii=False)
+        )]
+
+    async def get_table_count(self, arguments: dict) -> list[TextContent]:
+        """Retorna o número de registros em uma tabela"""
+        table_name = arguments.get("table_name", "")
+
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT COUNT(*) FROM {table_name}")
+        count = cursor.fetchone()[0]
+        cursor.close()
+
+        result = {
+            "success": True,
+            "table": table_name,
+            "count": count
+        }
+
+        return [TextContent(
+            type="text",
+            text=json.dumps(result, indent=2, ensure_ascii=False)
+        )]
+
+    async def search_table(self, arguments: dict) -> list[TextContent]:
+        """Busca em uma tabela"""
+        table_name = arguments.get("table_name", "")
+        search_value = arguments.get("search_value", "")
+        limit = arguments.get("limit", 50)
+
+        # Obtém as colunas da tabela
+        conn = self.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(f"DESCRIBE {table_name}")
+        columns = cursor.fetchall()
+
+        # Constrói a query de busca
+        column_names = [col['Field'] for col in columns]
+        where_clauses = [f"{col} LIKE %s" for col in column_names]
+        where_sql = " OR ".join(where_clauses)
+
+        query = f"SELECT * FROM {table_name} WHERE {where_sql} LIMIT {limit}"
+        params = [f"%{search_value}%"] * len(column_names)
+
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        cursor.close()
+
+        result = {
+            "success": True,
+            "table": table_name,
+            "search_value": search_value,
+            "row_count": len(rows),
+            "data": rows
+        }
+
+        return [TextContent(
+            type="text",
+            text=json.dumps(result, indent=2, default=str, ensure_ascii=False)
+        )]
+
+    async def run(self):
+        """Inicia o servidor MCP"""
+        async with stdio_server() as (read_stream, write_stream):
+            await self.server.run(
+                read_stream,
+                write_stream,
+                InitializationOptions(
+                    server_name="mysql-aione",
+                    server_version="1.0.0",
+                    capabilities=self.server.get_capabilities(
+                        notification_options=NotificationOptions(),
+                        experimental_capabilities={}
+                    )
+                )
+            )
+
+async def main():
+    """Função principal"""
+    server = MySQLMCPServer()
+    await server.run()
+
+if __name__ == "__main__":
+    asyncio.run(main())

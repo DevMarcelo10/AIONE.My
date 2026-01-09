@@ -234,11 +234,11 @@ begin
          if MostraMsg('Confirmação', 'Deseja realmente excluir esta compra?', mtConfirmation, [mbYes, mbNo]) = mrYes then
          begin
             try
-               SQL.Clear;
-               SQL.Add('DELETE FROM arqcompra WHERE IDComp = '   +recIDComp.ToString+';');
-               SQL.Add('DELETE FROM arqcompraite WHERE IDComp = '+recIDComp.ToString+';');
-               SQL.Add('DELETE FROM arqcomprasub WHERE IDComp = '+recIDComp.ToString+';');
-               ExecSQL;
+               //SQL.Clear;
+               //SQL.Add('DELETE FROM arqcompra WHERE IDComp = '   +recIDComp.ToString+';');
+               //SQL.Add('DELETE FROM arqcompraite WHERE IDComp = '+recIDComp.ToString+';');
+               //SQL.Add('DELETE FROM arqcomprasub WHERE IDComp = '+recIDComp.ToString+';');
+               //ExecSQL;
                Self.Close;
             except
                on E:Exception do

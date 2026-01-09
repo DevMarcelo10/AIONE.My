@@ -1,0 +1,457 @@
+# CLAUDE.md
+
+Este arquivo fornece orientações para o Claude Code (claude.ai/code) ao trabalhar com o código neste repositório.
+
+## Comportamento
+- Converse em Português brasileiro
+- Execute correções diretamente sem pedir confirmação quando for óbvio
+- Apenas pergunte quando houver ambiguidade real
+- Assuma que tenho contexto completo do projeto Delphi/MySQL
+- Não explique o que vai fazer, apenas faça (exceto mudanças estruturais grandes)
+
+## Visão Geral do Projeto
+
+AIONE.My é um sistema completo de gestão para farmácias (ERP), desenvolvido em Delphi, com arquitetura cliente-servidor e comunicação baseada em REST. O sistema gerencia vendas, estoque, compras, operações financeiras, conformidade fiscal (NF-e/NFC-e do Brasil) e integra recursos de Inteligência Artificial para recomendações inteligentes.
+
+**Linguagem:** Delphi RAD 12.1 (Object Pascal)
+**Framework:** VCL (Visual Component Library)
+**Arquitetura:** Multi-camadas REST cliente-servidor com domínios de negócio modulares
+**Banco de Dados:** MySQL acessado via protocolo REST-DW e FireDAC
+
+## Comandos de Build
+
+Este é um projeto em Delphi, não há ferramentas de build por linha de comando configuradas. A compilação deve ser feita usando a IDE do Delphi.
+
+1. Abra `AiONE.dproj` no Delphi (versão 11.3 ou superior recomendada)
+2. Build → Build AiONE (F9 para compilar e executar)
+3. Para o servidor: Abra `Server\IAServer.dproj` e compile separadamente
+
+**Saída:** O executável é gerado no diretório raiz como `AIONE.exe`
+
+## Arquitetura de Alto Nível
+
+### Organização dos Módulos
+
+A base de código usa uma **estrutura modular orientada a domínio** com diretórios prefixados com `uni*`:
+
+- **uniAuxilia/** - Serviços auxiliares (configuração, logging, integração IA, utilitários)
+- **uniProduto/** - Gerenciamento do catálogo de produtos (produtos, códigos EAN, grupos, kits, localizações de estoque)
+- **uniVendas/** - Operações de vendas (pedidos, PDV, manipulação de receitas, precificação de entregas)
+- **uniFinan/** - Gestão financeira (faturas, pagamentos, conciliação bancária, PIX, boletos)
+- **uniCompra/** - Fluxos de pedidos de compra e recebimento
+- **uniPessoa/** - Gerenciamento de pessoas/clientes/fornecedores
+- **uniConve/** - Gerenciamento de convênios/acordos (planos de saúde, contas corporativas)
+- **uniPromo/** - Regras promocionais e descontos progressivos
+- **uniDesco/** - Gerenciamento de descontos por produto/grupo/cliente/convênio
+- **uniComi/** - Cálculo de comissões para vendedores
+- **uniCaixa/** - Operações de caixa (PDV/caixa)
+- **uniSNGPC/** - Conformidade com substâncias controladas (relatórios governamentais)
+- **uniFatura/** - Geração de notas fiscais (NF-e/NF-Ce eletrônicas)
+
+### Pontos de Entrada Principais
+
+- **Aplicação Principal:** `AIONE.dpr` - Cria o módulo de dados (TDM) e formulário principal (TFrmPrincipal)
+- **Módulo de Dados:** `uDM.pas` - Acesso central aos dados, conexões REST e componentes compartilhados
+- **Formulário Principal:** `uPrincipal.pas` - Shell da aplicação e sistema de menus
+- **Constantes:** `uniAuxilia\uConst.pas` - Variáveis globais, estruturas de dados, configuração do servidor
+- **Utilitários:** `uniAuxilia\uLibFarm.pas` - Funções auxiliares comuns
+
+### Arquitetura do Servidor
+
+**Servidor REST Principal (IAServer.exe)**
+- Localizado no diretório `Server/`
+- Ponto de entrada: `Server\IAServer.dpr`
+- Porta padrão: 8093 (configurável)
+- Gerencia operações de banco de dados via FireDAC → MySQL
+- Manipuladores de eventos customizados para operações de IA, transferências de arquivos, verificações de versão
+
+**Servidores Adicionais:**
+- `ServerFar/` - Servidor variante específico para farmácias
+- `Roteirizador/` - Sistema de roteirização de entregas com múltiplos apps
+- `API_Conv/` - API de sincronização de dados de convênios
+
+### Padrão de Acesso ao Banco de Dados
+
+**Primário:** Protocolo REST-DW
+```
+Cliente (AIONE.exe)
+  → TRESTDWIdClientPooler (Pool de conexões)
+    → REST API (localhost:8093 ou ns1.aione.com.br)
+      → IAServer.exe
+        → FireDAC (TFDConnection)
+          → Banco de Dados MySQL
+```
+
+**Secundário:** Conexão direta FireDAC para operações específicas
+
+**Componentes Principais em uDM.pas:**
+- `DWDataBase: TRESTDWIdDatabase` - Conexão REST primária ao banco de dados
+- `RESTClientPooler: TRESTDWIdClientPooler` - Pooler de servidor Local/LAN
+- `RESTClientAIONE: TRESTDWIdClientPooler` - Servidor de backup em nuvem (ns1.aione.com.br)
+- `FDConnect: TFDConnection` - Conexão MySQL direta de fallback
+
+**Configuração:** IP/porta do servidor armazenados em `config.ini` (criado automaticamente se não existir)
+
+### Estruturas de Dados Importantes (uConst.pas)
+
+```pascal
+TEmpresa - Informações da empresa/farmácia (CNPJ, endereço, IDs fiscais)
+TArqPedidoIte - Item de linha de pedido de venda com preços, descontos, promoções
+TArqConvenio - Regras de convênio/acordo (prazos de pagamento, limites de crédito)
+TNFSalvar - Dados de nota fiscal NF-e para envio ao governo
+```
+
+**Variáveis Globais:**
+- `EMPRESA: TEmpresa` - Detalhes da farmácia atual carregados no startup
+- `FILIAL: Integer` - ID da filial/localização atual
+- `IPRemoto/PortaRemoto` - Conexão do servidor REST (carregado do config.ini)
+- `IPAIONE` - Endereço do servidor em nuvem: 'ns1.aione.com.br'
+- `DWUser = 'restuser'` - Usuário REST-DW padrão do banco de dados
+
+## Bibliotecas de Terceiros
+
+**Banco de Dados & REST:**
+- REST-DW (uRESTDW*) - Framework primário de comunicação cliente-servidor
+- FireDAC - Conectividade universal de banco de dados
+- Indy (IdHTTP, IdTCPClient) - Comunicações HTTP e socket
+
+**Conformidade Fiscal Brasileira:**
+- TecnoSpeed (spdNFe, spdNFCe) - Processo principal de componentes especializados que é usado pelo nosso sistema para geração de NF-e/NF-Ce
+- Componentes ACBr (ACBrNFe, ACBrBoleto, ACBrCEP) - Notas fiscais eletrônicas e boletos de pagamento (processo secundário)
+
+**Componentes de UI:**
+- LMD Tools Suite (lmdrt*) - Componentes visuais avançados (grids, painéis, listas de imagens)
+- Componentes VCL padrão
+
+**Integração com IA:**
+- Integração com API OpenAI (classe TOpenAIChat customizada)
+- Integração com API DeepSeek
+- Localizado em `uniAuxilia\IABase.pas` e módulos específicos de IA
+
+**MarcLib - Biblioteca de Utilitários Customizada:**
+- Localização: `C:\Program Files (x86)\Embarcadero\MarcLib\MarcLib.pas`
+- Biblioteca pessoal de utilitários do desenvolvedor, com mais de 100 funções auxiliares
+- Amplamente utilizada em todo o sistema
+- Pode sugerir alternativas quando mais apropriado, mas dê preferência à MarcLib quando disponível
+
+## Diretrizes de Desenvolvimento
+
+### Convenções de Nomenclatura de Módulos
+
+- Formulários: `uXxxxxxx.pas` / classe `TFrmXxxxxxx`
+- Diálogos de busca: `uBuscaXxx.pas` / `TFrmBuscaXxx`
+- Formulários de detalhe/edição: `uXxxxxxCad.pas` / `TFrmXxxCad`
+- Cada formulário tem um arquivo `.dfm` correspondente (designer visual)
+
+### Preferências de Estilo de Código
+
+**IMPORTANTE:** Estas são as regras de estilo de código preferidas do desenvolvedor. Sempre siga estas diretrizes ao escrever código:
+
+**Indentação:**
+- **Use 3 espaços para indentação** (não 2 nem 4)
+- Nunca use tabulações, sempre espaços
+- Exemplo:
+```pascal
+procedure TFrmExample.DoSomething;
+begin
+   if Condition then
+   begin
+      // Código aqui com indentação de 3 espaços
+      DoAction;
+   end;
+end;
+```
+
+**Outras Regras de Estilo:**
+- Sempre use blocos `begin`/`end` mesmo para instruções únicas
+- Libere objetos com `FreeAndNil(Obj)` em vez de `Obj.Free`
+- Use blocos try-finally para toda limpeza de recursos
+- Prefira código explícito em vez de comportamento implícito
+
+### Padrões de Consulta ao Banco de Dados
+
+Ao criar consultas REST:
+```pascal
+var
+  Qry: TRESTDWClientSQL;
+begin
+  Qry := TRESTDWClientSQL.Create(nil);
+  Qry.DataBase := DM.DWDataBase;
+  try
+    Qry.SQL.Text := 'SELECT * FROM tabela WHERE condicao';
+    Qry.Open;
+    // Processar dados
+  finally
+    Qry.Close;
+    FreeAndNil(Qry);
+  end;
+end;
+```
+
+**IMPORTANTE:** Sempre declare `uRESTDWBasicDB` na cláusula uses ao usar TRESTDWClientSQL e componentes relacionados.
+
+### Framework REST-DW - Guia Completo
+
+**Versão:** REST-DW 2.0.7 (RESTDataWare)
+**Localização:** `C:\Program Files (x86)\Embarcadero\RESTDW11`
+**Documentação:** A pasta Demos contém exemplos completos
+
+#### Componentes Principais
+
+**Lado Cliente:**
+- `TRESTDWIdDatabase` - Conexão principal do banco de dados REST
+- `TRESTDWClientSQL` - Execução de consultas via REST (requer `uRESTDWBasicDB` nos uses)
+- `TRESTDWIdClientPooler` - Pooler de conexão para eventos
+- `TRESTDWClientEvents` - Chamador de eventos customizados do servidor
+
+**Lado Servidor:**
+- `TRESTDWIdServicePooler` - Componente principal do servidor
+- `TServerMethodDataModule` - Módulo de dados do servidor (estende TDataModule)
+- `TRESTDWPoolerDB` - Pooler de conexão do banco de dados
+- `TRESTDWServerEvents` - Manipuladores de eventos customizados
+- `TRESTDWFireDACDriver` - Driver de integração FireDAC
+
+#### Padrão de Consulta Padrão (SELECT)
+
+```pascal
+var
+  Qry: TRESTDWClientSQL;
+begin
+  Qry := TRESTDWClientSQL.Create(nil);
+  Qry.DataBase := DM.DWDataBase;
+  try
+    Qry.SQL.Clear;
+    Qry.SQL.Add('SELECT * FROM tabela WHERE campo = :param');
+    Qry.ParamByName('param').AsString := valor;
+    Qry.Open;
+
+    // Processar dados
+    while not Qry.Eof do
+    begin
+      // Use Qry.FieldByName('campo').AsString
+      Qry.Next;
+    end;
+  finally
+    Qry.Close;
+    FreeAndNil(Qry);
+  end;
+end;
+```
+
+#### Operações CRUD
+
+**INSERT:**
+```pascal
+Qry.Insert;
+Qry.FieldByName('campo').AsString := 'valor';
+Qry.Post;
+
+var vError: String;
+if not Qry.ApplyUpdates(vError) then
+  ShowMessage('Erro: ' + vError);
+```
+
+**UPDATE:**
+```pascal
+Qry.Edit;
+Qry.FieldByName('campo').AsString := 'novo valor';
+Qry.Post;
+
+var vError: String;
+if not Qry.ApplyUpdates(vError) then
+  ShowMessage('Erro: ' + vError);
+```
+
+**DELETE:**
+```pascal
+Qry.Delete;
+
+var vError: String;
+if not Qry.ApplyUpdates(vError) then
+  ShowMessage('Erro: ' + vError);
+```
+
+**EXECSQL (comandos que não retornam dados):**
+```pascal
+Qry.Close;
+Qry.SQL.Clear;
+Qry.SQL.Add('UPDATE tabela SET campo = :valor WHERE id = :id');
+Qry.ParamByName('valor').AsString := 'novo';
+Qry.ParamByName('id').AsInteger := 123;
+
+var vError: String;
+if not Qry.ExecSQL(vError) then
+  ShowMessage('Erro: ' + vError)
+else
+  ShowMessage(Format('Linhas afetadas: %d', [Qry.RowsAffected]));
+```
+
+#### Propriedades de Configuração Importantes
+
+**Para operações UPDATE/INSERT/DELETE:**
+```pascal
+Qry.UpdateTableName := 'nome_da_tabela';  // Obrigatório para operações DML
+Qry.FieldByName('id').ProviderFlags := [pfInUpdate, pfInWhere, pfInKey];  // Marcar chave primária
+```
+
+**Configurações de conexão:**
+```pascal
+// Conexão do banco de dados
+DM.DWDataBase.PoolerService := '127.0.0.1';  // ou ns1.aione.com.br
+DM.DWDataBase.PoolerPort := 8093;
+DM.DWDataBase.Compression := True;
+DM.DWDataBase.Open;
+
+// Pooler para eventos
+DM.RESTClientPooler.Host := '127.0.0.1';
+DM.RESTClientPooler.Port := 8093;
+DM.RESTClientPooler.DataCompression := True;
+```
+
+#### Eventos Customizados do Servidor
+
+**Lado servidor (definir evento):**
+```pascal
+procedure TServerMethodDM.RESTDWServerEvents1EventsgetdataReplyEvent(
+  var Params: TRESTDWParams; var Result: string);
+var
+  JSONValue: TRESTDWJSONValue;
+begin
+  JSONValue := TRESTDWJSONValue.Create;
+  try
+    FDQuery1.Close;
+    FDQuery1.SQL.Text := 'SELECT * FROM tabela';
+    FDQuery1.Open;
+
+    JSONValue.LoadFromDataset('dados', FDQuery1, False, dmDataware);
+    Params.ItemsString['result'].AsObject := JSONValue.ToJson;
+  finally
+    JSONValue.Free;
+  end;
+end;
+```
+
+**Lado cliente (chamar evento):**
+```pascal
+var
+  dwParams: TRESTDWParams;
+  vError, vResult: String;
+begin
+  DM.RESTClientEvents.CreateDWParams('getdata', dwParams);
+  try
+    DM.RESTClientEvents.SendEvent('getdata', dwParams, vError, vResult);
+    if vError = '' then
+      ShowMessage(vResult)
+    else
+      ShowMessage('Erro: ' + vError);
+  finally
+    dwParams.Free;
+  end;
+end;
+```
+
+#### Trabalhando com Parâmetros
+
+**Enviar parâmetros ao servidor:**
+```pascal
+dwParams.ItemsString['parametro'].AsString := 'valor';
+dwParams.ItemsString['numero'].AsInteger := 123;
+dwParams.ItemsString['data'].AsDateTime := Now;
+```
+
+**Receber parâmetros no servidor:**
+```pascal
+if Params.ItemsString['parametro'] <> nil then
+  vValor := Params.ItemsString['parametro'].AsString;
+```
+
+#### Melhores Práticas
+
+1. **Sempre use try-finally** para gerenciamento de memória
+2. **Feche as consultas** antes de reabrir: `Qry.Close; Qry.SQL.Clear;`
+3. **Use consultas parametrizadas** para prevenir injeção SQL
+4. **Verifique o resultado de ApplyUpdates** e trate erros apropriadamente
+5. **Reutilize conexões de banco de dados** - não crie novas por consulta
+6. **Habilite compressão** para melhor performance: `Compression := True`
+7. **Defina UpdateTableName** ao fazer INSERT/UPDATE/DELETE
+8. **Marque chaves primárias** com ProviderFlags para atualizações corretas
+
+#### Erros Comuns e Soluções
+
+**Erro: "UpdateTableName not defined"**
+- Solução: Defina `Qry.UpdateTableName := 'nome_tabela'` antes de Post/ApplyUpdates
+
+**Erro: "No records updated"**
+- Solução: Verifique ProviderFlags nos campos chave: `[pfInUpdate, pfInWhere, pfInKey]`
+
+**Erro: "Access violation on Free"**
+- Solução: Use `FreeAndNil(Qry)` em vez de `Qry.Free`
+
+**Timeout de conexão:**
+- Solução: Verifique se o servidor está rodando, verifique IP/porta no config.ini
+
+### Gerenciamento de Configuração
+
+- Conexão do servidor: Leitura/escrita via classe `uConfgIni.TConfigManager`
+- Configurações da aplicação: Armazenadas na tabela MySQL `arqparametros`
+- Preferências do usuário: Carregadas durante a inicialização `uDM.DataModuleCreate`
+
+### Ciclo de Vida dos Formulários
+
+1. Formulários são auto-criados listando-os na cláusula uses de `AIONE.dpr`
+2. Módulo de dados (TDM) é criado primeiro e acessível via variável global `DM`
+3. Formulário principal (FrmPrincipal) atua como pai MDI
+4. Formulários filhos carregam dados nos eventos `FormCreate` ou `FormShow`
+5. Sempre libere objetos de consulta em blocos try-finally
+
+### Tratamento de Erros e Logging
+
+- Use `SalvaLog(USUARIO, PastaLog, 'mensagem')` de `uLibFarm.pas` para logging
+- Arquivos de log armazenados no subdiretório `doc/`
+- Exiba mensagens ao usuário via função `MostraMsg()` (definida em uLibFarm)
+- Erros de banco de dados: Verifique `ER_DUP_KEY = 1062` (violação de chave duplicada)
+
+### Trabalhando com Documentos Fiscais (NF-e/NF-Ce)
+
+- Geração de NF-e: Use componente `spdNFe` no DM (SPEDWiz) ou `ACBrNFe`
+- Geração de NF-Ce: Use componente `spdNFCe` no DM
+- Certificados digitais: Gerenciados via `uniFatura\uCertificados.pas`
+- Manipuladores de eventos: `uniFatura\uNFEven.pas` (cancelamento, correção, etc.)
+
+### Recursos de IA/ML
+
+- Classe base de IA: `uniAuxilia\IABase.pas`
+- Recomendações de promoções: `uniPromo\uIAPromo.pas`
+- Sugestões de clientes: `uniVendas\uIAVendaCli.pas`
+- Busca de produtos: `uniVendas\uIAVendaPro.pas`
+- Integração com API Weather: `uniAuxilia\WeatherAPI.pas`
+
+## Armadilhas Comuns
+
+1. **Nunca ignore o REST-DW na aplicação cliente** - Sempre use DM.DWDataBase, não conexões diretas MySQL (FDConnect é apenas para o servidor)
+2. **Pool de conexões** - Use poolers existentes (RESTClientPooler/RESTClientAIONE), não crie novas conexões por consulta
+3. **Memory leaks** - Sempre libere consultas TRESTDWClientSQL em blocos try-finally
+4. **Estado global** - Esteja ciente das variáveis globais em uConst.pas (EMPRESA, FILIAL, etc.) inicializadas no startup
+5. **Criação de formulários** - Formulários listados no .dpr são auto-criados; não crie duplicatas manualmente
+6. **Codificação** - Sistema usa UTF-8 para strings de banco de dados; cuidado com caracteres especiais em Português Brasileiro
+7. **Escala DPI** - Use GlobalScaleFactor e BaseRowHeight para displays de alto DPI
+8. **Instância única** - Aplicação verifica instância existente via FindWindow em uDM.DataModuleCreate
+
+## Subsistemas Especializados
+
+### Conformidade SNGPC (uniSNGPC/)
+Relatórios governamentais para substâncias controladas:
+- Rastreamento de vendas: `uVendasInc.pas`, `uVenda.pas`
+- Movimentações de estoque: `uSNEstoque.pas`
+- Perdas: `uPerdasInc.pas`, `uPerdas.pas`
+- Transmissão: `uTransmite.pas`
+
+### Sistema de Entregas (Roteirizador/)
+Conjunto separado de aplicações para otimização de rotas de entrega com integração GIS.
+
+### Módulo Omnia AI (Omnia/)
+Análise semântica e busca de produtos com IA, utilizando as APIs da OpenAI/DeepSeek com engenharia de prompts personalizada.
+
+## Testes
+
+Atualmente, não há uma suíte de testes automatizados configurada. Os testes são realizados manualmente por meio do depurador da IDE do Delphi e validação no ambiente de produção.

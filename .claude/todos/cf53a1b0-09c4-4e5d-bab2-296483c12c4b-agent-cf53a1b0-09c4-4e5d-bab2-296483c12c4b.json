@@ -1,0 +1,17 @@
+[
+  {
+    "content": "Corrigir endpoint /ultimo-produto que retorna NULL",
+    "status": "completed",
+    "activeForm": "Corrigindo endpoint ultimo-produto"
+  },
+  {
+    "content": "Corrigir lógica de FLastProdutoID no widget",
+    "status": "completed",
+    "activeForm": "Corrigindo lógica de cache"
+  },
+  {
+    "content": "Testar detecção pelo widget após reiniciar",
+    "status": "in_progress",
+    "activeForm": "Testando detecção pelo widget"
+  }
+]

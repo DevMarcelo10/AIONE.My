@@ -1,0 +1,374 @@
+unit uCopilotAPI;
+
+interface
+
+uses
+   System.SysUtils, System.Classes, System.JSON, System.Net.HttpClient, System.Net.URLClient,
+   System.NetEncoding;
+
+type
+   TCopilotAPI = class
+   private
+      FBaseURL: string;
+      FSessionID: string;
+      FClienteID: Integer;
+      FVendaID: Integer;
+      FFilialID: Integer;
+      FHttpClient: THTTPClient;
+      function DoRequest(const AMethod, AEndpoint: string;
+         const ABody: string = ''): string;
+      function GetHeaders: TArray<TNameValuePair>;
+   public
+      constructor Create;
+      destructor Destroy; override;
+
+      // Chat
+      function SendChatMessage(const AMessage: string): string;
+      function GetChatHistory: string;
+      procedure ClearChat;
+
+      // Sugestoes
+      function GetSuggestions: string;
+      function GetGenericosForProduct(const AProdutoID: Integer): string;
+      function GetSimilaresForProduct(const AProdutoID: Integer): string;
+      function GetCrossSellingForCart: string;
+
+      // Alertas
+      function GetAlerts: string;
+      function GetClienteAlerts: string;
+      function GetEstoqueAlerts: string;
+
+      // Cliente
+      function SearchCliente(const ATermo: string): string;
+      function GetCliente(const AClienteID: Integer): string;
+      function GetClienteHistorico(const AClienteID: Integer): string;
+
+      // Produto
+      function SearchProduto(const ATermo: string): string;
+      function GetProduto(const AProdutoID: Integer): string;
+      function GetProdutoByEAN(const AEAN: string): string;
+
+      // Informacoes Farmaceuticas
+      function GetMedicamentoInfo(const AProdutoID: Integer): string;
+      function GetMedicamentoInfoByEAN(const AEAN: string): string;
+      function GetMedicamentoInfoByPrincipio(const APrincipio: string): string;
+
+      // Health
+      function TestConnection: Boolean;
+      function GetHealthStatus: string;
+
+      // Status / Cores
+      function GetCopilotStatus: string;
+      function GetUltimoProduto: string;
+
+      // Configuracao de Terminal
+      function GetTables: string;
+      function GetColumns(const ATabela: string): string;
+      function TestTerminalConfig(AConfig: TJSONObject): string;
+      procedure SaveTerminalConfig(AConfig: TJSONObject);
+      function GetTerminalConfig: string;
+
+      // Propriedades
+      property BaseURL: string read FBaseURL write FBaseURL;
+      property SessionID: string read FSessionID write FSessionID;
+      property ClienteID: Integer read FClienteID write FClienteID;
+      property VendaID: Integer read FVendaID write FVendaID;
+      property FilialID: Integer read FFilialID write FFilialID;
+   end;
+
+var
+   CopilotAPI: TCopilotAPI;
+
+implementation
+
+{ TCopilotAPI }
+
+constructor TCopilotAPI.Create;
+begin
+   inherited Create;
+   FBaseURL := 'http://localhost:8000';
+   FSessionID := '';
+   FClienteID := 0;
+   FVendaID := 0;
+   FFilialID := 1;
+   FHttpClient := THTTPClient.Create;
+   FHttpClient.ConnectionTimeout := 10000;
+   FHttpClient.ResponseTimeout := 30000;
+end;
+
+destructor TCopilotAPI.Destroy;
+begin
+   FreeAndNil(FHttpClient);
+   inherited;
+end;
+
+function TCopilotAPI.GetHeaders: TArray<TNameValuePair>;
+begin
+   SetLength(Result, 2);
+   Result[0] := TNameValuePair.Create('Content-Type', 'application/json');
+   Result[1] := TNameValuePair.Create('Accept', 'application/json');
+   if FSessionID <> '' then
+   begin
+      SetLength(Result, 3);
+      Result[2] := TNameValuePair.Create('X-Session-ID', FSessionID);
+   end;
+end;
+
+function TCopilotAPI.DoRequest(const AMethod, AEndpoint: string;
+   const ABody: string): string;
+var
+   Response: IHTTPResponse;
+   URL: string;
+   Content: TStringStream;
+begin
+   URL := FBaseURL + AEndpoint;
+   Content := nil;
+
+   try
+      if ABody <> '' then
+         Content := TStringStream.Create(ABody, TEncoding.UTF8);
+
+      if AMethod = 'GET' then
+         Response := FHttpClient.Get(URL, nil, GetHeaders)
+      else if AMethod = 'POST' then
+         Response := FHttpClient.Post(URL, Content, nil, GetHeaders)
+      else if AMethod = 'PUT' then
+         Response := FHttpClient.Put(URL, Content, nil, GetHeaders)
+      else if AMethod = 'DELETE' then
+         Response := FHttpClient.Delete(URL, nil, GetHeaders)
+      else
+         raise Exception.Create('Metodo HTTP nao suportado: ' + AMethod);
+
+      if (Response.StatusCode >= 200) and (Response.StatusCode < 300) then
+         Result := Response.ContentAsString(TEncoding.UTF8)
+      else
+         raise Exception.CreateFmt('Erro HTTP %d: %s',
+            [Response.StatusCode, Response.StatusText]);
+   finally
+      if Assigned(Content) then Content.Free;
+   end;
+end;
+
+// ============================================
+// CHAT
+// ============================================
+
+function TCopilotAPI.SendChatMessage(const AMessage: string): string;
+var
+   Body: TJSONObject;
+begin
+   Body := TJSONObject.Create;
+   try
+      Body.AddPair('message', AMessage);
+      Body.AddPair('cliente_id', TJSONNumber.Create(FClienteID));
+      Body.AddPair('venda_id', TJSONNumber.Create(FVendaID));
+      Body.AddPair('filial_id', TJSONNumber.Create(FFilialID));
+
+      if FSessionID <> '' then
+         Body.AddPair('session_id', FSessionID);
+
+      Result := DoRequest('POST', '/api/v1/chat/', Body.ToString);
+
+      // Extrai session_id da resposta para manter sessao
+      var ResponseJSON := TJSONObject.ParseJSONValue(Result) as TJSONObject;
+      if Assigned(ResponseJSON) then
+      try
+         var NewSessionID: string;
+         if ResponseJSON.TryGetValue<string>('session_id', NewSessionID) then
+            FSessionID := NewSessionID;
+      finally
+         ResponseJSON.Free;
+      end;
+   finally
+      Body.Free;
+   end;
+end;
+
+function TCopilotAPI.GetChatHistory: string;
+begin
+   if FSessionID = '' then Exit('[]');
+   Result := DoRequest('GET', '/api/v1/chat/history?session_id=' + FSessionID);
+end;
+
+procedure TCopilotAPI.ClearChat;
+begin
+   FSessionID := '';
+end;
+
+// ============================================
+// SUGESTOES
+// ============================================
+
+function TCopilotAPI.GetSuggestions: string;
+begin
+   // Se tiver venda, busca sugestoes para a venda atual
+   if FVendaID > 0 then
+      Result := DoRequest('GET', Format('/api/v1/suggestions/venda-atual/%d?cliente_id=%d',
+         [FVendaID, FClienteID]))
+   else
+      Result := '[]';  // Sem contexto, retorna lista vazia
+end;
+
+function TCopilotAPI.GetGenericosForProduct(const AProdutoID: Integer): string;
+begin
+   Result := DoRequest('GET', Format('/api/v1/suggestions/genericos/%d', [AProdutoID]));
+end;
+
+function TCopilotAPI.GetSimilaresForProduct(const AProdutoID: Integer): string;
+begin
+   Result := DoRequest('GET', Format('/api/v1/suggestions/similares/%d', [AProdutoID]));
+end;
+
+function TCopilotAPI.GetCrossSellingForCart: string;
+begin
+   Result := DoRequest('GET', Format('/api/v1/suggestions/cross-sell/%d', [FVendaID]));
+end;
+
+// ============================================
+// ALERTAS
+// ============================================
+
+function TCopilotAPI.GetAlerts: string;
+begin
+   if FVendaID > 0 then
+      Result := DoRequest('GET', Format('/api/v1/alerts/venda/%d?cliente_id=%d',
+         [FVendaID, FClienteID]))
+   else
+      Result := '[]';
+end;
+
+function TCopilotAPI.GetClienteAlerts: string;
+begin
+   if FClienteID = 0 then Exit('[]');
+   Result := DoRequest('GET', Format('/api/v1/alerts/cliente/%d', [FClienteID]));
+end;
+
+function TCopilotAPI.GetEstoqueAlerts: string;
+begin
+   Result := DoRequest('GET', '/api/v1/alerts/estoque/vencendo');
+end;
+
+// ============================================
+// CLIENTE
+// ============================================
+
+function TCopilotAPI.SearchCliente(const ATermo: string): string;
+begin
+   Result := DoRequest('GET', '/api/cliente/search?termo=' +
+      TNetEncoding.URL.Encode(ATermo));
+end;
+
+function TCopilotAPI.GetCliente(const AClienteID: Integer): string;
+begin
+   Result := DoRequest('GET', Format('/api/cliente/%d', [AClienteID]));
+end;
+
+function TCopilotAPI.GetClienteHistorico(const AClienteID: Integer): string;
+begin
+   Result := DoRequest('GET', Format('/api/cliente/%d/historico', [AClienteID]));
+end;
+
+// ============================================
+// PRODUTO
+// ============================================
+
+function TCopilotAPI.SearchProduto(const ATermo: string): string;
+begin
+   Result := DoRequest('GET', '/api/produto/search?termo=' +
+      TNetEncoding.URL.Encode(ATermo));
+end;
+
+function TCopilotAPI.GetProduto(const AProdutoID: Integer): string;
+begin
+   Result := DoRequest('GET', Format('/api/produto/%d', [AProdutoID]));
+end;
+
+function TCopilotAPI.GetProdutoByEAN(const AEAN: string): string;
+begin
+   Result := DoRequest('GET', '/api/produto/ean/' + AEAN);
+end;
+
+// ============================================
+// INFORMACOES FARMACEUTICAS
+// ============================================
+
+function TCopilotAPI.GetMedicamentoInfo(const AProdutoID: Integer): string;
+begin
+   Result := DoRequest('GET', Format('/api/v1/medicamento-info/by-produto/%d', [AProdutoID]));
+end;
+
+function TCopilotAPI.GetMedicamentoInfoByEAN(const AEAN: string): string;
+begin
+   Result := DoRequest('GET', '/api/v1/medicamento-info/by-ean/' + AEAN);
+end;
+
+function TCopilotAPI.GetMedicamentoInfoByPrincipio(const APrincipio: string): string;
+begin
+   Result := DoRequest('GET', '/api/v1/medicamento-info/by-principio/' +
+      TNetEncoding.URL.Encode(APrincipio));
+end;
+
+// ============================================
+// HEALTH
+// ============================================
+
+function TCopilotAPI.TestConnection: Boolean;
+begin
+   try
+      GetHealthStatus;
+      Result := True;
+   except
+      Result := False;
+   end;
+end;
+
+function TCopilotAPI.GetHealthStatus: string;
+begin
+   Result := DoRequest('GET', '/health');
+end;
+
+// ============================================
+// STATUS / CORES
+// ============================================
+
+function TCopilotAPI.GetCopilotStatus: string;
+begin
+   Result := DoRequest('GET', Format('/api/v1/status?cliente_id=%d&venda_id=%d&filial_id=%d',
+      [FClienteID, FVendaID, FFilialID]));
+end;
+
+function TCopilotAPI.GetUltimoProduto: string;
+begin
+   Result := DoRequest('GET', Format('/api/v1/status/ultimo-produto?venda_id=%d', [FVendaID]));
+end;
+
+// ============================================
+// CONFIGURACAO DE TERMINAL
+// ============================================
+
+function TCopilotAPI.GetTables: string;
+begin
+   Result := DoRequest('GET', '/api/v1/config/tables');
+end;
+
+function TCopilotAPI.GetColumns(const ATabela: string): string;
+begin
+   Result := DoRequest('GET', '/api/v1/config/columns/' + TNetEncoding.URL.Encode(ATabela));
+end;
+
+function TCopilotAPI.TestTerminalConfig(AConfig: TJSONObject): string;
+begin
+   Result := DoRequest('POST', '/api/v1/config/terminal/test', AConfig.ToString);
+end;
+
+procedure TCopilotAPI.SaveTerminalConfig(AConfig: TJSONObject);
+begin
+   DoRequest('POST', '/api/v1/config/terminal', AConfig.ToString);
+end;
+
+function TCopilotAPI.GetTerminalConfig: string;
+begin
+   Result := DoRequest('GET', '/api/v1/config/terminal');
+end;
+
+end.

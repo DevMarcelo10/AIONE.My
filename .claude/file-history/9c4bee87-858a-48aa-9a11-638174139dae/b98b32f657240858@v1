@@ -1,0 +1,501 @@
+"""
+Servico de orientacoes farmaceuticas para o PharmaCopilot.
+
+Este servico processa informacoes de medicamentos e gera orientacoes
+personalizadas baseadas no perfil do cliente.
+"""
+
+from typing import Optional, List, Dict, Any
+from datetime import date, datetime
+import pymysql
+import structlog
+
+from config.settings import settings
+
+logger = structlog.get_logger()
+
+
+def get_copilot_connection():
+    """Obtem conexao com o banco copilot."""
+    return pymysql.connect(
+        host=settings.ERP_DB_HOST,
+        port=settings.ERP_DB_PORT,
+        user=settings.ERP_DB_USER,
+        password=settings.ERP_DB_PASSWORD,
+        database='copilot',
+        charset='utf8mb4',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+
+def get_erp_connection():
+    """Obtem conexao com o banco do ERP."""
+    return pymysql.connect(
+        host=settings.ERP_DB_HOST,
+        port=settings.ERP_DB_PORT,
+        user=settings.ERP_DB_USER,
+        password=settings.ERP_DB_PASSWORD,
+        database=settings.ERP_DB_NAME,
+        charset='utf8mb4',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+
+class OrientacaoService:
+    """Servico para gerar orientacoes farmaceuticas personalizadas."""
+
+    def __init__(self):
+        self.logger = structlog.get_logger()
+
+    def get_orientacao_por_produto(self, produto_id: int) -> Dict[str, Any]:
+        """
+        Busca orientacao completa para um produto.
+
+        Args:
+            produto_id: ID do produto no ERP
+
+        Returns:
+            Dict com orientacao_uso, posologia, horario_ideal, etc.
+        """
+        erp_conn = None
+        copilot_conn = None
+
+        try:
+            # Busca produto no ERP
+            erp_conn = get_erp_connection()
+            cursor = erp_conn.cursor()
+
+            cursor.execute("""
+                SELECT IDProd, Despro, CodEANpri
+                FROM arqproduto
+                WHERE IDProd = %s
+            """, (produto_id,))
+
+            produto = cursor.fetchone()
+            cursor.close()
+            erp_conn.close()
+            erp_conn = None
+
+            if not produto:
+                return {"found": False, "erro": "Produto nao encontrado"}
+
+            # Busca info farmaceutica no Copilot
+            copilot_conn = get_copilot_connection()
+            cursor = copilot_conn.cursor()
+
+            ean = produto.get('CodEANpri', '') or ''
+            nome = produto.get('Despro', '') or ''
+
+            info = self._buscar_info_medicamento(cursor, ean, nome)
+
+            cursor.close()
+            copilot_conn.close()
+            copilot_conn = None
+
+            if not info:
+                return {
+                    "found": False,
+                    "produto_id": produto['IDProd'],
+                    "produto_nome": produto['Despro']
+                }
+
+            return {
+                "found": True,
+                "produto_id": produto['IDProd'],
+                "produto_nome": produto['Despro'],
+                "orientacao": {
+                    "principio_ativo":       info.get('principio_ativo'),
+                    "nome_comercial":        info.get('nome_comercial'),
+                    "posologia":             info.get('posologia_padrao'),
+                    "orientacao_uso":        info.get('orientacao_uso'),
+                    "horario_ideal":         info.get('horario_ideal'),
+                    "armazenamento":         info.get('armazenamento'),
+                    "efeitos_colaterais":    info.get('efeitos_colaterais'),
+                    "interacao_alimentos":   info.get('interacao_alimentos'),
+                    "interacao_medicamentos": info.get('interacao_medicamentos'),
+                    "tipo_receita":          info.get('tipo_receita', 'livre'),
+                    "retem_receita":         bool(info.get('retem_receita', False))
+                }
+            }
+
+        except Exception as e:
+            self.logger.error("erro_orientacao_produto", erro=str(e), produto_id=produto_id)
+            return {"found": False, "erro": str(e)}
+        finally:
+            if erp_conn:
+                erp_conn.close()
+            if copilot_conn:
+                copilot_conn.close()
+
+    def get_orientacao_por_principio(self, principio_ativo: str) -> Dict[str, Any]:
+        """
+        Busca orientacao pelo principio ativo.
+
+        Args:
+            principio_ativo: Nome do principio ativo
+
+        Returns:
+            Dict com orientacoes do medicamento
+        """
+        conn = None
+        try:
+            conn = get_copilot_connection()
+            cursor = conn.cursor()
+
+            principio_upper = principio_ativo.upper().strip()
+            cursor.execute("""
+                SELECT * FROM copilot_medicamento_info
+                WHERE UPPER(principio_ativo) LIKE %s
+                ORDER BY
+                    CASE WHEN UPPER(principio_ativo) = %s THEN 0 ELSE 1 END,
+                    LENGTH(principio_ativo)
+                LIMIT 1
+            """, (f"%{principio_upper}%", principio_upper))
+
+            info = cursor.fetchone()
+            cursor.close()
+            conn.close()
+            conn = None
+
+            if not info:
+                return {"found": False}
+
+            return {
+                "found": True,
+                "orientacao": {
+                    "principio_ativo":       info.get('principio_ativo'),
+                    "nome_comercial":        info.get('nome_comercial'),
+                    "posologia":             info.get('posologia_padrao'),
+                    "orientacao_uso":        info.get('orientacao_uso'),
+                    "horario_ideal":         info.get('horario_ideal'),
+                    "armazenamento":         info.get('armazenamento'),
+                    "efeitos_colaterais":    info.get('efeitos_colaterais'),
+                    "interacao_alimentos":   info.get('interacao_alimentos'),
+                    "interacao_medicamentos": info.get('interacao_medicamentos'),
+                    "tipo_receita":          info.get('tipo_receita', 'livre'),
+                    "retem_receita":         bool(info.get('retem_receita', False))
+                }
+            }
+
+        except Exception as e:
+            self.logger.error("erro_orientacao_principio", erro=str(e), principio=principio_ativo)
+            return {"found": False, "erro": str(e)}
+        finally:
+            if conn:
+                conn.close()
+
+    def get_alertas_cliente(
+        self,
+        principio_ativo: str,
+        cliente_perfil: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
+        """
+        Gera alertas personalizados para um cliente baseado no perfil.
+
+        Args:
+            principio_ativo: Nome do principio ativo do medicamento
+            cliente_perfil: Dict com informacoes do cliente:
+                - idade: int (em anos)
+                - sexo: str ('M' ou 'F')
+                - gestante: bool
+                - lactante: bool
+                - insuf_renal: bool
+                - insuf_hepatica: bool
+
+        Returns:
+            Lista de alertas com severidade e mensagem
+        """
+        conn = None
+        alertas = []
+
+        try:
+            conn = get_copilot_connection()
+            cursor = conn.cursor()
+
+            principio_upper = principio_ativo.upper().strip()
+            cursor.execute("""
+                SELECT * FROM copilot_medicamento_info
+                WHERE UPPER(principio_ativo) LIKE %s
+                ORDER BY CASE WHEN UPPER(principio_ativo) = %s THEN 0 ELSE 1 END
+                LIMIT 1
+            """, (f"%{principio_upper}%", principio_upper))
+
+            info = cursor.fetchone()
+            cursor.close()
+            conn.close()
+            conn = None
+
+            if not info:
+                return alertas
+
+            # Idade / Idoso
+            idade = cliente_perfil.get('idade', 0)
+            if idade >= 65 and info.get('alerta_idoso'):
+                alertas.append({
+                    "tipo":       "idoso",
+                    "severidade": self._classificar_severidade(info['alerta_idoso']),
+                    "titulo":     "Atencao: Paciente Idoso",
+                    "mensagem":   info['alerta_idoso'],
+                    "icone":      "elderly"
+                })
+
+            # Pediatrico
+            if idade < 18 and info.get('alerta_pediatrico'):
+                alertas.append({
+                    "tipo":       "pediatrico",
+                    "severidade": self._classificar_severidade(info['alerta_pediatrico']),
+                    "titulo":     "Atencao: Paciente Pediatrico",
+                    "mensagem":   info['alerta_pediatrico'],
+                    "icone":      "child"
+                })
+
+            # Gestante
+            if cliente_perfil.get('gestante') and info.get('alerta_gestante'):
+                alertas.append({
+                    "tipo":       "gestante",
+                    "severidade": self._classificar_severidade(info['alerta_gestante']),
+                    "titulo":     "Alerta: Gestante",
+                    "mensagem":   info['alerta_gestante'],
+                    "icone":      "pregnant_woman"
+                })
+
+            # Lactante
+            if cliente_perfil.get('lactante') and info.get('alerta_lactante'):
+                alertas.append({
+                    "tipo":       "lactante",
+                    "severidade": self._classificar_severidade(info['alerta_lactante']),
+                    "titulo":     "Alerta: Lactante",
+                    "mensagem":   info['alerta_lactante'],
+                    "icone":      "breastfeeding"
+                })
+
+            # Insuficiencia Renal
+            if cliente_perfil.get('insuf_renal') and info.get('alerta_renal'):
+                alertas.append({
+                    "tipo":       "renal",
+                    "severidade": self._classificar_severidade(info['alerta_renal']),
+                    "titulo":     "Alerta: Insuficiencia Renal",
+                    "mensagem":   info['alerta_renal'],
+                    "icone":      "kidney"
+                })
+
+            # Insuficiencia Hepatica
+            if cliente_perfil.get('insuf_hepatica') and info.get('alerta_hepatico'):
+                alertas.append({
+                    "tipo":       "hepatico",
+                    "severidade": self._classificar_severidade(info['alerta_hepatico']),
+                    "titulo":     "Alerta: Insuficiencia Hepatica",
+                    "mensagem":   info['alerta_hepatico'],
+                    "icone":      "liver"
+                })
+
+            # Interacao com alimentos (sempre mostrar se existir)
+            if info.get('interacao_alimentos'):
+                alertas.append({
+                    "tipo":       "alimentacao",
+                    "severidade": "info",
+                    "titulo":     "Orientacao Alimentar",
+                    "mensagem":   info['interacao_alimentos'],
+                    "icone":      "restaurant"
+                })
+
+            return alertas
+
+        except Exception as e:
+            self.logger.error("erro_alertas_cliente", erro=str(e), principio=principio_ativo)
+            return alertas
+        finally:
+            if conn:
+                conn.close()
+
+    def get_alertas_venda(
+        self,
+        venda_id: int,
+        cliente_id: int
+    ) -> List[Dict[str, Any]]:
+        """
+        Analisa todos os produtos de uma venda e gera alertas consolidados.
+
+        Args:
+            venda_id: ID da venda
+            cliente_id: ID do cliente
+
+        Returns:
+            Lista de alertas para a venda
+        """
+        erp_conn = None
+        alertas = []
+
+        try:
+            erp_conn = get_erp_connection()
+            cursor = erp_conn.cursor()
+
+            # Busca perfil do cliente
+            cliente_perfil = self._get_cliente_perfil(cursor, cliente_id)
+
+            # Busca produtos da venda
+            cursor.execute("""
+                SELECT vi.IDProd, p.Despro, p.CodEANpri
+                FROM arqvendaite vi
+                JOIN arqproduto p ON vi.IDProd = p.IDProd
+                WHERE vi.IDVend = %s
+            """, (venda_id,))
+
+            produtos = cursor.fetchall()
+            cursor.close()
+            erp_conn.close()
+            erp_conn = None
+
+            # Gera alertas para cada produto
+            for produto in produtos:
+                nome = produto.get('Despro', '')
+                if nome:
+                    primeira_palavra = nome.upper().split()[0] if nome else ''
+                    if primeira_palavra and len(primeira_palavra) >= 4:
+                        produto_alertas = self.get_alertas_cliente(
+                            primeira_palavra,
+                            cliente_perfil
+                        )
+                        for alerta in produto_alertas:
+                            alerta['produto'] = nome
+                            alertas.append(alerta)
+
+            # Verifica interacoes entre medicamentos
+            interacoes = self._verificar_interacoes(produtos)
+            alertas.extend(interacoes)
+
+            return alertas
+
+        except Exception as e:
+            self.logger.error("erro_alertas_venda", erro=str(e), venda_id=venda_id)
+            return alertas
+        finally:
+            if erp_conn:
+                erp_conn.close()
+
+    def _buscar_info_medicamento(
+        self,
+        cursor,
+        ean: str,
+        nome_produto: str
+    ) -> Optional[Dict[str, Any]]:
+        """Busca info do medicamento por EAN ou nome."""
+        info = None
+
+        # Primeiro tenta pelo EAN
+        if ean:
+            cursor.execute("""
+                SELECT * FROM copilot_medicamento_info
+                WHERE ean = %s
+                LIMIT 1
+            """, (ean,))
+            info = cursor.fetchone()
+
+        # Se nao encontrou, tenta pelo nome
+        if not info and nome_produto:
+            nome_upper = nome_produto.upper().strip()
+            primeira_palavra = nome_upper.split()[0] if nome_upper else ''
+            if primeira_palavra and len(primeira_palavra) >= 4:
+                cursor.execute("""
+                    SELECT * FROM copilot_medicamento_info
+                    WHERE UPPER(principio_ativo) LIKE %s
+                       OR UPPER(nome_comercial) LIKE %s
+                    ORDER BY
+                        CASE
+                            WHEN UPPER(principio_ativo) LIKE %s THEN 0
+                            WHEN UPPER(nome_comercial) LIKE %s THEN 1
+                            ELSE 2
+                        END,
+                        LENGTH(principio_ativo)
+                    LIMIT 1
+                """, (f"%{primeira_palavra}%", f"%{primeira_palavra}%",
+                      f"{primeira_palavra}%", f"{primeira_palavra}%"))
+                info = cursor.fetchone()
+
+        return info
+
+    def _get_cliente_perfil(self, cursor, cliente_id: int) -> Dict[str, Any]:
+        """Obtem perfil do cliente para alertas."""
+        perfil = {
+            "idade":          0,
+            "sexo":           None,
+            "gestante":       False,
+            "lactante":       False,
+            "insuf_renal":    False,
+            "insuf_hepatica": False
+        }
+
+        if not cliente_id:
+            return perfil
+
+        try:
+            cursor.execute("""
+                SELECT NomPessoa, DatNas, Sexo
+                FROM arqpessoa
+                WHERE IDPessoa = %s
+            """, (cliente_id,))
+
+            cliente = cursor.fetchone()
+            if cliente:
+                # Calcula idade
+                if cliente.get('DatNas'):
+                    data_nasc = cliente['DatNas']
+                    if isinstance(data_nasc, (date, datetime)):
+                        hoje = date.today()
+                        idade = hoje.year - data_nasc.year
+                        if (hoje.month, hoje.day) < (data_nasc.month, data_nasc.day):
+                            idade -= 1
+                        perfil['idade'] = idade
+
+                perfil['sexo'] = cliente.get('Sexo')
+
+                # Gestante: mulher entre 15-50 anos (aproximado)
+                # Isso seria melhor se viesse do cadastro do cliente
+                if perfil['sexo'] == 'F' and 15 <= perfil['idade'] <= 50:
+                    # Poderia ter um campo no cadastro indicando gestacao
+                    pass
+
+        except Exception as e:
+            logger.warning("erro_perfil_cliente", erro=str(e), cliente_id=cliente_id)
+
+        return perfil
+
+    def _classificar_severidade(self, texto: str) -> str:
+        """Classifica a severidade baseada em palavras-chave."""
+        if not texto:
+            return "info"
+
+        texto_upper = texto.upper()
+
+        # Palavras que indicam alta severidade
+        palavras_criticas = [
+            'CONTRAINDICADO', 'PROIBIDO', 'EVITAR', 'NAO USAR',
+            'ALTO RISCO', 'GRAVE', 'DEPENDENCIA'
+        ]
+
+        # Palavras de alerta medio
+        palavras_warning = [
+            'CUIDADO', 'ATENCAO', 'REDUZIR', 'AJUSTAR', 'CAUTELA',
+            'MONITORAR', 'RISCO'
+        ]
+
+        for palavra in palavras_criticas:
+            if palavra in texto_upper:
+                return "danger"
+
+        for palavra in palavras_warning:
+            if palavra in texto_upper:
+                return "warning"
+
+        return "info"
+
+    def _verificar_interacoes(self, produtos: List[Dict]) -> List[Dict[str, Any]]:
+        """Verifica interacoes medicamentosas entre os produtos da venda."""
+        alertas = []
+        # TODO: Implementar verificacao de interacoes medicamentosas
+        # Isso requer uma base de dados de interacoes
+        return alertas
+
+
+# Instancia global do servico
+orientacao_service = OrientacaoService()

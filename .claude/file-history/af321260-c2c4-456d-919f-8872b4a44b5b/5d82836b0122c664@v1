@@ -1,0 +1,110 @@
+"""Popula tabela de interacoes medicamentosas para testes."""
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from sqlalchemy import create_engine, text
+from config.settings import settings
+
+# Interacoes conhecidas para farmacia
+INTERACOES = [
+    # Varfarina (Marevan) - anticoagulante, muitas interacoes
+    ("VARFARINA SÓDICA", "ACIDO ACETILSALICILICO", "grave",
+     "Risco aumentado de sangramento. AAS potencializa efeito anticoagulante da Varfarina.",
+     "Evitar uso concomitante. Se necessário, monitorar INR frequentemente."),
+
+    ("VARFARINA SÓDICA", "IBUPROFENO", "grave",
+     "AINEs aumentam risco de sangramento gastrointestinal com anticoagulantes.",
+     "Evitar AINEs. Se necessário, usar por menor tempo possível e monitorar."),
+
+    ("VARFARINA SÓDICA", "OMEPRAZOL", "moderada",
+     "Omeprazol pode aumentar efeito da Varfarina por inibicao enzimatica.",
+     "Monitorar INR. Considerar usar pantoprazol como alternativa."),
+
+    # Benzodiazepinicos
+    ("DIAZEPAM", "CLONAZEPAM", "moderada",
+     "Uso de dois benzodiazepinicos aumenta risco de sedacao excessiva e depressao respiratoria.",
+     "Evitar duplicidade. Revisar necessidade de ambos os medicamentos."),
+
+    ("DIAZEPAM", "FLUOXETINA", "moderada",
+     "Fluoxetina pode aumentar niveis de Diazepam por inibicao do CYP3A4.",
+     "Monitorar sedacao excessiva. Considerar reducao da dose de Diazepam."),
+
+    # IBPs - duplicidade
+    ("PANTOPRAZOL SÓDICO SESQUI-HIDRATADO", "OMEPRAZOL", "leve",
+     "Uso de dois inibidores de bomba de protons simultaneamente nao traz beneficio adicional.",
+     "Escolher apenas um IBP. Duplicidade desnecessaria."),
+
+    # Interacoes comuns
+    ("METFORMINA", "CONTRASTE IODADO", "contraindicada",
+     "Risco de acidose lactica. Metformina deve ser suspensa antes de exames com contraste.",
+     "Suspender Metformina 48h antes do exame e reintroduzir apos funcao renal normal."),
+
+    ("CIPROFLOXACINO", "TIZANIDINA", "contraindicada",
+     "Ciprofloxacino aumenta muito os niveis de Tizanidina - risco de hipotensao severa.",
+     "Combinacao contraindicada. Usar outro antibiotico ou outro relaxante muscular."),
+
+    ("SILDENAFILA", "NITRATO", "contraindicada",
+     "Hipotensao severa potencialmente fatal. Nitratos potencializam efeito hipotensor.",
+     "Combinacao absolutamente contraindicada. Intervalo minimo de 24h."),
+
+    # Mais interacoes graves
+    ("CLOPIDOGREL", "OMEPRAZOL", "moderada",
+     "Omeprazol reduz conversao de Clopidogrel em metabolito ativo.",
+     "Preferir Pantoprazol que tem menor interacao."),
+
+    ("SINVASTATINA", "AMIODARONA", "grave",
+     "Amiodarona aumenta niveis de Sinvastatina - risco de rabdomiolise.",
+     "Limitar Sinvastatina a 20mg/dia. Considerar outra estatina."),
+
+    ("METOCLOPRAMIDA", "HALOPERIDOL", "moderada",
+     "Ambos bloqueiam receptores dopaminergicos - risco de sintomas extrapiramidais.",
+     "Evitar uso prolongado. Monitorar rigidez muscular e tremores."),
+
+    ("TRAMADOL", "SERTRALINA", "grave",
+     "Risco de sindrome serotoninergica com uso concomitante.",
+     "Evitar combinacao. Se necessario, iniciar com doses baixas e monitorar."),
+
+    ("LÍTIO", "IBUPROFENO", "grave",
+     "AINEs reduzem excrecao renal de Litio, aumentando toxicidade.",
+     "Evitar AINEs. Se necessario, monitorar litemia frequentemente."),
+]
+
+def main():
+    # Conecta ao banco copilot
+    db_url = settings.COPILOT_DB_URL.replace("+aiomysql", "+pymysql")
+    print(f"Conectando a: {db_url}")
+
+    engine = create_engine(db_url, echo=True)
+
+    with engine.connect() as conn:
+        # Limpa interacoes anteriores
+        conn.execute(text("DELETE FROM copilot_interacao WHERE id > 0"))
+        conn.commit()
+        print("Tabela limpa.")
+
+        # Insere interacoes
+        for pa1, pa2, sev, desc, rec in INTERACOES:
+            # Insere nos dois sentidos para facilitar busca
+            conn.execute(text("""
+                INSERT INTO copilot_interacao
+                (principio_ativo_1, principio_ativo_2, severidade, descricao, recomendacao, fonte)
+                VALUES (:pa1, :pa2, :sev, :desc, :rec, 'manual')
+            """), {"pa1": pa1, "pa2": pa2, "sev": sev, "desc": desc, "rec": rec})
+
+            conn.execute(text("""
+                INSERT INTO copilot_interacao
+                (principio_ativo_1, principio_ativo_2, severidade, descricao, recomendacao, fonte)
+                VALUES (:pa1, :pa2, :sev, :desc, :rec, 'manual')
+            """), {"pa1": pa2, "pa2": pa1, "sev": sev, "desc": desc, "rec": rec})
+
+        conn.commit()
+        print(f"Inseridas {len(INTERACOES) * 2} interacoes.")
+
+        # Verifica
+        result = conn.execute(text("SELECT COUNT(*) as total FROM copilot_interacao"))
+        row = result.fetchone()
+        print(f"Total de interacoes na tabela: {row[0]}")
+
+if __name__ == "__main__":
+    main()

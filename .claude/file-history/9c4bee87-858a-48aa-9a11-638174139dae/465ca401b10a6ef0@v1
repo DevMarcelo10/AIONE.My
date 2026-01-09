@@ -1,0 +1,222 @@
+"""
+Endpoints de orientacoes farmaceuticas personalizadas.
+
+Diferente do medicamento_info que retorna dados brutos,
+este router processa e personaliza orientacoes baseado no perfil do cliente.
+"""
+
+from typing import Optional, List
+from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
+import structlog
+
+from services.orientacao_service import orientacao_service
+
+router = APIRouter()
+logger = structlog.get_logger()
+
+
+# ============================================
+# SCHEMAS
+# ============================================
+
+class OrientacaoBase(BaseModel):
+    """Orientacao basica de uso do medicamento."""
+    principio_ativo: Optional[str]     = None
+    nome_comercial: Optional[str]      = None
+    posologia: Optional[str]           = None
+    orientacao_uso: Optional[str]      = None
+    horario_ideal: Optional[str]       = None
+    armazenamento: Optional[str]       = None
+    efeitos_colaterais: Optional[str]  = None
+    interacao_alimentos: Optional[str] = None
+    interacao_medicamentos: Optional[str] = None
+    tipo_receita: str                  = "livre"
+    retem_receita: bool                = False
+
+
+class OrientacaoResponse(BaseModel):
+    """Resposta de orientacao para um produto."""
+    found: bool               = False
+    produto_id: Optional[int] = None
+    produto_nome: Optional[str] = None
+    orientacao: Optional[OrientacaoBase] = None
+    erro: Optional[str]       = None
+
+
+class ClientePerfil(BaseModel):
+    """Perfil do cliente para geracao de alertas."""
+    idade: int           = 0
+    sexo: Optional[str]  = None
+    gestante: bool       = False
+    lactante: bool       = False
+    insuf_renal: bool    = False
+    insuf_hepatica: bool = False
+
+
+class AlertaCliente(BaseModel):
+    """Alerta personalizado para cliente."""
+    tipo: str
+    severidade: str
+    titulo: str
+    mensagem: str
+    icone: Optional[str] = None
+    produto: Optional[str] = None
+
+
+class AlertasResponse(BaseModel):
+    """Resposta com lista de alertas."""
+    alertas: List[AlertaCliente] = []
+    total: int                   = 0
+
+
+# ============================================
+# ENDPOINTS
+# ============================================
+
+@router.get("/produto/{produto_id}", response_model=OrientacaoResponse)
+async def get_orientacao_produto(produto_id: int):
+    """
+    Busca orientacao de uso para um produto especifico.
+
+    Retorna posologia, horario ideal, interacoes, etc.
+    """
+    try:
+        resultado = orientacao_service.get_orientacao_por_produto(produto_id)
+
+        if not resultado.get('found'):
+            return OrientacaoResponse(
+                found=False,
+                produto_id=resultado.get('produto_id'),
+                produto_nome=resultado.get('produto_nome'),
+                erro=resultado.get('erro')
+            )
+
+        return OrientacaoResponse(
+            found=True,
+            produto_id=resultado.get('produto_id'),
+            produto_nome=resultado.get('produto_nome'),
+            orientacao=OrientacaoBase(**resultado.get('orientacao', {}))
+        )
+
+    except Exception as e:
+        logger.error("erro_orientacao_produto", erro=str(e), produto_id=produto_id)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/principio/{principio_ativo}", response_model=OrientacaoResponse)
+async def get_orientacao_principio(principio_ativo: str):
+    """
+    Busca orientacao de uso pelo principio ativo.
+    """
+    try:
+        resultado = orientacao_service.get_orientacao_por_principio(principio_ativo)
+
+        if not resultado.get('found'):
+            return OrientacaoResponse(found=False)
+
+        return OrientacaoResponse(
+            found=True,
+            orientacao=OrientacaoBase(**resultado.get('orientacao', {}))
+        )
+
+    except Exception as e:
+        logger.error("erro_orientacao_principio", erro=str(e), principio=principio_ativo)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/alertas/cliente", response_model=AlertasResponse)
+async def get_alertas_cliente(
+    principio_ativo: str = Query(..., description="Principio ativo do medicamento"),
+    perfil: ClientePerfil = None
+):
+    """
+    Gera alertas personalizados para um cliente especifico.
+
+    Analisa o perfil do cliente (idade, gestante, etc.) e retorna
+    alertas relevantes para aquele medicamento.
+    """
+    try:
+        if perfil is None:
+            perfil = ClientePerfil()
+
+        alertas_raw = orientacao_service.get_alertas_cliente(
+            principio_ativo,
+            perfil.model_dump()
+        )
+
+        alertas = [AlertaCliente(**a) for a in alertas_raw]
+
+        return AlertasResponse(
+            alertas=alertas,
+            total=len(alertas)
+        )
+
+    except Exception as e:
+        logger.error("erro_alertas_cliente", erro=str(e), principio=principio_ativo)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/alertas/venda/{venda_id}", response_model=AlertasResponse)
+async def get_alertas_venda(
+    venda_id: int,
+    cliente_id: int = Query(0, description="ID do cliente")
+):
+    """
+    Analisa todos os produtos de uma venda e gera alertas consolidados.
+
+    Considera o perfil do cliente para gerar alertas personalizados
+    para cada produto da venda.
+    """
+    try:
+        alertas_raw = orientacao_service.get_alertas_venda(venda_id, cliente_id)
+        alertas = [AlertaCliente(**a) for a in alertas_raw]
+
+        return AlertasResponse(
+            alertas=alertas,
+            total=len(alertas)
+        )
+
+    except Exception as e:
+        logger.error("erro_alertas_venda", erro=str(e), venda_id=venda_id)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/resumo/{produto_id}")
+async def get_resumo_orientacao(
+    produto_id: int,
+    cliente_id: int = Query(0, description="ID do cliente para alertas personalizados")
+):
+    """
+    Retorna um resumo completo: orientacao + alertas para um produto.
+
+    Util para o widget exibir todas as informacoes de uma vez.
+    """
+    try:
+        # Busca orientacao
+        orientacao = orientacao_service.get_orientacao_por_produto(produto_id)
+
+        # Busca alertas se tiver principio ativo
+        alertas = []
+        if orientacao.get('found') and orientacao.get('orientacao', {}).get('principio_ativo'):
+            # Tenta buscar perfil do cliente
+            perfil = {"idade": 0}
+
+            alertas_raw = orientacao_service.get_alertas_cliente(
+                orientacao['orientacao']['principio_ativo'],
+                perfil
+            )
+            alertas = alertas_raw
+
+        return {
+            "found":        orientacao.get('found', False),
+            "produto_id":   orientacao.get('produto_id'),
+            "produto_nome": orientacao.get('produto_nome'),
+            "orientacao":   orientacao.get('orientacao'),
+            "alertas":      alertas,
+            "total_alertas": len(alertas)
+        }
+
+    except Exception as e:
+        logger.error("erro_resumo_orientacao", erro=str(e), produto_id=produto_id)
+        raise HTTPException(status_code=500, detail=str(e))

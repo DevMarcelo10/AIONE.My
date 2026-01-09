@@ -1,0 +1,64 @@
+"""
+Script para criar a tabela copilot_medicamento_info no banco de dados.
+"""
+import pymysql
+
+def main():
+    conn = pymysql.connect(
+        host='localhost',
+        port=3307,
+        user='root',
+        password='f68interdb',
+        database='dbaione',
+        charset='utf8mb4'
+    )
+
+    cursor = conn.cursor()
+
+    # Dropar se existir para recriar
+    cursor.execute('DROP TABLE IF EXISTS copilot_medicamento_info')
+
+    sql = '''
+    CREATE TABLE copilot_medicamento_info (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       ean VARCHAR(14) NULL COMMENT 'Codigo EAN para associar com produto do ERP',
+       principio_ativo VARCHAR(500) NOT NULL COMMENT 'Principio ativo ou associacao',
+       nome_comercial VARCHAR(200) NULL COMMENT 'Nome comercial de referencia',
+       posologia_padrao VARCHAR(200) NULL COMMENT 'Ex: 1 comp 8/8h',
+       orientacao_uso TEXT NULL COMMENT 'Ex: Tomar em jejum',
+       horario_ideal VARCHAR(100) NULL COMMENT 'Ex: Manha, Noite, Com refeicao',
+       armazenamento VARCHAR(200) NULL COMMENT 'Ex: Temperatura ambiente, Refrigerar',
+       efeitos_colaterais TEXT NULL COMMENT 'Ex: Sonolencia, boca seca',
+       interacao_alimentos TEXT NULL COMMENT 'Ex: Evitar alcool',
+       interacao_medicamentos TEXT NULL COMMENT 'Lista de interacoes conhecidas',
+       retem_receita BOOLEAN DEFAULT FALSE COMMENT 'Se a farmacia deve reter a receita',
+       tipo_receita VARCHAR(50) DEFAULT 'livre' COMMENT 'livre, simples, especial, antimicrobiano, controlado',
+       alerta_idoso TEXT NULL COMMENT 'Cuidados especiais para idosos 65+',
+       alerta_pediatrico TEXT NULL COMMENT 'Cuidados para criancas',
+       alerta_gestante TEXT NULL COMMENT 'Uso na gravidez - categoria FDA',
+       alerta_lactante TEXT NULL COMMENT 'Uso durante amamentacao',
+       alerta_renal TEXT NULL COMMENT 'Ajuste em insuficiencia renal',
+       alerta_hepatico TEXT NULL COMMENT 'Ajuste em insuficiencia hepatica',
+       fonte VARCHAR(100) NULL COMMENT 'bulario, anvisa, micromedex',
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+       INDEX idx_ean (ean),
+       INDEX idx_principio (principio_ativo(100))
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    '''
+
+    cursor.execute(sql)
+    conn.commit()
+    print('Tabela copilot_medicamento_info criada com sucesso!')
+
+    # Verificar estrutura
+    cursor.execute('DESCRIBE copilot_medicamento_info')
+    print('\nEstrutura da tabela:')
+    for row in cursor.fetchall():
+        print(f'  {row[0]}: {row[1]}')
+
+    cursor.close()
+    conn.close()
+
+if __name__ == '__main__':
+    main()

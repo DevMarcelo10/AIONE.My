@@ -15,5 +15,10 @@
   "includeCoAuthoredBy": false,
   "enabledMcpjsonServers": [
     "mysql-aione"
+  ],
+  "allowedTools": [
+    "Edit",
+    "Write", 
+    "Read"
   ]
 }

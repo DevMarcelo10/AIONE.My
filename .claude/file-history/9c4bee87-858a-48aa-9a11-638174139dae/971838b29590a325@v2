@@ -1,0 +1,126 @@
+"""
+Script para atualizar o campo EAN na tabela copilot_medicamento_info
+usando dados da tabela arqproduto do ERP.
+"""
+import os
+from sqlalchemy import create_engine, text
+
+# Conexões
+DB_PASSWORD = os.environ.get('ERP_DB_PASSWORD', '')
+ERP_DB_URL = f"mysql+pymysql://root:{DB_PASSWORD}@localhost:3307/dbaione"
+COPILOT_DB_URL = f"mysql+pymysql://root:{DB_PASSWORD}@localhost:3307/copilot"
+
+erp_engine = create_engine(ERP_DB_URL)
+copilot_engine = create_engine(COPILOT_DB_URL)
+
+
+import unicodedata
+
+def remove_acentos(texto: str) -> str:
+    """Remove acentos de uma string."""
+    nfkd = unicodedata.normalize('NFKD', texto)
+    return ''.join(c for c in nfkd if not unicodedata.combining(c))
+
+
+# Cache global das substâncias
+_substancias_cache = None
+
+def _carregar_substancias():
+    """Carrega todas as substâncias com EAN uma vez."""
+    global _substancias_cache
+    if _substancias_cache is not None:
+        return _substancias_cache
+
+    print("Carregando substâncias do ERP...")
+    with erp_engine.connect() as conn:
+        query = text("""
+            SELECT p.CodEANpri, s.DesSubs
+            FROM arqproduto p
+            JOIN arqprodutosub ps ON p.IDProd = ps.IDProd
+            JOIN arqsubstancia s ON ps.IDSubs = s.IDSubs
+            WHERE p.CodEANpri IS NOT NULL
+              AND p.CodEANpri != ''
+              AND p.Ativo = '1'
+            ORDER BY p.PrecoVen DESC
+        """)
+        result = conn.execute(query)
+        _substancias_cache = [
+            (row[0], remove_acentos(row[1].upper()) if row[1] else "")
+            for row in result.fetchall()
+        ]
+    print(f"  {len(_substancias_cache)} produtos com substância carregados")
+    return _substancias_cache
+
+
+def get_ean_por_principio(principio_ativo: str) -> str | None:
+    """Busca EAN de um produto pelo princípio ativo."""
+    # Normaliza o princípio ativo (remove acentos)
+    pa = remove_acentos(principio_ativo.upper().strip())
+
+    # Remove sufixos comuns para melhorar o match
+    pa_base = pa.replace(" SODICA", "").replace(" SODICO", "")
+    pa_base = pa_base.replace(" POTASSICA", "").replace(" POTASSICO", "")
+    pa_base = pa_base.replace(" CLORIDRATO", "").replace(" MALEATO", "")
+    pa_base = pa_base.replace(" BESILATO", "").replace(" CALCICA", "")
+    pa_base = pa_base.replace(" HEMITARTARATO", "").replace(" OXALATO", "")
+    pa_base = pa_base.replace(" DICLORIDRATO", "")
+    pa_base = pa_base.replace(" MONOIDRATADA", "").replace(" MONOIDRATADO", "")
+
+    substancias = _carregar_substancias()
+
+    for ean, subs in substancias:
+        # Match exato
+        if subs == pa:
+            return ean
+
+        # Match parcial (base)
+        if pa_base and pa_base in subs:
+            return ean
+
+    return None
+
+
+def main():
+    print("Atualizando EANs na tabela copilot_medicamento_info...")
+
+    # Busca registros sem EAN
+    with copilot_engine.connect() as conn:
+        result = conn.execute(text(
+            "SELECT id, principio_ativo FROM copilot_medicamento_info WHERE ean IS NULL"
+        ))
+        registros = result.fetchall()
+
+    print(f"Encontrados {len(registros)} registros sem EAN")
+
+    atualizados = 0
+    nao_encontrados = []
+
+    for reg_id, principio in registros:
+        ean = get_ean_por_principio(principio)
+
+        if ean:
+            with copilot_engine.connect() as conn:
+                conn.execute(
+                    text("UPDATE copilot_medicamento_info SET ean = :ean WHERE id = :id"),
+                    {"ean": ean, "id": reg_id}
+                )
+                conn.commit()
+            atualizados += 1
+            print(f"  [{atualizados}] {principio} -> {ean}")
+        else:
+            nao_encontrados.append(principio)
+
+    print(f"\nResultado:")
+    print(f"  - Atualizados: {atualizados}")
+    print(f"  - Não encontrados: {len(nao_encontrados)}")
+
+    if nao_encontrados:
+        print(f"\nPrincípios não encontrados:")
+        for pa in nao_encontrados[:20]:  # Mostra só os 20 primeiros
+            print(f"  - {pa}")
+        if len(nao_encontrados) > 20:
+            print(f"  ... e mais {len(nao_encontrados) - 20}")
+
+
+if __name__ == "__main__":
+    main()

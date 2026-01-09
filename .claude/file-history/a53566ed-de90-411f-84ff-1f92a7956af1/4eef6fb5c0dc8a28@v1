@@ -1,0 +1,297 @@
+"""
+Adiciona regras de cross-sell ao banco copilot.copilot_cross_sell
+"""
+import pymysql
+
+conn = pymysql.connect(
+    host='localhost',
+    port=3307,
+    user='root',
+    password='f68interdb',
+    database='copilot',
+    charset='utf8mb4'
+)
+cursor = conn.cursor()
+
+# Lista de regras: (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem)
+regras = [
+    # DERMOCOSMÉTICOS
+    ('principio_ativo', 'TRETINOINA', 'categoria', 'HIDRATANTE FACIAL', 'Hidratante facial', 90, 'Ácidos ressecam a pele. Hidratante é essencial para evitar irritação.'),
+    ('principio_ativo', 'ADAPALENO', 'categoria', 'HIDRATANTE FACIAL', 'Hidratante facial', 90, 'Adapaleno resseca. Hidratante ajuda a tolerar o tratamento.'),
+    ('principio_ativo', 'ACIDO GLICOLICO', 'categoria', 'HIDRATANTE FACIAL', 'Hidratante facial', 90, 'Ácido glicólico pode irritar. Use hidratante para equilibrar.'),
+    ('principio_ativo', 'ACIDO SALICILICO', 'categoria', 'HIDRATANTE OIL-FREE', 'Hidratante facial oil-free', 85, 'Ácido salicílico resseca. Hidratante oil-free é ideal.'),
+    ('principio_ativo', 'ISOTRETINOINA', 'categoria', 'HIDRATANTE LABIAL', 'Hidratante labial', 95, 'Roacutan resseca muito os lábios. Manteiga de cacau é indispensável.'),
+    ('principio_ativo', 'ISOTRETINOINA', 'categoria', 'PROTETOR SOLAR FPS 50', 'Protetor solar FPS 50', 95, 'Pele fica muito sensível ao sol. Protetor alto é obrigatório.'),
+    ('principio_ativo', 'ISOTRETINOINA', 'categoria', 'COLIRIO LUBRIFICANTE', 'Colírio lubrificante', 85, 'Olhos ressecam com Roacutan. Colírio lubrificante alivia.'),
+    ('principio_ativo', 'HIDROQUINONA', 'categoria', 'PROTETOR SOLAR', 'Protetor solar', 95, 'Sem protetor solar, o clareamento não funciona e pode manchar mais.'),
+    ('principio_ativo', 'ARBUTIN', 'categoria', 'PROTETOR SOLAR', 'Protetor solar', 95, 'Clareador só funciona com proteção solar diária.'),
+    ('principio_ativo', 'ACIDO KOJICO', 'categoria', 'PROTETOR SOLAR', 'Protetor solar', 95, 'Essencial usar protetor para não manchar.'),
+    ('principio_ativo', 'PEROXIDO DE BENZOILA', 'categoria', 'HIDRATANTE OIL-FREE', 'Hidratante oil-free', 80, 'Peróxido de benzoíla resseca. Hidratante oil-free equilibra.'),
+    ('principio_ativo', 'ACIDO AZELAICO', 'categoria', 'PROTETOR SOLAR', 'Protetor solar', 85, 'Protetor solar potencializa o tratamento.'),
+
+    # SAÚDE FEMININA
+    ('principio_ativo', 'ETINILESTRADIOL', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 70, 'Anticoncepcional pode reduzir ácido fólico. Bom suplementar.'),
+    ('principio_ativo', 'LEVONORGESTREL', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 70, 'Suplementar ácido fólico é recomendado.'),
+    ('principio_ativo', 'DESOGESTREL', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 70, 'Ácido fólico é importante para mulheres em idade fértil.'),
+    ('principio_ativo', 'DROSPIRENONA', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 70, 'Ácido fólico complementa o anticoncepcional.'),
+    ('principio_ativo', 'FLUCONAZOL', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 85, 'Sabonete íntimo ajuda a manter o pH e prevenir recorrência.'),
+    ('principio_ativo', 'MICONAZOL', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 85, 'Higiene íntima adequada previne novas infecções.'),
+    ('principio_ativo', 'CLOTRIMAZOL', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 85, 'Sabonete íntimo pH neutro ajuda no tratamento.'),
+    ('principio_ativo', 'METRONIDAZOL', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 85, 'Para vaginose, manter higiene com sabonete adequado.'),
+    ('principio_ativo', 'NISTATINA', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 80, 'Sabonete íntimo complementa o tratamento.'),
+
+    # SAÚDE DIGESTIVA
+    ('principio_ativo', 'LACTULOSE', 'categoria', 'FIBRAS', 'Fibras', 80, 'Fibras ajudam a regular o intestino naturalmente.'),
+    ('principio_ativo', 'BISACODIL', 'categoria', 'FIBRAS', 'Fibras', 80, 'Fibras previnem dependência de laxante.'),
+    ('principio_ativo', 'PICOSSULFATO', 'categoria', 'FIBRAS', 'Fibras', 80, 'Associe fibras para regularizar o intestino.'),
+    ('principio_ativo', 'LACTULOSE', 'categoria', 'PROBIOTICO', 'Probiótico', 75, 'Probiótico ajuda a equilibrar a flora intestinal.'),
+    ('principio_ativo', 'BISACODIL', 'categoria', 'PROBIOTICO', 'Probiótico', 75, 'Probiótico melhora o funcionamento intestinal.'),
+    ('principio_ativo', 'LOPERAMIDA', 'categoria', 'SORO REIDRATACAO', 'Soro reidratação oral', 90, 'Diarreia desidrata. Soro de reidratação é fundamental.'),
+    ('principio_ativo', 'RACECADOTRILA', 'categoria', 'SORO REIDRATACAO', 'Soro reidratação oral', 90, 'Importante repor líquidos e eletrólitos.'),
+    ('principio_ativo', 'OMEPRAZOL', 'categoria', 'VITAMINA B12', 'Vitamina B12', 70, 'Uso prolongado de IBP pode reduzir absorção de B12.'),
+    ('principio_ativo', 'PANTOPRAZOL', 'categoria', 'VITAMINA B12', 'Vitamina B12', 70, 'Considere suplementar B12 em uso contínuo.'),
+    ('principio_ativo', 'ESOMEPRAZOL', 'categoria', 'VITAMINA B12', 'Vitamina B12', 70, 'IBP a longo prazo pode afetar absorção de B12.'),
+    ('principio_ativo', 'OMEPRAZOL', 'categoria', 'MAGNESIO', 'Magnésio', 65, 'IBP prolongado pode reduzir magnésio.'),
+    ('principio_ativo', 'PANTOPRAZOL', 'categoria', 'MAGNESIO', 'Magnésio', 65, 'Magnésio pode ser importante em uso crônico.'),
+
+    # SAÚDE BUCAL
+    ('principio_ativo', 'CLOREXIDINA', 'categoria', 'FIO DENTAL', 'Fio dental', 70, 'Fio dental complementa a higiene bucal.'),
+    ('principio_ativo', 'TRIANCINOLONA', 'categoria', 'ENXAGUANTE SEM ALCOOL', 'Enxaguante sem álcool', 75, 'Enxaguante suave ajuda na cicatrização de aftas.'),
+    ('principio_ativo', 'AMLEXANOX', 'categoria', 'ENXAGUANTE SEM ALCOOL', 'Enxaguante sem álcool', 75, 'Use enxaguante sem álcool para não irritar.'),
+
+    # SISTEMA NERVOSO
+    ('principio_ativo', 'CLONAZEPAM', 'categoria', 'VALERIANA', 'Valeriana', 55, 'Valeriana pode auxiliar no desmame. Consulte o médico.'),
+    ('principio_ativo', 'ALPRAZOLAM', 'categoria', 'PASSIFLORA', 'Passiflora', 55, 'Passiflora pode complementar o tratamento.'),
+    ('principio_ativo', 'BROMAZEPAM', 'categoria', 'VALERIANA', 'Valeriana', 55, 'Fitoterápico pode ajudar a relaxar.'),
+    ('principio_ativo', 'FLUOXETINA', 'categoria', 'VITAMINA D', 'Vitamina D', 65, 'Vitamina D pode auxiliar no humor.'),
+    ('principio_ativo', 'SERTRALINA', 'categoria', 'VITAMINA D', 'Vitamina D', 65, 'Estudos mostram benefício de Vitamina D.'),
+    ('principio_ativo', 'ESCITALOPRAM', 'categoria', 'VITAMINA D', 'Vitamina D', 65, 'Vitamina D é importante para saúde mental.'),
+    ('principio_ativo', 'PAROXETINA', 'categoria', 'VITAMINA D', 'Vitamina D', 65, 'Considere suplementar Vitamina D.'),
+    ('principio_ativo', 'FLUOXETINA', 'categoria', 'OMEGA 3', 'Ômega 3', 60, 'Ômega 3 DHA apoia a saúde cerebral.'),
+    ('principio_ativo', 'SERTRALINA', 'categoria', 'OMEGA 3', 'Ômega 3', 60, 'Ômega 3 pode potencializar o tratamento.'),
+    ('principio_ativo', 'ZOLPIDEM', 'categoria', 'MELATONINA', 'Melatonina', 55, 'Melatonina pode ajudar a regular o sono naturalmente.'),
+    ('principio_ativo', 'ZOPICLONA', 'categoria', 'MELATONINA', 'Melatonina', 55, 'Melatonina é opção para sono mais natural.'),
+
+    # DERMATOLOGIA
+    ('principio_ativo', 'CETOCONAZOL', 'categoria', 'TALCO ANTISSEPTICO', 'Talco antisséptico', 70, 'Talco ajuda a manter a área seca e prevenir recorrência.'),
+    ('principio_ativo', 'TERBINAFINA', 'categoria', 'TALCO ANTISSEPTICO', 'Talco antisséptico', 70, 'Área seca previne proliferação de fungos.'),
+    ('principio_ativo', 'BETAMETASONA', 'categoria', 'HIDRATANTE CORPORAL', 'Hidratante corporal', 75, 'Corticoide afina a pele. Hidratante ajuda a proteger.'),
+    ('principio_ativo', 'DEXAMETASONA', 'categoria', 'HIDRATANTE CORPORAL', 'Hidratante corporal', 75, 'Hidrate a pele após uso do corticoide.'),
+    ('principio_ativo', 'ACICLOVIR', 'categoria', 'PROTETOR LABIAL FPS', 'Protetor labial FPS', 80, 'Sol pode reativar herpes. Protetor labial previne.'),
+    ('principio_ativo', 'PERMETRINA', 'categoria', 'PENTE FINO', 'Pente fino', 90, 'Pente fino é essencial para remover lêndeas.'),
+    ('principio_ativo', 'DELTAMETRINA', 'categoria', 'PENTE FINO', 'Pente fino', 90, 'Sem pente fino, as lêndeas permanecem.'),
+    ('principio_ativo', 'IVERMECTINA', 'categoria', 'SABONETE ANTISSEPTICO', 'Sabonete antisséptico', 75, 'Higiene reforçada ajuda no tratamento da escabiose.'),
+    ('principio_ativo', 'SULFADIAZINA DE PRATA', 'categoria', 'GAZE NAO ADERENTE', 'Gaze não aderente', 85, 'Gaze especial não gruda na queimadura.'),
+    ('principio_ativo', 'NEOMICINA', 'categoria', 'GAZE ESTERIL', 'Gaze estéril', 80, 'Gaze estéril para cobrir o ferimento.'),
+    ('principio_ativo', 'BACITRACINA', 'categoria', 'GAZE ESTERIL', 'Gaze estéril', 80, 'Gaze estéril para cobrir o ferimento.'),
+
+    # PEDIATRIA
+    ('categoria', 'VITAMINA INFANTIL', 'categoria', 'OMEGA 3 INFANTIL', 'Ômega 3 infantil DHA', 70, 'DHA é importante para desenvolvimento cerebral.'),
+    ('principio_ativo', 'SIMETICONA', 'categoria', 'CHA ERVA DOCE', 'Chá erva-doce infantil', 65, 'Chá pode complementar o alívio das cólicas.'),
+    ('principio_ativo', 'NISTATINA', 'categoria', 'PROBIOTICO INFANTIL', 'Probiótico infantil', 80, 'Probiótico reequilibra a flora após antifúngico.'),
+    ('principio_ativo', 'AMOXICILINA', 'categoria', 'SERINGA DOSADORA', 'Seringa dosadora', 85, 'Seringa facilita dar a dose certa.'),
+    ('principio_ativo', 'AMOXICILINA', 'categoria', 'PROBIOTICO INFANTIL', 'Probiótico infantil', 80, 'Probiótico protege a flora intestinal.'),
+    ('principio_ativo', 'IBUPROFENO', 'categoria', 'SERINGA DOSADORA', 'Seringa dosadora', 80, 'Seringa dosadora facilita a administração.'),
+    ('principio_ativo', 'DIPIRONA', 'categoria', 'TERMOMETRO DIGITAL', 'Termômetro digital', 75, 'Termômetro para monitorar a febre.'),
+
+    # IDOSOS
+    ('principio_ativo', 'CARBONATO DE CALCIO', 'categoria', 'VITAMINA K2', 'Vitamina K2', 75, 'Vitamina K2 direciona o cálcio para os ossos.'),
+    ('principio_ativo', 'GINKGO BILOBA', 'categoria', 'OMEGA 3 DHA', 'Ômega 3 DHA', 70, 'Ômega 3 potencializa a saúde cognitiva.'),
+    ('principio_ativo', 'GLUCOSAMINA', 'categoria', 'COLAGENO TIPO 2', 'Colágeno tipo 2', 70, 'Colágeno tipo 2 é específico para articulações.'),
+    ('principio_ativo', 'CONDROITINA', 'categoria', 'COLAGENO TIPO 2', 'Colágeno tipo 2', 70, 'Colágeno complementa o tratamento articular.'),
+    ('principio_ativo', 'ALENDRONATO', 'categoria', 'VITAMINA D3', 'Vitamina D3', 85, 'Vitamina D é essencial para absorção de cálcio.'),
+    ('principio_ativo', 'RISEDRONATO', 'categoria', 'VITAMINA D3', 'Vitamina D3', 85, 'Não esqueça da Vitamina D para osteoporose.'),
+
+    # CARDIOVASCULAR
+    ('principio_ativo', 'ACIDO ACETILSALICILICO', 'categoria', 'OMEPRAZOL', 'Omeprazol', 80, 'AAS diário pode irritar estômago. Protetor gástrico previne.'),
+    ('principio_ativo', 'FUROSEMIDA', 'categoria', 'CLORETO DE POTASSIO', 'Cloreto de potássio', 75, 'Diurético pode reduzir potássio. Monitorar ou suplementar.'),
+    ('principio_ativo', 'HIDROCLOROTIAZIDA', 'categoria', 'CLORETO DE POTASSIO', 'Cloreto de potássio', 70, 'Diuréticos podem deplecionar potássio.'),
+    ('principio_ativo', 'FUROSEMIDA', 'categoria', 'MAGNESIO', 'Magnésio', 70, 'Diuréticos de alça podem reduzir magnésio.'),
+
+    # CUIDADOS PESSOAIS
+    ('categoria', 'TINTURA CABELO', 'categoria', 'LUVAS DESCARTAVEIS', 'Luvas descartáveis', 85, 'Luvas protegem as mãos da tintura.'),
+    ('categoria', 'TINTURA CABELO', 'categoria', 'VASELINA', 'Vaselina', 70, 'Vaselina na testa e orelhas evita manchas.'),
+    ('categoria', 'CERA DEPILATORIA', 'categoria', 'CREME POS DEPILATORIO', 'Creme pós-depilatório', 80, 'Creme calmante evita irritação.'),
+    ('categoria', 'PROTETOR SOLAR', 'categoria', 'HIDRATANTE POS SOL', 'Hidratante pós-sol', 70, 'Pós-sol hidrata e prolonga o bronzeado.'),
+
+    # VIAGEM
+    ('principio_ativo', 'DIMENIDRINATO', 'categoria', 'GOMA DE MASCAR', 'Goma de mascar', 65, 'Mascar chiclete ajuda com enjoo de viagem.'),
+    ('principio_ativo', 'MECLIZINA', 'categoria', 'GOMA DE MASCAR', 'Goma de mascar', 65, 'Chiclete pode auxiliar no enjoo.'),
+    ('categoria', 'REPELENTE', 'categoria', 'LOCAO POS PICADA', 'Loção pós-picada', 75, 'Caso seja picado, a loção alivia a coceira.'),
+
+    # OFTALMOLOGIA
+    ('principio_ativo', 'CIPROFLOXACINO', 'categoria', 'GAZE ESTERIL', 'Gaze estéril', 80, 'Gaze estéril para limpar secreção.'),
+    ('principio_ativo', 'TOBRAMICINA', 'categoria', 'GAZE ESTERIL', 'Gaze estéril', 80, 'Limpe os olhos com gaze antes de aplicar.'),
+
+    # OTORRINOLARINGOLOGIA
+    ('principio_ativo', 'BUDESONIDA', 'categoria', 'SORO FISIOLOGICO', 'Soro fisiológico', 80, 'Lavar o nariz antes do corticoide melhora absorção.'),
+    ('principio_ativo', 'MOMETASONA', 'categoria', 'SORO FISIOLOGICO', 'Soro fisiológico', 80, 'Soro limpa o nariz e potencializa o corticoide.'),
+
+    # DIABETES
+    ('principio_ativo', 'METFORMINA', 'categoria', 'VITAMINA B12', 'Vitamina B12', 80, 'Metformina reduz absorção de B12. Suplementar é importante.'),
+    ('categoria', 'INSULINA', 'categoria', 'ALGODAO', 'Algodão', 85, 'Algodão para higiene local da aplicação.'),
+    ('categoria', 'INSULINA', 'categoria', 'ALCOOL 70', 'Álcool 70%', 85, 'Álcool para assepsia antes da aplicação.'),
+    ('categoria', 'INSULINA', 'categoria', 'CAIXA TERMICA', 'Caixa térmica', 75, 'Para transportar insulina em viagens.'),
+    ('categoria', 'INSULINA', 'categoria', 'DESCARTEX', 'Descartex', 90, 'Descarte correto de agulhas é obrigatório.'),
+    ('principio_ativo', 'GLIBENCLAMIDA', 'categoria', 'GLICOSIMETRO', 'Glicosímetro', 70, 'Monitorar glicemia é essencial.'),
+    ('principio_ativo', 'GLICLAZIDA', 'categoria', 'GLICOSIMETRO', 'Glicosímetro', 70, 'Glicosímetro ajuda no controle do diabetes.'),
+    ('principio_ativo', 'METFORMINA', 'categoria', 'ADOCANTE', 'Adoçante', 65, 'Adoçante substitui o açúcar no dia a dia.'),
+    ('principio_ativo', 'DAPAGLIFLOZINA', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 80, 'Esta classe pode aumentar risco de infecção urinária.'),
+    ('principio_ativo', 'EMPAGLIFLOZINA', 'categoria', 'SABONETE INTIMO', 'Sabonete íntimo', 80, 'Higiene íntima reforçada é importante.'),
+
+    # ORTOPEDIA/REUMATOLOGIA
+    ('principio_ativo', 'COLCHICINA', 'categoria', 'AGUA MINERAL', 'Água mineral', 85, 'Hidratação intensa é essencial no tratamento da gota.'),
+    ('principio_ativo', 'ALOPURINOL', 'categoria', 'VITAMINA C', 'Vitamina C', 70, 'Vitamina C auxilia na excreção de ácido úrico.'),
+    ('principio_ativo', 'METOTREXATO', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 95, 'Ácido fólico é OBRIGATÓRIO para reduzir efeitos colaterais.'),
+    ('principio_ativo', 'PREDNISONA', 'categoria', 'CALCIO VITAMINA D', 'Cálcio + Vitamina D', 85, 'Corticoide prolongado causa perda óssea.'),
+    ('principio_ativo', 'PREDNISONA', 'categoria', 'OMEPRAZOL', 'Omeprazol', 80, 'Corticoide pode irritar estômago.'),
+    ('principio_ativo', 'DEFLAZACORTE', 'categoria', 'CALCIO VITAMINA D', 'Cálcio + Vitamina D', 85, 'Proteja os ossos durante uso de corticoide.'),
+
+    # UROLOGIA
+    ('principio_ativo', 'TANSULOSINA', 'categoria', 'SAW PALMETTO', 'Saw Palmetto', 65, 'Saw Palmetto pode complementar tratamento da próstata.'),
+    ('principio_ativo', 'DOXAZOSINA', 'categoria', 'SAW PALMETTO', 'Saw Palmetto', 65, 'Fitoterápico para saúde da próstata.'),
+    ('principio_ativo', 'FINASTERIDA', 'categoria', 'ZINCO', 'Zinco', 60, 'Zinco é importante para saúde prostática.'),
+    ('principio_ativo', 'DUTASTERIDA', 'categoria', 'ZINCO', 'Zinco', 60, 'Zinco auxilia na saúde da próstata.'),
+    ('principio_ativo', 'SILDENAFILA', 'categoria', 'PRESERVATIVO', 'Preservativo', 70, 'Momento oportuno para oferecer preservativos.'),
+    ('principio_ativo', 'TADALAFILA', 'categoria', 'PRESERVATIVO', 'Preservativo', 70, 'Não esqueça da proteção.'),
+    ('principio_ativo', 'NORFLOXACINO', 'categoria', 'CRANBERRY', 'Cranberry', 75, 'Cranberry ajuda a prevenir recorrência de infecção urinária.'),
+    ('principio_ativo', 'NITROFURANTOINA', 'categoria', 'PROBIOTICO', 'Probiótico', 75, 'Probiótico protege a flora durante antibiótico.'),
+    ('principio_ativo', 'OXIBUTININA', 'categoria', 'ABSORVENTE GERIATRICO', 'Absorvente geriátrico', 70, 'Absorvente para maior segurança.'),
+
+    # TIREOIDE
+    ('principio_ativo', 'LEVOTIROXINA', 'categoria', 'SELENIO', 'Selênio', 70, 'Selênio é importante para saúde da tireoide.'),
+    ('principio_ativo', 'LEVOTIROXINA', 'categoria', 'PORTA COMPRIMIDO', 'Porta-comprimido', 60, 'Porta-comprimido ajuda a lembrar de tomar em jejum.'),
+
+    # ALERGIA/IMUNOLOGIA
+    ('principio_ativo', 'PREDNISONA', 'categoria', 'CALCIO', 'Cálcio', 80, 'Corticoide sistêmico afeta os ossos.'),
+    ('principio_ativo', 'DEXAMETASONA', 'categoria', 'CALCIO', 'Cálcio', 80, 'Suplementar cálcio durante uso de corticoide.'),
+    ('classe_terapeutica', 'ANTI-HISTAMINICO', 'categoria', 'COLIRIO LUBRIFICANTE', 'Colírio lubrificante', 65, 'Antialérgico pode ressecar os olhos.'),
+
+    # PNEUMOLOGIA
+    ('principio_ativo', 'SALBUTAMOL', 'categoria', 'ESPACADOR', 'Espaçador', 85, 'Espaçador melhora a eficácia da bombinha.'),
+    ('principio_ativo', 'FORMOTEROL', 'categoria', 'ESPACADOR', 'Espaçador', 85, 'Espaçador garante que o medicamento chegue ao pulmão.'),
+    ('principio_ativo', 'BECLOMETASONA', 'categoria', 'AGUA', 'Água', 80, 'Bochechar com água após uso para evitar candidíase.'),
+    ('principio_ativo', 'BUDESONIDA', 'categoria', 'AGUA', 'Água', 80, 'Lave a boca após usar corticoide inalatório.'),
+    ('principio_ativo', 'ACETILCISTEINA', 'categoria', 'AGUA', 'Água', 85, 'Beba bastante água para o expectorante funcionar.'),
+    ('principio_ativo', 'CARBOCISTEINA', 'categoria', 'AGUA', 'Água', 85, 'Hidratação potencializa o efeito expectorante.'),
+    ('principio_ativo', 'DEXTROMETORFANO', 'categoria', 'MEL', 'Mel', 70, 'Mel ajuda a aliviar tosse seca.'),
+
+    # NEUROLOGIA
+    ('principio_ativo', 'CARBAMAZEPINA', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 80, 'Anticonvulsivante pode reduzir ácido fólico.'),
+    ('principio_ativo', 'FENITOINA', 'categoria', 'ACIDO FOLICO', 'Ácido fólico', 80, 'Suplementar ácido fólico durante tratamento.'),
+    ('principio_ativo', 'CARBAMAZEPINA', 'categoria', 'VITAMINA D', 'Vitamina D', 75, 'Anticonvulsivantes aumentam risco de osteoporose.'),
+    ('principio_ativo', 'VALPROATO', 'categoria', 'VITAMINA D', 'Vitamina D', 75, 'Vitamina D é importante em uso prolongado.'),
+    ('principio_ativo', 'GABAPENTINA', 'categoria', 'VITAMINA B12', 'Vitamina B12', 65, 'Complexo B pode auxiliar na neuropatia.'),
+    ('principio_ativo', 'PREGABALINA', 'categoria', 'VITAMINA B12', 'Vitamina B12', 65, 'B12 é importante para saúde nervosa.'),
+    ('principio_ativo', 'DONEPEZILA', 'categoria', 'OMEGA 3 DHA', 'Ômega 3 DHA', 70, 'Ômega 3 apoia saúde cognitiva.'),
+    ('principio_ativo', 'RIVASTIGMINA', 'categoria', 'OMEGA 3 DHA', 'Ômega 3 DHA', 70, 'DHA é importante para o cérebro.'),
+
+    # SAÚDE MENTAL
+    ('principio_ativo', 'CARBONATO DE LITIO', 'categoria', 'AGUA', 'Água', 90, 'Hidratação é ESSENCIAL com lítio. Desidratação é perigosa.'),
+    ('principio_ativo', 'QUETIAPINA', 'categoria', 'LAXANTE', 'Laxante', 70, 'Constipação é efeito comum. Fibras ou laxante ajudam.'),
+    ('principio_ativo', 'OLANZAPINA', 'categoria', 'LAXANTE', 'Laxante', 70, 'Antipsicótico pode causar prisão de ventre.'),
+    ('principio_ativo', 'QUETIAPINA', 'categoria', 'ADOCANTE', 'Adoçante', 65, 'Pode haver ganho de peso. Adoçante ajuda a controlar.'),
+    ('principio_ativo', 'OLANZAPINA', 'categoria', 'ADOCANTE', 'Adoçante', 65, 'Cuidado com peso. Evite açúcar.'),
+    ('principio_ativo', 'RISPERIDONA', 'categoria', 'PROTETOR SOLAR', 'Protetor solar', 65, 'Alguns antipsicóticos causam fotossensibilidade.'),
+    ('principio_ativo', 'METILFENIDATO', 'categoria', 'OMEGA 3', 'Ômega 3', 65, 'Ômega 3 pode auxiliar na concentração.'),
+    ('principio_ativo', 'LISDEXANFETAMINA', 'categoria', 'OMEGA 3', 'Ômega 3', 65, 'Ômega 3 complementa tratamento de TDAH.'),
+
+    # CESSAÇÃO TABAGISMO
+    ('principio_ativo', 'VARENICLINA', 'categoria', 'CHICLETE NICOTINA', 'Chiclete nicotina', 80, 'Chiclete ajuda nas crises de abstinência.'),
+    ('principio_ativo', 'BUPROPIONA', 'categoria', 'ADESIVO NICOTINA', 'Adesivo nicotina', 75, 'Adesivo pode ser associado. Consulte o médico.'),
+    ('categoria', 'ADESIVO NICOTINA', 'categoria', 'CREME HIDRATANTE', 'Creme hidratante', 70, 'Adesivo pode irritar. Hidratante alivia.'),
+
+    # EMAGRECIMENTO
+    ('principio_ativo', 'ORLISTATE', 'categoria', 'POLIVITAMINICO', 'Polivitamínico', 85, 'Orlistat reduz absorção de vitaminas. Suplementar é importante.'),
+    ('principio_ativo', 'ORLISTATE', 'categoria', 'VITAMINA D', 'Vitamina D', 80, 'Vitaminas lipossolúveis precisam ser repostas.'),
+    ('principio_ativo', 'LIRAGLUTIDA', 'categoria', 'PROTETOR GASTRICO', 'Protetor gástrico', 75, 'Náusea é comum no início. Protetor pode ajudar.'),
+    ('principio_ativo', 'SEMAGLUTIDA', 'categoria', 'PROTETOR GASTRICO', 'Protetor gástrico', 75, 'Protetor gástrico alivia desconforto inicial.'),
+    ('principio_ativo', 'SIBUTRAMINA', 'categoria', 'POLIVITAMINICO', 'Polivitamínico', 70, 'Durante dieta, vitaminas são importantes.'),
+
+    # CABELOS E UNHAS
+    ('principio_ativo', 'MINOXIDIL', 'categoria', 'BIOTINA', 'Biotina', 80, 'Biotina fortalece o cabelo junto com minoxidil.'),
+    ('principio_ativo', 'FINASTERIDA', 'categoria', 'ZINCO', 'Zinco', 70, 'Zinco e biotina ajudam na saúde capilar.'),
+    ('principio_ativo', 'FINASTERIDA', 'categoria', 'BIOTINA', 'Biotina', 75, 'Biotina fortalece os fios.'),
+    ('principio_ativo', 'TERBINAFINA', 'categoria', 'LIXA UNHA DESCARTAVEL', 'Lixa unha descartável', 80, 'Use lixa descartável para não recontaminar.'),
+    ('principio_ativo', 'ITRACONAZOL', 'categoria', 'CORTADOR UNHA', 'Cortador unha', 75, 'Cortador exclusivo evita espalhar fungo.'),
+
+    # VARIZES/CIRCULAÇÃO
+    ('principio_ativo', 'DIOSMINA', 'categoria', 'MEIA COMPRESSAO', 'Meia compressão', 80, 'Meia elástica potencializa o tratamento de varizes.'),
+    ('principio_ativo', 'HESPERIDINA', 'categoria', 'MEIA COMPRESSAO', 'Meia compressão', 80, 'Meia de compressão é fundamental.'),
+    ('principio_ativo', 'PENTOXIFILINA', 'categoria', 'VITAMINA E', 'Vitamina E', 65, 'Vitamina E auxilia na circulação.'),
+    ('principio_ativo', 'RIVAROXABANA', 'categoria', 'MEIA ELASTICA', 'Meia elástica', 80, 'Meia elástica é parte do tratamento de trombose.'),
+    ('principio_ativo', 'APIXABANA', 'categoria', 'MEIA ELASTICA', 'Meia elástica', 80, 'Use meia elástica conforme orientação médica.'),
+
+    # HEPÁTICO
+    ('principio_ativo', 'SILIMARINA', 'categoria', 'VITAMINA E', 'Vitamina E', 65, 'Vitamina E é antioxidante para o fígado.'),
+    ('principio_ativo', 'SILIMARINA', 'categoria', 'OMEGA 3', 'Ômega 3', 60, 'Ômega 3 apoia saúde hepática.'),
+    ('principio_ativo', 'ACIDO URSODESOXICOLICO', 'categoria', 'VITAMINA D', 'Vitamina D', 70, 'Vitamina D pode estar baixa em problemas hepáticos.'),
+
+    # ANEMIA
+    ('principio_ativo', 'SULFATO FERROSO', 'categoria', 'VITAMINA C', 'Vitamina C', 85, 'Vitamina C melhora muito a absorção do ferro.'),
+    ('principio_ativo', 'SULFATO FERROSO', 'categoria', 'SUCO LARANJA', 'Suco laranja', 80, 'Tome o ferro com suco de laranja.'),
+    ('principio_ativo', 'ACIDO FOLICO', 'categoria', 'VITAMINA B12', 'Vitamina B12', 80, 'B12 e ácido fólico trabalham juntos na anemia.'),
+    ('principio_ativo', 'FERRIPOLIMALTOSE', 'categoria', 'VITAMINA C', 'Vitamina C', 75, 'Vitamina C potencializa absorção do ferro.'),
+
+    # PRIMEIROS SOCORROS
+    ('categoria', 'INSULINA CANETA', 'categoria', 'AGULHA CANETA', 'Agulha caneta', 95, 'Precisa de agulhas para a caneta de insulina?'),
+    ('categoria', 'MEDICAMENTO INJETAVEL', 'categoria', 'SERINGA AGULHA', 'Seringa agulha', 90, 'Leva seringa e agulha para aplicação?'),
+    ('categoria', 'MEDICAMENTO INJETAVEL', 'categoria', 'ALGODAO', 'Algodão', 85, 'Algodão para o local da aplicação.'),
+    ('categoria', 'MEDICAMENTO INJETAVEL', 'categoria', 'ALCOOL 70', 'Álcool 70%', 85, 'Álcool para assepsia.'),
+
+    # HOME CARE
+    ('categoria', 'FRALDA GERIATRICA', 'categoria', 'CREME BARREIRA', 'Creme barreira', 85, 'Creme previne assaduras em acamados.'),
+    ('categoria', 'FRALDA GERIATRICA', 'categoria', 'LENCO UMEDECIDO', 'Lenço umedecido', 80, 'Lenço umedecido para higiene.'),
+    ('categoria', 'SONDA VESICAL', 'categoria', 'GAZE ESTERIL', 'Gaze estéril', 85, 'Gaze para higiene do local.'),
+
+    # SAZONALIDADE INVERNO
+    ('categoria', 'ANTIGRIPAL', 'categoria', 'PROPOLIS', 'Própolis', 70, 'Própolis tem ação antimicrobiana natural.'),
+    ('categoria', 'ANTIGRIPAL', 'categoria', 'MEL', 'Mel', 65, 'Mel alivia a garganta e a tosse.'),
+    ('categoria', 'GRIPE', 'categoria', 'VITAMINA C D ZINCO', 'Vitamina C + D + Zinco', 75, 'Trio da imunidade para recuperar mais rápido.'),
+
+    # SAZONALIDADE VERÃO
+    ('categoria', 'QUEIMADURA SOLAR', 'categoria', 'DEXPANTENOL', 'Dexpantenol', 85, 'Bepantol regenera a pele queimada.'),
+    ('categoria', 'QUEIMADURA SOLAR', 'categoria', 'HIDRATANTE ALOE VERA', 'Hidratante aloe vera', 80, 'Aloe vera acalma queimadura de sol.'),
+    ('categoria', 'PROTETOR SOLAR', 'categoria', 'AGUA TERMAL', 'Água termal', 65, 'Água termal refresca e hidrata no verão.'),
+
+    # CONVENIÊNCIA
+    ('categoria', 'POLIFARMACIA', 'categoria', 'ORGANIZADOR COMPRIMIDOS', 'Organizador semanal comprimidos', 75, 'Organizador ajuda a não esquecer os remédios.'),
+    ('categoria', 'IDOSO', 'categoria', 'PORTA MEDICAMENTOS', 'Porta-medicamentos', 70, 'Facilita organizar os medicamentos da semana.'),
+    ('categoria', 'USO CONTINUO', 'categoria', 'ORGANIZADOR COMPRIMIDOS', 'Organizador comprimidos', 70, 'Organizador evita esquecimento.'),
+    ('categoria', 'DIFICULDADE ENGOLIR', 'categoria', 'TRITURADOR COMPRIMIDOS', 'Triturador comprimidos', 80, 'Triturador facilita tomar comprimidos grandes.'),
+    ('categoria', 'VISAO RUIM', 'categoria', 'LUPA', 'Lupa', 65, 'Lupa ajuda a ler a bula.'),
+]
+
+# Conta registros antes
+cursor.execute("SELECT COUNT(*) FROM copilot_cross_sell")
+antes = cursor.fetchone()[0]
+
+# Insere regras
+sql = """
+INSERT INTO copilot_cross_sell
+(gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor, ativo)
+VALUES (%s, %s, %s, %s, %s, %s, %s, 1)
+"""
+
+cursor.executemany(sql, regras)
+conn.commit()
+
+# Conta depois
+cursor.execute("SELECT COUNT(*) FROM copilot_cross_sell")
+depois = cursor.fetchone()[0]
+
+print(f"Registros antes: {antes}")
+print(f"Registros adicionados: {depois - antes}")
+print(f"Total agora: {depois}")
+
+# Estatísticas por tipo
+cursor.execute("SELECT gatilho_tipo, COUNT(*) FROM copilot_cross_sell GROUP BY gatilho_tipo ORDER BY COUNT(*) DESC")
+print("\nPor tipo de gatilho:")
+for row in cursor.fetchall():
+    print(f"  - {row[0]}: {row[1]}")
+
+cursor.execute("SELECT COUNT(*) FROM copilot_cross_sell WHERE prioridade >= 85")
+print(f"\nAlta prioridade (>=85): {cursor.fetchone()[0]} regras")
+
+cursor.close()
+conn.close()

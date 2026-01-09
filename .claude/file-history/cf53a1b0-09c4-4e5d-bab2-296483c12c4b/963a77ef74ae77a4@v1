@@ -1,0 +1,206 @@
+"""
+Script para adicionar mais medicamentos à base copilot_medicamento_info.
+Complementa os 74 existentes para chegar a 200 medicamentos mais vendidos no Brasil.
+"""
+import pymysql
+
+MEDICAMENTOS_EXTRAS = [
+    # 75-100: Anti-inflamatórios e Analgésicos
+    ("CETOPROFENO", "Profenid", "50-100mg 2-3x/dia", "Tomar com alimentos para reduzir irritação gástrica", "Com refeições", "Temperatura ambiente", "Dor estomacal, náusea, tontura", "Evitar álcool", "AINEs, anticoagulantes, lítio", False, "simples", "Maior risco de sangramento GI e renal", "Não recomendado < 15 anos", "Evitar no 3º trimestre", "Evitar", "Reduzir dose", "Contraindicado em hepatopatas graves"),
+    ("TENOXICAM", "Tilatil", "20mg 1x/dia", "Tomar preferencialmente com alimentos", "Manhã", "Temperatura ambiente", "Dispepsia, náusea, cefaleia", "Tomar com alimentos", "AINEs, anticoagulantes", False, "simples", "Usar dose menor", "Não indicado", "Contraindicado", "Evitar", "Ajustar dose", "Contraindicado"),
+    ("PIROXICAM", "Feldene", "20mg 1x/dia", "Tomar com alimentos", "Manhã", "Temperatura ambiente", "Irritação gástrica, tontura", "Tomar com alimentos", "Anticoagulantes, AINEs", False, "simples", "Alto risco GI - evitar", "Contraindicado", "Contraindicado", "Evitar", "Usar com cautela", "Contraindicado"),
+    ("MELOXICAM", "Movatec", "7,5-15mg 1x/dia", "Tomar com alimentos", "Manhã", "Temperatura ambiente", "Dispepsia, diarreia, cefaleia", "Tomar com alimentos", "AINEs, anticoagulantes, lítio", False, "simples", "Iniciar com 7,5mg", "> 15 anos apenas", "Contraindicado 3º tri", "Evitar", "Usar com cautela", "Contraindicado se grave"),
+    ("ACECLOFENACO", "Proflam", "100mg 2x/dia", "Tomar com alimentos", "Manhã e noite", "Temperatura ambiente", "Dispepsia, dor abdominal", "Tomar com alimentos", "AINEs, anticoagulantes", False, "simples", "Usar menor dose eficaz", "Não recomendado", "Contraindicado", "Evitar", "Reduzir dose", "Contraindicado"),
+    ("ETORICOXIBE", "Arcoxia", "60-120mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Cefaleia, tontura, edema", "Sem restrições", "AINEs, anticoagulantes", False, "simples", "Risco cardiovascular aumentado", "Não indicado < 16 anos", "Contraindicado", "Contraindicado", "Contraindicado se grave", "Contraindicado se grave"),
+    ("CELECOXIBE", "Celebra", "100-200mg 1-2x/dia", "Pode tomar com ou sem alimentos", "Conforme prescrição", "Temperatura ambiente", "Dor abdominal, dispepsia", "Sem restrições significativas", "Anticoagulantes, fluconazol", False, "simples", "Avaliar risco CV", "Não indicado", "Contraindicado 3º tri", "Evitar", "Reduzir dose 50%", "Reduzir dose"),
+
+    # Anti-histamínicos
+    ("FEXOFENADINA", "Allegra", "120-180mg 1x/dia", "Tomar com água, evitar sucos", "Manhã", "Temperatura ambiente", "Cefaleia, sonolência leve", "Evitar suco de laranja/maçã/grapefruit", "Antiácidos com alumínio/magnésio", False, "livre", "Seguro para idosos", "≥ 6 anos: 30mg 2x/dia", "Cat. C - avaliar", "Excretado no leite", "Sem ajuste necessário", "Sem ajuste necessário"),
+    ("DESLORATADINA", "Desalex", "5mg 1x/dia", "Pode tomar com ou sem alimentos", "Qualquer horário", "Temperatura ambiente", "Cefaleia, boca seca, fadiga", "Sem restrições", "Poucos conhecidos", False, "livre", "Seguro", "≥ 6 meses: xarope", "Cat. C - avaliar", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("BILASTINA", "Alektos", "20mg 1x/dia", "Tomar 1h antes ou 2h após refeição", "Manhã em jejum", "Temperatura ambiente", "Cefaleia, sonolência", "Tomar longe das refeições", "Cetoconazol, eritromicina", False, "livre", "Seguro", "≥ 12 anos", "Não recomendado", "Não recomendado", "Evitar se grave", "Sem ajuste"),
+    ("EBASTINA", "Ebastel", "10-20mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã ou noite", "Temperatura ambiente", "Cefaleia, boca seca, sonolência", "Sem restrições", "Cetoconazol, eritromicina", False, "livre", "Usar com cautela", "≥ 12 anos", "Não recomendado", "Evitar", "Evitar se grave", "Contraindicado se grave"),
+    ("RUPATADINA", "Rupafin", "10mg 1x/dia", "Pode tomar com ou sem alimentos", "Qualquer horário", "Temperatura ambiente", "Sonolência, cefaleia, fadiga", "Evitar álcool", "Cetoconazol, eritromicina", False, "livre", "Usar com cautela", "≥ 12 anos", "Não recomendado", "Não recomendado", "Sem ajuste", "Evitar se grave"),
+
+    # Antibióticos adicionais
+    ("CLARITROMICINA", "Klaricid", "250-500mg 2x/dia", "Pode tomar com ou sem alimentos", "12/12h", "Temperatura ambiente", "Náusea, diarreia, alteração paladar", "Sem restrições", "Estatinas, carbamazepina, varfarina", True, "antimicrobiano", "Ajustar dose", "Dose por peso", "Cat. C - avaliar risco", "Excretado no leite", "Reduzir dose 50%", "Contraindicado se grave"),
+    ("CEFUROXIMA", "Zinnat", "250-500mg 2x/dia", "Tomar com alimentos para melhor absorção", "12/12h com refeições", "Temperatura ambiente", "Diarreia, náusea, cefaleia", "Tomar com alimentos", "Probenecida", True, "antimicrobiano", "Seguro com ajuste", "Dose por peso", "Cat. B - relativamente seguro", "Compatível", "Ajustar conforme ClCr", "Sem ajuste"),
+    ("CEFTRIAXONA", "Rocefin", "1-2g 1x/dia IV/IM", "Uso hospitalar ou ambulatorial", "1x/dia", "Refrigerar reconstituído", "Diarreia, rash, dor no local", "N/A - parenteral", "Soluções com cálcio", True, "antimicrobiano", "Sem ajuste", "Dose por peso/idade", "Cat. B - seguro", "Compatível", "Sem ajuste até anúria", "Sem ajuste"),
+    ("CIPROFLOXACINO", "Cipro", "250-750mg 2x/dia", "Evitar antiácidos e laticínios", "12/12h longe de antiácidos", "Temperatura ambiente", "Náusea, diarreia, tendinite", "Evitar laticínios junto", "Antiácidos, teofilina, varfarina", True, "antimicrobiano", "Risco de tendinite - evitar", "Contraindicado < 18 anos", "Contraindicado", "Contraindicado", "Ajustar dose", "Sem ajuste"),
+    ("NORFLOXACINO", "Floxacin", "400mg 2x/dia", "Tomar 1h antes ou 2h após refeições", "12/12h em jejum", "Temperatura ambiente", "Náusea, cefaleia, tontura", "Evitar laticínios e antiácidos", "Antiácidos, teofilina", True, "antimicrobiano", "Risco de tendinite", "Contraindicado", "Contraindicado", "Contraindicado", "Ajustar dose", "Usar com cautela"),
+    ("SULFAMETOXAZOL+TRIMETOPRIMA", "Bactrim", "800/160mg 2x/dia", "Tomar com água abundante", "12/12h", "Temperatura ambiente", "Náusea, rash, fotossensibilidade", "Manter hidratação", "Varfarina, metotrexato, fenitoína", True, "antimicrobiano", "Monitorar função renal", "Dose por peso", "Contraindicado", "Contraindicado", "Ajustar ou evitar", "Contraindicado se grave"),
+    ("METRONIDAZOL", "Flagyl", "250-500mg 3x/dia", "Pode tomar com alimentos", "8/8h", "Temperatura ambiente", "Náusea, gosto metálico, cefaleia", "Evitar álcool absolutamente", "Álcool, varfarina, lítio", True, "antimicrobiano", "Sem ajuste", "Dose por peso", "Contraindicado 1º tri", "Evitar ou suspender", "Sem ajuste", "Reduzir dose"),
+    ("DOXICICLINA", "Vibramicina", "100mg 1-2x/dia", "Tomar com água, evitar deitar após", "Com alimentos", "Temperatura ambiente", "Fotossensibilidade, náusea, esofagite", "Evitar laticínios e antiácidos", "Antiácidos, anticoagulantes, isotretinoína", True, "antimicrobiano", "Seguro", "Contraindicado < 8 anos", "Contraindicado", "Contraindicado", "Sem ajuste", "Sem ajuste"),
+
+    # Antifúngicos
+    ("FLUCONAZOL", "Zoltec", "150-400mg/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Náusea, cefaleia, rash", "Sem restrições", "Varfarina, fenitoína, ciclosporina", False, "simples", "Sem ajuste", "Dose por peso", "Contraindicado em doses altas", "Excretado no leite", "Ajustar conforme ClCr", "Usar com cautela"),
+    ("ITRACONAZOL", "Sporanox", "100-200mg 1-2x/dia", "Tomar cápsulas com alimentos", "Com refeição gordurosa", "Temperatura ambiente", "Náusea, cefaleia, rash, hepatotoxicidade", "Cápsulas: com alimentos", "Muitas interações - verificar", False, "simples", "Monitorar função cardíaca", "Dose por peso", "Contraindicado", "Contraindicado", "Sem ajuste", "Contraindicado se grave"),
+    ("TERBINAFINA", "Lamisil", "250mg 1x/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Cefaleia, rash, alteração paladar", "Sem restrições", "Rifampicina, cimetidina", False, "simples", "Sem ajuste", "Dose por peso", "Não recomendado", "Excretado no leite - evitar", "Não recomendado se grave", "Não recomendado"),
+    ("NISTATINA", "Micostatin", "100.000-500.000 UI 3-4x/dia", "Bochechar e engolir ou aplicar", "Após refeições", "Temperatura ambiente até 25°C", "Náusea, vômito, diarreia (raro)", "Uso tópico/oral sem restrições", "Nenhuma significativa", False, "livre", "Seguro", "Seguro - dose por idade", "Seguro - não absorvido", "Seguro", "Seguro", "Seguro"),
+
+    # Antivirais
+    ("ACICLOVIR", "Zovirax", "200-800mg 5x/dia", "Manter boa hidratação", "A cada 4h (5x/dia)", "Temperatura ambiente", "Náusea, cefaleia, nefrotoxicidade", "Manter hidratação", "Nefrotóxicos, probenecida", False, "simples", "Ajustar dose", "Dose por peso/idade", "Cat. B - relativamente seguro", "Compatível com cautela", "Ajustar conforme ClCr", "Sem ajuste"),
+    ("VALACICLOVIR", "Valtrex", "500-1000mg 2-3x/dia", "Pode tomar com ou sem alimentos", "8/8h ou 12/12h", "Temperatura ambiente", "Cefaleia, náusea", "Manter hidratação", "Nefrotóxicos", False, "simples", "Ajustar dose", "≥ 12 anos", "Cat. B", "Excretado no leite", "Ajustar conforme ClCr", "Sem ajuste"),
+    ("OSELTAMIVIR", "Tamiflu", "75mg 2x/dia por 5 dias", "Pode tomar com alimentos para reduzir náusea", "12/12h", "Temperatura ambiente", "Náusea, vômito, cefaleia", "Tomar com alimentos", "Probenecida", False, "simples", "Ajustar dose", "Dose por peso/idade", "Cat. C - avaliar", "Excretado no leite", "Ajustar conforme ClCr", "Sem ajuste"),
+
+    # Gastroprotetores e antiácidos
+    ("PANTOPRAZOL", "Pantozol", "20-40mg 1x/dia", "Tomar em jejum", "Manhã em jejum", "Temperatura ambiente", "Cefaleia, diarreia, náusea", "Tomar em jejum", "Atazanavir, metotrexato", False, "livre", "Risco de fratura e hipomagnesemia", "Não indicado rotineiramente", "Cat. B - relativamente seguro", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("LANSOPRAZOL", "Prazol", "15-30mg 1x/dia", "Tomar em jejum", "Manhã antes café", "Temperatura ambiente", "Cefaleia, diarreia, náusea", "Tomar em jejum", "Atazanavir, metotrexato", False, "livre", "Uso prolongado: riscos", "Dose por peso", "Cat. B", "Excretado no leite", "Sem ajuste", "Reduzir dose se grave"),
+    ("RABEPRAZOL", "Pariet", "10-20mg 1x/dia", "Tomar em jejum", "Manhã em jejum", "Temperatura ambiente", "Cefaleia, diarreia", "Tomar em jejum", "Metotrexato, rilpivirina", False, "livre", "Monitorar uso prolongado", "Não estabelecido", "Cat. B", "Excretado no leite", "Sem ajuste", "Usar com cautela"),
+    ("HIDRÓXIDO DE ALUMÍNIO", "Pepsamar", "500-1000mg 3-4x/dia", "Tomar entre refeições e ao deitar", "1-3h após refeições", "Temperatura ambiente", "Constipação, hipofosfatemia", "Usar longe de outros medicamentos", "Muitos - reduz absorção", False, "livre", "Risco de acúmulo de Al", "Seguro", "Seguro com moderação", "Seguro", "Evitar uso crônico", "Seguro"),
+    ("HIDRÓXIDO DE MAGNÉSIO", "Leite de Magnésia", "30-60mL/dia", "Tomar com água", "Conforme necessidade", "Temperatura ambiente", "Diarreia, cólicas", "Com água", "Pode afetar absorção de outros", False, "livre", "Usar com cautela", "Dose por idade", "Seguro", "Seguro", "Contraindicado se grave", "Seguro"),
+    ("SUCRALFATO", "Sucrafilm", "1g 4x/dia", "Tomar em jejum, 1h antes das refeições", "1h antes das refeições", "Temperatura ambiente", "Constipação, boca seca", "Não tomar com outros medicamentos", "Reduz absorção de vários", False, "livre", "Risco de acúmulo Al", "Seguro", "Cat. B - seguro", "Provavelmente seguro", "Usar com cautela", "Seguro"),
+
+    # Antieméticos
+    ("ONDANSETRONA", "Vonau", "4-8mg até 3x/dia", "Pode tomar com ou sem alimentos", "Conforme necessidade", "Temperatura ambiente", "Cefaleia, constipação, tontura", "Sem restrições", "Apomorfina (contraindicado)", False, "simples", "Risco de QT longo", "Dose por peso", "Cat. B - seguro", "Excretado no leite", "Sem ajuste", "Ajustar dose"),
+    ("BROMOPRIDA", "Digesan", "10mg 3x/dia", "Tomar 15min antes das refeições", "Antes das refeições", "Temperatura ambiente", "Sonolência, galactorreia, discinesia", "Tomar antes das refeições", "Anticolinérgicos antagonizam", False, "simples", "Risco de efeitos extrapiramidais", "Usar com cautela", "Evitar", "Aumenta prolactina", "Sem ajuste", "Sem ajuste"),
+    ("DIMENIDRINATO", "Dramin", "50-100mg 4-6x/dia", "Pode tomar com ou sem alimentos", "Conforme necessidade", "Temperatura ambiente", "Sonolência, boca seca, visão turva", "Sem restrições", "Depressores SNC, anticolinérgicos", False, "livre", "Maior sensibilidade", "Dose por peso/idade", "Cat. B - usar se necessário", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+
+    # Laxantes
+    ("LACTULOSE", "Lactulona", "15-30mL 1-2x/dia", "Pode diluir em água ou suco", "Manhã", "Temperatura ambiente", "Flatulência, cólicas, diarreia", "Pode diluir em líquidos", "Nenhuma significativa", False, "livre", "Seguro - primeira escolha", "Dose por idade", "Seguro", "Seguro", "Usar com cautela se grave", "Reduzir dose se encefalopatia"),
+    ("BISACODIL", "Dulcolax", "5-10mg à noite", "Não mastigar, não tomar com leite/antiácidos", "À noite ao deitar", "Temperatura ambiente", "Cólicas, diarreia", "Não tomar com leite ou antiácidos", "Antiácidos, IBPs", False, "livre", "Evitar uso crônico", "≥ 6 anos", "Evitar", "Evitar", "Sem restrições", "Sem restrições"),
+    ("PICOSSULFATO DE SÓDIO", "Guttalax", "5-10mg à noite", "Tomar com água", "À noite", "Temperatura ambiente", "Cólicas abdominais, diarreia", "Tomar com água", "Nenhuma significativa", False, "livre", "Seguro para uso ocasional", "Dose por idade", "Evitar", "Provavelmente seguro", "Sem restrições", "Sem restrições"),
+    ("ÓLEO MINERAL", "Nujol", "15-45mL ao deitar", "Tomar longe das refeições", "2h após jantar", "Temperatura ambiente", "Vazamento anal, má absorção vitaminas", "Longe das refeições", "Reduz absorção vit. lipossolúveis", False, "livre", "Risco de aspiração", "Evitar < 6 anos", "Evitar", "Evitar", "Sem restrições", "Sem restrições"),
+
+    # Antidiarreicos
+    ("LOPERAMIDA", "Imosec", "2mg após cada evacuação (máx 16mg/dia)", "Pode tomar com ou sem alimentos", "Após evacuações", "Temperatura ambiente", "Constipação, cólicas, tontura", "Manter hidratação", "Opioides, anticolinérgicos", False, "livre", "Usar com cautela", "Contraindicado < 2 anos", "Cat. C - evitar", "Evitar", "Sem ajuste", "Usar com cautela"),
+    ("RACECADOTRILA", "Tiorfan", "100mg 3x/dia", "Tomar antes das refeições", "Antes das refeições", "Temperatura ambiente", "Cefaleia, tontura", "Antes das refeições", "IECA (risco de angioedema)", False, "livre", "Seguro", "Dose por peso (sachê pediátrico)", "Não recomendado", "Não recomendado", "Usar com cautela", "Usar com cautela"),
+
+    # Antiespasmódicos
+    ("HIOSCINA (ESCOPOLAMINA)", "Buscopan", "10-20mg 3-4x/dia", "Pode tomar com ou sem alimentos", "Conforme necessidade", "Temperatura ambiente", "Boca seca, visão turva, taquicardia", "Sem restrições", "Anticolinérgicos, anti-histamínicos", False, "livre", "Maior sensibilidade a efeitos", "Dose por peso/idade", "Cat. C - avaliar", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("TRIMEBUTINA", "Debridat", "100-200mg 3x/dia", "Tomar antes das refeições", "Antes das refeições", "Temperatura ambiente", "Sonolência, tontura, boca seca", "Antes das refeições", "Tubocurarina", False, "livre", "Seguro", "Dose por peso", "Cat. C", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("MEBEVERINA", "Duspatalin", "135mg 3x/dia", "Tomar 20min antes das refeições", "20min antes das refeições", "Temperatura ambiente", "Raramente: tontura, cefaleia", "Antes das refeições", "Nenhuma significativa", False, "livre", "Seguro", "Não indicado < 18 anos", "Evitar", "Evitar", "Sem ajuste", "Sem ajuste"),
+
+    # Vitaminas e suplementos
+    ("VITAMINA D3 (COLECALCIFEROL)", "Depura", "1000-50000 UI/semana", "Tomar com refeição gordurosa", "Com refeição", "Temperatura ambiente", "Hipercalcemia (doses altas)", "Com refeição gordurosa", "Tiazídicos, digoxina", False, "livre", "Monitorar níveis séricos", "Dose por idade/peso", "Seguro em doses usuais", "Seguro", "Monitorar cálcio", "Sem restrições"),
+    ("VITAMINA B12 (CIANOCOBALAMINA)", "Citoneurin", "1000-5000mcg/dia ou semanal", "Pode tomar com ou sem alimentos", "Qualquer horário", "Temperatura ambiente", "Raramente: acne, rash", "Sem restrições", "Metformina reduz absorção", False, "livre", "Repor se deficiente", "Seguro", "Seguro", "Seguro", "Sem ajuste", "Sem ajuste"),
+    ("ÁCIDO FÓLICO", "Folacin", "5mg/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Raramente: náusea, flatulência", "Sem restrições", "Metotrexato, fenitoína, sulfassalazina", False, "livre", "Mascarar deficiência B12", "Seguro", "Essencial na gestação", "Seguro", "Sem ajuste", "Sem ajuste"),
+    ("SULFATO FERROSO", "Combiron", "40-80mg Fe elementar 1-3x/dia", "Tomar em jejum com vitamina C", "Jejum ou entre refeições", "Temperatura ambiente", "Constipação, náusea, fezes escuras", "Evitar chá, café, leite junto", "Antiácidos, quinolonas, levotiroxina", False, "livre", "Risco de sobrecarga", "Dose por peso", "Essencial se anemia", "Seguro", "Usar com cautela", "Sem ajuste"),
+    ("CÁLCIO + VITAMINA D", "Calcium D3", "500-1000mg Ca + 200-800UI D3/dia", "Tomar com alimentos", "Com refeições", "Temperatura ambiente", "Constipação, hipercalcemia", "Com alimentos", "Tiazídicos, levotiroxina, bisfosfonatos", False, "livre", "Monitorar níveis", "Dose por idade", "Seguro e recomendado", "Seguro", "Ajustar se hipercalcemia", "Sem restrições"),
+    ("POLIVITAMÍNICO", "Centrum", "1 comp/dia", "Tomar com refeição", "Manhã com café", "Temperatura ambiente", "Raramente: náusea, urina amarela", "Com refeição", "Pode afetar absorção de alguns medicamentos", False, "livre", "Seguro", "Formulações pediátricas", "Existem para gestantes", "Seguro", "Sem restrições", "Sem restrições"),
+
+    # Dermatológicos - uso oral
+    ("ISOTRETINOÍNA", "Roacutan", "0,5-1mg/kg/dia", "Tomar com alimentos gordurosos", "Com refeição gordurosa", "Temperatura ambiente protegido da luz", "Ressecamento, queilite, teratogenicidade", "Refeição gordurosa essencial", "Tetraciclinas, vitamina A", True, "especial", "Maior risco de efeitos", "Contraindicado < 12 anos rotineiramente", "ABSOLUTAMENTE CONTRAINDICADO", "Contraindicado", "Sem ajuste", "Contraindicado se grave"),
+    ("DAPSONA", "Dapsona", "50-100mg/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Hemólise, metemoglobinemia, rash", "Sem restrições", "Rifampicina, trimetoprima", True, "simples", "Monitorar hemograma", "Dose por peso", "Cat. C - avaliar", "Excretado no leite", "Sem ajuste", "Usar com cautela"),
+
+    # Anti-hipertensivos adicionais
+    ("ANLODIPINO", "Norvasc", "5-10mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã ou noite", "Temperatura ambiente", "Edema maleolar, rubor, cefaleia", "Sem restrições", "Sinvastatina (limitar dose)", False, "simples", "Iniciar com 2,5mg", "Não indicado", "Cat. C - avaliar", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("NIFEDIPINO", "Adalat", "30-60mg/dia retard", "Não partir/mastigar formas retard", "1x/dia", "Temperatura ambiente", "Cefaleia, rubor, edema, taquicardia", "Evitar grapefruit", "Betabloqueadores, digoxina", False, "simples", "Risco de hipotensão", "Não indicado", "Cat. C", "Excretado no leite", "Sem ajuste", "Iniciar dose menor"),
+    ("VERAPAMIL", "Dilacoron", "120-480mg/dia", "Tomar com alimentos para reduzir GI", "Com alimentos", "Temperatura ambiente", "Constipação, bradicardia, hipotensão", "Com alimentos", "Betabloqueadores, digoxina, estatinas", False, "simples", "Maior risco de bradicardia", "Não indicado", "Cat. C", "Excretado no leite", "Sem ajuste", "Reduzir dose"),
+    ("DILTIAZEM", "Cardizem", "120-360mg/dia", "Pode tomar com ou sem alimentos", "Dividir doses ou CD 1x/dia", "Temperatura ambiente", "Bradicardia, constipação, edema", "Sem restrições", "Betabloqueadores, digoxina, ciclosporina", False, "simples", "Risco de bradicardia", "Não indicado", "Cat. C", "Excretado no leite", "Sem ajuste", "Reduzir dose 50%"),
+    ("CARVEDILOL", "Coreg", "6,25-25mg 2x/dia", "Tomar com alimentos para reduzir hipotensão", "Com refeições", "Temperatura ambiente", "Tontura, fadiga, bradicardia", "Com alimentos", "Digoxina, insulina, diltiazem", False, "simples", "Iniciar com dose baixa", "Não estabelecido", "Cat. C", "Excretado no leite", "Sem ajuste", "Iniciar dose muito baixa"),
+    ("PROPRANOLOL", "Inderal", "40-320mg/dia", "Tomar com alimentos", "Dividir em 2-3 doses", "Temperatura ambiente", "Bradicardia, fadiga, broncoespasmo", "Com alimentos", "Verapamil, clonidina, insulina", False, "simples", "Risco de bradicardia e quedas", "Dose por peso/indicação", "Cat. C - evitar 1º tri", "Excretado no leite", "Sem ajuste", "Reduzir dose"),
+    ("METOPROLOL", "Seloken", "50-200mg/dia", "Tomar com ou logo após alimentos", "Com alimentos", "Temperatura ambiente", "Bradicardia, fadiga, hipotensão", "Com alimentos", "Verapamil, clonidina, IMAO", False, "simples", "Iniciar dose baixa", "Não indicado rotineiramente", "Cat. C", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("ATENOLOL", "Atenol", "25-100mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Bradicardia, fadiga, extremidades frias", "Sem restrições", "Verapamil, diltiazem, clonidina", False, "simples", "Iniciar dose baixa", "Dose por peso", "Cat. D - evitar", "Excretado no leite", "Ajustar conforme ClCr", "Sem ajuste"),
+    ("BISOPROLOL", "Concor", "2,5-10mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Bradicardia, fadiga, cefaleia", "Sem restrições", "Verapamil, diltiazem, antiarrítmicos", False, "simples", "Iniciar com 1,25mg em IC", "Não indicado", "Cat. C", "Excretado no leite", "Ajustar se ClCr < 20", "Sem ajuste"),
+
+    # Diuréticos
+    ("HIDROCLOROTIAZIDA", "Clorana", "12,5-50mg 1x/dia", "Tomar pela manhã", "Manhã", "Temperatura ambiente", "Hipocalemia, hiponatremia, hiperuricemia", "Sem restrições", "Lítio, digoxina, AINEs", False, "simples", "Monitorar eletrólitos", "Não indicado", "Cat. B - mas evitar", "Excretado no leite", "Ineficaz se ClCr < 30", "Usar com cautela"),
+    ("FUROSEMIDA", "Lasix", "20-80mg 1-2x/dia", "Tomar pela manhã para evitar noctúria", "Manhã (e almoço se 2x)", "Temperatura ambiente", "Hipocalemia, desidratação, ototoxicidade", "Sem restrições", "Aminoglicosídeos, digoxina, lítio", False, "simples", "Monitorar eletrólitos e função renal", "Dose por peso", "Cat. C - usar se necessário", "Excretado no leite", "Pode precisar doses maiores", "Usar com cautela"),
+    ("ESPIRONOLACTONA", "Aldactone", "25-200mg/dia", "Tomar com alimentos", "Com refeições", "Temperatura ambiente", "Hipercalemia, ginecomastia, irregularidade menstrual", "Com alimentos", "IECA, BRA, suplementos de K", False, "simples", "Alto risco de hipercalemia", "Dose por peso", "Contraindicado", "Excretado no leite", "Contraindicado se grave", "Usar com cautela"),
+    ("INDAPAMIDA", "Natrilix", "1,5-2,5mg 1x/dia", "Tomar pela manhã", "Manhã", "Temperatura ambiente", "Hipocalemia, hiperuricemia", "Sem restrições", "Lítio, digoxina", False, "simples", "Monitorar eletrólitos", "Não indicado", "Cat. B", "Excretado no leite", "Ineficaz se ClCr < 30", "Usar com cautela"),
+
+    # IECA e BRA
+    ("CAPTOPRIL", "Capoten", "25-150mg/dia dividido", "Tomar 1h antes das refeições", "1h antes das refeições", "Temperatura ambiente", "Tosse seca, hipercalemia, angioedema", "1h antes das refeições", "Espironolactona, AINEs, lítio", False, "simples", "Iniciar dose baixa, monitorar K", "Não indicado", "CONTRAINDICADO", "Excretado no leite", "Reduzir dose", "Sem ajuste"),
+    ("ENALAPRIL", "Renitec", "5-40mg/dia", "Pode tomar com ou sem alimentos", "1-2x/dia", "Temperatura ambiente", "Tosse seca, hipercalemia, angioedema", "Sem restrições", "Espironolactona, AINEs, lítio", False, "simples", "Iniciar dose baixa", "Não indicado", "CONTRAINDICADO", "Excretado no leite", "Ajustar dose", "Sem ajuste"),
+    ("RAMIPRIL", "Triatec", "2,5-10mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Tosse seca, hipercalemia, angioedema", "Sem restrições", "Espironolactona, AINEs, lítio", False, "simples", "Iniciar 1,25mg", "Não indicado", "CONTRAINDICADO", "Evitar", "Iniciar dose muito baixa", "Sem ajuste"),
+    ("LISINOPRIL", "Zestril", "5-40mg 1x/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Tosse seca, hipercalemia, angioedema", "Sem restrições", "Espironolactona, AINEs, lítio", False, "simples", "Iniciar 2,5mg", "Não indicado", "CONTRAINDICADO", "Excretado no leite", "Ajustar conforme ClCr", "Sem ajuste"),
+    ("LOSARTANA", "Cozaar", "25-100mg 1x/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Tontura, hipercalemia", "Sem restrições", "Espironolactona, AINEs, lítio", False, "simples", "Iniciar 25mg", "Não indicado", "CONTRAINDICADO", "Excretado no leite", "Sem ajuste de dose", "Iniciar 25mg"),
+    ("VALSARTANA", "Diovan", "80-320mg 1x/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Tontura, hipercalemia", "Sem restrições", "Espironolactona, AINEs, lítio", False, "simples", "Iniciar 40mg", "Não indicado", "CONTRAINDICADO", "Excretado no leite", "Sem ajuste", "Iniciar 40mg"),
+
+    # Estatinas
+    ("SINVASTATINA", "Zocor", "10-40mg 1x/dia", "Tomar à noite", "Noite", "Temperatura ambiente", "Mialgia, hepatotoxicidade, rabdomiólise", "Evitar grapefruit", "Fibratos, ciclosporina, amiodarona", False, "simples", "Maior risco de miopatia", "Não indicado", "CONTRAINDICADO", "Contraindicado", "Sem ajuste", "Contraindicado se grave"),
+    ("ATORVASTATINA", "Lipitor", "10-80mg 1x/dia", "Pode tomar qualquer horário", "Qualquer horário", "Temperatura ambiente", "Mialgia, hepatotoxicidade", "Evitar grapefruit em excesso", "Fibratos, ciclosporina, eritromicina", False, "simples", "Monitorar CPK e função hepática", "Uso em hipercolesterolemia familiar", "CONTRAINDICADO", "Contraindicado", "Sem ajuste", "Contraindicado se grave"),
+    ("ROSUVASTATINA", "Crestor", "5-40mg 1x/dia", "Pode tomar qualquer horário", "Qualquer horário", "Temperatura ambiente", "Mialgia, proteinúria", "Sem restrições", "Ciclosporina, anticoagulantes", False, "simples", "Iniciar 5mg, máx 20mg em asiáticos", "Hipercolesterolemia familiar", "CONTRAINDICADO", "Contraindicado", "Iniciar 5mg se ClCr < 30", "Evitar se grave"),
+
+    # Antidiabéticos
+    ("METFORMINA", "Glifage", "500-2550mg/dia", "Tomar com refeições", "Com refeições", "Temperatura ambiente", "Náusea, diarreia, acidose láctica (raro)", "Com refeições reduz GI", "Contrastes iodados, álcool", False, "simples", "Monitorar B12, evitar se ClCr < 30", "Não indicado < 10 anos", "CONTRAINDICADO", "Contraindicado", "Ajustar ou evitar", "Contraindicado"),
+    ("GLIBENCLAMIDA", "Daonil", "2,5-20mg/dia", "Tomar com café da manhã", "Com café da manhã", "Temperatura ambiente", "Hipoglicemia, ganho de peso", "Com alimentos", "Betabloqueadores mascaram hipoglicemia", False, "simples", "Alto risco de hipoglicemia - evitar", "Não indicado", "CONTRAINDICADO", "Contraindicado", "Contraindicado", "Contraindicado se grave"),
+    ("GLIMEPIRIDA", "Amaryl", "1-8mg 1x/dia", "Tomar com café da manhã", "Com café da manhã", "Temperatura ambiente", "Hipoglicemia, ganho de peso", "Com alimentos", "Betabloqueadores, fluconazol", False, "simples", "Iniciar 1mg", "Não indicado", "CONTRAINDICADO", "Contraindicado", "Iniciar 1mg, evitar se grave", "Evitar se grave"),
+    ("GLICLAZIDA", "Diamicron", "30-120mg 1x/dia (MR)", "Tomar com café da manhã", "Com café da manhã", "Temperatura ambiente", "Hipoglicemia, ganho de peso", "Com alimentos", "Betabloqueadores, fluconazol", False, "simples", "Menor risco de hipoglicemia", "Não indicado", "CONTRAINDICADO", "Contraindicado", "Usar com cautela", "Evitar se grave"),
+    ("SITAGLIPTINA", "Januvia", "100mg 1x/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Cefaleia, nasofaringite", "Sem restrições", "Digoxina", False, "simples", "Sem risco de hipoglicemia isolada", "Não indicado", "Não recomendado", "Não recomendado", "Ajustar: 50mg ou 25mg", "Sem ajuste"),
+    ("VILDAGLIPTINA", "Galvus", "50mg 2x/dia", "Pode tomar com ou sem alimentos", "Manhã e noite", "Temperatura ambiente", "Cefaleia, tremor, tontura", "Sem restrições", "IECA (risco angioedema)", False, "simples", "Sem risco de hipoglicemia isolada", "Não indicado", "Não recomendado", "Não recomendado", "Não recomendado se grave", "Não recomendado"),
+    ("DAPAGLIFLOZINA", "Forxiga", "10mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Infecção genital, ITU, poliúria", "Manter hidratação", "Diuréticos (risco depleção)", False, "simples", "Evitar se ClCr < 45 para DM", "Não indicado", "Não recomendado", "Não recomendado", "Ver indicação específica", "Sem ajuste"),
+    ("EMPAGLIFLOZINA", "Jardiance", "10-25mg 1x/dia", "Pode tomar com ou sem alimentos", "Manhã", "Temperatura ambiente", "Infecção genital, ITU", "Manter hidratação", "Diuréticos, insulina", False, "simples", "Benefício cardiovascular", "Não indicado", "Não recomendado", "Não recomendado", "Ver indicação específica", "Sem ajuste"),
+
+    # Hormônios tireoidianos
+    ("LEVOTIROXINA", "Puran T4", "25-200mcg 1x/dia", "Tomar em jejum 30-60min antes café", "Manhã em jejum", "Temperatura ambiente", "Taquicardia, tremor, perda peso (superdose)", "Jejum - longe de Ca, Fe, café", "Cálcio, ferro, antiácidos, café", False, "simples", "Iniciar dose muito baixa", "Dose por peso", "Essencial manter tratamento", "Seguro", "Sem ajuste", "Sem ajuste"),
+    ("PROPILTIOURACIL", "Propiltiouracil", "100-400mg/dia dividido", "Pode tomar com ou sem alimentos", "8/8h ou 6/6h", "Temperatura ambiente", "Rash, artralgia, agranulocitose", "Sem restrições", "Anticoagulantes", True, "simples", "Monitorar hemograma", "Dose por peso", "Preferido no 1º trimestre", "Excretado - monitorar RN", "Sem ajuste", "Sem ajuste"),
+    ("METIMAZOL", "Tapazol", "5-30mg/dia", "Pode tomar com ou sem alimentos", "1x/dia ou dividido", "Temperatura ambiente", "Rash, artralgia, agranulocitose", "Sem restrições", "Anticoagulantes, betabloqueadores", True, "simples", "Monitorar hemograma", "Dose por peso", "Preferido 2º/3º tri", "Excretado - monitorar RN", "Sem ajuste", "Sem ajuste"),
+
+    # Corticoides
+    ("PREDNISONA", "Meticorten", "5-60mg/dia", "Tomar pela manhã com alimentos", "Manhã com café", "Temperatura ambiente", "Hiperglicemia, osteoporose, imunossupressão", "Com alimentos", "AINEs, hipoglicemiantes, vacinas vivas", False, "simples", "Maior risco de efeitos adversos", "Dose por peso", "Cat. C - usar se necessário", "Excretado no leite", "Sem ajuste", "Sem ajuste mas cuidado"),
+    ("PREDNISOLONA", "Predsim", "5-60mg/dia", "Tomar pela manhã com alimentos", "Manhã com café", "Temperatura ambiente", "Hiperglicemia, osteoporose, Cushing", "Com alimentos", "AINEs, hipoglicemiantes", False, "simples", "Maior sensibilidade", "Formulação líquida disponível", "Cat. C", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("DEXAMETASONA", "Decadron", "0,5-16mg/dia", "Tomar pela manhã com alimentos", "Manhã", "Temperatura ambiente", "Hiperglicemia, HAS, imunossupressão", "Com alimentos", "AINEs, hipoglicemiantes, fenitoína", False, "simples", "Muito potente - usar menor dose", "Dose por peso/indicação", "Cat. C", "Evitar", "Sem ajuste", "Sem ajuste"),
+    ("BUDESONIDA ORAL", "Entocort", "9mg/dia", "Tomar pela manhã", "Manhã", "Temperatura ambiente", "Menos efeitos sistêmicos que outros", "Sem restrições", "Cetoconazol aumenta níveis", False, "simples", "Menos efeitos sistêmicos", "Não estabelecido", "Cat. C", "Provavelmente seguro", "Sem ajuste", "Evitar se grave"),
+
+    # Relaxantes musculares
+    ("CICLOBENZAPRINA", "Miosan", "5-10mg 3x/dia", "Pode tomar com ou sem alimentos", "3x/dia (máx 2-3 semanas)", "Temperatura ambiente", "Sonolência, boca seca, tontura", "Sem restrições", "IMAO, depressores SNC", False, "simples", "Maior sensibilidade - iniciar 5mg", "Não indicado < 15 anos", "Cat. B - evitar", "Excretado no leite", "Sem ajuste", "Não recomendado"),
+    ("CARISOPRODOL", "Mioflex", "350mg 3-4x/dia", "Pode tomar com ou sem alimentos", "3-4x/dia", "Temperatura ambiente", "Sonolência, tontura, dependência", "Sem restrições", "Depressores SNC, opioides", True, "controlado_b", "Evitar - risco de sedação", "Não indicado < 12 anos", "Não recomendado", "Excretado no leite", "Usar com cautela", "Usar com cautela"),
+    ("ORFENADRINA", "Dorflex", "35mg (+ dipirona) 3-4x/dia", "Pode tomar com ou sem alimentos", "3-4x/dia", "Temperatura ambiente", "Boca seca, sonolência, retenção urinária", "Sem restrições", "Anticolinérgicos, depressores SNC", False, "livre", "Efeitos anticolinérgicos - evitar", "Não indicado", "Não recomendado", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+    ("TIZANIDINA", "Sirdalud", "2-8mg 3x/dia", "Consistência: sempre com ou sem alimentos", "3x/dia", "Temperatura ambiente", "Sonolência, boca seca, hipotensão", "Manter consistência", "Ciprofloxacino, fluvoxamina", False, "simples", "Risco de hipotensão", "Não indicado", "Cat. C", "Evitar", "Usar com cautela", "Evitar"),
+    ("BACLOFENO", "Lioresal", "5-25mg 3x/dia", "Tomar com alimentos", "Com refeições", "Temperatura ambiente", "Sonolência, fraqueza, náusea", "Com alimentos", "Depressores SNC, anti-hipertensivos", False, "simples", "Risco de sedação - iniciar baixo", "Não estabelecido < 12 anos", "Cat. C", "Excretado no leite", "Reduzir dose", "Sem ajuste"),
+]
+
+def main():
+    conn = pymysql.connect(
+        host='localhost',
+        port=3307,
+        user='root',
+        password='f68interdb',
+        database='copilot',
+        charset='utf8mb4'
+    )
+
+    cursor = conn.cursor()
+
+    # Verificar quantos já existem
+    cursor.execute("SELECT COUNT(*) FROM copilot_medicamento_info")
+    count_atual = cursor.fetchone()[0]
+    print(f"Registros atuais: {count_atual}")
+
+    # Inserir novos medicamentos
+    sql = """
+    INSERT INTO copilot_medicamento_info
+        (principio_ativo, nome_comercial, posologia_padrao, orientacao_uso,
+         horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos,
+         interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso,
+         alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal,
+         alerta_hepatico, fonte)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'bulario_anvisa')
+    """
+
+    inseridos = 0
+    for med in MEDICAMENTOS_EXTRAS:
+        try:
+            cursor.execute(sql, med)
+            inseridos += 1
+        except pymysql.err.IntegrityError as e:
+            print(f"Duplicado: {med[0]}")
+        except Exception as e:
+            print(f"Erro em {med[0]}: {e}")
+
+    conn.commit()
+
+    # Verificar total final
+    cursor.execute("SELECT COUNT(*) FROM copilot_medicamento_info")
+    count_final = cursor.fetchone()[0]
+
+    print(f"\nInseridos: {inseridos}")
+    print(f"Total final: {count_final}")
+
+    # Mostrar distribuição por tipo de receita
+    cursor.execute("""
+        SELECT tipo_receita, COUNT(*) as qtd
+        FROM copilot_medicamento_info
+        GROUP BY tipo_receita
+        ORDER BY qtd DESC
+    """)
+    print("\nDistribuição por tipo de receita:")
+    for row in cursor.fetchall():
+        print(f"  {row[0]}: {row[1]}")
+
+    cursor.close()
+    conn.close()
+
+if __name__ == '__main__':
+    main()

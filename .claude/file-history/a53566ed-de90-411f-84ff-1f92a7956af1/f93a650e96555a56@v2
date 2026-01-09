@@ -1,0 +1,5 @@
+"""Conectores para diferentes ERPs."""
+
+from .aione import AIONEConnector
+
+__all__ = ["AIONEConnector"]

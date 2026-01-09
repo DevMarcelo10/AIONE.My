@@ -1,0 +1,57 @@
+# PharmaCopilot - Configurações de Ambiente
+# Copie para .env e preencha os valores
+
+# ============================================
+# APP
+# ============================================
+DEBUG=true
+HOST=127.0.0.1
+PORT=8000
+
+# ============================================
+# ERP CONNECTION (READ-ONLY!)
+# ============================================
+# Tipos: aione, linx, trier, profarma, generic
+ERP_TYPE=aione
+
+# Drivers: mysql, mssql, postgres, firebird
+ERP_DB_DRIVER=mysql
+ERP_DB_HOST=localhost
+ERP_DB_PORT=3306
+ERP_DB_NAME=dbaione
+ERP_DB_USER=root
+ERP_DB_PASSWORD=
+
+# ============================================
+# COPILOT DATABASE (banco próprio)
+# ============================================
+COPILOT_DB_URL=mysql+aiomysql://root@localhost/copilot
+
+# ============================================
+# LLM PROVIDERS
+# ============================================
+# Provider: anthropic, openai, google
+LLM_PROVIDER=anthropic
+
+# API Keys (preencha apenas o provider escolhido)
+ANTHROPIC_API_KEY=sk-ant-...
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=
+
+# Model settings
+LLM_MODEL=claude-3-5-sonnet-20241022
+LLM_MAX_TOKENS=1024
+LLM_TEMPERATURE=0.3
+
+# ============================================
+# CACHE
+# ============================================
+REDIS_URL=redis://localhost:6379/0
+CACHE_TTL=300
+
+# ============================================
+# FEATURES
+# ============================================
+ENABLE_SUGGESTIONS=true
+ENABLE_ALERTS=true
+ENABLE_CROSS_SELL=true

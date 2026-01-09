@@ -383,8 +383,8 @@ begin
          end; //while
       end; //with
 
-            // ....... Verifica se Há pedidos de Compras Já Realizados ....... //
-      QueAuxi.Close;
+      // ....... Verifica se Há pedidos de Compras Já Realizados ....... //
+     {QueAuxi.Close;
       QueAuxi.SQL.Text := 'SELECT a.IDProd, SUM(Qtdped) AS TotQtdped FROM arqcompraite a JOIN arqcompra c ON a.IDComp = c.IDComp '+
       'WHERE a.Status = "0" AND c.Datped >= DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH) GROUP BY a.IDProd';
       QueAuxi.Open;
@@ -419,8 +419,7 @@ begin
          QueAuxi.Next;
       end; //while
       MemTableIA.IndexFieldNames := 'IDFilial;IDProd';
-      MemTableIA.First;
-
+      MemTableIA.First; }
       Result := MemTableIA;
    finally
       QueAuxi.Close;

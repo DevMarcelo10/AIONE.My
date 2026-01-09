@@ -1,0 +1,90 @@
+"""
+Schemas de configuração do terminal.
+Define como identificar a venda atual de cada terminal/caixa.
+"""
+
+from typing import Optional
+from pydantic import BaseModel, Field
+
+
+class TerminalConfig(BaseModel):
+    """Configuração para identificação da venda atual do terminal."""
+
+    # Tabela e campo da venda
+    tabela_vendas: str = Field(
+        default="arqpedido",
+        description="Nome da tabela de vendas no ERP"
+    )
+    campo_id_venda: str = Field(
+        default="IDPed",
+        description="Nome do campo que contém o ID da venda"
+    )
+
+    # Identificação do terminal (ex: filial, caixa, terminal)
+    campo_identificador: str = Field(
+        default="IDFilial",
+        description="Campo usado para identificar o terminal"
+    )
+    valor_identificador: str = Field(
+        default="1",
+        description="Valor do identificador deste terminal"
+    )
+
+    # Status da venda
+    campo_status_venda: str = Field(
+        default="Status",
+        description="Campo que indica o status da venda"
+    )
+    valor_venda_aberta: str = Field(
+        default="A",
+        description="Valor que indica venda aberta/em andamento"
+    )
+
+    # Campos opcionais para ordenação e filtros
+    campo_data: Optional[str] = Field(
+        default="Datped",
+        description="Campo de data/hora da venda"
+    )
+    campo_cliente: Optional[str] = Field(
+        default="IDPess",
+        description="Campo do ID do cliente"
+    )
+    ordenar_por: str = Field(
+        default="Datped DESC",
+        description="Ordenação para pegar a venda mais recente"
+    )
+
+
+class TerminalConfigResponse(BaseModel):
+    """Resposta da configuração do terminal."""
+
+    config: TerminalConfig
+    saved: bool = True
+
+
+class TerminalTestResult(BaseModel):
+    """Resultado do teste de configuração."""
+
+    success: bool
+    venda_id: Optional[int] = None
+    cliente_id: Optional[int] = None
+    data_venda: Optional[str] = None
+    total_vendas_abertas: int = 0
+    message: str = ""
+    query_executada: Optional[str] = None
+
+
+class TableInfo(BaseModel):
+    """Informações de uma tabela."""
+
+    name: str
+    type: str = "table"
+
+
+class ColumnInfo(BaseModel):
+    """Informações de uma coluna."""
+
+    name: str
+    type: str
+    nullable: bool = True
+    key: str = ""

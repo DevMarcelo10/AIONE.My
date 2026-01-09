@@ -1,0 +1,74 @@
+# MCP Server MySQL para AIONE.My
+
+Servidor MCP (Model Context Protocol) que fornece acesso ao banco de dados MySQL do projeto AIONE.My através do Claude Code.
+
+## Funcionalidades
+
+Este MCP fornece as seguintes ferramentas:
+
+### 1. query_select
+Executa queries SELECT no banco de dados.
+- **Entrada**: query SQL, limite opcional
+- **Saída**: Resultados em formato JSON
+
+### 2. query_execute
+Executa queries INSERT, UPDATE ou DELETE.
+- **Entrada**: query SQL
+- **Saída**: Número de linhas afetadas
+
+### 3. list_tables
+Lista todas as tabelas disponíveis no banco.
+- **Saída**: Lista de nomes de tabelas
+
+### 4. describe_table
+Mostra a estrutura de uma tabela específica.
+- **Entrada**: nome da tabela
+- **Saída**: Colunas, tipos de dados, chaves
+
+### 5. get_table_count
+Retorna o número de registros em uma tabela.
+- **Entrada**: nome da tabela
+- **Saída**: Contagem de registros
+
+### 6. search_table
+Busca registros em uma tabela por valor.
+- **Entrada**: nome da tabela, valor de busca, limite opcional
+- **Saída**: Registros encontrados
+
+## Configuração
+
+Edite o arquivo `config.ini` com suas credenciais MySQL:
+
+```ini
+[Database]
+host = localhost
+port = 3307
+user = root
+password = sua_senha
+database = aione
+```
+
+## Instalação
+
+1. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+2. Configure o Claude Code para usar este MCP (veja instruções no arquivo principal)
+
+## Uso
+
+O MCP é automaticamente ativado pelo Claude Code. Você pode usar comandos como:
+
+- "Liste todas as tabelas do banco"
+- "Mostre a estrutura da tabela arqproduto"
+- "Busque produtos com nome 'paracetamol'"
+- "Execute SELECT * FROM arqpessoa WHERE tipo = 'C' LIMIT 10"
+
+## Segurança
+
+⚠️ **IMPORTANTE**:
+- Nunca commite o arquivo `config.ini` com senhas reais
+- Use usuários de banco com permissões apropriadas
+- Sempre revise queries antes de executar operações de escrita

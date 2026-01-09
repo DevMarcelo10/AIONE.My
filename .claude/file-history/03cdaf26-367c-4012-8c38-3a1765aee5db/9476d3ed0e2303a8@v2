@@ -1,0 +1,217 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+AIONE.My is a comprehensive pharmacy management system (ERP) built in Delphi, featuring a client-server architecture with REST-based communication. The system handles sales, inventory, purchases, financial operations, fiscal compliance (Brazilian NF-e/NF-Ce), and integrates AI capabilities for intelligent recommendations.
+
+**Language:** Delphi (Object Pascal)
+**Framework:** VCL (Visual Component Library)
+**Architecture:** Multi-tier REST client-server with modular business domains
+**Database:** MySQL accessed via REST-DW protocol and FireDAC
+
+## Build Commands
+
+This is a Delphi project - there are no command-line build tools configured. Build using Delphi IDE:
+
+1. Open `AiONE.dproj` in Delphi (version 10.4 Sydney or later recommended)
+2. Build → Build AiONE (F9 to compile and run)
+3. For the server: Open `Server\IAServer.dproj` and build separately
+
+**Output:** Executable is generated in the root directory as `AIONE.exe`
+
+## High-Level Architecture
+
+### Module Organization
+
+The codebase uses a **domain-driven modular structure** with `uni*` prefix directories:
+
+- **uniAuxilia/** - Auxiliary services (configuration, logging, AI integration, utilities)
+- **uniProduto/** - Product catalog management (products, EAN codes, groups, kits, inventory locations)
+- **uniVendas/** - Sales operations (sales orders, POS, prescription handling, delivery pricing)
+- **uniFinan/** - Financial management (invoices, payments, bank reconciliation, PIX, boletos)
+- **uniCompra/** - Purchase orders and receiving workflows
+- **uniPessoa/** - Person/customer/supplier management
+- **uniConve/** - Convention/agreement management (health plans, corporate accounts)
+- **uniPromo/** - Promotional rules and progressive discounts
+- **uniDesco/** - Discount management by product/group/customer/convention
+- **uniComi/** - Commission calculation for salespeople
+- **uniCaixa/** - Cash register (POS/cashier) operations
+- **uniSNGPC/** - Controlled substances compliance (government reporting)
+- **uniFatura/** - Fiscal invoice generation (NF-e/NF-Ce electronic invoices)
+
+### Key Entry Points
+
+- **Main Application:** `AIONE.dpr` - Creates data module (TDM) and main form (TFrmPrincipal)
+- **Data Module:** `uDM.pas` - Central data access, REST connections, and shared components
+- **Main Form:** `uPrincipal.pas` - Application shell and menu system
+- **Constants:** `uniAuxilia\uConst.pas` - Global variables, data structures, server configuration
+- **Utilities:** `uniAuxilia\uLibFarm.pas` - Common helper functions
+
+### Server Architecture
+
+**Main REST Server (IAServer.exe)**
+- Located in `Server/` directory
+- Entry point: `Server\IAServer.dpr`
+- Default port: 8093 (configurable)
+- Handles database operations via FireDAC → MySQL
+- Custom event handlers for AI operations, file transfers, version checks
+
+**Additional Servers:**
+- `ServerFar/` - Pharmacy-specific variant server
+- `Roteirizador/` - Delivery routing system with multiple apps
+- `API_Conv/` - Convention data synchronization API
+
+### Database Access Pattern
+
+**Primary:** REST-DW Protocol
+```
+Client (AIONE.exe)
+  → TRESTDWIdClientPooler (Connection pooling)
+    → REST API (localhost:8093 or ns1.aione.com.br)
+      → IAServer.exe
+        → FireDAC (TFDConnection)
+          → MySQL Database
+```
+
+**Secondary:** Direct FireDAC connection for specific operations
+
+**Key Components in uDM.pas:**
+- `DWDataBase: TRESTDWIdDatabase` - Primary REST database connection
+- `RESTClientPooler: TRESTDWIdClientPooler` - Local/LAN server pooler
+- `RESTClientAIONE: TRESTDWIdClientPooler` - Cloud backup server (ns1.aione.com.br)
+- `FDConnect: TFDConnection` - Direct MySQL fallback connection
+
+**Configuration:** Server IP/port stored in `config.ini` (created automatically if missing)
+
+### Important Data Structures (uConst.pas)
+
+```pascal
+TEmpresa - Company/pharmacy information (CNPJ, address, tax IDs)
+TArqPedidoIte - Sales order line item with pricing, discounts, promotions
+TArqConvenio - Convention/agreement rules (payment terms, credit limits)
+TNFSalvar - NF-e fiscal invoice data for government submission
+```
+
+**Global Variables:**
+- `EMPRESA: TEmpresa` - Current pharmacy details loaded at startup
+- `FILIAL: Integer` - Current branch/location ID
+- `IPRemoto/PortaRemoto` - REST server connection (loaded from config.ini)
+- `IPAIONE` - Cloud server address: 'ns1.aione.com.br'
+- `DWUser = 'restuser'` - Default REST-DW database user
+
+## Third-Party Libraries
+
+**Database & REST:**
+- REST-DW (uRESTDW*) - Primary client-server communication framework
+- FireDAC - Universal database connectivity
+- Indy (IdHTTP, IdTCPClient) - HTTP and socket communications
+
+**Brazilian Fiscal Compliance:**
+- ACBr Components (ACBrNFe, ACBrBoleto, ACBrCEP) - Electronic invoices and payment slips
+- SPEDWiz (spdNFe, spdNFCe) - Alternative NF-e/NF-Ce generation
+
+**UI Components:**
+- LMD Tools Suite (lmdrt*) - Advanced visual components (grids, panels, image lists)
+- Standard VCL components
+
+**AI Integration:**
+- OpenAI API integration (custom TOpenAIChat class)
+- DeepSeek API integration
+- Located in `uniAuxilia\IABase.pas` and AI-specific modules
+
+## Development Guidelines
+
+### Module Naming Conventions
+
+- Forms: `uXxxxxxx.pas` / `TFrmXxxxxxx` class
+- Search dialogs: `uBuscaXxx.pas` / `TFrmBuscaXxx`
+- Detail/edit forms: `uXxxxxxCad.pas` / `TFrmXxxCad`
+- Each form has a corresponding `.dfm` file (visual designer)
+
+### Database Query Patterns
+
+When creating REST queries:
+```pascal
+var
+  Qry: TRESTDWClientSQL;
+begin
+  Qry := TRESTDWClientSQL.Create(nil);
+  Qry.DataBase := DM.DWDataBase;
+  try
+    Qry.SQL.Text := 'SELECT * FROM table WHERE condition';
+    Qry.Open;
+    // Process data
+  finally
+    Qry.Close;
+    FreeAndNil(Qry);
+  end;
+end;
+```
+
+### Configuration Management
+
+- Server connection: Read/write via `uConfgIni.TConfigManager` class
+- Application settings: Stored in MySQL `arqparametros` table
+- User preferences: Loaded during `uDM.DataModuleCreate` initialization
+
+### Form Lifecycle
+
+1. Forms are auto-created by listing in `AIONE.dpr` uses clause
+2. Data module (TDM) is created first and accessible via global `DM` variable
+3. Main form (FrmPrincipal) acts as MDI parent
+4. Child forms load data in `FormCreate` or `FormShow` events
+5. Always free query objects in try-finally blocks
+
+### Error Handling & Logging
+
+- Use `SalvaLog(USUARIO, PastaLog, 'message')` from `uLibFarm.pas` for logging
+- Log files stored in `doc/` subdirectory
+- Display user messages via `MostraMsg()` function (defined in uLibFarm)
+- Database errors: Check for `ER_DUP_KEY = 1062` (duplicate key constraint)
+
+### Working with Fiscal Documents (NF-e/NF-Ce)
+
+- NF-e generation: Use `spdNFe` component in DM (SPEDWiz) or `ACBrNFe`
+- NF-Ce generation: Use `spdNFCe` component in DM
+- Digital certificates: Managed via `uniFatura\uCertificados.pas`
+- Event handlers: `uniFatura\uNFEven.pas` (cancellation, correction, etc.)
+
+### AI/ML Features
+
+- Base AI class: `uniAuxilia\IABase.pas`
+- Promotion recommendations: `uniPromo\uIAPromo.pas`
+- Customer suggestions: `uniVendas\uIAVendaCli.pas`
+- Product search: `uniVendas\uIAVendaPro.pas`
+- Weather API integration: `uniAuxilia\WeatherAPI.pas`
+
+## Common Pitfalls
+
+1. **Never bypass REST-DW in client app** - Always use DM.DWDataBase, not direct MySQL connections (FDConnect is for server only)
+2. **Connection pooling** - Use existing poolers (RESTClientPooler/RESTClientAIONE), don't create new connections per query
+3. **Memory leaks** - Always free TRESTDWClientSQL queries in try-finally blocks
+4. **Global state** - Be aware of global variables in uConst.pas (EMPRESA, FILIAL, etc.) initialized at startup
+5. **Form creation** - Forms listed in .dpr are auto-created; don't manually create duplicates
+6. **Encoding** - System uses UTF-8 for database strings; watch for special characters in Brazilian Portuguese
+7. **DPI scaling** - Use GlobalScaleFactor and BaseRowHeight for high-DPI displays
+8. **Single instance** - Application checks for existing instance via FindWindow in uDM.DataModuleCreate
+
+## Specialized Subsystems
+
+### SNGPC Compliance (uniSNGPC/)
+Government reporting for controlled substances:
+- Sales tracking: `uVendasInc.pas`, `uVenda.pas`
+- Inventory movements: `uSNEstoque.pas`
+- Losses: `uPerdasInc.pas`, `uPerdas.pas`
+- Transmission: `uTransmite.pas`
+
+### Delivery System (Roteirizador/)
+Separate suite of applications for delivery route optimization with GIS integration.
+
+### Omnia AI Module (Omnia/)
+Semantic analysis and AI-powered product search using OpenAI/DeepSeek APIs with custom prompt engineering.
+
+## Testing
+
+No automated test suite is currently configured. Testing is performed manually via the Delphi IDE debugger and production environment validation.

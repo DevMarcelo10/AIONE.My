@@ -1,0 +1,287 @@
+2025-12-22T17:09:08.090Z [DEBUG] Watching for changes in setting files C:\Users\DevDelphi\.claude...
+2025-12-22T17:09:08.124Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-22T17:09:08.162Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-22T17:09:08.162Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-22T17:09:08.162Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-22T17:09:08.169Z [DEBUG] LSP server manager initialized successfully
+2025-12-22T17:09:08.170Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-22T17:09:08.170Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2025-12-22T17:09:08.178Z [DEBUG] Stats cache is up to date
+2025-12-22T17:09:08.184Z [DEBUG] Loading skills from: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\DevDelphi\.claude\skills, project=[]
+2025-12-22T17:09:08.200Z [DEBUG] Loaded 0 installed plugins from C:\Users\DevDelphi\.claude\plugins\installed_plugins.json
+2025-12-22T17:09:08.272Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-22T17:09:08.272Z [DEBUG] Looking for shell config file: C:\Users\DevDelphi\.bashrc
+2025-12-22T17:09:08.272Z [DEBUG] Shell config file not found: C:\Users\DevDelphi\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-22T17:09:08.272Z [DEBUG] Snapshots directory: C:\Users\DevDelphi\.claude\shell-snapshots
+2025-12-22T17:09:08.285Z [DEBUG] Creating snapshot at: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1766423348272-s7eo2p.sh
+2025-12-22T17:09:08.285Z [DEBUG] Shell binary exists: true
+2025-12-22T17:09:08.285Z [DEBUG] Execution timeout: 10000ms
+2025-12-22T17:09:08.290Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\0c79ce22-3b9d-440b-b636-ac19470bd37e-agent-0c79ce22-3b9d-440b-b636-ac19470bd37e.json.tmp.37336.1766423348290
+2025-12-22T17:09:08.293Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-22T17:09:08.293Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\0c79ce22-3b9d-440b-b636-ac19470bd37e-agent-0c79ce22-3b9d-440b-b636-ac19470bd37e.json.tmp.37336.1766423348290 to C:\Users\DevDelphi\.claude\todos\0c79ce22-3b9d-440b-b636-ac19470bd37e-agent-0c79ce22-3b9d-440b-b636-ac19470bd37e.json
+2025-12-22T17:09:08.293Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\0c79ce22-3b9d-440b-b636-ac19470bd37e-agent-0c79ce22-3b9d-440b-b636-ac19470bd37e.json written atomically
+2025-12-22T17:09:08.305Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2025-12-22T17:09:08.305Z [DEBUG] Total plugin skills loaded: 0
+2025-12-22T17:09:08.305Z [DEBUG] Total plugin commands loaded: 0
+2025-12-22T17:09:08.306Z [DEBUG] Registered 0 hooks from 0 plugins
+2025-12-22T17:09:08.372Z [DEBUG] Total plugin agents loaded: 0
+2025-12-22T17:09:08.385Z [DEBUG] Git remote URL: https://github.com/aionefarma/AIONE.git
+2025-12-22T17:09:08.386Z [DEBUG] Parsed repository: aionefarma/AIONE from https://github.com/aionefarma/AIONE.git
+2025-12-22T17:09:08.386Z [DEBUG] Parsed repository: aionefarma/AIONE from URL: https://github.com/aionefarma/AIONE.git
+2025-12-22T17:09:08.386Z [DEBUG] Path C:\Fontes\AIONE.My already tracked for repo aionefarma/aione
+2025-12-22T17:09:08.467Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\DevDelphi\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2025-12-22T17:09:08.539Z [DEBUG] Loaded 6 unique skills (managed: 0, user: 3, project: 0, legacy commands: 3)
+2025-12-22T17:09:08.539Z [DEBUG] getSkills returning: 6 skill dir commands, 0 plugin skills
+2025-12-22T17:09:08.629Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423348629
+2025-12-22T17:09:08.629Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:08.633Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:08.633Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:08.633Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423348629 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:08.634Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:08.819Z [DEBUG] Shell snapshot created successfully (346 bytes)
+2025-12-22T17:09:09.157Z [DEBUG] MCP server "local-mcp": Initializing HTTP transport to http://127.0.0.1:9001/mcp
+2025-12-22T17:09:09.157Z [DEBUG] MCP server "local-mcp": Node version: v24.12.0, Platform: win32
+2025-12-22T17:09:09.157Z [DEBUG] MCP server "local-mcp": Environment: {"NODE_OPTIONS":"not set","UV_THREADPOOL_SIZE":"default","HTTP_PROXY":"not set","HTTPS_PROXY":"not set","NO_PROXY":"not set"}
+2025-12-22T17:09:09.161Z [DEBUG] MCP server "context7": Starting connection with timeout of 30000ms
+2025-12-22T17:09:09.230Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2025-12-22T17:09:09.232Z [DEBUG] MCP server "local-mcp": Proxy options: default
+2025-12-22T17:09:09.232Z [DEBUG] MCP server "local-mcp": HTTP transport options: {"url":"http://127.0.0.1:9001/mcp","headers":{"User-Agent":"claude-code/2.0.75"},"hasAuthProvider":true,"timeoutMs":60000}
+2025-12-22T17:09:09.233Z [DEBUG] MCP server "local-mcp": HTTP transport created successfully
+2025-12-22T17:09:09.233Z [DEBUG] MCP server "local-mcp": Client created, setting up request handler
+2025-12-22T17:09:09.233Z [DEBUG] MCP server "local-mcp": Starting connection with timeout of 30000ms
+2025-12-22T17:09:09.233Z [DEBUG] MCP server "local-mcp": Testing basic HTTP connectivity to http://127.0.0.1:9001/mcp
+2025-12-22T17:09:09.233Z [DEBUG] MCP server "local-mcp": Parsed URL: host=127.0.0.1, port=9001, protocol=http:
+2025-12-22T17:09:09.233Z [DEBUG] MCP server "local-mcp": Using loopback address: 127.0.0.1
+2025-12-22T17:09:09.243Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423349243
+2025-12-22T17:09:09.243Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:09.247Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:09.247Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:09.247Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423349243 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:09.250Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:09.268Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2025-12-22T17:09:09.268Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:09:09.268Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2025-12-22T17:09:09.270Z [DEBUG] MCP server "local-mcp": No token data found
+2025-12-22T17:09:09.287Z [DEBUG] MCP server "local-mcp": HTTP Connection failed after 130ms: fetch failed (code: none, errno: none)
+2025-12-22T17:09:09.287Z [ERROR] MCP server "local-mcp" TypeError: fetch failed
+2025-12-22T17:09:09.302Z [DEBUG] MCP server "local-mcp": Connection failed after 145ms: fetch failed
+2025-12-22T17:09:09.302Z [ERROR] MCP server "local-mcp" Connection failed: fetch failed
+2025-12-22T17:09:09.318Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-22T17:09:09.318Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:09:09.318Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-22T17:09:09.342Z [DEBUG] Getting matching hook commands for SubagentStart with query: Plan
+2025-12-22T17:09:09.342Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:09:09.342Z [DEBUG] Matched 0 unique hooks for query "Plan" (0 before deduplication)
+2025-12-22T17:09:09.420Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423349420
+2025-12-22T17:09:09.420Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:09.424Z [DEBUG] Temp file written successfully, size: 62256 bytes
+2025-12-22T17:09:09.424Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:09.424Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423349420 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:09.425Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:09.436Z [DEBUG] Official marketplace auto-install skipped: already_attempted
+2025-12-22T17:09:09.436Z [DEBUG] performStartupChecks called
+2025-12-22T17:09:09.437Z [DEBUG] Starting background plugin installations
+2025-12-22T17:09:09.437Z [DEBUG] performBackgroundPluginInstallations called
+2025-12-22T17:09:09.480Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T17:09:09.486Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423349486
+2025-12-22T17:09:09.486Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:09.489Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:09.490Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:09.490Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423349486 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:09.492Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:10.287Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (791.2ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34540\").Pare
+2025-12-22T17:09:10.829Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (541.9ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34076\").Pare
+2025-12-22T17:09:10.830Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2025-12-22T17:09:10.831Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2025-12-22T17:09:10.839Z [ERROR] MCP server "context7" Server stderr: npm notice Access token expired or revoked. Please try logging in again.
+npm notice Access token expired or revoked. Please try logging in again.
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@context7%2fmcp-server - Not found
+npm error 404
+npm error 404  The requested resource '@context7/mcp-server@*' could not be found or you do not have permission to access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm error A complete log of this run can be found in: C:\Users\DevDelphi\AppData\Local\npm-cache\_logs\2025-12-22T17_09_09_463Z-debug-0.log
+2025-12-22T17:09:10.843Z [ERROR] Failed to refresh marketplace claude-plugins-official: Failed to clone marketplace repository: SSH authentication failed. Please ensure your SSH keys are configured for GitHub, or use an HTTPS URL instead.
+
+Original error: Cloning into 'C:\Users\DevDelphi\.claude\plugins\marketplaces\claude-plugins-official'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+2025-12-22T17:09:10.843Z [WARN] Plugin autoupdate: failed to refresh marketplace claude-plugins-official: Failed to refresh marketplace 'claude-plugins-official': Failed to clone marketplace repository: SSH authentication failed. Please ensure your SSH keys are configured for GitHub, or use an HTTPS URL instead.
+
+Original error: Cloning into 'C:\Users\DevDelphi\.claude\plugins\marketplaces\claude-plugins-official'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+2025-12-22T17:09:10.843Z [DEBUG] Plugin autoupdate: checking installed plugins
+2025-12-22T17:09:10.875Z [DEBUG] MCP server "context7": Connection failed after 1717ms: MCP error -32000: Connection closed
+2025-12-22T17:09:10.875Z [ERROR] MCP server "context7" Connection failed: MCP error -32000: Connection closed
+2025-12-22T17:09:10.882Z [DEBUG] Skills and commands included in Skill tool: delphi-patterns, rest-dw, ui-components, review-staged, investigate, create-form
+2025-12-22T17:09:10.920Z [DEBUG] MCP server "ide": Starting connection with timeout of 30000ms
+2025-12-22T17:09:10.925Z [DEBUG] Summarizing all 19 messages (~6514 tokens)
+2025-12-22T17:09:10.928Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:09:10.944Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423350944
+2025-12-22T17:09:10.944Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:10.948Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:10.948Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:10.948Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423350944 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:10.949Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:10.962Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423350962
+2025-12-22T17:09:10.962Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:10.965Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:10.966Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:10.966Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423350962 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:10.966Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:10.991Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:09:10.996Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:09:11.029Z [DEBUG] MCP server "ide": Successfully connected to ws-ide server in 112ms
+2025-12-22T17:09:11.030Z [DEBUG] MCP server "ide": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Claude Code VSCode MCP","version":"2.0.75"}}
+2025-12-22T17:09:11.883Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (556.5ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34540\").Pare
+2025-12-22T17:09:12.363Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (479.3ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34076\").Pare
+2025-12-22T17:09:12.372Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:09:12.378Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:09:13.974Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:09:15.392Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T17:09:15.393Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:09:15.393Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T17:09:19.771Z [DEBUG] UserCommandMessage rendering: "add-dir" (args: "none")
+2025-12-22T17:09:19.771Z [DEBUG] isSkillFormat: false
+2025-12-22T17:09:19.817Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T17:09:19.845Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423359845
+2025-12-22T17:09:19.845Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:19.848Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:19.849Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:19.849Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423359845 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:19.850Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:19.893Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.37336.1766423359893
+2025-12-22T17:09:19.893Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T17:09:19.896Z [DEBUG] Temp file written successfully, size: 62329 bytes
+2025-12-22T17:09:19.896Z [DEBUG] Applied original permissions to temp file
+2025-12-22T17:09:19.896Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.37336.1766423359893 to C:\Users\DevDelphi\.claude.json
+2025-12-22T17:09:19.897Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T17:09:24.021Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T17:09:24.021Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:09:24.021Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T17:09:33.359Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-22T17:09:33.371Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T17:09:34.067Z [DEBUG] FileHistory: Added snapshot for 0604abf4-e7ff-4fea-af5c-d5442449fbb8, tracking 0 files
+2025-12-22T17:09:34.073Z [DEBUG] UserCommandMessage rendering: "context" (args: "none")
+2025-12-22T17:09:34.073Z [DEBUG] isSkillFormat: false
+2025-12-22T17:09:34.117Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T17:13:41.292Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T17:13:42.333Z [DEBUG] Metadata string for investigate:
+2025-12-22T17:13:42.333Z [DEBUG] <command-message>investigate</command-message>
+<command-name>/investigate</command-name>
+<command-args>teste</command-args>
+2025-12-22T17:13:42.334Z [DEBUG] command-message tags in metadata: 1
+2025-12-22T17:13:42.349Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T17:13:42.349Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T17:13:42.350Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T17:13:42.350Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T17:13:42.541Z [DEBUG] processPromptSlashCommand creating 4 messages for investigate
+2025-12-22T17:13:42.541Z [DEBUG] Message 1: <command-message>investigate</command-message>
+<command-name>/investigate</command-name>
+<command-args>teste</command-args>
+2025-12-22T17:13:42.541Z [DEBUG] Message 2 [META]: [{"type":"text","text":"# Protocolo de Investigação\n\nAntes de planejar ou implementar, investigar: teste\n\n## Processo\n\n### 1. Descoberta Inicial\nFazer 3-5 perguntas focadas sobre:\n- Estado atu
+2025-12-22T17:13:42.541Z [DEBUG] Message 3: [ATTACHMENT]
+2025-12-22T17:13:42.541Z [DEBUG] Message 4: [ATTACHMENT]
+2025-12-22T17:13:42.554Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T17:13:42.554Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:13:42.554Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T17:13:42.555Z [DEBUG] FileHistory: Making snapshot for message a000040c-31b4-491d-9eef-1ae361fd52ef
+2025-12-22T17:13:42.555Z [DEBUG] FileHistory: Added snapshot for a000040c-31b4-491d-9eef-1ae361fd52ef, tracking 0 files
+2025-12-22T17:13:42.558Z [DEBUG] UserCommandMessage rendering: "investigate" (args: "teste")
+2025-12-22T17:13:42.558Z [DEBUG] isSkillFormat: false
+2025-12-22T17:13:42.575Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T17:13:42.604Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 29ms
+2025-12-22T17:13:42.628Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T17:13:45.231Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:13:52.936Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-22T17:13:52.936Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:13:52.936Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T17:14:20.001Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T17:14:20.001Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:20.001Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T17:14:20.001Z [DEBUG] FileHistory: Making snapshot for message d2fcd612-62bb-4866-b7e4-1ef9b41aaf25
+2025-12-22T17:14:20.002Z [DEBUG] FileHistory: Added snapshot for d2fcd612-62bb-4866-b7e4-1ef9b41aaf25, tracking 0 files
+2025-12-22T17:14:20.024Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T17:14:20.043Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:14:20.064Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 40ms
+2025-12-22T17:14:20.079Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T17:14:21.638Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:24.134Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:25.863Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T17:14:25.871Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T17:14:25.871Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:25.871Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T17:14:25.910Z [DEBUG] tree-sitter: loaded from disk
+2025-12-22T17:14:26.058Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T17:14:26.598Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:14:26.624Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T17:14:26.624Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:26.624Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T17:14:26.648Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T17:14:26.648Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T17:14:26.648Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T17:14:26.648Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T17:14:26.648Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T17:14:26.716Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 68ms
+2025-12-22T17:14:26.739Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T17:14:27.315Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:30.133Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:31.874Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T17:14:31.882Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T17:14:31.882Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:31.882Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T17:14:32.015Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T17:14:32.537Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:14:32.563Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T17:14:32.563Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:32.563Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T17:14:32.593Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T17:14:32.593Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T17:14:32.593Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T17:14:32.593Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T17:14:32.593Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T17:14:32.658Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 65ms
+2025-12-22T17:14:32.677Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T17:14:34.757Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:35.008Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:38.958Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T17:14:38.967Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T17:14:38.967Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:38.967Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T17:14:38.999Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T17:14:40.844Z [DEBUG] Stream started - received first chunk
+2025-12-22T17:14:41.081Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "git diff:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T17:14:41.099Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T17:14:41.107Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T17:14:41.107Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:14:41.107Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T17:14:47.123Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T17:14:47.123Z [DEBUG] Found 1 hook matchers in settings
+2025-12-22T17:14:47.123Z [DEBUG] Matched 1 unique hooks for query "permission_prompt" (1 before deduplication)
+2025-12-22T17:14:47.569Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T17:14:49.663Z [DEBUG] Notification:permission_prompt [powershell -c (New-Object Media.SoundPlayer 'C:\Windows\Media\chimes.wav').PlaySync()] completed with status 0
+2025-12-22T17:14:49.663Z [DEBUG] Hook output does not start with {, treating as plain text
+2025-12-22T17:16:07.898Z [DEBUG] Getting matching hook commands for SessionEnd with query: prompt_input_exit
+2025-12-22T17:16:07.898Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T17:16:07.898Z [DEBUG] Matched 0 unique hooks for query "prompt_input_exit" (0 before deduplication)

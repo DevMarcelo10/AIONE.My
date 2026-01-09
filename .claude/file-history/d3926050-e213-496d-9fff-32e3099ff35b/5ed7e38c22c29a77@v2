@@ -1,0 +1,193 @@
+unit uLogSistema;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, uRESTDWClientSQL;
+
+type
+  TTipoLog = (tlInfo, tlWarning, tlError, tlDebug, tlCritical);
+
+  TLogSistema = class
+  private
+    class function TipoLogToString(ATipo: TTipoLog): string;
+  public
+    // Função principal para salvar log
+    class procedure Salvar(
+      const ATipo: TTipoLog;
+      const AModulo: string;
+      const AAcao: string;
+      const AMensagem: string;
+      const ADadosAdicionais: string = '';
+      const AStackTrace: string = ''
+    ); overload;
+
+    // Sobrecarga simplificada - apenas mensagem (tipo INFO)
+    class procedure Salvar(const AMensagem: string); overload;
+
+    // Sobrecarga para erros com Exception
+    class procedure SalvarErro(
+      const AModulo: string;
+      const AAcao: string;
+      const E: Exception
+    );
+
+    // Funções auxiliares para cada tipo de log
+    class procedure Info(const AModulo, AAcao, AMensagem: string);
+    class procedure Warning(const AModulo, AAcao, AMensagem: string);
+    class procedure Error(const AModulo, AAcao, AMensagem: string);
+    class procedure Debug(const AModulo, AAcao, AMensagem: string);
+    class procedure Critical(const AModulo, AAcao, AMensagem: string);
+  end;
+
+implementation
+
+uses
+  uDM, uConst, uLibFarm, Winapi.Windows;
+
+{ TLogSistema }
+
+class function TLogSistema.TipoLogToString(ATipo: TTipoLog): string;
+begin
+  case ATipo of
+    tlInfo:     Result := 'INFO';
+    tlWarning:  Result := 'WARNING';
+    tlError:    Result := 'ERROR';
+    tlDebug:    Result := 'DEBUG';
+    tlCritical: Result := 'CRITICAL';
+  else
+    Result := 'INFO';
+  end;
+end;
+
+class procedure TLogSistema.Salvar(
+  const ATipo: TTipoLog;
+  const AModulo: string;
+  const AAcao: string;
+  const AMensagem: string;
+  const ADadosAdicionais: string = '';
+  const AStackTrace: string = ''
+);
+var
+  Qry: TRESTDWClientSQL;
+  NomeMaquina: string;
+begin
+  // Tenta obter o nome da máquina
+  try
+    NomeMaquina := GetComputerName;
+  except
+    NomeMaquina := 'Desconhecido';
+  end;
+
+  Qry := TRESTDWClientSQL.Create(nil);
+  try
+    Qry.DataBase := DM.DWDataBase;
+
+    Qry.SQL.Text :=
+      'INSERT INTO arqlogs ' +
+      '  (usuario, idfilial, modulo, tipolog, acao, mensagem, ' +
+      '   dados_adicionais, maquina, stacktrace) ' +
+      'VALUES ' +
+      '  (:usuario, :filial, :modulo, :tipo, :acao, :mensagem, ' +
+      '   :dados, :maquina, :stack)';
+
+    // Parâmetros básicos
+    Qry.ParamByName('usuario').AsString := USUARIO;
+    Qry.ParamByName('filial').AsInteger := FILIAL;
+    Qry.ParamByName('modulo').AsString := AModulo;
+    Qry.ParamByName('tipo').AsString := TipoLogToString(ATipo);
+    Qry.ParamByName('acao').AsString := AAcao;
+    Qry.ParamByName('mensagem').AsString := AMensagem;
+    Qry.ParamByName('maquina').AsString := NomeMaquina;
+
+    // Parâmetros opcionais
+    if ADadosAdicionais <> '' then
+      Qry.ParamByName('dados').AsString := ADadosAdicionais
+    else
+      Qry.ParamByName('dados').Clear;
+
+    if AStackTrace <> '' then
+      Qry.ParamByName('stack').AsString := AStackTrace
+    else
+      Qry.ParamByName('stack').Clear;
+
+    Qry.ExecSQL;
+
+  except
+    on E: Exception do
+    begin
+      // Se falhar ao salvar no banco, grava no arquivo de log tradicional
+      try
+        SalvaLog(USUARIO, PastaLog,
+          Format('[ERRO AO SALVAR LOG DB] %s - %s: %s',
+            [AModulo, AAcao, E.Message]));
+      except
+        // Se também falhar, ignora para não travar o sistema
+      end;
+    end;
+  end;
+
+  // Libera sempre
+  try
+    FreeAndNil(Qry);
+  except
+    // Ignora erro ao liberar
+  end;
+end;
+
+class procedure TLogSistema.Salvar(const AMensagem: string);
+begin
+  Salvar(tlInfo, 'Sistema', 'Informação', AMensagem);
+end;
+
+class procedure TLogSistema.SalvarErro(
+  const AModulo: string;
+  const AAcao: string;
+  const E: Exception
+);
+var
+  StackTrace: string;
+begin
+  // Monta o stack trace a partir da exception
+  try
+    StackTrace := E.StackTrace;
+  except
+    StackTrace := 'Stack trace não disponível';
+  end;
+
+  Salvar(
+    tlError,
+    AModulo,
+    AAcao,
+    E.Message,
+    Format('Exception: %s', [E.ClassName]),
+    StackTrace
+  );
+end;
+
+class procedure TLogSistema.Info(const AModulo, AAcao, AMensagem: string);
+begin
+  Salvar(tlInfo, AModulo, AAcao, AMensagem);
+end;
+
+class procedure TLogSistema.Warning(const AModulo, AAcao, AMensagem: string);
+begin
+  Salvar(tlWarning, AModulo, AAcao, AMensagem);
+end;
+
+class procedure TLogSistema.Error(const AModulo, AAcao, AMensagem: string);
+begin
+  Salvar(tlError, AModulo, AAcao, AMensagem);
+end;
+
+class procedure TLogSistema.Debug(const AModulo, AAcao, AMensagem: string);
+begin
+  Salvar(tlDebug, AModulo, AAcao, AMensagem);
+end;
+
+class procedure TLogSistema.Critical(const AModulo, AAcao, AMensagem: string);
+begin
+  Salvar(tlCritical, AModulo, AAcao, AMensagem);
+end;
+
+end.

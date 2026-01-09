@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "mysql-aione": {
+      "command": "py",
+      "args": [
+        "C:\\Users\\DevDelphi\\.claude\\mcp-mysql-aione\\server.py"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "query_select",
+        "list_tables",
+        "describe_table",
+        "get_table_count",
+        "search_table"
+      ]
+    }
+  }
+}

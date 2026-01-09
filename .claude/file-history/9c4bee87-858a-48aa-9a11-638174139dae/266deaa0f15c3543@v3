@@ -1,0 +1,627 @@
+# PharmaCopilot - Guia de Desenvolvimento
+
+## Comportamento
+
+- Converse em Português brasileiro
+- Execute correções diretamente sem pedir confirmação
+- Este é um **produto standalone**, não um módulo do AIONE
+- Foco em arquitetura extensível para múltiplos ERPs
+
+## Visão Geral
+
+PharmaCopilot é um **assistente IA independente** para vendedores de farmácia que conecta a qualquer ERP do mercado.
+
+**Modelo de Negócio:**
+- Produto vendido separadamente
+- Licenciamento por farmácia/terminal
+- Compatível com: AIONE, Linx, Trier, Profarma, e qualquer sistema com acesso ao banco
+
+**Stack:**
+- Widget: Delphi RAD 12 (VCL) - Overlay standalone
+- Backend: Python FastAPI
+- Integração: Conectores para bancos de terceiros (READ-ONLY)
+- Banco próprio: MySQL/PostgreSQL para dados do copilot
+- LLMs: Multi-provider (Anthropic, OpenAI, Google)
+
+## Estrutura do Projeto
+
+```
+C:\Projetos\PharmaCopilot\
+│
+├── CLAUDE.md                    # Este arquivo
+├── README.md
+│
+├── widget\                      # Frontend Delphi (standalone)
+│   ├── PharmaCopilot.dproj
+│   └── src\
+│       ├── uCopilotIcon.pas
+│       ├── uCopilotPanel.pas
+│       ├── uCopilotAPI.pas
+│       └── uCopilotConfig.pas
+│
+├── backend\                     # Backend Python
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── config\
+│   ├── routers\
+│   ├── services\
+│   ├── models\
+│   └── integrations\            # ★ CAMADA DE INTEGRAÇÃO
+│       ├── base_connector.py    # Interface abstrata
+│       ├── connector_factory.py
+│       ├── connectors\          # Implementações
+│       │   ├── aione.py
+│       │   ├── linx.py
+│       │   └── generic_mysql.py
+│       └── mappings\            # Mapeamentos de campos
+│           ├── aione_mapping.json
+│           └── linx_mapping.json
+│
+├── database\                    # Scripts SQL
+│   └── copilot_schema.sql       # Banco próprio
+│
+├── installer\
+│   └── setup.iss
+│
+└── docs\
+    ├── INSTALL.md
+    └── NEW_CONNECTOR.md
+```
+
+## Princípio Central: Camada de Integração
+
+**REGRA FUNDAMENTAL:** O PharmaCopilot NUNCA escreve no banco do ERP. Apenas leitura.
+
+```
+┌─────────────────┐      ┌──────────────────┐      ┌─────────────────┐
+│   ERP Cliente   │ READ │  Integration     │      │  Copilot DB     │
+│   (MySQL/MSSQL/ │◄─────│  Layer           │─────►│  (próprio)      │
+│    Firebird)    │ ONLY │  BaseConnector   │ R/W  │  MySQL/Postgres │
+└─────────────────┘      └──────────────────┘      └─────────────────┘
+```
+
+### Interface BaseERPConnector
+
+Todo conector DEVE implementar:
+```python
+get_cliente(id) -> Cliente
+search_cliente(termo) -> List[Cliente]
+get_produto(id) -> Produto
+get_produto_by_ean(ean) -> Produto
+get_genericos(principio_ativo) -> List[Produto]
+get_estoque(produto_id) -> float
+get_lotes_vencendo(dias) -> List[LoteEstoque]
+get_historico_cliente(cliente_id, dias) -> List[Venda]
+get_venda_atual(venda_id) -> Venda
+```
+
+### Mappings JSON
+
+Cada ERP tem um arquivo de mapeamento:
+```json
+{
+  "erp_name": "AIONE.My",
+  "database_type": "mysql",
+  "clientes": {
+    "tabela": "arqpessoa",
+    "campos": {
+      "id": "IDPessoa",
+      "nome": "NomePessoa"
+    }
+  }
+}
+```
+
+## Padrões de Código
+
+### Python (Backend)
+- Type hints obrigatórios
+- Pydantic para schemas
+- SQLAlchemy para queries
+- Async quando possível
+- Docstrings em português
+
+### Delphi (Widget)
+- `FreeAndNil` sempre
+- `try-finally` para recursos
+- Config em `%APPDATA%\PharmaCopilot\`
+
+### 1. CLÁUSULA USES
+- Máximo ~100 caracteres por linha
+- Agrupar units por namespace quando possível
+- Vírgula após cada unit, ponto-e-vírgula apenas na última
+```pascal
+// CORRETO
+uses
+   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, System.JSON,
+   System.Generics.Collections, System.Threading, Vcl.Graphics, Vcl.Controls,
+   Vcl.Forms, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, uCopilotAPI, uCopilotConfig;
+
+// ERRADO - linha muito longa
+uses
+   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, System.JSON, System.Generics.Collections, System.Threading;
+
+// ERRADO - uma unit por linha
+uses
+   Winapi.Windows,
+   Winapi.Messages,
+   System.SysUtils;
+```
+
+### 2. INDENTAÇÃO
+- Sempre **3 espaços** (nunca tabs)
+- Consistente em todo o código
+
+### 3. CONSTANTES
+- MAIÚSCULAS com underscore
+- Valores alinhados pelo `=`
+```pascal
+// CORRETO
+const
+   PANEL_WIDTH  = 380;
+   PANEL_MARGIN = 10;
+   ANIM_STEP    = 40;
+```
+
+### 4. ATRIBUIÇÕES MÚLTIPLAS CONSECUTIVAS
+- Alinhar os `:=` para melhor legibilidade
+```pascal
+// CORRETO
+BorderStyle     := bsNone;
+FormStyle       := fsStayOnTop;
+Width           := PANEL_WIDTH;
+AlphaBlend      := True;
+AlphaBlendValue := 245;
+
+Msg.IsUser    := AIsUser;
+Msg.Text      := AText;
+Msg.Timestamp := Now;
+
+Btn         := TButton.Create(pnlSuggestionsContent);
+Btn.Parent  := pnlSuggestionsContent;
+Btn.Caption := AText;
+Btn.Tag     := AIndex;
+Btn.Left    := 5;
+
+// ERRADO - não alinhado
+BorderStyle := bsNone;
+FormStyle := fsStayOnTop;
+Width := PANEL_WIDTH;
+```
+
+### 5. IF SIMPLES (linha única)
+- Se o IF tem apenas UMA ação e cabe em ~130 caracteres, usar formato inline
+- Não usar begin/end para ação única
+```pascal
+// CORRETO
+if Assigned(pnlMedInfo) then pnlMedInfo.Visible := False;
+if Key = VK_ESCAPE then HidePanel;
+if UserMessage = '' then Exit;
+if edtMessage.CanFocus then edtMessage.SetFocus;
+if FAnimating then Exit;
+
+// ERRADO - begin/end desnecessário
+if FAnimating then
+begin
+   Exit;
+end;
+```
+
+### 6. ELSE SIMPLES (linha única)
+- Se o ELSE tem apenas UMA ação, usar formato inline
+- Mesmo que o IF tenha begin/end, ELSE simples fica inline
+```pascal
+// CORRETO
+if ProdutoNome <> '' then
+begin
+   TextoSugestao := ProdutoNome;
+   if Motivo <> '' then TextoSugestao := TextoSugestao + ' - ' + Motivo;
+end
+else TextoSugestao := Motivo;
+
+if Assigned(JSON) then
+begin
+   // múltiplas linhas
+end
+else AddMessage('Resposta invalida do servidor.', False);
+
+// CORRETO - IF e ELSE ambos simples
+if ProdutoNome <> '' then memoMedInfo.SelText := ProdutoNome + #13#10
+else memoMedInfo.SelText := PrincipioAtivo + #13#10;
+
+// ERRADO - begin/end desnecessário no ELSE
+if ProdutoNome <> '' then
+begin
+   TextoSugestao := ProdutoNome;
+end
+else
+begin
+   TextoSugestao := Motivo;
+end;
+```
+
+### 7. IF-ELSE-IF EM CASCATA
+- Uma condição por linha, alinhadas
+- Ação após `then` na mesma linha
+```pascal
+// CORRETO
+if AAlertType = 'warning'    then Lbl.Font.Color := clOlive
+else if AAlertType = 'error' then Lbl.Font.Color := clMaroon
+else Lbl.Font.Color := clNavy;
+
+// CORRETO - com ações maiores
+if Left > FTargetLeft then
+begin
+   Left := Left - ANIM_STEP;
+   if Left < FTargetLeft then Left := FTargetLeft;
+end else
+begin
+   tmrAnimShow.Enabled := False;
+   FAnimating := False;
+end;
+```
+
+### 8. TTask.Run
+- `TTask.Run(` na primeira linha
+- `procedure` na linha seguinte, alinhado com `TTask`
+- `var` na próxima linha se houver variáveis locais
+- Fechamento: `end);` junto (o `);` fica na mesma linha do `end`)
+```pascal
+// CORRETO
+TTask.Run(
+procedure
+var
+   Response: string;
+begin
+   try
+      Response := CopilotAPI.GetSuggestions;
+      TThread.Synchronize(nil,
+      procedure
+      begin
+         ProcessResponse(Response);
+      end);
+   except
+      // Silencioso
+   end;
+end);
+
+// CORRETO - sem variáveis locais
+TTask.Run(
+procedure
+begin
+   try
+      Response := CopilotAPI.GetMedicamentoInfo(AProdutoID);
+      TThread.Synchronize(nil,
+      procedure
+      begin
+         DisplayMedicamentoInfo(Response);
+      end);
+   except
+      // Silencioso
+   end;
+end);
+```
+
+### 9. TThread.Synchronize
+- `TThread.Synchronize(nil,` na primeira linha
+- `procedure` na linha seguinte, alinhado
+- `begin` na próxima linha
+- Fechamento: `end);` junto
+```pascal
+// CORRETO
+TThread.Synchronize(nil,
+procedure
+begin
+   ProcessResponse(Response);
+   edtMessage.Enabled := True;
+   btnSend.Enabled := True;
+   edtMessage.SetFocus;
+end);
+
+// CORRETO - aninhado dentro de TTask.Run
+TTask.Run(
+procedure
+var
+   Response: string;
+begin
+   try
+      Response := CopilotAPI.SendChatMessage(UserMessage);
+      TThread.Synchronize(nil,
+      procedure
+      begin
+         ProcessResponse(Response);
+         edtMessage.Enabled := True;
+         btnSend.Enabled := True;
+         edtMessage.SetFocus;
+      end);
+   except
+      on E: Exception do
+      begin
+         TThread.Synchronize(nil,
+         procedure
+         begin
+            AddMessage('Erro ao conectar: ' + E.Message, False);
+            edtMessage.Enabled := True;
+            btnSend.Enabled := True;
+         end);
+      end;
+   end;
+end);
+```
+
+### 10. TRY/FINALLY
+- `try` numa linha própria
+- Conteúdo indentado 3 espaços
+- `finally` alinhado com `try`
+- Usar FreeAndNil() ao invés de .Free
+```pascal
+// CORRETO
+JSON := TJSONObject.ParseJSONValue(AResponse) as TJSONObject;
+try
+   if Assigned(JSON) then
+   begin
+      ResponseText := JSON.GetValue<string>('message', '');
+      AddMessage(ResponseText, False);
+   end;
+finally
+   JSON.Free;
+end;
+```
+
+### 11. TRY/EXCEPT
+- `except` alinhado com `try`
+- `on E: Exception do` para captura específica
+- `begin/end` após o `do`
+```pascal
+// CORRETO
+try
+   JSON := TJSONObject.ParseJSONValue(AResponse) as TJSONObject;
+   // processar
+except
+   on E: Exception do
+   begin
+      AddMessage('Erro ao processar: ' + E.Message, False);
+   end;
+end;
+
+// CORRETO - except silencioso
+try
+   Response := CopilotAPI.GetMedicamentoInfo(AProdutoID);
+except
+   // Silencioso
+end;
+```
+
+### 12. FOR LOOPS
+- Se ação única, sem begin/end
+- `for var` para variável inline quando apropriado
+```pascal
+// CORRETO - ação única
+for I := 0 to High(FMessages) do
+   ProcessMessage(FMessages[I]);
+
+// CORRETO - múltiplas ações
+for I := 0 to High(FMessages) do
+begin
+   Msg := FMessages[I];
+   if Msg.IsUser then Prefix := 'Voce: '
+   else Prefix := 'Copilot: ';
+   memoChat.SelText := Prefix + Msg.Text;
+end;
+
+// CORRETO - variável inline
+for var I := 0 to JSON.Count - 1 do
+begin
+   Item := JSON.Items[I] as TJSONObject;
+   ProcessItem(Item);
+end;
+```
+
+### 13. WHILE LOOPS
+- Se ação única, sem begin/end na linha seguinte
+```pascal
+// CORRETO
+while pnlSuggestionsContent.ControlCount > 0 do
+   pnlSuggestionsContent.Controls[0].Free;
+
+// CORRETO - múltiplas ações
+while not EOF do
+begin
+   ProcessRecord;
+   Next;
+end;
+```
+
+### 14. DECLARAÇÃO DE VARIÁVEIS
+- Uma variável por linha (ou agrupar do mesmo tipo)
+- Tipo após os dois pontos
+```pascal
+// CORRETO
+var
+   Response: string;
+   JSON: TJSONObject;
+   ProdutoID, ItemSeq: Integer;  // mesmo tipo pode agrupar
+   Found: Boolean;
+
+// CORRETO - múltiplas do mesmo tipo
+var
+   Titulo, Mensagem, Severidade, TextoAlerta: string;
+```
+
+### 15. NOMENCLATURA
+- Units: prefixo `u` (uCopilotAPI.pas)
+- Forms: prefixo `Frm` na variável, `TFrm` na classe (TFrmCopilotPanel)
+- Campos privados: prefixo `F` (FMessages, FAnimating, FLastProdutoID)
+- Parâmetros: prefixo `A` (AText, AIsUser, AResponse)
+- Constantes: MAIÚSCULAS_COM_UNDERSCORE (PANEL_WIDTH, ANIM_STEP)
+- Records: prefixo `T` (TChatMessage)
+
+### 16. PARÂMETROS DE PROCEDURES/FUNCTIONS
+- `const` para strings e records
+- Se couber em ~130 chars, tudo na mesma linha
+- Se não couber, quebrar após `(`
+```pascal
+// CORRETO - cabe na linha
+procedure AddMessage(const AText: string; AIsUser: Boolean);
+procedure SetContext(const AClienteID: Integer; const AVendaID: Integer);
+procedure CreateAlertLabel(const AText: string; AAlertType: string);
+
+// CORRETO - evento com quebra
+procedure pnlHeaderMouseDown(Sender: TObject;
+   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+```
+
+### 17. COMENTÁRIOS
+- `// ` com espaço após as barras
+- Comentários de seção com linha de `-`
+```pascal
+// CORRETO
+// Configura janela
+BorderStyle := bsNone;
+
+// Scroll para o final
+SendMessage(memoChat.Handle, WM_VSCROLL, SB_BOTTOM, 0);
+
+// --------------------------------------------
+// INFORMACOES FARMACEUTICAS
+// --------------------------------------------
+```
+
+### 18. ESPAÇAMENTO VERTICAL
+- Linha em branco entre procedures/functions
+- Linha em branco após bloco var local
+- Sem linha em branco antes de `end;` final de procedure
+- Sem linha em branco entre `try` e primeira linha de código
+- Linha em branco para separar blocos lógicos dentro de procedure
+```pascal
+// CORRETO
+procedure TFrmCopilotPanel.DoSendMessage;
+var
+   UserMessage: string;
+begin
+   UserMessage := Trim(edtMessage.Text);
+   if UserMessage = '' then Exit;
+   AddMessage(UserMessage, True);
+   edtMessage.Clear;
+
+   // Desabilita input enquanto processa
+   edtMessage.Enabled := False;
+   btnSend.Enabled    := False;
+
+   // Envia para o backend em thread separada
+   TTask.Run(
+   procedure
+   ...
+   end);
+end;
+
+procedure TFrmCopilotPanel.ProcessResponse(const AResponse: string);
+begin
+   ...
+end;
+```
+
+### 19. RESUMO IF/ELSE
+| Situação | Formato 																			|
+|----------|------------------------------------------------------------------|
+| IF simples, sem ELSE | `if X then Acao;` 												|
+| IF simples, ELSE simples | `if X then Acao1 else Acao2;` 							|
+| IF múltiplo, ELSE simples | `if X then begin ... end else Acao;` 				|
+| IF simples, ELSE múltiplo | `if X then Acao else begin ... end;` 				|
+| IF múltiplo, ELSE múltiplo | `if X then begin ... end else begin ... end;` 	|
+| IF-ELSE-IF cascata | Uma linha por condição, alinhadas 							|
+
+
+## Bancos de Dados
+
+**IMPORTANTE:** O PharmaCopilot usa DOIS bancos de dados separados:
+
+### Banco do ERP (READ-ONLY)
+- **Database:** `dbaione` (ou equivalente do ERP)
+- **Conexão:** Configurada pelo usuário no config
+- **Permissão:** Apenas SELECT permitido
+- **Uso:** Dados de clientes, produtos, vendas, estoque
+- Cada ERP tem seu conector específico
+
+### Banco do Copilot (READ-WRITE) - SEPARADO!
+- **Database:** `copilot` (banco próprio do PharmaCopilot)
+- **Conexão:** `mysql://root:f68interdb@localhost:3307/copilot`
+- **Permissão:** SELECT, INSERT, UPDATE, DELETE
+- **Schema:** `database/copilot_schema.sql`
+
+**Tabelas do banco `copilot`:**
+- `copilot_cross_sell` - Regras de venda cruzada (gatilhos e sugestões)
+- `copilot_cliente_perfil` - Dados extras do cliente (alergias, preferências)
+- `copilot_medicamento_info` - Informações farmacêuticas
+- `copilot_interacao` - Interações medicamentosas
+- `copilot_drug_cache` - Cache de dados de medicamentos
+- `copilot_chat_session` - Sessões de chat
+- `copilot_chat_message` - Mensagens do chat
+- `copilot_log` - Analytics e logs
+- `copilot_licenca` - Licenciamento
+- `copilot_terminal` - Terminais registrados
+
+**REGRA:** Ao buscar dados de cross-sell, interações, ou qualquer funcionalidade do copilot, SEMPRE usar o banco `copilot`, NUNCA o banco do ERP.
+
+## Desenvolvimento
+
+### Criar novo conector
+```bash
+# 1. Criar arquivo do conector
+backend/integrations/connectors/novo_erp.py
+
+# 2. Criar mapping
+backend/integrations/mappings/novo_erp_mapping.json
+
+# 3. Registrar na factory
+ConnectorFactory.register('novo_erp', NovoERPConnector)
+```
+
+### Testar conector
+```python
+from integrations import ConnectorFactory
+
+connector = ConnectorFactory.create(
+    'aione',
+    'mysql://user:pass@localhost/dbaione',
+    mapping
+)
+
+assert connector.test_connection()
+cliente = connector.get_cliente(1)
+```
+
+## Checklist de Revisão
+
+### Backend Python
+- [ ] Type hints em todas funções
+- [ ] Pydantic schemas para I/O
+- [ ] Tratamento de erros
+- [ ] Logging adequado
+- [ ] Conexões com pool
+
+### Conectores
+- [ ] Implementa toda interface BaseERPConnector
+- [ ] Mapping JSON completo
+- [ ] Queries parametrizadas (sem SQL injection)
+- [ ] Tratamento de NULL
+- [ ] Timeout configurado
+
+### Widget Delphi
+- [ ] Não depende de nenhum ERP
+- [ ] Config em AppData
+- [ ] Hotkey global funcional
+- [ ] Executa sem privilégio admin
+
+## Skills Relacionadas
+
+- `pharmacopilot` - Documentação completa do módulo
+- Para padrões Delphi genéricos, consulte projeto AIONE
+
+## Comandos
+
+```bash
+/copilot init                    # Criar estrutura
+/copilot backend connector novo  # Criar novo conector
+/copilot test connector aione    # Testar conector
+```

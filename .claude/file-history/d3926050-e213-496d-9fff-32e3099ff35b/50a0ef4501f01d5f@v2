@@ -1,0 +1,153 @@
+unit uComDet;
+
+interface
+
+uses
+   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, LMDLabel, RxToolEdit, Data.DB,
+   LMDBaseControl, LMDBaseLabel, LMDBaseGraphicControl, LMDCustomLabel, AdvGlowButton,
+   Vcl.StdCtrls, AdvSmoothPanel, Vcl.ExtCtrls, Vcl.Imaging.PngImage, AdvEdit, AdvEdBtn,
+   LMDControl, LMDCustomControl, LMDCustomPanel, LMDCustomBevelPanel, LMDSimplePanel,
+   LMDEdit, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFrmComDet = class(TForm)
+    PanelGrid: TAdvSmoothPanel;
+    PanelGrids: TLMDSimplePanel;
+    LMDSimplePanel1: TLMDSimplePanel;
+    edBusFor: TAdvEditBtn;
+    edBusFilial: TAdvEditBtn;
+    edSubGru: TAdvEditBtn;
+    edGrupo: TAdvEditBtn;
+    btAddItem: TAdvGlowButton;
+    DBGrid1: TDBGrid;
+    LMDSimplePanel2: TLMDSimplePanel;
+    LMDLabel1: TLMDLabel;
+    LMDSimplePanel3: TLMDSimplePanel;
+    btFechar: TAdvGlowButton;
+    edBusca: TAdvEditBtn;
+    btAnaIA: TAdvGlowButton;
+    btAgruSubs: TAdvGlowButton;
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btFecharClick(Sender: TObject);
+    procedure edBusForKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edBusForClickBtn(Sender: TObject);
+    procedure edBusFilialClickBtn(Sender: TObject);
+    procedure edBusFilialKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edGrupoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edGrupoClickBtn(Sender: TObject);
+    procedure edSubGruKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edSubGruClickBtn(Sender: TObject);
+  private
+    procedure AtuDBGrid;
+    { Private declarations }
+  public
+    { Public declarations }
+    RctAuxi:TRect;
+    recIDComp:Integer;
+  end;
+
+var
+   FrmComDet: TFrmComDet;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM, uLibFarm, uLogSistema;
+
+procedure TFrmComDet.FormShow(Sender: TObject);
+begin
+   try
+      Self.Top  := RctAuxi.Top  + ((RctAuxi.Height - Self.Height) div 2);
+      Self.Left := RctAuxi.Left + ((RctAuxi.Width  - Self.Width)  div 2) - 1;
+      AtuDBGrid;
+      PanelGrids.SetFocus;
+
+      // Log de abertura do formulário
+      TLogSistema.Info('uniCompra', 'Abrir Detalhes',
+         Format('Formulário de detalhes de compra aberto - ID Compra: %d', [recIDComp]));
+   except
+      on E: Exception do
+      begin
+         TLogSistema.SalvarErro('uniCompra', 'FormShow', E);
+         raise;
+      end;
+   end;
+end;
+
+procedure TFrmComDet.AtuDBGrid;
+begin
+   TStringGrid(DBGrid1).DefaultRowHeight := 23;
+   DBGrid1.Width := DBGrid1.Width - 5;
+   DBGrid1.Width := DBGrid1.Width + 5;
+end;
+
+procedure TFrmComDet.edBusFilialClickBtn(Sender: TObject);
+begin
+   btBuscas('arqfilial',TEdit(edBusFilial), 'IDFilial','Nomfil','',0);
+end;
+
+procedure TFrmComDet.edBusFilialKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   btBuscas('arqfilial',TEdit(edBusFilial), 'IDFilial','Nomfil','',Key);
+end;
+
+procedure TFrmComDet.edBusForClickBtn(Sender: TObject);
+begin
+   try
+      btBuscas('arqpessoa',TEdit(edBusFor), 'IDPess','Nompes','IDEsppes = 2 OR IDEsppes = 3',0);
+
+      // Log quando busca fornecedor
+      if edBusFor.Text <> '' then
+         TLogSistema.Debug('uniCompra', 'Buscar Fornecedor',
+            Format('Fornecedor selecionado: %s', [edBusFor.Text]));
+   except
+      on E: Exception do
+      begin
+         TLogSistema.SalvarErro('uniCompra', 'Buscar Fornecedor', E);
+         raise;
+      end;
+   end;
+end;
+
+procedure TFrmComDet.edBusForKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   btBuscas('arqpessoa',TEdit(edBusFor), 'IDPess','Nompes','IDEsppes = 2 OR IDEsppes = 3',Key);
+end;
+
+procedure TFrmComDet.edGrupoClickBtn(Sender: TObject);
+begin
+   btBuscas('arqgrupo',TEdit(edGrupo), 'IDGrupo','Desgru','',0);
+end;
+
+procedure TFrmComDet.edGrupoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   btBuscas('arqgrupo',TEdit(edGrupo), 'IDGrupo','Desgru','',Key);
+end;
+
+procedure TFrmComDet.edSubGruClickBtn(Sender: TObject);
+begin
+   btBuscas('arqgruposub',TEdit(edSubGru), 'IDGruSub','DesgruSub','',0);
+end;
+
+procedure TFrmComDet.edSubGruKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   btBuscas('arqgruposub',TEdit(edSubGru), 'IDGruSub','DesgruSub','',Key);
+end;
+
+procedure TFrmComDet.btFecharClick(Sender: TObject);
+begin
+   // Log de fechamento
+   TLogSistema.Info('uniCompra', 'Fechar Detalhes',
+      Format('Formulário de detalhes de compra fechado - ID Compra: %d', [recIDComp]));
+   Close;
+end;
+
+procedure TFrmComDet.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   Action := TCloseAction.caFree;
+end;
+
+end.

@@ -1,0 +1,52 @@
+@echo off
+echo ========================================
+echo   Teste do MCP MySQL para AIONE.My
+echo ========================================
+echo.
+
+echo Verificando Python...
+py --version
+if errorlevel 1 (
+    echo ERRO: Python nao encontrado
+    pause
+    exit /b 1
+)
+
+echo.
+echo Verificando modulos Python...
+py -c "import mcp" >nul 2>&1
+if errorlevel 1 (
+    echo ERRO: Modulo 'mcp' nao instalado
+    echo Execute: py -m pip install -r requirements.txt
+    pause
+    exit /b 1
+)
+echo OK: modulo 'mcp' instalado
+
+py -c "import mysql.connector" >nul 2>&1
+if errorlevel 1 (
+    echo ERRO: Modulo 'mysql-connector-python' nao instalado
+    echo Execute: py -m pip install -r requirements.txt
+    pause
+    exit /b 1
+)
+echo OK: modulo 'mysql-connector-python' instalado
+
+echo.
+echo Verificando arquivo de configuracao...
+if not exist "config.ini" (
+    echo ERRO: config.ini nao encontrado
+    echo Crie o arquivo com suas credenciais MySQL
+    pause
+    exit /b 1
+)
+echo OK: config.ini encontrado
+
+echo.
+echo ========================================
+echo Iniciando servidor MCP...
+echo Pressione Ctrl+C para parar
+echo ========================================
+echo.
+
+py server.py

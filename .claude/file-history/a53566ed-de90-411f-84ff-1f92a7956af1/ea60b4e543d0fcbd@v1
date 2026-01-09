@@ -1,0 +1,528 @@
+"""
+Script para popular tabela copilot_interacao com interacoes medicamentosas.
+Fonte: Drugs.com, Micromedex, bulas ANVISA.
+"""
+
+import pymysql
+
+# Configuracao do banco COPILOT
+DB_CONFIG = {
+    'host': 'localhost',
+    'port': 3307,
+    'user': 'root',
+    'password': 'f68interdb',
+    'database': 'copilot',
+    'charset': 'utf8mb4',
+}
+
+# Interacoes medicamentosas importantes para farmacia
+INTERACOES = [
+    # ============================================================
+    # GRAVES - Risco a vida, evitar combinacao
+    # ============================================================
+
+    # AINEs + Anticoagulantes
+    {
+        'pa1': 'IBUPROFENO',
+        'pa2': 'VARFARINA',
+        'severidade': 'grave',
+        'descricao': 'AINEs aumentam risco de sangramento quando usados com anticoagulantes. Ibuprofeno inibe agregacao plaquetaria e pode deslocar varfarina da albumina.',
+        'recomendacao': 'EVITAR combinacao. Se necessario analgesia, preferir PARACETAMOL. Monitorar INR.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'IBUPROFENO',
+        'pa2': 'RIVAROXABANA',
+        'severidade': 'grave',
+        'descricao': 'AINEs aumentam significativamente o risco de sangramento gastrointestinal com anticoagulantes diretos.',
+        'recomendacao': 'EVITAR. Usar paracetamol para dor. Se indispensavel, usar menor dose pelo menor tempo.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'DICLOFENACO',
+        'pa2': 'VARFARINA',
+        'severidade': 'grave',
+        'descricao': 'Diclofenaco potencializa efeito anticoagulante e aumenta risco de hemorragia digestiva.',
+        'recomendacao': 'CONTRAINDICADO. Substituir por paracetamol ou tramadol se necessario.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'NIMESULIDA',
+        'pa2': 'VARFARINA',
+        'severidade': 'grave',
+        'descricao': 'Nimesulida interfere na coagulacao e potencializa anticoagulantes.',
+        'recomendacao': 'EVITAR. Preferir paracetamol.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'ASPIRINA',
+        'pa2': 'VARFARINA',
+        'severidade': 'grave',
+        'descricao': 'AAS inibe plaquetas e aumenta drasticamente risco de sangramento com varfarina.',
+        'recomendacao': 'Combinacao requer supervisao medica rigorosa. Alto risco de hemorragia.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'NAPROXENO',
+        'pa2': 'VARFARINA',
+        'severidade': 'grave',
+        'descricao': 'Naproxeno aumenta risco de sangramento GI e potencializa anticoagulantes.',
+        'recomendacao': 'EVITAR. Usar alternativas mais seguras.',
+        'fonte': 'Micromedex'
+    },
+
+    # IECA/BRA + Potassio
+    {
+        'pa1': 'ENALAPRIL',
+        'pa2': 'CLORETO DE POTASSIO',
+        'severidade': 'grave',
+        'descricao': 'IECA reduzem excrecao de potassio. Suplementacao pode causar hipercalemia grave (arritmias, parada cardiaca).',
+        'recomendacao': 'EVITAR suplementos de potassio. Monitorar niveis sericos de K+.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'LOSARTANA',
+        'pa2': 'CLORETO DE POTASSIO',
+        'severidade': 'grave',
+        'descricao': 'BRA elevam potassio serico. Suplementacao aumenta risco de hipercalemia.',
+        'recomendacao': 'NAO suplementar potassio sem prescricao. Monitorar K+ regularmente.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'CAPTOPRIL',
+        'pa2': 'ESPIRONOLACTONA',
+        'severidade': 'grave',
+        'descricao': 'Ambos retém potassio. Combinacao pode causar hipercalemia severa.',
+        'recomendacao': 'Monitorar potassio semanalmente. Orientar sinais de hipercalemia.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'ENALAPRIL',
+        'pa2': 'ESPIRONOLACTONA',
+        'severidade': 'grave',
+        'descricao': 'Risco elevado de hipercalemia potencialmente fatal.',
+        'recomendacao': 'Requer monitoramento rigoroso de potassio.',
+        'fonte': 'Micromedex'
+    },
+
+    # Metformina + Contraste iodado
+    {
+        'pa1': 'METFORMINA',
+        'pa2': 'CONTRASTE IODADO',
+        'severidade': 'grave',
+        'descricao': 'Contraste pode causar insuficiencia renal aguda, levando a acumulo de metformina e acidose latica fatal.',
+        'recomendacao': 'SUSPENDER metformina 48h antes do exame com contraste e reintroduzir apos confirmar funcao renal.',
+        'fonte': 'FDA/ANVISA'
+    },
+
+    # Outras interacoes graves
+    {
+        'pa1': 'METOCLOPRAMIDA',
+        'pa2': 'LEVODOPA',
+        'severidade': 'grave',
+        'descricao': 'Metoclopramida bloqueia dopamina e antagoniza efeito da levodopa no Parkinson.',
+        'recomendacao': 'CONTRAINDICADO em pacientes com Parkinson. Usar domperidona como alternativa.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'FLUCONAZOL',
+        'pa2': 'VARFARINA',
+        'severidade': 'grave',
+        'descricao': 'Fluconazol inibe CYP2C9, aumentando drasticamente niveis de varfarina.',
+        'recomendacao': 'Reduzir dose de varfarina 25-50%. Monitorar INR frequentemente.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'CLARITROMICINA',
+        'pa2': 'SINVASTATINA',
+        'severidade': 'grave',
+        'descricao': 'Claritromicina inibe CYP3A4, aumentando niveis de sinvastatina. Risco de rabdomiolise.',
+        'recomendacao': 'SUSPENDER estatina durante uso do antibiotico. Atentar para dor muscular.',
+        'fonte': 'FDA'
+    },
+    {
+        'pa1': 'ERITROMICINA',
+        'pa2': 'SINVASTATINA',
+        'severidade': 'grave',
+        'descricao': 'Eritromicina aumenta concentracoes de sinvastatina. Risco de miopatia/rabdomiolise.',
+        'recomendacao': 'CONTRAINDICADO. Suspender estatina ou trocar antibiotico.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'AMIODARONA',
+        'pa2': 'SINVASTATINA',
+        'severidade': 'grave',
+        'descricao': 'Amiodarona aumenta risco de miopatia por estatinas.',
+        'recomendacao': 'Dose maxima de sinvastatina: 10mg/dia com amiodarona.',
+        'fonte': 'FDA'
+    },
+    {
+        'pa1': 'SILDENAFILA',
+        'pa2': 'NITRATO',
+        'severidade': 'contraindicada',
+        'descricao': 'Combinacao causa hipotensao severa potencialmente fatal.',
+        'recomendacao': 'ABSOLUTAMENTE CONTRAINDICADO. Intervalo minimo de 24-48h entre eles.',
+        'fonte': 'FDA/ANVISA'
+    },
+    {
+        'pa1': 'SILDENAFILA',
+        'pa2': 'ISOSSORBIDA',
+        'severidade': 'contraindicada',
+        'descricao': 'Ambos causam vasodilatacao. Combinacao leva a hipotensao grave.',
+        'recomendacao': 'NUNCA usar juntos. Pode ser fatal.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'TRAMADOL',
+        'pa2': 'SERTRALINA',
+        'severidade': 'grave',
+        'descricao': 'Risco de sindrome serotoninergica (confusao, tremores, febre, convulsoes).',
+        'recomendacao': 'Monitorar sinais de sindrome serotoninergica. Preferir outro analgesico.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'TRAMADOL',
+        'pa2': 'FLUOXETINA',
+        'severidade': 'grave',
+        'descricao': 'Fluoxetina inibe metabolismo do tramadol e aumenta risco de sindrome serotoninergica.',
+        'recomendacao': 'EVITAR. Se necessario, usar doses baixas e monitorar.',
+        'fonte': 'Drugs.com'
+    },
+
+    # ============================================================
+    # MODERADAS - Requerem ajuste ou monitoramento
+    # ============================================================
+
+    # Omeprazol + Clopidogrel
+    {
+        'pa1': 'OMEPRAZOL',
+        'pa2': 'CLOPIDOGREL',
+        'severidade': 'moderada',
+        'descricao': 'Omeprazol inibe CYP2C19, reduzindo conversao do clopidogrel em metabolito ativo. Menor efeito antiplaquetario.',
+        'recomendacao': 'Preferir PANTOPRAZOL ou ESOMEPRAZOL que tem menor interacao.',
+        'fonte': 'FDA'
+    },
+    {
+        'pa1': 'ESOMEPRAZOL',
+        'pa2': 'CLOPIDOGREL',
+        'severidade': 'moderada',
+        'descricao': 'Inibicao do CYP2C19 pode reduzir eficacia do clopidogrel.',
+        'recomendacao': 'Pantoprazol e a melhor opcao entre os IBP com clopidogrel.',
+        'fonte': 'Drugs.com'
+    },
+
+    # Estatinas + Fibratos
+    {
+        'pa1': 'SINVASTATINA',
+        'pa2': 'GENFIBROZILA',
+        'severidade': 'moderada',
+        'descricao': 'Genfibrozila aumenta niveis de estatinas e risco de miopatia/rabdomiolise.',
+        'recomendacao': 'EVITAR genfibrozila com estatinas. Se necessario, usar FENOFIBRATO.',
+        'fonte': 'FDA'
+    },
+    {
+        'pa1': 'ATORVASTATINA',
+        'pa2': 'GENFIBROZILA',
+        'severidade': 'moderada',
+        'descricao': 'Risco aumentado de miopatia quando combinados.',
+        'recomendacao': 'Preferir fenofibrato. Monitorar CPK e sintomas musculares.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'SINVASTATINA',
+        'pa2': 'FENOFIBRATO',
+        'severidade': 'moderada',
+        'descricao': 'Combinacao aumenta risco de miopatia, porem menor que com genfibrozila.',
+        'recomendacao': 'Monitorar dor muscular e CPK. Fenofibrato e mais seguro que genfibrozila.',
+        'fonte': 'Drugs.com'
+    },
+
+    # Antibioticos + Antiacidos
+    {
+        'pa1': 'CIPROFLOXACINO',
+        'pa2': 'HIDROXIDO DE ALUMINIO',
+        'severidade': 'moderada',
+        'descricao': 'Antiacidos com aluminio/magnesio quelam fluoroquinolonas, reduzindo absorcao em ate 90%.',
+        'recomendacao': 'Tomar antibiotico 2h ANTES ou 6h DEPOIS do antiacido.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'CIPROFLOXACINO',
+        'pa2': 'HIDROXIDO DE MAGNESIO',
+        'severidade': 'moderada',
+        'descricao': 'Quelacao reduz drasticamente absorcao do antibiotico.',
+        'recomendacao': 'Separar administracao: antibiotico 2h antes ou 6h depois.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'LEVOFLOXACINO',
+        'pa2': 'HIDROXIDO DE ALUMINIO',
+        'severidade': 'moderada',
+        'descricao': 'Antiacidos reduzem absorcao de fluoroquinolonas.',
+        'recomendacao': 'Administrar com intervalo de 2 horas.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'TETRACICLINA',
+        'pa2': 'HIDROXIDO DE ALUMINIO',
+        'severidade': 'moderada',
+        'descricao': 'Antiacidos quelam tetraciclinas, reduzindo eficacia.',
+        'recomendacao': 'Tomar tetraciclina 1h antes ou 2h depois de antiacidos.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'DOXICICLINA',
+        'pa2': 'CALCIO',
+        'severidade': 'moderada',
+        'descricao': 'Calcio quela tetraciclinas, reduzindo absorcao.',
+        'recomendacao': 'Separar administracao em pelo menos 2-3 horas.',
+        'fonte': 'Drugs.com'
+    },
+
+    # Outras moderadas
+    {
+        'pa1': 'LEVOTIROXINA',
+        'pa2': 'CARBONATO DE CALCIO',
+        'severidade': 'moderada',
+        'descricao': 'Calcio reduz absorcao de levotiroxina.',
+        'recomendacao': 'Tomar levotiroxina 4 horas ANTES do calcio.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'LEVOTIROXINA',
+        'pa2': 'SULFATO FERROSO',
+        'severidade': 'moderada',
+        'descricao': 'Ferro reduz absorcao de levotiroxina significativamente.',
+        'recomendacao': 'Separar por 4 horas. Levotiroxina em jejum, ferro apos almoco.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'LEVOTIROXINA',
+        'pa2': 'OMEPRAZOL',
+        'severidade': 'moderada',
+        'descricao': 'IBP reduzem acidez gastrica necessaria para absorcao de levotiroxina.',
+        'recomendacao': 'Pode necessitar ajuste de dose de levotiroxina. Monitorar TSH.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'DIGOXINA',
+        'pa2': 'AMIODARONA',
+        'severidade': 'moderada',
+        'descricao': 'Amiodarona aumenta niveis de digoxina em 70-100%.',
+        'recomendacao': 'Reduzir dose de digoxina pela metade ao iniciar amiodarona.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'DIGOXINA',
+        'pa2': 'VERAPAMIL',
+        'severidade': 'moderada',
+        'descricao': 'Verapamil aumenta concentracoes de digoxina.',
+        'recomendacao': 'Monitorar niveis de digoxina e ajustar dose.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'METFORMINA',
+        'pa2': 'ALCOOL',
+        'severidade': 'moderada',
+        'descricao': 'Alcool aumenta risco de acidose latica com metformina.',
+        'recomendacao': 'Evitar consumo excessivo de alcool durante tratamento.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'METRONIDAZOL',
+        'pa2': 'ALCOOL',
+        'severidade': 'moderada',
+        'descricao': 'Reacao tipo dissulfiram: nauseas, vomitos, rubor, taquicardia.',
+        'recomendacao': 'NAO consumir alcool durante tratamento e ate 48h apos.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'CARBAMAZEPINA',
+        'pa2': 'ANTICONCEPCIONAL',
+        'severidade': 'moderada',
+        'descricao': 'Carbamazepina induz metabolismo de anticoncepcionais, reduzindo eficacia.',
+        'recomendacao': 'Usar metodo contraceptivo adicional (preservativo). Considerar DIU.',
+        'fonte': 'FDA'
+    },
+    {
+        'pa1': 'FENITOINA',
+        'pa2': 'ANTICONCEPCIONAL',
+        'severidade': 'moderada',
+        'descricao': 'Fenitoina acelera metabolismo de hormonios, risco de gravidez.',
+        'recomendacao': 'Anticoncepcional hormonal pode falhar. Usar metodo de barreira.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'RIFAMPICINA',
+        'pa2': 'ANTICONCEPCIONAL',
+        'severidade': 'moderada',
+        'descricao': 'Rifampicina e potente indutor enzimatico, reduz eficacia de ACO.',
+        'recomendacao': 'Usar outro metodo contraceptivo durante tratamento.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'LOPERAMIDA',
+        'pa2': 'CIPROFLOXACINO',
+        'severidade': 'moderada',
+        'descricao': 'Loperamida pode mascarar sintomas de infeccao intestinal.',
+        'recomendacao': 'Usar com cautela. Preferir reidratacao.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'VARFARINA',
+        'pa2': 'VITAMINA K',
+        'severidade': 'moderada',
+        'descricao': 'Vitamina K antagoniza efeito da varfarina.',
+        'recomendacao': 'Manter dieta consistente em vitamina K. Evitar suplementos.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'LISINOPRIL',
+        'pa2': 'IBUPROFENO',
+        'severidade': 'moderada',
+        'descricao': 'AINEs reduzem efeito anti-hipertensivo de IECA e aumentam risco renal.',
+        'recomendacao': 'Monitorar pressao arterial e funcao renal. Usar menor dose por menor tempo.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'ENALAPRIL',
+        'pa2': 'IBUPROFENO',
+        'severidade': 'moderada',
+        'descricao': 'AINEs antagonizam efeito anti-hipertensivo e podem piorar funcao renal.',
+        'recomendacao': 'Preferir paracetamol. Se AINE necessario, monitorar.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'LOSARTANA',
+        'pa2': 'IBUPROFENO',
+        'severidade': 'moderada',
+        'descricao': 'AINEs reduzem eficacia de BRA e aumentam risco de lesao renal.',
+        'recomendacao': 'Usar AINEs com cautela em hipertensos. Preferir alternativas.',
+        'fonte': 'ANVISA'
+    },
+
+    # ============================================================
+    # LEVES - Atencao, mas geralmente manejavel
+    # ============================================================
+
+    {
+        'pa1': 'CAPTOPRIL',
+        'pa2': 'ALIMENTO',
+        'severidade': 'leve',
+        'descricao': 'Alimentos reduzem absorcao de captopril em 30-40%.',
+        'recomendacao': 'Tomar captopril 1 hora antes das refeicoes.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'OMEPRAZOL',
+        'pa2': 'VITAMINA B12',
+        'severidade': 'leve',
+        'descricao': 'Uso prolongado de IBP pode reduzir absorcao de B12.',
+        'recomendacao': 'Monitorar niveis de B12 em uso cronico de IBP.',
+        'fonte': 'Drugs.com'
+    },
+    {
+        'pa1': 'DIURETICO',
+        'pa2': 'LITIO',
+        'severidade': 'moderada',
+        'descricao': 'Diureticos aumentam reabsorcao de litio, elevando niveis sericos.',
+        'recomendacao': 'Monitorar litemia. Ajustar dose se necessario.',
+        'fonte': 'Micromedex'
+    },
+    {
+        'pa1': 'ATENOLOL',
+        'pa2': 'CLONIDINA',
+        'severidade': 'moderada',
+        'descricao': 'Retirada abrupta de clonidina com betabloqueador pode causar crise hipertensiva.',
+        'recomendacao': 'Se suspender clonidina, retirar betabloqueador primeiro.',
+        'fonte': 'ANVISA'
+    },
+    {
+        'pa1': 'FLUOXETINA',
+        'pa2': 'IMAO',
+        'severidade': 'contraindicada',
+        'descricao': 'Risco de sindrome serotoninergica grave, potencialmente fatal.',
+        'recomendacao': 'CONTRAINDICADO. Intervalo minimo de 5 semanas entre eles.',
+        'fonte': 'FDA'
+    },
+    {
+        'pa1': 'SERTRALINA',
+        'pa2': 'IMAO',
+        'severidade': 'contraindicada',
+        'descricao': 'Sindrome serotoninergica grave.',
+        'recomendacao': 'NUNCA combinar. Aguardar 2 semanas apos suspender ISRS.',
+        'fonte': 'Drugs.com'
+    },
+]
+
+
+def popular_interacoes():
+    """Popula tabela copilot_interacao com interacoes medicamentosas."""
+    conn = pymysql.connect(**DB_CONFIG)
+    cursor = conn.cursor()
+
+    try:
+        # Limpa dados anteriores
+        cursor.execute("DELETE FROM copilot_interacao WHERE id > 0")
+        print("[INFO] Tabela limpa")
+
+        inserted = 0
+        for inter in INTERACOES:
+            cursor.execute("""
+                INSERT INTO copilot_interacao
+                (principio_ativo_1, principio_ativo_2, severidade, descricao, recomendacao, fonte)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (
+                inter['pa1'].upper(),
+                inter['pa2'].upper(),
+                inter['severidade'],
+                inter['descricao'],
+                inter['recomendacao'],
+                inter['fonte']
+            ))
+            inserted += 1
+
+            # Insere tambem a interacao inversa para facilitar busca
+            cursor.execute("""
+                INSERT IGNORE INTO copilot_interacao
+                (principio_ativo_1, principio_ativo_2, severidade, descricao, recomendacao, fonte)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (
+                inter['pa2'].upper(),
+                inter['pa1'].upper(),
+                inter['severidade'],
+                inter['descricao'],
+                inter['recomendacao'],
+                inter['fonte']
+            ))
+
+        conn.commit()
+        print(f"[OK] {inserted} interacoes inseridas (+ inversas)")
+
+        # Estatisticas
+        cursor.execute("""
+            SELECT severidade, COUNT(*) as qtd
+            FROM copilot_interacao
+            GROUP BY severidade
+            ORDER BY FIELD(severidade, 'contraindicada', 'grave', 'moderada', 'leve')
+        """)
+
+        print("\n[ESTATISTICAS]")
+        for row in cursor.fetchall():
+            print(f"  {row[0]}: {row[1]} interacoes")
+
+        cursor.execute("SELECT COUNT(*) FROM copilot_interacao")
+        total = cursor.fetchone()[0]
+        print(f"\n  TOTAL: {total} registros")
+
+    except Exception as e:
+        conn.rollback()
+        print(f"[ERRO] {e}")
+        raise
+    finally:
+        cursor.close()
+        conn.close()
+
+
+if __name__ == '__main__':
+    popular_interacoes()

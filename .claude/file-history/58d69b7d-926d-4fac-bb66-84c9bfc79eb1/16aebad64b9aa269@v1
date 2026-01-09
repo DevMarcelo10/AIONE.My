@@ -1,0 +1,17 @@
+{
+  "mysql-aione": {
+    "type": "stdio",
+    "command": "py",
+    "args": [
+      "C:\\Fontes\\AIONE.My\\mcp-mysql-aione\\server.py"
+    ],
+    "env": {},
+    "autoApprove": [
+      "query_select",
+      "list_tables",
+      "describe_table",
+      "get_table_count",
+      "search_table"
+    ]
+  }
+}

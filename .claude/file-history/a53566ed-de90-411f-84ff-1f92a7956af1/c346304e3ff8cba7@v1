@@ -1,0 +1,15 @@
+@echo off
+echo Compilando PharmaCopilot...
+call "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\rsvars.bat"
+cd /d "%~dp0"
+msbuild PharmaCopilot.dproj /t:Build /p:Config=Debug /p:Platform=Win32 /v:normal
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo ERRO na compilacao!
+    pause
+) else (
+    echo.
+    echo Compilacao concluida com sucesso!
+    echo Executavel em: Win32\Debug\PharmaCopilot.exe
+    pause
+)

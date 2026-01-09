@@ -1,0 +1,6 @@
+Get-ChildItem 'C:\Fontes\AIONE.My\PharmaCopilot' -Recurse -Filter 'nul' -File -ErrorAction SilentlyContinue | ForEach-Object {
+    $path = "\\?\$($_.FullName)"
+    cmd /c "del /f /q `"$path`"" 2>$null
+    Write-Host "Removido: $($_.FullName)"
+}
+Write-Host "Concluido"

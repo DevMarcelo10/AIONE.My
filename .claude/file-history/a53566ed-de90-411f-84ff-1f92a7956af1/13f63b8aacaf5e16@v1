@@ -1,0 +1,31 @@
+"""Models e Schemas do PharmaCopilot."""
+
+from .schemas import (
+    Cliente,
+    Produto,
+    LoteEstoque,
+    ItemVenda,
+    Venda,
+    ChatMessage,
+    ChatRequest,
+    ChatResponse,
+    Suggestion,
+    SuggestionType,
+    Alert,
+    AlertType,
+)
+
+__all__ = [
+    "Cliente",
+    "Produto",
+    "LoteEstoque",
+    "ItemVenda",
+    "Venda",
+    "ChatMessage",
+    "ChatRequest",
+    "ChatResponse",
+    "Suggestion",
+    "SuggestionType",
+    "Alert",
+    "AlertType",
+]

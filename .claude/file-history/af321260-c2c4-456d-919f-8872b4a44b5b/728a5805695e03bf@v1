@@ -1,0 +1,112 @@
+"""Adiciona itens de teste ao pedido 141765 para simular alertas farmacológicos."""
+import os
+import sys
+
+# Muda para o diretorio do backend para carregar .env corretamente
+backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(backend_dir)
+sys.path.insert(0, backend_dir)
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import pymysql
+
+# Conexao direta ao banco AIONE (ERP)
+ERP_HOST = "localhost"
+ERP_PORT = 3307
+ERP_USER = "root"
+ERP_PASS = os.getenv("ERP_DB_PASSWORD", "f68interdb")
+ERP_DB = "dbaione"
+
+# Produtos para simular alertas
+# IDProd, Descricao, PrecoVen, PrecoPMC, PrecoFab, CustoMed, Alerta esperado
+PRODUTOS_TESTE = [
+    (939, "MAREVAN 5MG", 11.54, 11.54, 8.35, 5.89, "Varfarina - interage com AAS"),
+    (2078, "AAS 100MG", 25.86, 25.86, 19.28, 13.51, "Interação GRAVE com Marevan"),
+    (2124, "OMEPRAZOL 20MG", 24.50, 24.50, 17.72, 0.00, "Duplicidade LEVE com Pantoprazol"),
+    (435, "DIAZEPAM 10MG", 22.01, 22.01, 15.92, 5.89, "Controlado + duplicidade com Rivotril"),
+    (1273, "RIVOTRIL 2MG", 21.32, 21.32, 15.42, 0.00, "Controlado + duplicidade MODERADA com Diazepam"),
+]
+
+PEDIDO_ID = 141765
+FILIAL_ID = 1
+VENDEDOR_ID = 302
+
+
+def main():
+    print(f"Conectando ao banco AIONE em {ERP_HOST}:{ERP_PORT}...")
+
+    conn = pymysql.connect(
+        host=ERP_HOST,
+        port=ERP_PORT,
+        user=ERP_USER,
+        password=ERP_PASS,
+        database=ERP_DB,
+        charset='utf8mb4'
+    )
+
+    try:
+        with conn.cursor() as cursor:
+            # Busca o proximo Nroite
+            cursor.execute(
+                "SELECT COALESCE(MAX(Nroite), -1) + 1 FROM arqpedidoite WHERE IDPed = %s",
+                (PEDIDO_ID,)
+            )
+            next_nroite = cursor.fetchone()[0]
+            print(f"Proximo Nroite: {next_nroite}")
+
+            # Verifica quais produtos ja estao no pedido
+            cursor.execute(
+                "SELECT IDProd FROM arqpedidoite WHERE IDPed = %s",
+                (PEDIDO_ID,)
+            )
+            produtos_existentes = {row[0] for row in cursor.fetchall()}
+            print(f"Produtos ja no pedido: {produtos_existentes}")
+
+            # Insere cada produto de teste
+            inseridos = 0
+            for id_prod, desc, preco_ven, preco_pmc, preco_fab, custo_med, alerta in PRODUTOS_TESTE:
+                if id_prod in produtos_existentes:
+                    print(f"  SKIP: {desc} (ja existe no pedido)")
+                    continue
+
+                cursor.execute("""
+                    INSERT INTO arqpedidoite
+                    (IDFilial, IDPed, Nroite, IDProd, IDVend, IndComi,
+                     PrecoVen, PrecoPMC, PrecoFP, PrecoFab, CustoMed,
+                     VlrPIS, VlrCOF, Qtdped, QtdConf, PerDesc, VlrDesc, VlrVenda)
+                    VALUES
+                    (%s, %s, %s, %s, %s, 0,
+                     %s, %s, 0, %s, %s,
+                     0, 0, 1, 0, 0, 0, %s)
+                """, (FILIAL_ID, PEDIDO_ID, next_nroite, id_prod, VENDEDOR_ID,
+                      preco_ven, preco_pmc, preco_fab, custo_med, preco_ven))
+
+                print(f"  OK: {desc} (Nroite={next_nroite}) -> {alerta}")
+                next_nroite += 1
+                inseridos += 1
+
+            conn.commit()
+            print(f"\nTotal inseridos: {inseridos} itens")
+
+            # Lista todos os itens do pedido
+            print(f"\n=== Itens do Pedido {PEDIDO_ID} ===")
+            cursor.execute("""
+                SELECT pi.Nroite, pi.IDProd, p.Despro, pi.PrecoVen, pi.Qtdped
+                FROM arqpedidoite pi
+                JOIN arqproduto p ON pi.IDProd = p.IDProd
+                WHERE pi.IDPed = %s
+                ORDER BY pi.Nroite
+            """, (PEDIDO_ID,))
+
+            for row in cursor.fetchall():
+                print(f"  {row[0]}: [{row[1]}] {row[2]} - R$ {row[3]:.2f} x {row[4]}")
+
+    finally:
+        conn.close()
+        print("\nConexao fechada.")
+
+
+if __name__ == "__main__":
+    main()

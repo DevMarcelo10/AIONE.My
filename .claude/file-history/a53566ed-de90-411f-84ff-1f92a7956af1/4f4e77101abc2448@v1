@@ -1,0 +1,491 @@
+-- ============================================================
+-- PharmaCopilot - Schema do Banco de Dados
+-- Banco proprio do Copilot (READ-WRITE)
+-- Separado do banco do ERP (que e apenas READ-ONLY)
+-- ============================================================
+
+CREATE DATABASE IF NOT EXISTS copilot
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE copilot;
+
+-- ============================================================
+-- CONFIGURACAO E LICENCIAMENTO
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_licenca (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   farmacia_cnpj VARCHAR(18) NOT NULL,
+   farmacia_nome VARCHAR(200) NOT NULL,
+   licenca_key VARCHAR(64) NOT NULL UNIQUE,
+   tipo_licenca ENUM('trial', 'basic', 'pro', 'enterprise') NOT NULL DEFAULT 'trial',
+   max_terminais INT NOT NULL DEFAULT 1,
+   data_inicio DATE NOT NULL,
+   data_expiracao DATE NOT NULL,
+   ativo BOOLEAN NOT NULL DEFAULT TRUE,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+   INDEX idx_cnpj (farmacia_cnpj),
+   INDEX idx_licenca (licenca_key)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS copilot_terminal (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   licenca_id INT NOT NULL,
+   terminal_uuid VARCHAR(64) NOT NULL UNIQUE,
+   terminal_nome VARCHAR(100),
+   ultimo_acesso TIMESTAMP NULL,
+   ativo BOOLEAN NOT NULL DEFAULT TRUE,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+   FOREIGN KEY (licenca_id) REFERENCES copilot_licenca(id) ON DELETE CASCADE,
+   INDEX idx_licenca (licenca_id)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- PERFIL DO CLIENTE (dados extras, alem do ERP)
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_cliente_perfil (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   erp_cliente_id INT NOT NULL COMMENT 'ID do cliente no ERP (arqpessoa.IDPessoa)',
+
+   -- Preferencias
+   preferencia_generico BOOLEAN DEFAULT NULL COMMENT 'Prefere generico quando disponivel',
+   preferencia_similar BOOLEAN DEFAULT NULL,
+   sensivel_preco BOOLEAN DEFAULT NULL,
+
+   -- Alergias conhecidas (informadas pelo vendedor)
+   alergias TEXT COMMENT 'Lista de alergias separadas por virgula',
+
+   -- Condicoes cronicas
+   diabetico BOOLEAN DEFAULT NULL,
+   hipertenso BOOLEAN DEFAULT NULL,
+   gestante BOOLEAN DEFAULT NULL,
+   lactante BOOLEAN DEFAULT NULL,
+   idoso BOOLEAN DEFAULT NULL COMMENT 'Maior de 65 anos',
+
+   -- Observacoes do vendedor
+   observacoes TEXT,
+
+   -- Ultima interacao
+   ultima_compra DATE,
+   ultima_interacao_chat TIMESTAMP NULL,
+   total_interacoes INT DEFAULT 0,
+
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+   UNIQUE KEY uk_erp_cliente (erp_cliente_id),
+   INDEX idx_ultima_compra (ultima_compra)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- CACHE DE DADOS FARMACEUTICOS
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_drug_cache (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+
+   -- Identificacao
+   ean VARCHAR(14) NOT NULL,
+   nome_comercial VARCHAR(200) NOT NULL,
+   principio_ativo VARCHAR(500),
+   laboratorio VARCHAR(100),
+
+   -- Classificacao
+   tipo ENUM('referencia', 'generico', 'similar', 'fitoterapico', 'outro') DEFAULT 'outro',
+   classe_terapeutica VARCHAR(200),
+
+   -- Regulatorio
+   ms_registro VARCHAR(20),
+   receita_tipo ENUM('livre', 'branca', 'azul', 'amarela', 'especial') DEFAULT 'livre',
+   controlado BOOLEAN DEFAULT FALSE,
+
+   -- Informacoes para alertas
+   contraindicacoes TEXT,
+   interacoes_graves TEXT COMMENT 'Lista de principios ativos com interacao grave',
+
+   -- Cache control
+   fonte VARCHAR(50) COMMENT 'anvisa, bulario, manual',
+   atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+   UNIQUE KEY uk_ean (ean),
+   INDEX idx_principio (principio_ativo(100)),
+   INDEX idx_classe (classe_terapeutica(100)),
+   FULLTEXT idx_ft_nome (nome_comercial, principio_ativo)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- INTERACOES MEDICAMENTOSAS
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_interacao (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+
+   principio_ativo_1 VARCHAR(200) NOT NULL,
+   principio_ativo_2 VARCHAR(200) NOT NULL,
+
+   severidade ENUM('leve', 'moderada', 'grave', 'contraindicada') NOT NULL,
+   descricao TEXT NOT NULL,
+   recomendacao TEXT,
+
+   fonte VARCHAR(100) COMMENT 'drugs.com, anvisa, etc',
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+   UNIQUE KEY uk_interacao (principio_ativo_1(100), principio_ativo_2(100)),
+   INDEX idx_pa1 (principio_ativo_1(100)),
+   INDEX idx_pa2 (principio_ativo_2(100)),
+   INDEX idx_severidade (severidade)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- REGRAS DE CROSS-SELL (VENDA CRUZADA)
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_cross_sell (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+
+   -- Gatilho: quando cliente compra isso...
+   gatilho_tipo ENUM('produto', 'categoria', 'principio_ativo', 'classe_terapeutica') NOT NULL,
+   gatilho_valor VARCHAR(200) NOT NULL COMMENT 'EAN, nome categoria, principio ativo, etc',
+
+   -- Sugestao: ofereca isso...
+   sugestao_tipo ENUM('produto', 'categoria') NOT NULL,
+   sugestao_valor VARCHAR(200) NOT NULL,
+   sugestao_nome VARCHAR(200) NOT NULL COMMENT 'Nome amigavel para exibir',
+
+   -- Configuracao
+   prioridade INT DEFAULT 50 COMMENT '1-100, maior = mais prioritario',
+   mensagem_vendedor VARCHAR(500) COMMENT 'Frase sugerida para o vendedor',
+   ativo BOOLEAN DEFAULT TRUE,
+
+   -- Metricas
+   vezes_sugerido INT DEFAULT 0,
+   vezes_aceito INT DEFAULT 0,
+
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+   INDEX idx_gatilho (gatilho_tipo, gatilho_valor(100)),
+   INDEX idx_prioridade (prioridade DESC),
+   INDEX idx_ativo (ativo)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- SESSOES DE CHAT
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_chat_session (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   session_uuid VARCHAR(64) NOT NULL UNIQUE,
+
+   terminal_id INT NULL,
+   erp_vendedor_id INT NULL COMMENT 'ID do vendedor no ERP',
+   erp_cliente_id INT NULL COMMENT 'ID do cliente no ERP',
+   erp_venda_id INT NULL COMMENT 'ID da venda no ERP',
+
+   iniciado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   finalizado_em TIMESTAMP NULL,
+
+   total_mensagens INT DEFAULT 0,
+   total_tokens_usados INT DEFAULT 0,
+
+   FOREIGN KEY (terminal_id) REFERENCES copilot_terminal(id) ON DELETE SET NULL,
+   INDEX idx_terminal (terminal_id),
+   INDEX idx_vendedor (erp_vendedor_id),
+   INDEX idx_data (iniciado_em)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS copilot_chat_message (
+   id BIGINT AUTO_INCREMENT PRIMARY KEY,
+   session_id INT NOT NULL,
+
+   role ENUM('user', 'assistant', 'system') NOT NULL,
+   content TEXT NOT NULL,
+
+   tokens_usado INT DEFAULT 0,
+   latencia_ms INT DEFAULT 0 COMMENT 'Tempo de resposta da LLM',
+
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+   FOREIGN KEY (session_id) REFERENCES copilot_chat_session(id) ON DELETE CASCADE,
+   INDEX idx_session (session_id),
+   INDEX idx_role (role)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- LOGS E ANALYTICS
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_log (
+   id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+   tipo ENUM('sugestao', 'alerta', 'chat', 'erro', 'acao') NOT NULL,
+   acao VARCHAR(100) NOT NULL COMMENT 'sugestao_exibida, sugestao_aceita, alerta_ignorado, etc',
+
+   terminal_id INT NULL,
+   erp_vendedor_id INT NULL,
+   erp_cliente_id INT NULL,
+   erp_venda_id INT NULL,
+   erp_produto_id INT NULL,
+
+   dados JSON COMMENT 'Dados adicionais do evento',
+
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+   INDEX idx_tipo_acao (tipo, acao),
+   INDEX idx_data (created_at),
+   INDEX idx_terminal (terminal_id),
+   INDEX idx_vendedor (erp_vendedor_id)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- FEEDBACK DO VENDEDOR
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS copilot_feedback (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+
+   session_id INT NULL,
+   message_id BIGINT NULL,
+
+   tipo ENUM('positivo', 'negativo', 'sugestao') NOT NULL,
+   categoria VARCHAR(50) COMMENT 'resposta_util, resposta_incorreta, sugestao_boa, etc',
+   comentario TEXT,
+
+   erp_vendedor_id INT NULL,
+
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+   FOREIGN KEY (session_id) REFERENCES copilot_chat_session(id) ON DELETE SET NULL,
+   FOREIGN KEY (message_id) REFERENCES copilot_chat_message(id) ON DELETE SET NULL,
+   INDEX idx_tipo (tipo),
+   INDEX idx_data (created_at)
+) ENGINE=InnoDB;
+
+-- ============================================================
+-- DADOS INICIAIS - REGRAS DE CROSS-SELL PARA FARMACIAS
+-- ============================================================
+
+-- Limpa dados anteriores para recarregar
+DELETE FROM copilot_cross_sell WHERE id > 0;
+
+-- ============================================================
+-- ANALGESICOS E ANTITERMICOS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('principio_ativo', 'DIPIRONA', 'categoria', 'TERMOMETRO', 'Termometro Digital', 80,
+ 'Vai precisar de um termometro para acompanhar a febre?'),
+
+('principio_ativo', 'PARACETAMOL', 'categoria', 'TERMOMETRO', 'Termometro Digital', 80,
+ 'Ja tem termometro em casa para monitorar?'),
+
+('principio_ativo', 'IBUPROFENO', 'categoria', 'PROTETOR_GASTRICO', 'Protetor Gastrico', 75,
+ 'Anti-inflamatorio pode irritar o estomago. Vai levar um protetor gastrico?'),
+
+('principio_ativo', 'NIMESULIDA', 'categoria', 'PROTETOR_GASTRICO', 'Protetor Gastrico', 75,
+ 'Para proteger o estomago, recomendo associar com um protetor gastrico.'),
+
+('principio_ativo', 'DICLOFENACO', 'categoria', 'PROTETOR_GASTRICO', 'Protetor Gastrico', 80,
+ 'Diclofenaco pode ser agressivo ao estomago. Leva um omeprazol junto?');
+
+-- ============================================================
+-- ANTIBIOTICOS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('principio_ativo', 'AMOXICILINA', 'categoria', 'PROBIOTICO', 'Probiotico', 85,
+ 'Antibiotico pode afetar a flora intestinal. Recomendo um probiotico para proteger.'),
+
+('principio_ativo', 'AZITROMICINA', 'categoria', 'PROBIOTICO', 'Probiotico', 85,
+ 'Para evitar desconforto intestinal, leva um probiotico?'),
+
+('principio_ativo', 'CEFALEXINA', 'categoria', 'PROBIOTICO', 'Probiotico', 85,
+ 'Antibiotico pode causar diarreia. Um probiotico ajuda a prevenir.'),
+
+('principio_ativo', 'LEVOFLOXACINO', 'categoria', 'PROBIOTICO', 'Probiotico', 85,
+ 'Esse antibiotico e forte. Recomendo associar com probiotico.');
+
+-- ============================================================
+-- GRIPES E RESFRIADOS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('classe_terapeutica', 'ANTIGRIPAL', 'categoria', 'VITAMINA_C', 'Vitamina C', 70,
+ 'Vitamina C ajuda na recuperacao. Quer levar?'),
+
+('classe_terapeutica', 'ANTIGRIPAL', 'categoria', 'PASTILHA_GARGANTA', 'Pastilhas para Garganta', 65,
+ 'Esta com dor de garganta tambem? Temos pastilhas que aliviam.'),
+
+('classe_terapeutica', 'ANTIGRIPAL', 'categoria', 'LENCO_PAPEL', 'Lencos de Papel', 50,
+ 'Vai precisar de lencos de papel?'),
+
+('classe_terapeutica', 'DESCONGESTIONANTE', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 75,
+ 'Soro fisiologico ajuda a limpar as vias nasais. Leva junto?'),
+
+('principio_ativo', 'LORATADINA', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 70,
+ 'Para alergia, lavar o nariz com soro ajuda bastante.');
+
+-- ============================================================
+-- DERMATOLOGICOS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('classe_terapeutica', 'ACIDO_RETINOICO', 'categoria', 'PROTETOR_SOLAR', 'Protetor Solar FPS50+', 95,
+ 'IMPORTANTE: Acido retinoico aumenta sensibilidade ao sol. Protetor solar e obrigatorio!'),
+
+('classe_terapeutica', 'ACIDO_GLICOLICO', 'categoria', 'PROTETOR_SOLAR', 'Protetor Solar FPS50+', 95,
+ 'Acidos deixam a pele sensivel. Precisa usar protetor solar todos os dias.'),
+
+('classe_terapeutica', 'ANTIACNE', 'categoria', 'SABONETE_FACIAL', 'Sabonete Facial', 70,
+ 'Para acne, um sabonete facial adequado potencializa o tratamento.'),
+
+('classe_terapeutica', 'HIDRATANTE', 'categoria', 'PROTETOR_LABIAL', 'Protetor Labial', 55,
+ 'Os labios tambem ressecam. Quer levar um protetor labial?');
+
+-- ============================================================
+-- DIABETES
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('principio_ativo', 'METFORMINA', 'categoria', 'LANCETA', 'Lancetas', 60,
+ 'Esta precisando de lancetas para o glicosimetro?'),
+
+('principio_ativo', 'METFORMINA', 'categoria', 'FITA_GLICOSE', 'Fitas de Glicose', 65,
+ 'Precisa de fitas para medir a glicose?'),
+
+('principio_ativo', 'INSULINA', 'categoria', 'SERINGA_INSULINA', 'Seringas de Insulina', 90,
+ 'Vai precisar de seringas para insulina?'),
+
+('principio_ativo', 'INSULINA', 'categoria', 'ALGODAO', 'Algodao', 50,
+ 'Leva algodao para aplicacao?'),
+
+('classe_terapeutica', 'ANTIDIABETICO', 'categoria', 'ADOCANTE', 'Adocante', 45,
+ 'Ja tem adocante em casa?');
+
+-- ============================================================
+-- HIPERTENSAO
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('principio_ativo', 'LOSARTANA', 'categoria', 'APARELHO_PRESSAO', 'Aparelho de Pressao', 55,
+ 'Tem aparelho para medir pressao em casa? E importante monitorar.'),
+
+('principio_ativo', 'ATENOLOL', 'categoria', 'APARELHO_PRESSAO', 'Aparelho de Pressao', 55,
+ 'Controlar a pressao em casa ajuda no tratamento. Temos aparelhos digitais.'),
+
+('classe_terapeutica', 'ANTI-HIPERTENSIVO', 'categoria', 'SAL_LIGHT', 'Sal Light/Hipossodico', 40,
+ 'Para hipertensao, sal light ajuda a reduzir o sodio na dieta.');
+
+-- ============================================================
+-- GASTRO
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('principio_ativo', 'OMEPRAZOL', 'categoria', 'CHA_DIGESTIVO', 'Cha Digestivo', 40,
+ 'Cha de boldo ou camomila tambem ajuda na digestao.'),
+
+('principio_ativo', 'LOPERAMIDA', 'categoria', 'SORO_REIDRATANTE', 'Soro Reidratante', 85,
+ 'Diarreia desidrata. E importante repor liquidos com soro reidratante.'),
+
+('classe_terapeutica', 'LAXANTE', 'categoria', 'FIBRAS', 'Suplemento de Fibras', 60,
+ 'Para regularizar o intestino, fibras no dia a dia ajudam bastante.');
+
+-- ============================================================
+-- MULHER / GINECOLOGIA
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('classe_terapeutica', 'ANTIFUNGICO_VAGINAL', 'categoria', 'SABONETE_INTIMO', 'Sabonete Intimo', 70,
+ 'Sabonete intimo com pH adequado ajuda na prevencao de infeccoes.'),
+
+('classe_terapeutica', 'ANTICONCEPCIONAL', 'categoria', 'LUBRIFICANTE', 'Lubrificante Intimo', 35,
+ 'Precisa de lubrificante intimo?'),
+
+('principio_ativo', 'ACIDO_FOLICO', 'categoria', 'VITAMINA_PRENATAL', 'Vitaminas Pre-natal', 75,
+ 'Esta planejando gravidez? Vitaminas pre-natais complementam o acido folico.');
+
+-- ============================================================
+-- INFANTIL
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('categoria', 'MEDICAMENTO_PEDIATRICO', 'categoria', 'SERINGA_DOSADORA', 'Seringa Dosadora', 70,
+ 'Para dar remedio para crianca, a seringa dosadora facilita.'),
+
+('categoria', 'FORMULA_INFANTIL', 'categoria', 'MAMADEIRA', 'Mamadeira', 50,
+ 'Precisa de mamadeira?'),
+
+('categoria', 'FRALDA', 'categoria', 'POMADA_ASSADURA', 'Pomada para Assadura', 75,
+ 'Leva pomada para prevenir assaduras?'),
+
+('categoria', 'FRALDA', 'categoria', 'LENCO_UMEDECIDO', 'Lencos Umedecidos', 70,
+ 'Vai precisar de lencos umedecidos tambem?');
+
+-- ============================================================
+-- DORES MUSCULARES / ORTOPEDIA
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('classe_terapeutica', 'RELAXANTE_MUSCULAR', 'categoria', 'BOLSA_TERMICA', 'Bolsa Termica', 60,
+ 'Compressa quente ajuda a relaxar a musculatura. Temos bolsas termicas.'),
+
+('classe_terapeutica', 'ANTI-INFLAMATORIO_TOPICO', 'categoria', 'FAIXA_ELASTICA', 'Faixa Elastica', 50,
+ 'Para imobilizar, uma faixa elastica pode ajudar.'),
+
+('principio_ativo', 'CICLOBENZAPRINA', 'categoria', 'ADESIVO_TERMICO', 'Adesivo Termico', 55,
+ 'Adesivo termico mantem o calor no local e alivia a dor.');
+
+-- ============================================================
+-- OLHOS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('classe_terapeutica', 'COLIRIO', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 65,
+ 'Soro fisiologico serve para lavar os olhos e e mais economico para uso frequente.');
+
+-- ============================================================
+-- CURATIVOS / PRIMEIROS SOCORROS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('categoria', 'CURATIVO', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 75,
+ 'Para limpar o ferimento, soro fisiologico e o mais indicado.'),
+
+('categoria', 'CURATIVO', 'categoria', 'ANTISSEPTICO', 'Antisseptico', 70,
+ 'Vai precisar de antisseptico para limpar o ferimento?'),
+
+('categoria', 'ATADURA', 'categoria', 'ESPARADRAPO', 'Esparadrapo', 65,
+ 'Leva esparadrapo para fixar a atadura?');
+
+-- ============================================================
+-- SUPLEMENTOS
+-- ============================================================
+
+INSERT INTO copilot_cross_sell (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor) VALUES
+('principio_ativo', 'CALCIO', 'categoria', 'VITAMINA_D', 'Vitamina D', 80,
+ 'Vitamina D ajuda na absorcao do calcio. Leva junto?'),
+
+('principio_ativo', 'FERRO', 'categoria', 'VITAMINA_C', 'Vitamina C', 75,
+ 'Vitamina C aumenta a absorcao do ferro. Recomendo associar.'),
+
+('principio_ativo', 'OMEGA_3', 'categoria', 'VITAMINA_E', 'Vitamina E', 50,
+ 'Vitamina E e antioxidante e combina com omega 3.');
+
+-- ============================================================
+-- VERIFICACAO
+-- ============================================================
+
+SELECT
+   CONCAT('Total de regras de cross-sell: ', COUNT(*)) as resultado
+FROM copilot_cross_sell;
+
+SELECT
+   gatilho_tipo,
+   COUNT(*) as quantidade
+FROM copilot_cross_sell
+GROUP BY gatilho_tipo;

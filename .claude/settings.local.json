@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mysql-aione__query",
+      "mcp__mysql-aione__describe_table",
+      "mcp__mysql-aione__list_tables",
+      "Bash(claude update:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(claude -c:*)",
+      "Bash(claude -c -p:*)",
+      "Bash(python:*)",
+      "Bash(tree:*)",
+      "Bash(dir \"C:\\\\Fontes\\\\AIONE.My\\\\aione-ia\\\\modules\\\\compras\\\\processadores\")",
+      "Bash(dir \"C:\\\\Fontes\\\\AIONE.My\\\\aione-ia\\\\core\")",
+      "Bash(dir /b \"C:\\\\Fontes\\\\AIONE.My\\\\aione-ia\\\\modules\\\\compras\\\\processadores\\\\necessidade\")",
+      "Bash(mkdir:*)"
+    ]
+  }
+}

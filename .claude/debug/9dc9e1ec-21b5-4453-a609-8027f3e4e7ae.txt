@@ -1,0 +1,2368 @@
+2025-12-22T11:33:19.693Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-22T11:33:19.733Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-22T11:33:19.733Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-22T11:33:19.733Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-22T11:33:19.739Z [DEBUG] LSP server manager initialized successfully
+2025-12-22T11:33:19.739Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-22T11:33:19.740Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2025-12-22T11:33:19.746Z [DEBUG] Stats cache is up to date
+2025-12-22T11:33:19.751Z [DEBUG] Loading skills from: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\DevDelphi\.claude\skills, project=[]
+2025-12-22T11:33:19.766Z [DEBUG] Loaded 0 installed plugins from C:\Users\DevDelphi\.claude\plugins\installed_plugins.json
+2025-12-22T11:33:19.836Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-22T11:33:19.836Z [DEBUG] Looking for shell config file: C:\Users\DevDelphi\.bashrc
+2025-12-22T11:33:19.836Z [DEBUG] Shell config file not found: C:\Users\DevDelphi\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-22T11:33:19.836Z [DEBUG] Snapshots directory: C:\Users\DevDelphi\.claude\shell-snapshots
+2025-12-22T11:33:19.850Z [DEBUG] Creating snapshot at: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1766403199836-qtaa9v.sh
+2025-12-22T11:33:19.850Z [DEBUG] Shell binary exists: true
+2025-12-22T11:33:19.850Z [DEBUG] Execution timeout: 10000ms
+2025-12-22T11:33:19.855Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403199855
+2025-12-22T11:33:19.858Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-22T11:33:19.858Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403199855 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:33:19.859Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:33:19.871Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2025-12-22T11:33:19.871Z [DEBUG] Total plugin skills loaded: 0
+2025-12-22T11:33:19.871Z [DEBUG] Total plugin commands loaded: 0
+2025-12-22T11:33:19.872Z [DEBUG] Registered 0 hooks from 0 plugins
+2025-12-22T11:33:19.929Z [DEBUG] Total plugin agents loaded: 0
+2025-12-22T11:33:19.929Z [DEBUG] Loaded 0 unique skills (managed: 0, user: 0, project: 0, legacy commands: 0)
+2025-12-22T11:33:19.930Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills
+2025-12-22T11:33:19.950Z [DEBUG] Git remote URL: https://github.com/aionefarma/AIONE.git
+2025-12-22T11:33:19.950Z [DEBUG] Parsed repository: aionefarma/AIONE from https://github.com/aionefarma/AIONE.git
+2025-12-22T11:33:19.950Z [DEBUG] Parsed repository: aionefarma/AIONE from URL: https://github.com/aionefarma/AIONE.git
+2025-12-22T11:33:19.951Z [DEBUG] Path C:\Fontes\AIONE.My already tracked for repo aionefarma/aione
+2025-12-22T11:33:20.034Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\DevDelphi\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2025-12-22T11:33:20.237Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403200237
+2025-12-22T11:33:20.237Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:33:20.240Z [DEBUG] Temp file written successfully, size: 62331 bytes
+2025-12-22T11:33:20.241Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:33:20.241Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403200237 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:33:20.242Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:33:20.356Z [DEBUG] Shell snapshot created successfully (346 bytes)
+2025-12-22T11:33:20.516Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2025-12-22T11:33:20.516Z [DEBUG] Plugin autoupdate: checking installed plugins
+2025-12-22T11:33:20.852Z [DEBUG] MCP server "local-mcp": Initializing HTTP transport to http://127.0.0.1:9001/mcp
+2025-12-22T11:33:20.852Z [DEBUG] MCP server "local-mcp": Node version: v24.12.0, Platform: win32
+2025-12-22T11:33:20.852Z [DEBUG] MCP server "local-mcp": Environment: {"NODE_OPTIONS":"not set","UV_THREADPOOL_SIZE":"default","HTTP_PROXY":"not set","HTTPS_PROXY":"not set","NO_PROXY":"not set"}
+2025-12-22T11:33:20.855Z [DEBUG] MCP server "context7": Starting connection with timeout of 30000ms
+2025-12-22T11:33:20.930Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2025-12-22T11:33:20.932Z [DEBUG] MCP server "local-mcp": Proxy options: default
+2025-12-22T11:33:20.932Z [DEBUG] MCP server "local-mcp": HTTP transport options: {"url":"http://127.0.0.1:9001/mcp","headers":{"User-Agent":"claude-code/2.0.75"},"hasAuthProvider":true,"timeoutMs":60000}
+2025-12-22T11:33:20.932Z [DEBUG] MCP server "local-mcp": HTTP transport created successfully
+2025-12-22T11:33:20.933Z [DEBUG] MCP server "local-mcp": Client created, setting up request handler
+2025-12-22T11:33:20.933Z [DEBUG] MCP server "local-mcp": Starting connection with timeout of 30000ms
+2025-12-22T11:33:20.933Z [DEBUG] MCP server "local-mcp": Testing basic HTTP connectivity to http://127.0.0.1:9001/mcp
+2025-12-22T11:33:20.933Z [DEBUG] MCP server "local-mcp": Parsed URL: host=127.0.0.1, port=9001, protocol=http:
+2025-12-22T11:33:20.933Z [DEBUG] MCP server "local-mcp": Using loopback address: 127.0.0.1
+2025-12-22T11:33:20.942Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403200942
+2025-12-22T11:33:20.942Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:33:20.945Z [DEBUG] Temp file written successfully, size: 62331 bytes
+2025-12-22T11:33:20.945Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:33:20.945Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403200942 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:33:20.946Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:33:20.965Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2025-12-22T11:33:20.965Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:20.965Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2025-12-22T11:33:20.968Z [DEBUG] MCP server "local-mcp": No token data found
+2025-12-22T11:33:20.983Z [DEBUG] MCP server "local-mcp": HTTP Connection failed after 131ms: fetch failed (code: none, errno: none)
+2025-12-22T11:33:20.984Z [ERROR] MCP server "local-mcp" TypeError: fetch failed
+2025-12-22T11:33:20.998Z [DEBUG] MCP server "local-mcp": Connection failed after 146ms: fetch failed
+2025-12-22T11:33:20.998Z [ERROR] MCP server "local-mcp" Connection failed: fetch failed
+2025-12-22T11:33:21.007Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-22T11:33:21.007Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:21.007Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-22T11:33:21.028Z [DEBUG] Getting matching hook commands for SubagentStart with query: Plan
+2025-12-22T11:33:21.028Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:21.028Z [DEBUG] Matched 0 unique hooks for query "Plan" (0 before deduplication)
+2025-12-22T11:33:21.102Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403201102
+2025-12-22T11:33:21.102Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:33:21.105Z [DEBUG] Temp file written successfully, size: 62258 bytes
+2025-12-22T11:33:21.105Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:33:21.106Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403201102 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:33:21.107Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:33:21.117Z [DEBUG] Official marketplace auto-install skipped: already_attempted
+2025-12-22T11:33:21.118Z [DEBUG] performStartupChecks called
+2025-12-22T11:33:21.118Z [DEBUG] Starting background plugin installations
+2025-12-22T11:33:21.119Z [DEBUG] performBackgroundPluginInstallations called
+2025-12-22T11:33:21.158Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:33:21.176Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403201176
+2025-12-22T11:33:21.176Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:33:21.180Z [DEBUG] Temp file written successfully, size: 62331 bytes
+2025-12-22T11:33:21.180Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:33:21.180Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403201176 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:33:21.182Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:33:22.046Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (860.8ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34540\").Pare
+2025-12-22T11:33:22.616Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (569.9ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34076\").Pare
+2025-12-22T11:33:22.616Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2025-12-22T11:33:22.618Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2025-12-22T11:33:22.630Z [ERROR] MCP server "context7" Server stderr: npm notice Access token expired or revoked. Please try logging in again.
+npm notice Access token expired or revoked. Please try logging in again.
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@context7%2fmcp-server - Not found
+npm error 404
+npm error 404  The requested resource '@context7/mcp-server@*' could not be found or you do not have permission to access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm error A complete log of this run can be found in: C:\Users\DevDelphi\AppData\Local\npm-cache\_logs\2025-12-22T11_33_21_173Z-debug-0.log
+2025-12-22T11:33:22.661Z [DEBUG] MCP server "context7": Connection failed after 1807ms: MCP error -32000: Connection closed
+2025-12-22T11:33:22.661Z [ERROR] MCP server "context7" Connection failed: MCP error -32000: Connection closed
+2025-12-22T11:33:22.667Z [DEBUG] Skills and commands included in Skill tool:
+2025-12-22T11:33:22.699Z [DEBUG] MCP server "ide": Starting connection with timeout of 30000ms
+2025-12-22T11:33:22.716Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403202716
+2025-12-22T11:33:22.716Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:33:22.719Z [DEBUG] Temp file written successfully, size: 62331 bytes
+2025-12-22T11:33:22.719Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:33:22.719Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403202716 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:33:22.719Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:33:22.740Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:33:22.746Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:33:22.779Z [DEBUG] MCP server "ide": Successfully connected to ws-ide server in 82ms
+2025-12-22T11:33:22.779Z [DEBUG] MCP server "ide": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Claude Code VSCode MCP","version":"2.0.75"}}
+2025-12-22T11:33:23.581Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (545.7ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34540\").Pare
+2025-12-22T11:33:24.085Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (504.7ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=34076\").Pare
+2025-12-22T11:33:24.095Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:33:25.063Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:33:27.006Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T11:33:27.006Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:27.006Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:33:27.605Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:33:27.605Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:33:27.605Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:33:27.605Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:33:27.820Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T11:33:27.821Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:27.821Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:33:27.822Z [DEBUG] FileHistory: Added snapshot for 9c2cec8f-c4ca-41ba-9b77-eb7c031a2c23, tracking 0 files
+2025-12-22T11:33:27.845Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T11:33:27.864Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:33:27.877Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-22T11:33:27.885Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 40ms
+2025-12-22T11:33:27.898Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:33:28.563Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:33:30.015Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:33:35.017Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T11:33:35.018Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:35.018Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:33:41.063Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:33:41.105Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:33:41.105Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:41.105Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:33:41.199Z [DEBUG] tree-sitter: loaded from disk
+2025-12-22T11:33:41.235Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:33:42.000Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:33:42.341Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "git --version:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:33:42.392Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:33:42.432Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:33:42.432Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:42.432Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:33:48.422Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:33:48.422Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:33:48.422Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:34:36.579Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:34:36.692Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:34:37.325Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:37.364Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:34:37.364Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:37.364Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:37.380Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:34:37.380Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:34:37.403Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:34:37.403Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:37.403Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:37.403Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:34:37.403Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:37.403Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:37.617Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:34:37.827Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:34:37.956Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:38.244Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:38.291Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:34:38.291Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:38.291Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:38.439Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:38.477Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:34:38.477Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:38.477Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:38.485Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:34:38.511Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:34:38.511Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:38.511Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:39.069Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:39.071Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:39.072Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:39.073Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:34:39.105Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:39.110Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:39.774Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:39.790Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:39.846Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:40.405Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:34:40.621Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "dir:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:34:40.652Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:34:40.664Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:34:40.664Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:40.664Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:34:46.674Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:34:46.674Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:34:46.674Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:35:13.355Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:35:13.469Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:35:14.093Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:14.134Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:35:14.134Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:14.134Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:14.149Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:35:14.185Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:35:14.185Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:14.185Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:14.767Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:14.769Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:14.770Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:14.772Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:15.291Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:15.322Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:15.422Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:15.427Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:15.918Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:16.135Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "dir:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:35:16.162Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:35:16.176Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:35:16.176Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:16.176Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:21.789Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:35:21.897Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:35:22.502Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:22.539Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:35:22.539Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:22.539Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:22.570Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:35:22.571Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:35:22.571Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:35:22.571Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:35:22.571Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:35:22.647Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 77ms
+2025-12-22T11:35:22.668Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:35:23.191Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:24.936Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:28.449Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:35:28.462Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:35:28.462Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:28.462Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:28.604Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:35:29.060Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:29.086Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:35:29.087Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:29.087Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:29.094Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:35:29.117Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:35:29.117Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:29.117Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:29.150Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:29.918Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:30.440Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:30.642Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:35:31.645Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:35:31.824Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "dir /b"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  },
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "findstr:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:35:31.851Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:35:31.862Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:35:31.862Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:31.862Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:35:37.869Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:35:37.869Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:35:37.869Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:35:43.342Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:35:43.354Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403343354
+2025-12-22T11:35:43.354Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:35:43.356Z [DEBUG] Temp file written successfully, size: 62332 bytes
+2025-12-22T11:35:43.357Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:35:43.357Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403343354 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:35:43.358Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:35:43.379Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403343379
+2025-12-22T11:35:43.379Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:35:43.383Z [DEBUG] Temp file written successfully, size: 62333 bytes
+2025-12-22T11:35:43.384Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:35:43.384Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403343379 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:35:43.385Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:35:43.396Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403343396
+2025-12-22T11:35:43.396Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:35:43.397Z [DEBUG] Temp file written successfully, size: 62334 bytes
+2025-12-22T11:35:43.397Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:35:43.397Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403343396 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:35:43.398Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:38:37.886Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:38:37.886Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:38:37.887Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:38:37.887Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:38:37.887Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:38:37.892Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 6ms
+2025-12-22T11:38:37.979Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T11:38:37.979Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:37.979Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:38:37.980Z [DEBUG] FileHistory: Making snapshot for message eb6c2ec5-866d-4767-9216-ef98ef040bb3
+2025-12-22T11:38:37.981Z [DEBUG] FileHistory: Added snapshot for eb6c2ec5-866d-4767-9216-ef98ef040bb3, tracking 0 files
+2025-12-22T11:38:38.002Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T11:38:38.023Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:38:38.050Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 48ms
+2025-12-22T11:38:38.062Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:38:38.942Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:38:40.123Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:38:44.866Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-22T11:38:44.866Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-22T11:38:44.867Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-22T11:38:44.867Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-22T11:38:44.867Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-22T11:38:44.875Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-22T11:38:44.875Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:44.875Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:44.875Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-22T11:38:44.875Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:44.875Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:44.875Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-22T11:38:44.875Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:44.875Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:44.875Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-22T11:38:44.875Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:44.875Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:44.875Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-22T11:38:44.875Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:44.875Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:49.625Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-22T11:38:49.625Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:49.625Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:49.678Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-22T11:38:49.678Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:49.678Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:49.695Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-22T11:38:49.695Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:49.695Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:49.695Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-22T11:38:49.695Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:49.695Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:49.725Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-22T11:38:49.725Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:49.725Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:38:49.779Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:38:49.780Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:38:49.780Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:38:49.780Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:38:49.780Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:38:49.847Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 68ms
+2025-12-22T11:38:49.884Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:38:52.688Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:38:56.761Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:38:56.772Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:38:56.772Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:56.772Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:38:57.334Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:38:57.336Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:38:57.841Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:38:58.926Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:38:59.092Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "dir \"%USERPROFILE%\\.claude-code\" /b"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:38:59.115Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:38:59.127Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:38:59.127Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:38:59.127Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:39:05.132Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:39:05.132Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:05.132Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:39:30.854Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:39:30.965Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:39:31.622Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T11:39:31.622Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:31.622Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:39:31.633Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-22T11:39:31.655Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-22T11:39:31.655Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:31.655Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:39:32.829Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-22T11:39:32.829Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:32.829Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-22T11:39:32.835Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:39:32.855Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:39:32.855Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:32.855Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:39:33.986Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:39:33.987Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:39:33.989Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:39:33.990Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:39:34.716Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:34.717Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:34.723Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:34.819Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:34.970Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "where:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:39:34.993Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:39:35.009Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:39:35.009Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:35.009Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:39:41.016Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:39:41.016Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:41.016Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:39:42.679Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:39:42.795Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:39:43.483Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:39:43.514Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:39:43.514Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:43.514Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:39:43.537Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:39:43.538Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:39:43.538Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:39:43.538Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:39:43.538Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:39:43.614Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 77ms
+2025-12-22T11:39:43.648Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:39:44.282Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:47.166Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:48.990Z [DEBUG] executePreToolHooks called for tool: MCPSearch
+2025-12-22T11:39:49.001Z [DEBUG] Getting matching hook commands for PreToolUse with query: MCPSearch
+2025-12-22T11:39:49.001Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:49.001Z [DEBUG] Matched 0 unique hooks for query "MCPSearch" (0 before deduplication)
+2025-12-22T11:39:49.015Z [DEBUG] MCPSearchTool: cache invalidated - MCP tools changed
+2025-12-22T11:39:49.017Z [DEBUG] MCPSearchTool: keyword search for "mysql", found 0 matches
+2025-12-22T11:39:49.033Z [DEBUG] Getting matching hook commands for PostToolUse with query: MCPSearch
+2025-12-22T11:39:49.033Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:49.033Z [DEBUG] Matched 0 unique hooks for query "MCPSearch" (0 before deduplication)
+2025-12-22T11:39:49.053Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:39:49.053Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:39:49.053Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:39:49.053Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:39:49.053Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:39:49.120Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 67ms
+2025-12-22T11:39:49.140Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:39:51.279Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:39:52.587Z [DEBUG] executePreToolHooks called for tool: MCPSearch
+2025-12-22T11:39:52.597Z [DEBUG] Getting matching hook commands for PreToolUse with query: MCPSearch
+2025-12-22T11:39:52.597Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:52.597Z [DEBUG] Matched 0 unique hooks for query "MCPSearch" (0 before deduplication)
+2025-12-22T11:39:52.618Z [DEBUG] MCPSearchTool: keyword search for "database", found 0 matches
+2025-12-22T11:39:52.635Z [DEBUG] Getting matching hook commands for PostToolUse with query: MCPSearch
+2025-12-22T11:39:52.635Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:39:52.635Z [DEBUG] Matched 0 unique hooks for query "MCPSearch" (0 before deduplication)
+2025-12-22T11:39:52.656Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:39:52.656Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:39:52.656Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:39:52.656Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:39:52.656Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:39:52.720Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 64ms
+2025-12-22T11:39:52.740Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:39:54.899Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:40:00.842Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-22T11:40:00.842Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:40:00.842Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:40:00.850Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:40:00.939Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403600939
+2025-12-22T11:40:00.940Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:40:00.942Z [DEBUG] Temp file written successfully, size: 62335 bytes
+2025-12-22T11:40:00.942Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:40:00.942Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403600939 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:40:00.943Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:40:00.964Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766403600964
+2025-12-22T11:40:00.964Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:40:00.968Z [DEBUG] Temp file written successfully, size: 62336 bytes
+2025-12-22T11:40:00.968Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:40:00.968Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766403600964 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:40:00.969Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:40:03.111Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:40:07.409Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T11:40:07.409Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:40:07.409Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:41:21.884Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:41:21.884Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:41:21.884Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:41:21.884Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:41:21.884Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:41:21.952Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 68ms
+2025-12-22T11:41:21.965Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T11:41:21.965Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:21.966Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:41:21.967Z [DEBUG] FileHistory: Making snapshot for message 0d556eb5-bd22-4a7e-913d-e7964cd84cb9
+2025-12-22T11:41:21.967Z [DEBUG] FileHistory: Added snapshot for 0d556eb5-bd22-4a7e-913d-e7964cd84cb9, tracking 0 files
+2025-12-22T11:41:21.985Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T11:41:22.004Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:41:22.027Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 42ms
+2025-12-22T11:41:22.050Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:41:22.700Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:41:24.182Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:41:28.321Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-22T11:41:28.322Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-22T11:41:28.327Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-22T11:41:28.327Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:28.327Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-22T11:41:28.327Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-22T11:41:28.327Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:28.327Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-22T11:41:30.224Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-22T11:41:30.224Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:30.224Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-22T11:41:30.224Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-22T11:41:30.224Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:30.224Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-22T11:41:30.247Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:41:30.247Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:41:30.247Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:41:30.247Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:41:30.247Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:41:30.313Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 67ms
+2025-12-22T11:41:30.547Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:41:33.428Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:41:41.247Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:41:41.253Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:41:41.253Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:41.253Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:41:41.286Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403701286
+2025-12-22T11:41:41.286Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:41:41.290Z [DEBUG] Temp file written successfully, size: 972 bytes
+2025-12-22T11:41:41.290Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:41:41.290Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403701286 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:41:41.291Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:41:41.311Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:41:41.311Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:41.311Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:41:41.344Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:41:41.344Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:41:41.344Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:41:41.344Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:41:41.344Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:41:41.417Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 73ms
+2025-12-22T11:41:41.437Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:41:43.969Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:41:48.072Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:41:48.092Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:41:48.092Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:48.092Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:41:49.189Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:41:49.683Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:41:50.382Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "mkdir:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:41:50.402Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:41:50.413Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:41:50.413Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:50.413Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:41:56.416Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:41:56.416Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:41:56.416Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:42:24.164Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:42:24.268Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:42:24.940Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:42:24.965Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:42:24.965Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:42:24.965Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:42:24.972Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:42:24.993Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:42:24.994Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:42:24.994Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:42:25.029Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403745029
+2025-12-22T11:42:25.029Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:42:25.033Z [DEBUG] Temp file written successfully, size: 974 bytes
+2025-12-22T11:42:25.033Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:42:25.033Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403745029 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:42:25.033Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:42:25.053Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:42:25.053Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:42:25.053Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:42:25.076Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:42:25.076Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:42:25.076Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:42:25.076Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:42:25.076Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:42:25.146Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 70ms
+2025-12-22T11:42:25.165Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:42:26.362Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:42:27.472Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:43:09.380Z [WARN] Streaming stall detected: 39.4s gap between events (stall #1)
+2025-12-22T11:43:13.411Z [WARN] Streaming completed with 1 stall(s), total stall time: 39.4s
+2025-12-22T11:43:13.507Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:43:13.516Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:43:13.516Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:43:13.516Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:43:14.267Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:43:14.393Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:43:14.403Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:43:14.594Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:43:14.594Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:43:14.594Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:43:20.420Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:43:20.420Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:43:20.420Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:43:44.419Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (30s elapsed)
+2025-12-22T11:44:14.426Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (60s elapsed)
+2025-12-22T11:44:44.435Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (90s elapsed)
+2025-12-22T11:45:14.441Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (120s elapsed)
+2025-12-22T11:45:20.077Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:45:20.107Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:45:20.108Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:45:20.114Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 38ms
+2025-12-22T11:45:20.114Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 6ms
+2025-12-22T11:45:20.115Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\server.py, got file://c:\fontes\aione.my\mcp-mysql-aione\server.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:45:20.130Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\server.py
+2025-12-22T11:45:20.164Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .py
+2025-12-22T11:45:20.204Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 2m 5s
+2025-12-22T11:45:20.205Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:45:20.217Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 12ms
+2025-12-22T11:45:20.330Z [DEBUG] [binaryCheck] Binary 'pyright-langserver' not found (exit code: 1)
+2025-12-22T11:45:20.330Z [DEBUG] [lspRecommendation] Skipping pyright-lsp@claude-plugins-official (binary 'pyright-langserver' not found)
+2025-12-22T11:45:21.125Z [DEBUG] rg error (signal=undefined, code=ABORT_ERR, stderr: rg: C:\Fontes\AIONE.My\nul: Função incorreta. (os error 1)
+), 48 results
+2025-12-22T11:45:21.125Z [ERROR] AbortError: AbortError: The operation was aborted
+    at abortChildProcess (node:child_process:759:27)
+    at AbortSignal.onAbortListener (node:child_process:829:7)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at AbortSignal.dispatchEvent (node:internal/event_target:778:26)
+    at runAbort (node:internal/abort_controller:488:10)
+    at abortSignal (node:internal/abort_controller:459:3)
+    at AbortController.abort (node:internal/abort_controller:507:5)
+    at Timeout._onTimeout (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4746:2059)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+2025-12-22T11:45:21.134Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766403921134
+2025-12-22T11:45:21.137Z [DEBUG] Temp file written successfully, size: 14891 bytes
+2025-12-22T11:45:21.137Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766403921134 to C:\Fontes\AIONE.My\mcp-mysql-aione\server.py
+2025-12-22T11:45:21.137Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\server.py written atomically
+2025-12-22T11:45:21.165Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:45:21.165Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:45:21.165Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:45:21.211Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:45:21.211Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:45:21.211Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:45:21.211Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:45:21.211Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:45:21.340Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 129ms
+2025-12-22T11:45:21.363Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:45:24.247Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:45:35.520Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:45:35.595Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:45:35.595Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:45:35.595Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:45:35.661Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403935661
+2025-12-22T11:45:35.661Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:45:35.665Z [DEBUG] Temp file written successfully, size: 976 bytes
+2025-12-22T11:45:35.665Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:45:35.665Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766403935661 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:45:35.666Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:45:35.705Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:45:35.705Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:45:35.705Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:45:35.918Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:45:35.945Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:45:35.945Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:45:35.945Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:45:38.010Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:45:38.342Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:45:38.360Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:45:38.683Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:45:38.683Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:45:38.683Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:45:44.378Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:45:44.378Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:45:44.378Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:46:08.373Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (30s elapsed)
+2025-12-22T11:46:38.377Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (60s elapsed)
+2025-12-22T11:47:08.388Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (90s elapsed)
+2025-12-22T11:47:21.906Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:47:21.931Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:47:21.933Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:47:21.938Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 32ms
+2025-12-22T11:47:21.939Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 6ms
+2025-12-22T11:47:21.939Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini, got file://c:\fontes\aione.my\mcp-mysql-aione\config.ini/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:47:21.940Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini.tmp.32436.1766404041940
+2025-12-22T11:47:21.947Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.3ms)
+2025-12-22T11:47:21.947Z [DEBUG] Temp file written successfully, size: 357 bytes
+2025-12-22T11:47:21.947Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini.tmp.32436.1766404041940 to C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini
+2025-12-22T11:47:21.948Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini written atomically
+2025-12-22T11:47:21.970Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini
+2025-12-22T11:47:21.996Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .ini
+2025-12-22T11:47:22.006Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:47:22.006Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:47:22.006Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:47:22.025Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:47:22.026Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 1m 43s
+2025-12-22T11:47:22.027Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:47:22.053Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 26ms
+2025-12-22T11:47:22.072Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:47:22.072Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:47:22.072Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:47:22.163Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404042163
+2025-12-22T11:47:22.163Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:47:22.166Z [DEBUG] Temp file written successfully, size: 978 bytes
+2025-12-22T11:47:22.166Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:47:22.166Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404042163 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:47:22.167Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:47:22.189Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:47:22.190Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:47:22.190Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:47:22.220Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:47:22.221Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:47:22.221Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:47:22.221Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:47:22.221Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:47:22.420Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 200ms
+2025-12-22T11:47:22.449Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:47:24.935Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:47:42.226Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:47:42.235Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:47:42.235Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:47:42.235Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:47:43.004Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:47:43.129Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:47:43.135Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:47:43.296Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:47:43.296Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:47:43.296Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:47:49.140Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:47:49.140Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:47:49.140Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:48:13.144Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (30s elapsed)
+2025-12-22T11:48:37.667Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:48:37.688Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:48:37.688Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:48:37.694Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 54s
+2025-12-22T11:48:37.695Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 28ms
+2025-12-22T11:48:37.695Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 7ms
+2025-12-22T11:48:37.695Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:48:37.695Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\requirements.txt, got file://c:\fontes\aione.my\mcp-mysql-aione\requirements.txt/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:48:37.696Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\requirements.txt.tmp.32436.1766404117696
+2025-12-22T11:48:37.699Z [DEBUG] Temp file written successfully, size: 93 bytes
+2025-12-22T11:48:37.699Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\requirements.txt.tmp.32436.1766404117696 to C:\Fontes\AIONE.My\mcp-mysql-aione\requirements.txt
+2025-12-22T11:48:37.700Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\requirements.txt written atomically
+2025-12-22T11:48:37.713Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 18ms
+2025-12-22T11:48:37.720Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\requirements.txt
+2025-12-22T11:48:37.768Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .txt
+2025-12-22T11:48:37.780Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:48:37.780Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:48:37.780Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:48:37.900Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:48:37.915Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:48:37.915Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:48:37.915Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:48:38.829Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:48:39.001Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:48:39.007Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:48:39.203Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:48:39.203Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:48:39.203Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:48:45.023Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:48:45.023Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:48:45.023Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:48:59.126Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:48:59.135Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:48:59.168Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:48:59.168Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 20s
+2025-12-22T11:48:59.168Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 33ms
+2025-12-22T11:48:59.168Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:48:59.168Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\README.md, got file://c:\fontes\aione.my\mcp-mysql-aione\readme.md/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:48:59.169Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\README.md.tmp.32436.1766404139169
+2025-12-22T11:48:59.172Z [DEBUG] Temp file written successfully, size: 1941 bytes
+2025-12-22T11:48:59.172Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\README.md.tmp.32436.1766404139169 to C:\Fontes\AIONE.My\mcp-mysql-aione\README.md
+2025-12-22T11:48:59.173Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\README.md written atomically
+2025-12-22T11:48:59.182Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 14ms
+2025-12-22T11:48:59.182Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 56ms
+2025-12-22T11:48:59.190Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\README.md
+2025-12-22T11:48:59.231Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .md
+2025-12-22T11:48:59.247Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:48:59.247Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:48:59.247Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:48:59.377Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:48:59.392Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:48:59.392Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:48:59.392Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:49:00.309Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:49:00.502Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:49:00.513Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:49:00.653Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:49:00.653Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:00.653Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:49:06.519Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:49:06.519Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:06.519Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:49:16.491Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:49:16.516Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:49:16.517Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:49:16.521Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 30ms
+2025-12-22T11:49:16.521Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 4ms
+2025-12-22T11:49:16.522Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\.gitignore, got file://c:\fontes\aione.my\mcp-mysql-aione\.gitignore/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:49:16.522Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\.gitignore.tmp.32436.1766404156522
+2025-12-22T11:49:16.526Z [DEBUG] Temp file written successfully, size: 208 bytes
+2025-12-22T11:49:16.526Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\.gitignore.tmp.32436.1766404156522 to C:\Fontes\AIONE.My\mcp-mysql-aione\.gitignore
+2025-12-22T11:49:16.526Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\.gitignore written atomically
+2025-12-22T11:49:16.539Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\.gitignore
+2025-12-22T11:49:16.567Z [DEBUG] [lspRecommendation] No file extension found
+2025-12-22T11:49:16.579Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:49:16.579Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:16.579Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:49:16.591Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-22T11:49:16.601Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:49:16.602Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 16s
+2025-12-22T11:49:16.602Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:49:16.622Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 20ms
+2025-12-22T11:49:16.644Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:49:16.644Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:16.644Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:49:16.711Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404156711
+2025-12-22T11:49:16.711Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:49:16.714Z [DEBUG] Temp file written successfully, size: 980 bytes
+2025-12-22T11:49:16.714Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:49:16.714Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404156711 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:49:16.715Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:49:16.748Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:49:16.748Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:16.748Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:49:16.769Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-22T11:49:16.797Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:49:16.797Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:49:16.797Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:49:16.797Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:49:16.797Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:49:17.159Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 362ms
+2025-12-22T11:49:17.263Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:49:24.041Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:49:30.369Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:49:30.375Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:49:30.375Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:30.375Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:49:31.123Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:49:31.249Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:49:31.258Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:49:31.397Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:49:31.397Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:31.397Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:49:37.273Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:49:37.273Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:37.273Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:49:48.634Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:49:48.651Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:49:48.652Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:49:48.657Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 23ms
+2025-12-22T11:49:48.657Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 5ms
+2025-12-22T11:49:48.657Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json, got file://c:\fontes\aione.my\mcp-mysql-aione\mcp.json/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:49:48.658Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json.tmp.32436.1766404188658
+2025-12-22T11:49:48.663Z [DEBUG] Temp file written successfully, size: 379 bytes
+2025-12-22T11:49:48.663Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json.tmp.32436.1766404188658 to C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json
+2025-12-22T11:49:48.664Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json written atomically
+2025-12-22T11:49:48.676Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json
+2025-12-22T11:49:48.700Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .json
+2025-12-22T11:49:48.703Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 17s
+2025-12-22T11:49:48.703Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:49:48.713Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:49:48.713Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:48.713Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:49:48.714Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 11ms
+2025-12-22T11:49:48.729Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:49:48.779Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:49:48.779Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:48.779Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:49:48.829Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:49:49.617Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:49:50.047Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "if not exist \"%USERPROFILE%\\.claude-code\" mkdir \"%USERPROFILE%\\.claude-code\""
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:49:50.083Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:49:50.099Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:49:50.099Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:50.099Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:49:55.834Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:49:55.939Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:49:56.546Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T11:49:56.546Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:49:56.546Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:49:56.578Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:49:56.578Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:49:56.578Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:49:56.578Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:49:56.578Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:49:56.906Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 328ms
+2025-12-22T11:49:57.033Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:49:59.415Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:06.910Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:50:06.932Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:50:06.932Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:06.932Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:06.971Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addDirectories",
+    "directories": [
+      "C:\\Fontes\\AIONE.My\\$HOME"
+    ],
+    "destination": "session"
+  },
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:50:06.997Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:50:07.010Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:50:07.010Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:07.010Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:12.693Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:50:12.807Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:50:13.413Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:13.444Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:50:13.444Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:13.444Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:13.457Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:50:13.483Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:50:13.483Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:13.483Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:13.546Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:50:13.561Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:50:13.562Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:13.562Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:14.000Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:19.568Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:50:19.568Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:19.569Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:50:22.640Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:50:22.751Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:50:23.359Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:23.393Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:50:23.393Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:23.393Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:23.404Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:50:23.434Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:50:23.434Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:23.434Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:50:23.479Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404223479
+2025-12-22T11:50:23.479Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:50:23.483Z [DEBUG] Temp file written successfully, size: 982 bytes
+2025-12-22T11:50:23.483Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:50:23.483Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404223479 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:50:23.484Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:50:23.504Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:50:23.504Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:23.504Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:50:23.530Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:50:23.530Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:50:23.530Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:50:23.530Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:50:23.530Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:50:23.852Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 322ms
+2025-12-22T11:50:23.877Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:50:24.016Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:27.207Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:28.720Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:50:28.729Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:50:28.729Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:28.729Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:29.045Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:29.046Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:29.047Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:29.894Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:29.925Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:30.194Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:30.500Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "python -m pip install:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:50:30.523Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:50:30.535Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:50:30.535Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:30.535Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:34.306Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:50:34.414Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:50:35.148Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T11:50:35.148Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:35.148Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:35.176Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:50:35.176Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:50:35.176Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:50:35.177Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:50:35.177Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:50:35.493Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 317ms
+2025-12-22T11:50:35.515Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:50:37.958Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:41.437Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:50:41.449Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:50:41.449Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:41.449Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:41.478Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:41.479Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:41.480Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:41.481Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:42.317Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:42.393Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:42.536Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:42.914Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:43.102Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:50:43.123Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:50:43.136Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:50:43.136Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:43.136Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:45.505Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:50:45.613Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:50:46.389Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:46.414Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:50:46.414Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:46.414Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:46.433Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:50:46.462Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:50:46.462Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:46.462Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:46.497Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:46.499Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:47.114Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:47.216Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:47.306Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:47.769Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "\"/c/Users/DevDelphi/AppData/Local/Microsoft/WindowsApps/python.exe\" --version"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:50:47.797Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:50:47.810Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:50:47.810Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:47.810Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:49.480Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:50:49.586Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:50:50.299Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T11:50:50.300Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:50.300Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:50.325Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:50:50.326Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:50:50.326Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:50:50.326Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:50:50.326Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:50:50.640Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 315ms
+2025-12-22T11:50:50.660Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:50:54.776Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:57.262Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:50:57.275Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:50:57.275Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:57.275Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:50:57.597Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:57.599Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:50:58.275Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:58.869Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:50:59.327Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py -m pip install:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:50:59.345Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:50:59.358Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:50:59.358Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:50:59.358Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:51:02.172Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:51:02.278Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:51:02.899Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T11:51:02.899Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:51:02.899Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:51:02.925Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:51:02.925Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:51:02.925Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:51:02.925Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:51:02.925Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:51:03.230Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 305ms
+2025-12-22T11:51:03.249Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:51:05.780Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:51:40.953Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:51:40.963Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:51:40.963Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:51:40.964Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:51:41.733Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:51:41.859Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:51:41.867Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:51:42.059Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:51:42.059Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:51:42.059Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:51:47.874Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:51:47.874Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:51:47.874Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:52:11.878Z [DEBUG] MCP server "ide": Tool 'openDiff' still running (30s elapsed)
+2025-12-22T11:52:21.100Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:21.117Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:52:21.117Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:52:21.122Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 22ms
+2025-12-22T11:52:21.122Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 5ms
+2025-12-22T11:52:21.122Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALACAO.md, got file://c:\fontes\aione.my\mcp-mysql-aione\instalacao.md/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:52:21.123Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALACAO.md.tmp.32436.1766404341123
+2025-12-22T11:52:21.126Z [DEBUG] Temp file written successfully, size: 4389 bytes
+2025-12-22T11:52:21.126Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALACAO.md.tmp.32436.1766404341123 to C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALACAO.md
+2025-12-22T11:52:21.126Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALACAO.md written atomically
+2025-12-22T11:52:21.139Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALACAO.md
+2025-12-22T11:52:21.152Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 39s
+2025-12-22T11:52:21.152Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:21.164Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .md
+2025-12-22T11:52:21.166Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 14ms
+2025-12-22T11:52:21.174Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:52:21.174Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:21.174Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:21.304Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T11:52:21.317Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T11:52:21.317Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:21.317Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T11:52:22.090Z [DEBUG] Permission suggestions for Edit: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:52:22.227Z [DEBUG] executePermissionRequestHooks called for tool: Edit
+2025-12-22T11:52:22.233Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:52:22.449Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Edit
+2025-12-22T11:52:22.449Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:22.449Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T11:52:26.235Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:26.240Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:52:26.255Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:52:26.258Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 18ms
+2025-12-22T11:52:26.258Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 23ms
+2025-12-22T11:52:26.258Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json, got file://c:\fontes\aione.my\mcp-mysql-aione\mcp.json/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:52:26.262Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json.tmp.32436.1766404346262
+2025-12-22T11:52:26.262Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:52:26.266Z [DEBUG] Temp file written successfully, size: 375 bytes
+2025-12-22T11:52:26.266Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:52:26.266Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json.tmp.32436.1766404346262 to C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json
+2025-12-22T11:52:26.266Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\mcp.json written atomically
+2025-12-22T11:52:26.302Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T11:52:26.302Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:26.302Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T11:52:26.316Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T11:52:26.318Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 4s
+2025-12-22T11:52:26.318Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:26.332Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 14ms
+2025-12-22T11:52:26.348Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T11:52:26.348Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:26.348Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:52:26.407Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404346407
+2025-12-22T11:52:26.407Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:52:26.412Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-22T11:52:26.412Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-22T11:52:26.413Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:52:26.413Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766404346407 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T11:52:26.413Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T11:52:26.435Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T11:52:26.435Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:26.435Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T11:52:26.471Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:52:26.471Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:52:26.472Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:52:26.472Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:52:26.472Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:52:26.846Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 375ms
+2025-12-22T11:52:26.864Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:52:29.582Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:52:45.119Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:52:45.126Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:52:45.126Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:45.126Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:45.816Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:52:45.930Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:52:45.938Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:52:46.137Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:52:46.137Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:46.137Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:47.761Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:47.777Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:52:47.777Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:52:47.781Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 20ms
+2025-12-22T11:52:47.781Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 4ms
+2025-12-22T11:52:47.781Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\instalar.bat, got file://c:\fontes\aione.my\mcp-mysql-aione\instalar.bat/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:52:47.781Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\instalar.bat.tmp.32436.1766404367781
+2025-12-22T11:52:47.785Z [DEBUG] Temp file written successfully, size: 1631 bytes
+2025-12-22T11:52:47.785Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\instalar.bat.tmp.32436.1766404367781 to C:\Fontes\AIONE.My\mcp-mysql-aione\instalar.bat
+2025-12-22T11:52:47.785Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\instalar.bat written atomically
+2025-12-22T11:52:47.794Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\instalar.bat
+2025-12-22T11:52:47.814Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .bat
+2025-12-22T11:52:47.823Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:52:47.823Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:47.823Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:47.905Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 1s
+2025-12-22T11:52:47.905Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:47.920Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 15ms
+2025-12-22T11:52:47.929Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:52:47.944Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:52:47.944Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:47.944Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:48.684Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T11:52:48.808Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-22T11:52:48.818Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-22T11:52:49.001Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-22T11:52:49.001Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:49.001Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:49.881Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:49.995Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-22T11:52:49.996Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:52:49.996Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:52:49.999Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 118ms
+2025-12-22T11:52:49.999Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 1s
+2025-12-22T11:52:49.999Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T11:52:49.999Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-22T11:52:49.999Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\testar.bat, got file://c:\fontes\aione.my\mcp-mysql-aione\testar.bat/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:52:49.999Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\testar.bat.tmp.32436.1766404369999
+2025-12-22T11:52:50.001Z [DEBUG] Temp file written successfully, size: 1232 bytes
+2025-12-22T11:52:50.001Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\testar.bat.tmp.32436.1766404369999 to C:\Fontes\AIONE.My\mcp-mysql-aione\testar.bat
+2025-12-22T11:52:50.001Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\testar.bat written atomically
+2025-12-22T11:52:50.006Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 7ms
+2025-12-22T11:52:50.010Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\testar.bat
+2025-12-22T11:52:50.034Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .bat
+2025-12-22T11:52:50.044Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:52:50.044Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:50.044Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:52:50.060Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:52:50.089Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:52:50.089Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:50.089Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:52:50.565Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:52:51.033Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:52:51.072Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:52:51.072Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:52:51.072Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:52:51.112Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:52:51.113Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:52:51.113Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:52:51.113Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:52:51.113Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:52:51.520Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 408ms
+2025-12-22T11:52:51.540Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:52:52.456Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:52:54.035Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:10.021Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-22T11:53:10.200Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-22T11:53:10.200Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:10.200Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:53:10.202Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:53:10.279Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.32436.1766404390279
+2025-12-22T11:53:10.279Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T11:53:10.282Z [DEBUG] Temp file written successfully, size: 62337 bytes
+2025-12-22T11:53:10.282Z [DEBUG] Applied original permissions to temp file
+2025-12-22T11:53:10.282Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.32436.1766404390279 to C:\Users\DevDelphi\.claude.json
+2025-12-22T11:53:10.283Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-22T11:53:13.165Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:19.075Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T11:53:19.075Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:19.075Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:53:24.628Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:53:24.628Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:53:24.628Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:53:24.628Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:53:24.628Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:53:24.630Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 2ms
+2025-12-22T11:53:25.204Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T11:53:25.204Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:25.204Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:53:25.205Z [DEBUG] FileHistory: Making snapshot for message de28d08d-5f6a-497a-92ec-f2d9202872cc
+2025-12-22T11:53:25.218Z [DEBUG] FileHistory: Added snapshot for de28d08d-5f6a-497a-92ec-f2d9202872cc, tracking 9 files
+2025-12-22T11:53:25.238Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T11:53:25.257Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:53:25.281Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 43ms
+2025-12-22T11:53:25.293Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:53:26.331Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:27.638Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:30.895Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:53:30.902Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:53:30.902Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:30.902Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:53:31.199Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:53:31.201Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:53:31.901Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:32.025Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:32.572Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "cmd.exe /c instalar.bat"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:53:32.588Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:53:32.598Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:53:32.598Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:32.598Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:53:38.596Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T11:53:38.596Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:38.596Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T11:53:47.012Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:53:47.106Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:53:47.715Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:53:47.738Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:53:47.738Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:47.738Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:53:47.761Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:53:47.761Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:53:47.761Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:53:47.761Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:53:47.761Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:53:48.167Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 407ms
+2025-12-22T11:53:48.203Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:53:49.165Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:51.485Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:53.425Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:53:53.434Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:53:53.434Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:53.434Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:53:53.724Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:53:54.362Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:53:54.905Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T11:53:54.923Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:53:54.935Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:53:54.935Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:54.935Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:53:58.915Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:53:59.011Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:53:59.546Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T11:53:59.546Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:53:59.546Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:53:59.567Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:53:59.567Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:53:59.567Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:53:59.567Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:53:59.567Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:53:59.972Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 405ms
+2025-12-22T11:53:59.991Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:54:03.481Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:54:14.737Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T11:54:14.744Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T11:54:14.744Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:14.744Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:54:15.303Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:54:15.306Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T11:54:15.306Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALAR_PYTHON.txt, got file://c:\fontes\aione.my\mcp-mysql-aione\instalar_python.txt/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T11:54:15.307Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALAR_PYTHON.txt.tmp.32436.1766404455307
+2025-12-22T11:54:15.308Z [DEBUG] Temp file written successfully, size: 1158 bytes
+2025-12-22T11:54:15.308Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALAR_PYTHON.txt.tmp.32436.1766404455307 to C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALAR_PYTHON.txt
+2025-12-22T11:54:15.309Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALAR_PYTHON.txt written atomically
+2025-12-22T11:54:15.317Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\INSTALAR_PYTHON.txt
+2025-12-22T11:54:15.329Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .txt
+2025-12-22T11:54:15.335Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T11:54:15.335Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:15.335Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T11:54:15.345Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T11:54:15.371Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T11:54:15.371Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:15.371Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:54:15.432Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T11:54:15.445Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T11:54:15.445Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:15.445Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:54:18.322Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T11:54:18.418Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T11:54:19.584Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T11:54:19.617Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T11:54:19.617Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:19.617Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T11:54:19.644Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T11:54:19.644Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T11:54:19.644Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T11:54:19.644Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T11:54:19.644Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T11:54:20.246Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 602ms
+2025-12-22T11:54:20.315Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:54:20.854Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:54:22.945Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:54:30.531Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-22T11:54:30.531Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:30.531Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:54:30.534Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T11:54:33.717Z [DEBUG] Stream started - received first chunk
+2025-12-22T11:54:40.904Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T11:54:40.904Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:54:40.904Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T11:55:30.624Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-22T11:55:30.624Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T11:55:30.624Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2025-12-22T12:53:59.124Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:53:59.125Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:53:59.125Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:53:59.125Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:53:59.125Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:53:59.597Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 473ms
+2025-12-22T12:53:59.610Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-22T12:53:59.610Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:53:59.610Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T12:53:59.612Z [DEBUG] FileHistory: Making snapshot for message d273229f-c88b-4efd-b78c-ce90f6bd94de
+2025-12-22T12:53:59.614Z [DEBUG] FileHistory: Added snapshot for d273229f-c88b-4efd-b78c-ce90f6bd94de, tracking 10 files
+2025-12-22T12:53:59.637Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-22T12:53:59.663Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:53:59.689Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 52ms
+2025-12-22T12:53:59.718Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:54:00.822Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:03.737Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:06.877Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:54:06.886Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:54:06.886Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:06.886Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:07.322Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:54:07.339Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:54:07.353Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:54:07.353Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:07.353Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:12.431Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:54:12.522Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:54:13.193Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:13.220Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:54:13.220Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:13.220Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:13.227Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:54:13.247Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:54:13.247Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:13.247Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:13.545Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:13.547Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:13.777Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:14.087Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:14.496Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:14.743Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py -m pip:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:54:14.768Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:54:14.785Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:54:14.785Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:14.785Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:15.968Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:54:16.065Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:54:16.952Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:16.972Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:54:16.972Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:16.972Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:16.994Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:54:16.994Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:54:16.994Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:54:16.994Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:54:16.994Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:54:17.448Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 454ms
+2025-12-22T12:54:17.481Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:54:17.506Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:19.714Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:21.614Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:54:21.625Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:54:21.625Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:21.625Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:21.913Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:23.193Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:23.733Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py -m pip install:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:54:23.755Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:54:23.767Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:54:23.767Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:23.767Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:27.417Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:54:27.511Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:54:29.019Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:29.041Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:54:29.041Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:29.041Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:29.062Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:54:29.062Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:54:29.062Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:54:29.062Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:54:29.062Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:54:29.513Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 451ms
+2025-12-22T12:54:29.548Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:54:30.403Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:34.423Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:39.226Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:54:39.233Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:54:39.233Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:39.233Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:39.745Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addDirectories",
+    "directories": [
+      "C:\\Fontes\\AIONE.My\\$HOME"
+    ],
+    "destination": "session"
+  },
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-22T12:54:39.763Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:54:39.779Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:54:39.779Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:39.779Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:41.660Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:54:41.757Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:54:42.287Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:42.313Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:54:42.313Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:42.313Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:42.320Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:54:42.339Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:54:42.339Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:42.339Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:42.377Z [DEBUG] Permission suggestions for Bash: []
+2025-12-22T12:54:42.406Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:54:42.419Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:54:42.419Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:42.419Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:43.119Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:45.239Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:54:45.338Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:54:45.850Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:54:45.873Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:54:45.873Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:54:45.873Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:54:45.899Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:54:45.900Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:54:45.900Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:54:45.900Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:54:45.900Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:54:46.305Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 406ms
+2025-12-22T12:54:46.431Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:54:46.948Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:54:49.310Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:00.053Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T12:55:00.063Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T12:55:00.063Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:00.063Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:55:00.646Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:55:00.649Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:55:00.649Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py, got file://c:\fontes\aione.my\mcp-mysql-aione\teste_conexao.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:55:00.650Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py.tmp.32436.1766408100650
+2025-12-22T12:55:00.652Z [DEBUG] Temp file written successfully, size: 2297 bytes
+2025-12-22T12:55:00.652Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py.tmp.32436.1766408100650 to C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py
+2025-12-22T12:55:00.652Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py written atomically
+2025-12-22T12:55:00.668Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py
+2025-12-22T12:55:00.677Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .py
+2025-12-22T12:55:00.683Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T12:55:00.683Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:00.683Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:55:00.684Z [DEBUG] [binaryCheck] Cache hit for 'pyright-langserver': false
+2025-12-22T12:55:00.684Z [DEBUG] [lspRecommendation] Skipping pyright-lsp@claude-plugins-official (binary 'pyright-langserver' not found)
+2025-12-22T12:55:00.697Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:55:00.723Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:55:00.723Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:00.723Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:01.039Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:55:01.040Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:55:02.754Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:03.180Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:03.425Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py teste_conexao.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:55:03.447Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:55:03.461Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:55:03.461Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:03.461Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:06.060Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:55:06.156Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:55:07.004Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T12:55:07.004Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:07.004Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:07.032Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:55:07.032Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:55:07.032Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:55:07.032Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:55:07.032Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:55:07.472Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 440ms
+2025-12-22T12:55:07.494Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:55:10.079Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:21.083Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T12:55:21.091Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T12:55:21.091Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:21.091Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:55:21.664Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:55:21.667Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:55:21.667Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py, got file://c:\fontes\aione.my\mcp-mysql-aione\listar_bancos.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:55:21.667Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py.tmp.32436.1766408121667
+2025-12-22T12:55:21.670Z [DEBUG] Temp file written successfully, size: 1145 bytes
+2025-12-22T12:55:21.670Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py.tmp.32436.1766408121667 to C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py
+2025-12-22T12:55:21.670Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py written atomically
+2025-12-22T12:55:21.679Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py
+2025-12-22T12:55:21.691Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .py
+2025-12-22T12:55:21.698Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T12:55:21.698Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:21.698Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:55:21.698Z [DEBUG] [binaryCheck] Cache hit for 'pyright-langserver': false
+2025-12-22T12:55:21.698Z [DEBUG] [lspRecommendation] Skipping pyright-lsp@claude-plugins-official (binary 'pyright-langserver' not found)
+2025-12-22T12:55:21.711Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:55:21.737Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:55:21.737Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:21.737Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:22.055Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:55:22.056Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:55:22.654Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:23.021Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:23.364Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py listar_bancos.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:55:23.394Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:55:23.407Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:55:23.407Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:23.407Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:29.405Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T12:55:29.405Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:29.405Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T12:55:31.681Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:55:31.777Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:55:32.668Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:55:32.699Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:55:32.699Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:32.699Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:32.727Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:55:32.728Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:55:32.728Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:55:32.728Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:55:32.728Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:55:33.220Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 493ms
+2025-12-22T12:55:33.257Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:55:33.940Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:36.914Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:41.490Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:55:41.498Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:55:41.498Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:41.498Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:55:42.053Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:55:42.056Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:55:42.056Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py, got file://c:\fontes\aione.my\mcp-mysql-aione\listar_bancos.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:55:42.058Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py.tmp.32436.1766408142058
+2025-12-22T12:55:42.058Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:55:42.061Z [DEBUG] Temp file written successfully, size: 1212 bytes
+2025-12-22T12:55:42.061Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:55:42.061Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py.tmp.32436.1766408142058 to C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py
+2025-12-22T12:55:42.061Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\listar_bancos.py written atomically
+2025-12-22T12:55:42.082Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:55:42.082Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:42.082Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:55:42.093Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:55:42.120Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:55:42.120Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:42.120Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:42.613Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py listar_bancos.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:55:42.637Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:55:42.655Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:55:42.655Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:42.655Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:48.664Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-22T12:55:48.664Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:48.664Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-22T12:55:54.294Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:55:54.386Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:55:55.255Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:55:55.285Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:55:55.285Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:55:55.285Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:55:55.311Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:55:55.311Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:55:55.311Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:55:55.311Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:55:55.311Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:55:55.807Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 496ms
+2025-12-22T12:55:55.831Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:55:56.612Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:55:58.922Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:10.484Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:56:10.492Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:56:10.492Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:10.492Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:11.069Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:11.072Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:56:11.072Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini, got file://c:\fontes\aione.my\mcp-mysql-aione\config.ini/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:56:11.073Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini.tmp.32436.1766408171073
+2025-12-22T12:56:11.073Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:56:11.076Z [DEBUG] Temp file written successfully, size: 421 bytes
+2025-12-22T12:56:11.076Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:56:11.076Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini.tmp.32436.1766408171073 to C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini
+2025-12-22T12:56:11.076Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\config.ini written atomically
+2025-12-22T12:56:11.097Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:56:11.097Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:11.097Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:11.187Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:56:11.201Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:56:11.201Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:11.201Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:11.781Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:11.783Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 2ms
+2025-12-22T12:56:11.783Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\server.py, got file://c:\fontes\aione.my\mcp-mysql-aione\server.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:56:11.785Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766408171785
+2025-12-22T12:56:11.785Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:56:11.788Z [DEBUG] Temp file written successfully, size: 14960 bytes
+2025-12-22T12:56:11.788Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:56:11.788Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766408171785 to C:\Fontes\AIONE.My\mcp-mysql-aione\server.py
+2025-12-22T12:56:11.789Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\server.py written atomically
+2025-12-22T12:56:11.815Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:56:11.815Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:11.815Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:11.906Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:56:11.917Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:56:11.917Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:11.917Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:12.481Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:12.484Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:56:12.484Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\server.py, got file://c:\fontes\aione.my\mcp-mysql-aione\server.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:56:12.485Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766408172485
+2025-12-22T12:56:12.486Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:56:12.488Z [DEBUG] Temp file written successfully, size: 15211 bytes
+2025-12-22T12:56:12.488Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:56:12.488Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766408172485 to C:\Fontes\AIONE.My\mcp-mysql-aione\server.py
+2025-12-22T12:56:12.489Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\server.py written atomically
+2025-12-22T12:56:12.518Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:56:12.518Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:12.518Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:12.553Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:12.553Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:56:12.553Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:56:12.553Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:56:12.553Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:56:13.092Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 539ms
+2025-12-22T12:56:13.128Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:56:15.703Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:21.114Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:56:21.120Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:56:21.120Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:21.120Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:21.668Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:21.673Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 5ms
+2025-12-22T12:56:21.673Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py, got file://c:\fontes\aione.my\mcp-mysql-aione\teste_conexao.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:56:21.674Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py.tmp.32436.1766408181674
+2025-12-22T12:56:21.674Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:56:21.676Z [DEBUG] Temp file written successfully, size: 2454 bytes
+2025-12-22T12:56:21.676Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:56:21.676Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py.tmp.32436.1766408181674 to C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py
+2025-12-22T12:56:21.677Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\teste_conexao.py written atomically
+2025-12-22T12:56:21.698Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:56:21.698Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:21.698Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:56:21.708Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:56:21.730Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:56:21.730Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:21.730Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:56:22.060Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:56:22.876Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:23.469Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:56:23.471Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:56:24.155Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:24.232Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:24.572Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py teste_conexao.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  },
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "iconv:*"
+      },
+      {
+        "toolName": "Bash",
+        "ruleContent": "py teste_conexao.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:56:24.597Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:56:24.613Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:56:24.613Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:24.613Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:56:29.652Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:56:29.747Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:56:30.996Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T12:56:30.996Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:30.996Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:56:31.027Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:31.028Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:56:31.028Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:56:31.028Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:56:31.028Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:56:31.591Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 564ms
+2025-12-22T12:56:31.626Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:56:35.253Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:46.026Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T12:56:46.034Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T12:56:46.034Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:46.034Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:56:46.582Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:46.585Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:56:46.585Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py, got file://c:\fontes\aione.my\mcp-mysql-aione\teste_final.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:56:46.585Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py.tmp.32436.1766408206585
+2025-12-22T12:56:46.588Z [DEBUG] Temp file written successfully, size: 1978 bytes
+2025-12-22T12:56:46.588Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py.tmp.32436.1766408206585 to C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py
+2025-12-22T12:56:46.588Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py written atomically
+2025-12-22T12:56:46.598Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py
+2025-12-22T12:56:46.609Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .py
+2025-12-22T12:56:46.616Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T12:56:46.616Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:46.616Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:56:46.616Z [DEBUG] [binaryCheck] Cache hit for 'pyright-langserver': false
+2025-12-22T12:56:46.616Z [DEBUG] [lspRecommendation] Skipping pyright-lsp@claude-plugins-official (binary 'pyright-langserver' not found)
+2025-12-22T12:56:46.627Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:56:46.655Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:56:46.655Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:46.655Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:56:46.961Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:56:46.962Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:56:47.534Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:47.898Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:49.759Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py teste_final.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:56:49.781Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:56:49.796Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:56:49.796Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:49.796Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:56:52.714Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:56:52.805Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:56:53.640Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:56:53.665Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:56:53.665Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:56:53.665Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:56:53.691Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:56:53.691Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:56:53.691Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:56:53.691Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:56:53.691Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:56:54.269Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 578ms
+2025-12-22T12:56:54.304Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:56:54.881Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:56:57.079Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:57:01.066Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:57:01.073Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:57:01.073Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:01.073Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:57:01.654Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:57:01.657Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:57:01.657Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py, got file://c:\fontes\aione.my\mcp-mysql-aione\teste_final.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:57:01.658Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py.tmp.32436.1766408221658
+2025-12-22T12:57:01.658Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:57:01.660Z [DEBUG] Temp file written successfully, size: 2038 bytes
+2025-12-22T12:57:01.660Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:57:01.660Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py.tmp.32436.1766408221658 to C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py
+2025-12-22T12:57:01.661Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\teste_final.py written atomically
+2025-12-22T12:57:01.681Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:57:01.681Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:01.681Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:57:01.693Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:57:01.718Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:57:01.718Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:01.718Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:57:02.196Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "py teste_final.py"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:57:02.239Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:57:02.254Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:57:02.254Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:02.254Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:57:08.166Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:57:08.261Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:57:09.127Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:57:09.160Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:57:09.160Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:09.160Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:57:09.187Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:57:09.187Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:57:09.187Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:57:09.187Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:57:09.187Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:57:09.780Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 593ms
+2025-12-22T12:57:09.801Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:57:10.427Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:57:12.689Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:57:22.853Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-22T12:57:22.862Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-22T12:57:22.862Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:22.862Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:57:23.418Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:57:23.421Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:57:23.422Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\server.py, got file://c:\fontes\aione.my\mcp-mysql-aione\server.py/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1873:624)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:57:23.424Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766408243424
+2025-12-22T12:57:23.424Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:57:23.427Z [DEBUG] Temp file written successfully, size: 15219 bytes
+2025-12-22T12:57:23.427Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:57:23.427Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\server.py.tmp.32436.1766408243424 to C:\Fontes\AIONE.My\mcp-mysql-aione\server.py
+2025-12-22T12:57:23.428Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\server.py written atomically
+2025-12-22T12:57:23.458Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-22T12:57:23.458Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:23.458Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-22T12:57:23.477Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-22T12:57:23.501Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-22T12:57:23.501Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:23.501Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T12:57:23.548Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766408243548
+2025-12-22T12:57:23.548Z [DEBUG] Preserving file permissions: 100666
+2025-12-22T12:57:23.553Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-22T12:57:23.553Z [DEBUG] Applied original permissions to temp file
+2025-12-22T12:57:23.553Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json.tmp.32436.1766408243548 to C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json
+2025-12-22T12:57:23.553Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\9dc9e1ec-21b5-4453-a609-8027f3e4e7ae-agent-9dc9e1ec-21b5-4453-a609-8027f3e4e7ae.json written atomically
+2025-12-22T12:57:23.571Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-22T12:57:23.571Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:23.572Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-22T12:57:23.598Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:57:23.598Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:57:23.598Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:57:23.598Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:57:23.598Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:57:24.172Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 574ms
+2025-12-22T12:57:24.194Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:57:27.779Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:57:51.036Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-22T12:57:51.043Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-22T12:57:51.043Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:51.043Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:57:51.592Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:57:51.595Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 3ms
+2025-12-22T12:57:51.595Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\mcp-mysql-aione\RESUMO_INSTALACAO.txt, got file://c:\fontes\aione.my\mcp-mysql-aione\resumo_instalacao.txt/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-22T12:57:51.595Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\mcp-mysql-aione\RESUMO_INSTALACAO.txt.tmp.32436.1766408271595
+2025-12-22T12:57:51.597Z [DEBUG] Temp file written successfully, size: 3561 bytes
+2025-12-22T12:57:51.597Z [DEBUG] Renaming C:\Fontes\AIONE.My\mcp-mysql-aione\RESUMO_INSTALACAO.txt.tmp.32436.1766408271595 to C:\Fontes\AIONE.My\mcp-mysql-aione\RESUMO_INSTALACAO.txt
+2025-12-22T12:57:51.597Z [DEBUG] File C:\Fontes\AIONE.My\mcp-mysql-aione\RESUMO_INSTALACAO.txt written atomically
+2025-12-22T12:57:51.606Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\mcp-mysql-aione\RESUMO_INSTALACAO.txt
+2025-12-22T12:57:51.617Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .txt
+2025-12-22T12:57:51.624Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-22T12:57:51.624Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:51.624Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-22T12:57:51.635Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:57:51.663Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:57:51.663Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:51.663Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:57:51.818Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:57:52.280Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-22T12:57:52.280Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:52.280Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:57:52.304Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:57:52.304Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:57:52.304Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:57:52.304Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:57:52.304Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:57:53.020Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 716ms
+2025-12-22T12:57:53.041Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:57:55.748Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:57:57.217Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-22T12:57:57.227Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-22T12:57:57.227Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:57.227Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:57:57.514Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:57:58.398Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:57:58.654Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "cat:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-22T12:57:58.676Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-22T12:57:58.688Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-22T12:57:58.688Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:57:58.688Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:58:00.564Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-22T12:58:00.660Z [DEBUG] Session environment not yet supported on Windows
+2025-12-22T12:58:01.165Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-22T12:58:01.191Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-22T12:58:01.191Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:58:01.191Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-22T12:58:01.218Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-22T12:58:01.219Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-22T12:58:01.219Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-22T12:58:01.219Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-22T12:58:01.219Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-22T12:58:01.840Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 622ms
+2025-12-22T12:58:01.861Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:58:02.172Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:58:04.675Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:58:19.304Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-22T12:58:19.304Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-22T12:58:19.359Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-22T12:58:19.359Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:58:19.359Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T12:58:19.361Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-22T12:58:22.220Z [DEBUG] Stream started - received first chunk
+2025-12-22T12:58:33.497Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-22T12:58:33.497Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:58:33.497Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-22T12:58:38.975Z [DEBUG] Getting matching hook commands for SessionEnd with query: prompt_input_exit
+2025-12-22T12:58:38.975Z [DEBUG] Found 0 hook matchers in settings
+2025-12-22T12:58:38.975Z [DEBUG] Matched 0 unique hooks for query "prompt_input_exit" (0 before deduplication)

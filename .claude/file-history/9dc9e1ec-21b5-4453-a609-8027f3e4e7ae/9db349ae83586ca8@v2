@@ -1,0 +1,12 @@
+[Database]
+# Configuração do banco de dados MySQL para o projeto AIONE.My
+host = localhost
+port = 3307
+user = root
+password = f68interdb
+database = aione
+
+# Notas:
+# - Altere 'user' e 'password' conforme suas credenciais MySQL
+# - A porta 3307 é a configurada no config.ini principal do projeto
+# - O database 'aione' é o nome padrão, ajuste se necessário

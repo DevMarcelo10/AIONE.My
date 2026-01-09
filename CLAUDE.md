@@ -185,3 +185,31 @@ DM.FDConnect: TFDConnection                // Fallback direto
 4. Use `/review-staged` antes de commitar
 5. Teste manualmente
 6. Commit e push
+
+## LEMBRETES IMPORTANTES
+
+💡 Princípios Guias ao Desenvolver:
+
+🔹 Não reinvente a roda
+		Se já existe algo pronto, testado e consolidado então use.
+
+🔹 DRY (Don’t Repeat Yourself)
+		Nada de lógica duplicada.
+		Se o mesmo código aparece em dois lugares, você deve centralizar em um único local.
+		Mesmo botão em três telas? Cria um componente só e reutiliza.
+		Comandos, funções, procedimentos e propriedades que você tiver dúvidas se o Delphi suportará, verifique antes de implementar.
+		Delphi é uma linguagem pouco treinada pela IA, então, use formas de suprir isso entendendo melhor o código já existente no projeto.
+
+🔹 YAGNI (You Aren’t Gonna Need It)
+		Se não precisar de determinado recurso no momento, não implemente agora.
+		Começa simples, mas sem abrir mão do necessário, e vai evoluindo.
+
+🔹 KISS (Keep It Simple, Stupid)
+		Prefira sempre a solução mais simples possível.
+		Se dá pra resolver com 50 linhas, não escreva 500.
+		Alerta simples não precisa virar um sistema de notificações inteiro.
+		Sempre faça códigos limpos.
+
+🔹 Separation of Concerns
+		Cada arquivo com uma responsabilidade.
+		Arquivo com 2000 linhas fazendo 4 coisas diferentes não é uma boa prática, separar isso melhora: a leitura, manutenção e testes.

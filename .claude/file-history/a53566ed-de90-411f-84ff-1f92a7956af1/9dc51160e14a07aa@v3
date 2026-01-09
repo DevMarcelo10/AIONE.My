@@ -1,0 +1,289 @@
+unit uCopilotIcon;
+
+interface
+
+uses
+   Winapi.Windows,
+   Winapi.Messages,
+   System.SysUtils,
+   System.Classes,
+   Vcl.Graphics,
+   Vcl.Controls,
+   Vcl.Forms,
+   Vcl.ExtCtrls,
+   Vcl.Menus,
+   vcl.Dialogs,
+   Vcl.Imaging.pngimage,
+   uCopilotConfig;
+
+type
+   TFrmCopilotIcon = class(TForm)
+      imgIcon: TImage;
+      tmrBlink: TTimer;
+      PopupMenu: TPopupMenu;
+      mnuAbrir: TMenuItem;
+      mnuSeparator1: TMenuItem;
+      mnuConfig: TMenuItem;
+      mnuSeparator2: TMenuItem;
+      mnuSair: TMenuItem;
+      TrayIcon: TTrayIcon;
+      procedure FormCreate(Sender: TObject);
+      procedure FormDestroy(Sender: TObject);
+      procedure FormMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+      procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+      procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+      procedure imgIconClick(Sender: TObject);
+      procedure imgIconDblClick(Sender: TObject);
+      procedure tmrBlinkTimer(Sender: TObject);
+      procedure mnuAbrirClick(Sender: TObject);
+      procedure mnuConfigClick(Sender: TObject);
+      procedure mnuSairClick(Sender: TObject);
+      procedure TrayIconDblClick(Sender: TObject);
+   private
+      FDragging: Boolean;
+      FDragStartX: Integer;
+      FDragStartY: Integer;
+      FHotKeyID: Integer;
+      FBlinkState: Boolean;
+      FHasNotification: Boolean;
+      procedure RegisterGlobalHotKey;
+      procedure UnregisterGlobalHotKey;
+      procedure WMHotKey(var Msg: TWMHotKey); message WM_HOTKEY;
+      procedure LoadIconPosition;
+      procedure SaveIconPosition;
+      procedure SetNotification(AValue: Boolean);
+   public
+      procedure ShowNotification(const ATitle, AMessage: string);
+      procedure TogglePanel;
+      property HasNotification: Boolean read FHasNotification write SetNotification;
+   end;
+
+var
+   FrmCopilotIcon: TFrmCopilotIcon;
+
+implementation
+
+uses
+   uCopilotPanel;
+
+{$R *.dfm}
+
+const
+   HOTKEY_ID = 1;
+
+procedure TFrmCopilotIcon.FormCreate(Sender: TObject);
+begin
+   // Configura janela sem borda, sempre visivel
+   BorderStyle := bsNone;
+   FormStyle := fsStayOnTop;
+   AlphaBlend := True;
+   AlphaBlendValue := 230;
+   TransparentColor := True;
+   TransparentColorValue := clFuchsia;
+   Color := clFuchsia;
+
+   // Dimensoes do icone
+   Width := 48;
+   Height := 48;
+
+   // Inicializa variaveis
+   FDragging := False;
+   FBlinkState := False;
+   FHasNotification := False;
+   FHotKeyID := 0;
+
+   // Carrega posicao salva
+   LoadIconPosition;
+
+   // Registra hotkey global (Ctrl+Shift+P)
+   RegisterGlobalHotKey;
+
+   // Configura TrayIcon
+   TrayIcon.Visible := True;
+   TrayIcon.Hint := 'PharmaCopilot - Seu assistente de vendas';
+end;
+
+procedure TFrmCopilotIcon.FormDestroy(Sender: TObject);
+begin
+   SaveIconPosition;
+   UnregisterGlobalHotKey;
+end;
+
+procedure TFrmCopilotIcon.RegisterGlobalHotKey;
+var
+   Modifiers: Cardinal;
+   VKey: Cardinal;
+begin
+   // Pega configuracao de hotkey
+   Modifiers := CopilotConfig.HotKeyModifiers;
+   VKey := CopilotConfig.HotKeyVirtualKey;
+
+   if RegisterHotKey(Handle, HOTKEY_ID, Modifiers, VKey) then
+   begin
+      FHotKeyID := HOTKEY_ID;
+   end;
+end;
+
+procedure TFrmCopilotIcon.UnregisterGlobalHotKey;
+begin
+   if FHotKeyID > 0 then
+   begin
+      UnregisterHotKey(Handle, FHotKeyID);
+      FHotKeyID := 0;
+   end;
+end;
+
+procedure TFrmCopilotIcon.WMHotKey(var Msg: TWMHotKey);
+begin
+   if Msg.HotKey = HOTKEY_ID then
+   begin
+      TogglePanel;
+   end;
+end;
+
+procedure TFrmCopilotIcon.LoadIconPosition;
+var
+   X, Y: Integer;
+begin
+   X := CopilotConfig.IconPosX;
+   Y := CopilotConfig.IconPosY;
+
+   // Valida se posicao esta dentro da tela
+   if (X < 0) or (X > Screen.Width - Width) then
+   begin
+      X := Screen.Width - Width - 20;
+   end;
+
+   if (Y < 0) or (Y > Screen.Height - Height) then
+   begin
+      Y := (Screen.Height - Height) div 2;
+   end;
+
+   Left := X;
+   Top := Y;
+end;
+
+procedure TFrmCopilotIcon.SaveIconPosition;
+begin
+   CopilotConfig.IconPosX := Left;
+   CopilotConfig.IconPosY := Top;
+   CopilotConfig.Save;
+end;
+
+procedure TFrmCopilotIcon.FormMouseDown(Sender: TObject; Button: TMouseButton;
+   Shift: TShiftState; X, Y: Integer);
+begin
+   if Button = mbLeft then
+   begin
+      FDragging := True;
+      FDragStartX := X;
+      FDragStartY := Y;
+   end;
+end;
+
+procedure TFrmCopilotIcon.FormMouseMove(Sender: TObject; Shift: TShiftState;
+   X, Y: Integer);
+begin
+   if FDragging then
+   begin
+      Left := Left + X - FDragStartX;
+      Top := Top + Y - FDragStartY;
+   end;
+end;
+
+procedure TFrmCopilotIcon.FormMouseUp(Sender: TObject; Button: TMouseButton;
+   Shift: TShiftState; X, Y: Integer);
+begin
+   if FDragging then
+   begin
+      FDragging := False;
+      SaveIconPosition;
+   end;
+end;
+
+procedure TFrmCopilotIcon.imgIconClick(Sender: TObject);
+begin
+   // Clique simples - mostra menu
+   if not FDragging then
+   begin
+      PopupMenu.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+   end;
+end;
+
+procedure TFrmCopilotIcon.imgIconDblClick(Sender: TObject);
+begin
+   TogglePanel;
+end;
+
+procedure TFrmCopilotIcon.TogglePanel;
+begin
+   if Assigned(FrmCopilotPanel) then
+   begin
+      if FrmCopilotPanel.Visible then
+      begin
+         FrmCopilotPanel.HidePanel;
+      end else
+      begin
+         FrmCopilotPanel.ShowPanel;
+      end;
+   end;
+
+   // Limpa notificacao ao abrir
+   HasNotification := False;
+end;
+
+procedure TFrmCopilotIcon.SetNotification(AValue: Boolean);
+begin
+   FHasNotification := AValue;
+   tmrBlink.Enabled := AValue;
+   if not AValue then
+   begin
+      FBlinkState := False;
+      // Restaura icone normal
+      AlphaBlendValue := 230;
+   end;
+end;
+
+procedure TFrmCopilotIcon.tmrBlinkTimer(Sender: TObject);
+begin
+   FBlinkState := not FBlinkState;
+   if FBlinkState then
+   begin
+      AlphaBlendValue := 255;
+   end
+   else
+   begin
+      AlphaBlendValue := 180;
+   end;
+end;
+
+procedure TFrmCopilotIcon.ShowNotification(const ATitle, AMessage: string);
+begin
+   HasNotification := True;
+   TrayIcon.BalloonTitle := ATitle;
+   TrayIcon.BalloonHint := AMessage;
+   TrayIcon.ShowBalloonHint;
+end;
+
+procedure TFrmCopilotIcon.mnuAbrirClick(Sender: TObject);
+begin
+   TogglePanel;
+end;
+
+procedure TFrmCopilotIcon.mnuConfigClick(Sender: TObject);
+begin
+   // TODO: Abrir tela de configuracoes
+   ShowMessage('Configuracoes - Em desenvolvimento');
+end;
+
+procedure TFrmCopilotIcon.mnuSairClick(Sender: TObject);
+begin
+   Application.Terminate;
+end;
+
+procedure TFrmCopilotIcon.TrayIconDblClick(Sender: TObject);
+begin
+   TogglePanel;
+end;
+
+end.

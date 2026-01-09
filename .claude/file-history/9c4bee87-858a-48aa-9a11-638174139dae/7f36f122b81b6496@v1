@@ -1,0 +1,154 @@
+# PharmaCopilot
+
+Assistente IA para vendedores de farmácia. Produto standalone que conecta a qualquer ERP do mercado.
+
+## Funcionalidades
+
+- **Sugestões Inteligentes**: Genéricos mais baratos, cross-sell baseado em regras
+- **Alertas**: Interações medicamentosas, contraindicações
+- **Chat IA**: Tire dúvidas sobre medicamentos em tempo real
+- **Multi-ERP**: Compatível com AIONE, Linx, Trier, Profarma e outros
+
+## Arquitetura
+
+```
+┌─────────────────┐      ┌──────────────────┐      ┌─────────────────┐
+│   ERP Cliente   │ READ │  PharmaCopilot   │      │  Copilot DB     │
+│   (MySQL/MSSQL/ │◄─────│  Backend         │─────►│  (próprio)      │
+│    Firebird)    │ ONLY │  Python FastAPI  │ R/W  │  MySQL          │
+└─────────────────┘      └──────────────────┘      └─────────────────┘
+                                  ▲
+                                  │ HTTP/REST
+                                  ▼
+                         ┌──────────────────┐
+                         │  Widget Delphi   │
+                         │  (Overlay)       │
+                         └──────────────────┘
+```
+
+## Stack Tecnológico
+
+| Componente | Tecnologia |
+|------------|------------|
+| Backend | Python 3.11+, FastAPI, SQLAlchemy |
+| Widget | Delphi RAD 12 (VCL) |
+| Banco Copilot | MySQL 8.0 |
+| LLMs | Anthropic, OpenAI, Google, DeepSeek |
+
+## Estrutura do Projeto
+
+```
+PharmaCopilot/
+├── backend/                 # API Python
+│   ├── config/             # Configurações
+│   ├── integrations/       # Conectores ERP
+│   │   └── connectors/     # AIONE, Linx, etc.
+│   ├── models/             # Schemas Pydantic
+│   ├── routers/            # Endpoints FastAPI
+│   ├── services/           # Lógica de negócio
+│   └── scripts/            # Scripts utilitários
+│
+├── widget/                  # Frontend Delphi
+│   └── src/
+│       ├── uCopilotIcon.pas    # Ícone flutuante
+│       ├── uCopilotPanel.pas   # Painel principal
+│       └── uCopilotAPI.pas     # Cliente HTTP
+│
+└── database/               # Scripts SQL
+    └── copilot_schema.sql  # Schema do banco
+```
+
+## Instalação
+
+### Backend
+
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Configurar .env
+copy .env.example .env
+# Editar .env com suas configurações
+
+# Iniciar servidor
+python -m uvicorn main:app --host 127.0.0.1 --port 8000
+```
+
+### Widget
+
+1. Abrir `widget/src/PharmaCopilot.dproj` no Delphi RAD 12
+2. Compilar (Ctrl+F9)
+3. Executar `PharmaCopilot.exe`
+
+### Banco de Dados
+
+```sql
+-- Criar banco copilot
+CREATE DATABASE copilot CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Executar schema
+mysql -u root -p copilot < database/copilot_schema.sql
+```
+
+## Configuração
+
+### Backend (.env)
+
+```env
+# ERP Connection (READ-ONLY)
+ERP_TYPE=aione
+ERP_DB_HOST=localhost
+ERP_DB_PORT=3307
+ERP_DB_NAME=dbaione
+ERP_DB_USER=root
+ERP_DB_PASSWORD=sua_senha
+
+# Copilot Database (READ-WRITE)
+COPILOT_DB_URL=mysql+aiomysql://root:senha@localhost/copilot
+
+# LLM Provider
+LLM_PROVIDER=deepseek
+DEEPSEEK_API_KEY=sua_api_key
+
+# Features
+ENABLE_SUGGESTIONS=true
+ENABLE_ALERTS=true
+ENABLE_CROSS_SELL=true
+```
+
+## API Endpoints
+
+| Endpoint | Descrição |
+|----------|-----------|
+| `GET /api/v1/status` | Status da venda atual com sugestões e alertas |
+| `GET /api/v1/status/ultimo-produto` | Último produto adicionado na venda |
+| `GET /api/v1/medicamento-info/by-produto/{id}` | Informações do medicamento |
+| `POST /api/v1/chat` | Chat com IA |
+| `GET /health` | Health check |
+
+## Criando Novo Conector ERP
+
+1. Criar arquivo em `backend/integrations/connectors/novo_erp.py`
+2. Implementar interface `BaseERPConnector`
+3. Criar mapping em `backend/integrations/mappings/novo_erp_mapping.json`
+4. Registrar na factory
+
+```python
+# novo_erp.py
+from integrations.base_connector import BaseERPConnector
+
+class NovoERPConnector(BaseERPConnector):
+    def get_produto(self, produto_id: int) -> Produto:
+        # Implementação
+        pass
+```
+
+## Licenciamento
+
+Produto comercial. Licenciamento por farmácia/terminal.
+
+## Suporte
+
+Para suporte técnico, entre em contato com a equipe de desenvolvimento.

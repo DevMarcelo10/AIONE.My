@@ -1,0 +1,187 @@
+"""
+Serviço de sugestões de produtos.
+Motor de recomendações para vendas.
+"""
+
+from decimal import Decimal
+from typing import Optional
+import structlog
+
+from config.settings import settings
+from models.schemas import Suggestion, SuggestionType, Produto
+from integrations import ConnectorFactory
+
+logger = structlog.get_logger()
+
+
+class SuggestionService:
+    """Serviço de sugestões inteligentes."""
+
+    def __init__(self):
+        self._connector = None
+
+    def _get_connector(self):
+        """Lazy load do conector."""
+        if self._connector is None:
+            self._connector = ConnectorFactory.create(
+                settings.ERP_TYPE,
+                settings.erp_connection_string,
+            )
+        return self._connector
+
+    async def get_genericos(self, produto_id: int) -> list[Suggestion]:
+        """
+        Retorna genéricos mais baratos para um produto.
+        """
+        if not settings.ENABLE_SUGGESTIONS:
+            return []
+
+        try:
+            connector = self._get_connector()
+            produto = connector.get_produto(produto_id)
+
+            if not produto or not produto.principio_ativo:
+                return []
+
+            genericos = connector.get_genericos(produto.principio_ativo)
+
+            suggestions = []
+            for gen in genericos:
+                if gen.id == produto_id:
+                    continue
+
+                economia = produto.preco_venda - gen.preco_venda
+                if economia <= 0:
+                    continue
+
+                suggestions.append(Suggestion(
+                    tipo=SuggestionType.GENERICO,
+                    produto=gen,
+                    motivo=f"Genérico de {produto.nome}",
+                    economia=economia,
+                    score=float(economia / produto.preco_venda),
+                ))
+
+            return sorted(suggestions, key=lambda x: x.score, reverse=True)[:5]
+
+        except Exception as e:
+            logger.error("get_genericos_error", produto_id=produto_id, error=str(e))
+            return []
+
+    async def get_cross_sell(self, produto_id: int) -> list[Suggestion]:
+        """
+        Retorna produtos complementares.
+
+        TODO: Implementar regras de cross-sell no banco do Copilot.
+        Por ora, retorna vazio.
+        """
+        if not settings.ENABLE_CROSS_SELL:
+            return []
+
+        # Placeholder - implementar com tabela copilot_cross_sell
+        return []
+
+    async def get_recompra(
+        self,
+        cliente_id: int,
+        dias: int = 90
+    ) -> list[Suggestion]:
+        """
+        Sugere recompra baseada no histórico do cliente.
+        """
+        if not settings.ENABLE_SUGGESTIONS:
+            return []
+
+        try:
+            connector = self._get_connector()
+            historico = connector.get_historico_cliente(cliente_id, dias * 2)
+
+            if not historico:
+                return []
+
+            # Conta frequência de produtos
+            produto_freq: dict[int, int] = {}
+            for venda in historico:
+                for item in venda.itens:
+                    produto_freq[item.produto_id] = (
+                        produto_freq.get(item.produto_id, 0) + 1
+                    )
+
+            # Filtra produtos comprados mais de uma vez
+            frequentes = [
+                (pid, freq)
+                for pid, freq in produto_freq.items()
+                if freq >= 2
+            ]
+
+            if not frequentes:
+                return []
+
+            # Ordena por frequência
+            frequentes.sort(key=lambda x: x[1], reverse=True)
+
+            suggestions = []
+            for pid, freq in frequentes[:10]:
+                produto = connector.get_produto(pid)
+                if produto:
+                    suggestions.append(Suggestion(
+                        tipo=SuggestionType.RECOMPRA,
+                        produto=produto,
+                        motivo=f"Comprado {freq}x nos últimos {dias*2} dias",
+                        score=min(freq / 10, 1.0),
+                    ))
+
+            return suggestions
+
+        except Exception as e:
+            logger.error("get_recompra_error", cliente_id=cliente_id, error=str(e))
+            return []
+
+    async def get_sugestoes_venda(
+        self,
+        venda_id: int,
+        cliente_id: Optional[int] = None,
+    ) -> list[Suggestion]:
+        """
+        Retorna todas as sugestões relevantes para uma venda.
+        """
+        if not settings.ENABLE_SUGGESTIONS:
+            return []
+
+        all_suggestions: list[Suggestion] = []
+
+        try:
+            connector = self._get_connector()
+            venda = connector.get_venda_atual(venda_id)
+
+            if not venda:
+                return []
+
+            # Genéricos para cada item da venda
+            for item in venda.itens:
+                genericos = await self.get_genericos(item.produto_id)
+                all_suggestions.extend(genericos)
+
+            # Cross-sell para cada item
+            for item in venda.itens:
+                cross = await self.get_cross_sell(item.produto_id)
+                all_suggestions.extend(cross)
+
+            # Recompra do cliente
+            if cliente_id:
+                recompra = await self.get_recompra(cliente_id)
+                all_suggestions.extend(recompra)
+
+            # Remove duplicados e ordena por score
+            seen_ids = set()
+            unique_suggestions = []
+            for sug in sorted(all_suggestions, key=lambda x: x.score, reverse=True):
+                if sug.produto.id not in seen_ids:
+                    seen_ids.add(sug.produto.id)
+                    unique_suggestions.append(sug)
+
+            return unique_suggestions[:10]
+
+        except Exception as e:
+            logger.error("get_sugestoes_venda_error", venda_id=venda_id, error=str(e))
+            return []

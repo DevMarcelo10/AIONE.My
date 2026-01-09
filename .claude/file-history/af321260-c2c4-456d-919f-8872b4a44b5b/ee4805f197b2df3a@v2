@@ -1,0 +1,16 @@
+# Remove task if exists
+Unregister-ScheduledTask -TaskName "PharmaCopilotBackend" -Confirm:$false -ErrorAction SilentlyContinue
+
+# Create action with full Python path
+$action = New-ScheduledTaskAction -Execute "C:\Users\DevDelphi\AppData\Local\Python\bin\python.exe" -Argument "-m uvicorn main:app --host 0.0.0.0 --port 8000" -WorkingDirectory "C:\Fontes\AIONE.My\PharmaCopilot\backend"
+
+# Settings - no time limit
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit ([TimeSpan]::Zero)
+
+# Register task
+Register-ScheduledTask -TaskName "PharmaCopilotBackend" -Action $action -Settings $settings -Description "PharmaCopilot Backend Server"
+
+# Start task
+Start-ScheduledTask -TaskName "PharmaCopilotBackend"
+
+Write-Host "Task created and started successfully"

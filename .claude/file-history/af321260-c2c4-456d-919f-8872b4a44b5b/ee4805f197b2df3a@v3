@@ -1,0 +1,16 @@
+# Remove task if exists
+Unregister-ScheduledTask -TaskName "PharmaCopilotBackend" -Confirm:$false -ErrorAction SilentlyContinue
+
+# Create action with pythonw (no console window)
+$action = New-ScheduledTaskAction -Execute "C:\Users\DevDelphi\AppData\Local\Python\bin\pythonw.exe" -Argument "run_server.pyw" -WorkingDirectory "C:\Fontes\AIONE.My\PharmaCopilot\backend"
+
+# Settings - no time limit, hidden
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit ([TimeSpan]::Zero) -Hidden
+
+# Register task
+Register-ScheduledTask -TaskName "PharmaCopilotBackend" -Action $action -Settings $settings -Description "PharmaCopilot Backend Server"
+
+# Start task
+Start-ScheduledTask -TaskName "PharmaCopilotBackend"
+
+Write-Host "Task created and started successfully (hidden)"

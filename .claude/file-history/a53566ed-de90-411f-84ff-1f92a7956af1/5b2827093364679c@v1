@@ -1,0 +1,241 @@
+"""
+Detector de venda atual do terminal.
+Monta query dinâmica baseada na configuração do terminal.
+"""
+
+from typing import Optional, Tuple
+import structlog
+from sqlalchemy import create_engine, text
+from sqlalchemy.exc import SQLAlchemyError
+
+from models.terminal_config import TerminalConfig, TerminalTestResult
+
+logger = structlog.get_logger()
+
+
+class TerminalDetector:
+    """Detecta a venda atual de um terminal baseado na configuração."""
+
+    def __init__(self, config: TerminalConfig, connection_string: str):
+        self._config = config
+        self._connection_string = connection_string
+        self._engine = None
+
+    def _get_engine(self):
+        """Lazy load do engine."""
+        if self._engine is None:
+            self._engine = create_engine(
+                self._connection_string,
+                pool_pre_ping=True,
+                pool_size=2,
+                max_overflow=3,
+            )
+        return self._engine
+
+    def _build_query(self) -> str:
+        """
+        Monta a query SQL para buscar a venda atual.
+
+        Returns:
+            Query SQL parametrizada
+        """
+        cfg = self._config
+
+        # Campos a selecionar
+        select_fields = [cfg.campo_id_venda]
+        if cfg.campo_cliente:
+            select_fields.append(cfg.campo_cliente)
+        if cfg.campo_data:
+            select_fields.append(cfg.campo_data)
+
+        # Monta query
+        query = f"""
+            SELECT {', '.join(select_fields)}
+            FROM {cfg.tabela_vendas}
+            WHERE {cfg.campo_identificador} = :identificador
+              AND {cfg.campo_status_venda} = :status_aberta
+        """
+
+        # Ordenação
+        if cfg.ordenar_por:
+            query += f" ORDER BY {cfg.ordenar_por}"
+
+        query += " LIMIT 1"
+
+        return query
+
+    def _build_count_query(self) -> str:
+        """Monta query para contar vendas abertas."""
+        cfg = self._config
+        return f"""
+            SELECT COUNT(*)
+            FROM {cfg.tabela_vendas}
+            WHERE {cfg.campo_identificador} = :identificador
+              AND {cfg.campo_status_venda} = :status_aberta
+        """
+
+    def get_venda_atual(self) -> Tuple[Optional[int], Optional[int]]:
+        """
+        Detecta a venda atual do terminal.
+
+        Returns:
+            Tupla (venda_id, cliente_id) ou (None, None) se não encontrar
+        """
+        try:
+            engine = self._get_engine()
+            query = self._build_query()
+            cfg = self._config
+
+            with engine.connect() as conn:
+                result = conn.execute(
+                    text(query),
+                    {
+                        "identificador": cfg.valor_identificador,
+                        "status_aberta": cfg.valor_venda_aberta,
+                    }
+                )
+                row = result.fetchone()
+
+                if row:
+                    venda_id = row[0]
+                    cliente_id = row[1] if len(row) > 1 else None
+                    logger.debug(
+                        "terminal_venda_detectada",
+                        venda_id=venda_id,
+                        cliente_id=cliente_id
+                    )
+                    return venda_id, cliente_id
+
+                return None, None
+
+        except SQLAlchemyError as e:
+            logger.error("terminal_detector_db_error", error=str(e))
+            return None, None
+        except Exception as e:
+            logger.error("terminal_detector_error", error=str(e))
+            return None, None
+
+    def test_config(self) -> TerminalTestResult:
+        """
+        Testa se a configuração está funcionando.
+
+        Returns:
+            TerminalTestResult com resultado do teste
+        """
+        try:
+            engine = self._get_engine()
+            query = self._build_query()
+            count_query = self._build_count_query()
+            cfg = self._config
+
+            with engine.connect() as conn:
+                # Conta vendas abertas
+                count_result = conn.execute(
+                    text(count_query),
+                    {
+                        "identificador": cfg.valor_identificador,
+                        "status_aberta": cfg.valor_venda_aberta,
+                    }
+                )
+                total_abertas = count_result.scalar() or 0
+
+                # Busca última venda
+                result = conn.execute(
+                    text(query),
+                    {
+                        "identificador": cfg.valor_identificador,
+                        "status_aberta": cfg.valor_venda_aberta,
+                    }
+                )
+                row = result.fetchone()
+
+                if row:
+                    venda_id = row[0]
+                    cliente_id = row[1] if len(row) > 1 else None
+                    data_venda = str(row[2]) if len(row) > 2 and row[2] else None
+
+                    return TerminalTestResult(
+                        success=True,
+                        venda_id=venda_id,
+                        cliente_id=cliente_id,
+                        data_venda=data_venda,
+                        total_vendas_abertas=total_abertas,
+                        message=f"Configuracao OK! Encontrada venda #{venda_id}",
+                        query_executada=query.strip(),
+                    )
+                else:
+                    return TerminalTestResult(
+                        success=True,
+                        total_vendas_abertas=0,
+                        message="Configuracao OK, mas nenhuma venda aberta no momento",
+                        query_executada=query.strip(),
+                    )
+
+        except SQLAlchemyError as e:
+            error_msg = str(e)
+            # Extrai mensagem mais amigável
+            if "Unknown column" in error_msg:
+                campo = error_msg.split("'")[1] if "'" in error_msg else "?"
+                error_msg = f"Campo nao encontrado: {campo}"
+            elif "doesn't exist" in error_msg:
+                error_msg = f"Tabela nao encontrada: {cfg.tabela_vendas}"
+
+            return TerminalTestResult(
+                success=False,
+                message=f"Erro de banco: {error_msg}",
+                query_executada=query.strip() if 'query' in locals() else None,
+            )
+        except Exception as e:
+            return TerminalTestResult(
+                success=False,
+                message=f"Erro: {str(e)}",
+            )
+
+
+def get_tables(connection_string: str) -> list[str]:
+    """
+    Lista tabelas do banco de dados.
+
+    Args:
+        connection_string: String de conexão SQLAlchemy
+
+    Returns:
+        Lista de nomes de tabelas
+    """
+    try:
+        engine = create_engine(connection_string, pool_pre_ping=True)
+        with engine.connect() as conn:
+            result = conn.execute(text("SHOW TABLES"))
+            return [row[0] for row in result.fetchall()]
+    except Exception as e:
+        logger.error("get_tables_error", error=str(e))
+        return []
+
+
+def get_columns(connection_string: str, table_name: str) -> list[dict]:
+    """
+    Lista colunas de uma tabela.
+
+    Args:
+        connection_string: String de conexão SQLAlchemy
+        table_name: Nome da tabela
+
+    Returns:
+        Lista de dicts com info das colunas
+    """
+    try:
+        engine = create_engine(connection_string, pool_pre_ping=True)
+        with engine.connect() as conn:
+            result = conn.execute(text(f"DESCRIBE {table_name}"))
+            columns = []
+            for row in result.fetchall():
+                columns.append({
+                    "name": row[0],
+                    "type": row[1],
+                    "nullable": row[2] == "YES",
+                    "key": row[3] or "",
+                })
+            return columns
+    except Exception as e:
+        logger.error("get_columns_error", table=table_name, error=str(e))
+        return []

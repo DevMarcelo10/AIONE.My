@@ -1,0 +1,95 @@
+"""
+Script para migrar a tabela copilot_medicamento_info para o banco copilot.
+"""
+import pymysql
+
+def main():
+    conn = pymysql.connect(
+        host='localhost',
+        port=3307,
+        user='root',
+        password='f68interdb',
+        charset='utf8mb4'
+    )
+
+    cursor = conn.cursor()
+
+    print("1. Criando tabela no banco copilot...")
+    cursor.execute("USE copilot")
+
+    cursor.execute("DROP TABLE IF EXISTS copilot_medicamento_info")
+
+    cursor.execute("""
+    CREATE TABLE copilot_medicamento_info (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       ean VARCHAR(14) NULL COMMENT 'Codigo EAN para associar com produto do ERP',
+       principio_ativo VARCHAR(500) NOT NULL COMMENT 'Principio ativo ou associacao',
+       nome_comercial VARCHAR(200) NULL COMMENT 'Nome comercial de referencia',
+       posologia_padrao VARCHAR(200) NULL COMMENT 'Ex: 1 comp 8/8h',
+       orientacao_uso TEXT NULL COMMENT 'Ex: Tomar em jejum',
+       horario_ideal VARCHAR(100) NULL COMMENT 'Ex: Manha, Noite, Com refeicao',
+       armazenamento VARCHAR(200) NULL COMMENT 'Ex: Temperatura ambiente, Refrigerar',
+       efeitos_colaterais TEXT NULL COMMENT 'Ex: Sonolencia, boca seca',
+       interacao_alimentos TEXT NULL COMMENT 'Ex: Evitar alcool',
+       interacao_medicamentos TEXT NULL COMMENT 'Lista de interacoes conhecidas',
+       retem_receita BOOLEAN DEFAULT FALSE COMMENT 'Se a farmacia deve reter a receita',
+       tipo_receita VARCHAR(50) DEFAULT 'livre' COMMENT 'livre, simples, especial, antimicrobiano, controlado',
+       alerta_idoso TEXT NULL COMMENT 'Cuidados especiais para idosos 65+',
+       alerta_pediatrico TEXT NULL COMMENT 'Cuidados para criancas',
+       alerta_gestante TEXT NULL COMMENT 'Uso na gravidez - categoria FDA',
+       alerta_lactante TEXT NULL COMMENT 'Uso durante amamentacao',
+       alerta_renal TEXT NULL COMMENT 'Ajuste em insuficiencia renal',
+       alerta_hepatico TEXT NULL COMMENT 'Ajuste em insuficiencia hepatica',
+       fonte VARCHAR(100) NULL COMMENT 'bulario, anvisa, micromedex',
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+       INDEX idx_ean (ean),
+       INDEX idx_principio (principio_ativo(100))
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    """)
+
+    print("2. Copiando dados de dbaione para copilot...")
+    cursor.execute("""
+    INSERT INTO copilot.copilot_medicamento_info
+        (principio_ativo, nome_comercial, posologia_padrao, orientacao_uso,
+         horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos,
+         interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso,
+         alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal,
+         alerta_hepatico, fonte)
+    SELECT
+        principio_ativo, nome_comercial, posologia_padrao, orientacao_uso,
+        horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos,
+        interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso,
+        alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal,
+        alerta_hepatico, fonte
+    FROM dbaione.copilot_medicamento_info
+    """)
+
+    conn.commit()
+
+    print("3. Verificando migração...")
+    cursor.execute("SELECT COUNT(*) FROM copilot.copilot_medicamento_info")
+    count_copilot = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM dbaione.copilot_medicamento_info")
+    count_dbaione = cursor.fetchone()[0]
+
+    print(f"   - Registros em copilot: {count_copilot}")
+    print(f"   - Registros em dbaione: {count_dbaione}")
+
+    if count_copilot == count_dbaione:
+        print("4. Removendo tabela do dbaione...")
+        cursor.execute("DROP TABLE dbaione.copilot_medicamento_info")
+        conn.commit()
+        print("   Tabela removida do dbaione com sucesso!")
+    else:
+        print("   ERRO: Contagem diferente, não removendo tabela original")
+
+    cursor.close()
+    conn.close()
+
+    print("\nMigração concluída!")
+    print(f"Tabela agora está em: copilot.copilot_medicamento_info")
+
+if __name__ == '__main__':
+    main()

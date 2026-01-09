@@ -1,0 +1,186 @@
+"""
+Teste do conector AIONE.
+Executa queries READ-ONLY no banco para validar funcionamento.
+"""
+
+import sys
+import json
+from pathlib import Path
+
+# Adiciona o backend ao path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from integrations.connectors.aione import AIONEConnector
+
+
+def load_mapping():
+    """Carrega o mapping JSON."""
+    mapping_path = Path(__file__).parent.parent / "integrations" / "mappings" / "aione_mapping.json"
+    with open(mapping_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def test_connector():
+    """Executa testes no conector AIONE."""
+
+    # Configuração de conexão (ajuste conforme necessário)
+    CONNECTION_STRING = "mysql+pymysql://root@localhost/dbaione"
+
+    print("=" * 60)
+    print("  TESTE DO CONECTOR AIONE")
+    print("=" * 60)
+    print()
+
+    # Carrega mapping
+    try:
+        mapping = load_mapping()
+        print(f"✓ Mapping carregado: {mapping['erp_name']} v{mapping['erp_version']}")
+    except Exception as e:
+        print(f"✗ Erro ao carregar mapping: {e}")
+        return False
+
+    # Cria conector
+    try:
+        connector = AIONEConnector(CONNECTION_STRING, mapping)
+        print("✓ Conector instanciado")
+    except Exception as e:
+        print(f"✗ Erro ao criar conector: {e}")
+        return False
+
+    # Testa conexão
+    print("\n[1] Testando conexão...")
+    try:
+        if connector.test_connection():
+            print("✓ Conexão OK")
+        else:
+            print("✗ Falha na conexão")
+            return False
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+        return False
+
+    # Testa busca de clientes
+    print("\n[2] Testando busca de clientes...")
+    try:
+        clientes = connector.search_cliente("MARIA", limit=3)
+        print(f"✓ Encontrados {len(clientes)} cliente(s)")
+        for c in clientes[:3]:
+            print(f"   → {c.id}: {c.nome} ({c.cpf_cnpj or 'sem CPF'})")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa get_cliente
+    print("\n[3] Testando get_cliente...")
+    try:
+        if clientes:
+            cliente = connector.get_cliente(clientes[0].id)
+            if cliente:
+                print(f"✓ Cliente carregado: {cliente.nome}")
+                print(f"   → Convênio: {cliente.convenio_nome or 'Nenhum'}")
+                print(f"   → Limite: R$ {cliente.limite_credito:.2f}")
+                print(f"   → Saldo devedor: R$ {cliente.saldo_devedor:.2f}")
+            else:
+                print("✗ Cliente não encontrado")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa busca de produtos
+    print("\n[4] Testando busca de produtos...")
+    try:
+        produtos = connector.search_produto("DIPIRONA", limit=5)
+        print(f"✓ Encontrados {len(produtos)} produto(s)")
+        for p in produtos[:5]:
+            tipo = "G" if p.generico else ("S" if p.similar else "R")
+            print(f"   → [{tipo}] {p.nome[:50]} - R$ {p.preco_venda:.2f} (est: {p.estoque})")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa get_produto
+    print("\n[5] Testando get_produto...")
+    try:
+        if produtos:
+            produto = connector.get_produto(produtos[0].id)
+            if produto:
+                print(f"✓ Produto carregado: {produto.nome}")
+                print(f"   → EAN: {produto.ean or 'N/A'}")
+                print(f"   → Princípio Ativo: {produto.principio_ativo or 'N/A'}")
+                print(f"   → Laboratório: {produto.laboratorio or 'N/A'}")
+                print(f"   → Controlado: {'Sim' if produto.controlado else 'Não'}")
+            else:
+                print("✗ Produto não encontrado")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa busca por EAN
+    print("\n[6] Testando busca por EAN...")
+    try:
+        if produtos and produtos[0].ean:
+            produto_ean = connector.get_produto_by_ean(produtos[0].ean)
+            if produto_ean:
+                print(f"✓ Produto encontrado por EAN: {produto_ean.nome}")
+            else:
+                print("✗ Produto não encontrado por EAN")
+        else:
+            print("⊘ Pulado (produto sem EAN)")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa busca de genéricos
+    print("\n[7] Testando busca de genéricos...")
+    try:
+        genericos = connector.get_genericos("DIPIRONA")
+        print(f"✓ Encontrados {len(genericos)} genérico(s)")
+        for g in genericos[:3]:
+            print(f"   → {g.nome[:50]} - R$ {g.preco_venda:.2f}")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa estoque
+    print("\n[8] Testando consulta de estoque...")
+    try:
+        if produtos:
+            estoque = connector.get_estoque(produtos[0].id)
+            print(f"✓ Estoque do produto {produtos[0].id}: {estoque}")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa lotes vencendo
+    print("\n[9] Testando lotes próximos do vencimento...")
+    try:
+        lotes = connector.get_lotes_vencendo(dias=180)
+        print(f"✓ Encontrados {len(lotes)} lote(s) vencendo em 180 dias")
+        for l in lotes[:3]:
+            print(f"   → {l.produto_nome[:40]} | Lote: {l.lote} | Vence em {l.dias_para_vencer} dias ({l.quantidade} un)")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa produtos mais vendidos
+    print("\n[10] Testando produtos mais vendidos...")
+    try:
+        mais_vendidos = connector.get_produtos_mais_vendidos(dias=90, limit=5)
+        print(f"✓ Top {len(mais_vendidos)} produtos mais vendidos (90 dias)")
+        for p in mais_vendidos[:5]:
+            print(f"   → {p.nome[:50]}")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    # Testa histórico de cliente
+    print("\n[11] Testando histórico de cliente...")
+    try:
+        if clientes:
+            historico = connector.get_historico_cliente(clientes[0].id, dias=365)
+            print(f"✓ Cliente {clientes[0].nome} tem {len(historico)} venda(s) no último ano")
+            for v in historico[:3]:
+                print(f"   → Pedido #{v.id} - {v.data.strftime('%d/%m/%Y')} - R$ {v.total:.2f} ({len(v.itens)} itens)")
+    except Exception as e:
+        print(f"✗ Erro: {e}")
+
+    print("\n" + "=" * 60)
+    print("  TESTE CONCLUÍDO")
+    print("=" * 60)
+
+    return True
+
+
+if __name__ == "__main__":
+    test_connector()

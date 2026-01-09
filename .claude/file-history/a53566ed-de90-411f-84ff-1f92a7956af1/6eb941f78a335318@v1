@@ -1,0 +1,53 @@
+program PharmaCopilot;
+
+uses
+   Vcl.Forms,
+   System.SysUtils,
+   Winapi.Windows,
+   uCopilotIcon in 'uCopilotIcon.pas' {FrmCopilotIcon},
+   uCopilotPanel in 'uCopilotPanel.pas' {FrmCopilotPanel},
+   uCopilotAPI in 'uCopilotAPI.pas',
+   uCopilotConfig in 'uCopilotConfig.pas';
+
+{$R *.res}
+
+var
+   Mutex: THandle;
+
+begin
+   // Evita multiplas instancias
+   Mutex := CreateMutex(nil, True, 'PharmaCopilot_SingleInstance');
+   if GetLastError = ERROR_ALREADY_EXISTS then
+   begin
+      MessageBox(0, 'PharmaCopilot ja esta em execucao.', 'Aviso', MB_ICONINFORMATION);
+      Exit;
+   end;
+
+   try
+      Application.Initialize;
+      Application.MainFormOnTaskbar := False;
+      Application.Title := 'PharmaCopilot';
+
+      // Carrega configuracoes
+      CopilotConfig := TCopilotConfig.Create;
+      CopilotConfig.Load;
+
+      // Cria API client
+      CopilotAPI := TCopilotAPI.Create;
+      CopilotAPI.BaseURL := CopilotConfig.BackendURL;
+
+      // Cria formularios
+      Application.CreateForm(TFrmCopilotIcon, FrmCopilotIcon);
+      Application.CreateForm(TFrmCopilotPanel, FrmCopilotPanel);
+
+      // Inicia minimizado na bandeja
+      Application.ShowMainForm := False;
+
+      Application.Run;
+   finally
+      CopilotConfig.Free;
+      CopilotAPI.Free;
+      ReleaseMutex(Mutex);
+      CloseHandle(Mutex);
+   end;
+end.

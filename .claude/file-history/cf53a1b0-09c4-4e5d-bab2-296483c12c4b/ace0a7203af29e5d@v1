@@ -1,0 +1,114 @@
+"""
+Script para completar os 200 medicamentos mais vendidos no Brasil.
+"""
+import pymysql
+
+MEDICAMENTOS_FINAIS = [
+    # Oftalmológicos
+    ("TOBRAMICINA COLÍRIO", "Tobrex", "1 gota 4-6x/dia", "Aplicar no olho afetado", "A cada 4-6h", "Temperatura ambiente após abrir", "Ardência, coceira ocular", "N/A", "Nenhuma significativa", False, "simples", "Seguro", "Seguro", "Cat. B", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("CIPROFLOXACINO COLÍRIO", "Ciloxan", "1-2 gotas 4x/dia", "Aplicar no olho afetado", "A cada 4-6h", "Temperatura ambiente", "Desconforto ocular, gosto amargo", "N/A", "Nenhuma significativa", False, "simples", "Seguro", "Seguro ≥ 1 ano", "Cat. C", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("DEXAMETASONA COLÍRIO", "Maxidex", "1-2 gotas 4-6x/dia", "Uso sob supervisão oftalmológica", "4-6x/dia", "Temperatura ambiente", "Aumento PIO, catarata (uso prolongado)", "N/A", "Nenhuma significativa", False, "simples", "Monitorar PIO", "Uso criterioso", "Cat. C", "Usar com cautela", "Sem ajuste", "Sem ajuste"),
+    ("LÁGRIMA ARTIFICIAL", "Systane", "1-2 gotas conforme necessidade", "Aplicar quando sentir olho seco", "Conforme necessidade", "Temperatura ambiente", "Raramente: turvação visual temporária", "N/A", "Nenhuma", False, "livre", "Seguro", "Seguro", "Seguro", "Seguro", "Seguro", "Seguro"),
+
+    # Otológicos
+    ("CIPROFLOXACINO + DEXAMETASONA OTOLÓGICO", "Ciprodex", "4 gotas 2x/dia", "Aplicar no ouvido afetado", "12/12h", "Temperatura ambiente", "Coceira no ouvido", "N/A", "Nenhuma significativa", False, "simples", "Seguro", "Seguro ≥ 6 meses", "Cat. C", "Usar com cautela", "Sem ajuste", "Sem ajuste"),
+
+    # Nasais
+    ("BUDESONIDA NASAL", "Busonid", "64-256mcg/dia", "1-2 jatos em cada narina 1-2x/dia", "Manhã", "Temperatura ambiente", "Epistaxe, irritação nasal", "N/A", "Nenhuma significativa", False, "livre", "Seguro", "≥ 6 anos", "Cat. B", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("MOMETASONA NASAL", "Nasonex", "100-200mcg/dia", "1-2 jatos em cada narina 1x/dia", "Manhã", "Temperatura ambiente", "Epistaxe, cefaleia", "N/A", "Nenhuma significativa", False, "livre", "Seguro", "≥ 3 anos", "Cat. C", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("OXIMETAZOLINA NASAL", "Afrin", "2-3 gotas ou 1 jato 2x/dia", "Máximo 3 dias de uso", "12/12h por máx 3 dias", "Temperatura ambiente", "Rinite medicamentosa (uso prolongado)", "N/A", "IMAO", False, "livre", "Cuidado com HAS", "≥ 6 anos", "Evitar", "Evitar", "Usar com cautela se HAS", "Sem ajuste"),
+    ("SOLUÇÃO SALINA NASAL", "Maresis", "2-3 jatos em cada narina", "Usar para higiene nasal", "Conforme necessidade", "Temperatura ambiente", "Nenhum significativo", "N/A", "Nenhuma", False, "livre", "Seguro", "Seguro", "Seguro", "Seguro", "Seguro", "Seguro"),
+
+    # Broncodilatadores
+    ("SALBUTAMOL SPRAY", "Aerolin", "100-200mcg (1-2 jatos) até 4x/dia", "Agitar antes de usar, expirar antes de inalar", "Conforme necessidade", "Temperatura ambiente", "Tremor, taquicardia, cefaleia", "N/A", "Betabloqueadores antagonizam", False, "livre", "Risco de arritmias", "Dose por idade", "Cat. C - usar se necessário", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("FORMOTEROL + BUDESONIDA", "Alenia/Symbicort", "1-2 inalações 2x/dia", "Usar espaçador se necessário, enxaguar boca", "Manhã e noite", "Temperatura ambiente", "Rouquidão, candidíase oral", "Enxaguar boca após", "Betabloqueadores, cetoconazol", False, "simples", "Seguro", "≥ 6 anos", "Cat. C - usar se necessário", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("BROMETO DE IPRATRÓPIO", "Atrovent", "2 jatos 3-4x/dia", "Evitar nos olhos", "6/6h ou 8/8h", "Temperatura ambiente", "Boca seca, gosto metálico", "N/A", "Anticolinérgicos", False, "livre", "Cuidado com glaucoma/HPB", "Dose por idade", "Cat. B", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("BECLOMETASONA SPRAY ORAL", "Clenil", "200-800mcg/dia", "1-2 jatos 2-4x/dia, enxaguar boca", "Manhã e noite", "Temperatura ambiente", "Candidíase oral, rouquidão", "Enxaguar boca após", "Nenhuma significativa", False, "livre", "Seguro", "Dose por idade", "Cat. C - usar se necessário", "Provavelmente seguro", "Sem ajuste", "Sem ajuste"),
+    ("MONTELUCASTE", "Singulair", "10mg 1x/dia (adultos)", "Tomar à noite", "Noite ao deitar", "Temperatura ambiente", "Cefaleia, dor abdominal", "Sem restrições", "Fenobarbital, rifampicina", False, "simples", "Seguro", "4mg (2-5 anos), 5mg (6-14)", "Cat. B - relativamente seguro", "Excretado no leite", "Sem ajuste", "Sem ajuste"),
+
+    # Dermatológicos tópicos
+    ("CETOCONAZOL CREME/SHAMPOO", "Nizoral", "Aplicar 1-2x/dia (creme)", "Aplicar na área afetada", "1-2x/dia", "Temperatura ambiente", "Irritação local, prurido", "N/A", "Nenhuma - uso tópico", False, "livre", "Seguro", "Seguro", "Provavelmente seguro", "Provavelmente seguro", "Seguro - tópico", "Seguro - tópico"),
+    ("CLOTRIMAZOL CREME", "Canesten", "Aplicar 2-3x/dia", "Aplicar na área afetada por 2-4 semanas", "2-3x/dia", "Temperatura ambiente", "Irritação, queimação local", "N/A", "Nenhuma - uso tópico", False, "livre", "Seguro", "Seguro", "Cat. B - 1º tri com cautela", "Provavelmente seguro", "Seguro", "Seguro"),
+    ("DEXAMETASONA CREME", "Decadron creme", "Aplicar fina camada 2-3x/dia", "Usar por período limitado", "2-3x/dia", "Temperatura ambiente", "Atrofia cutânea, estrias (uso prolongado)", "N/A", "Nenhuma - uso tópico", False, "livre", "Pele mais sensível", "Evitar uso prolongado", "Evitar uso extenso", "Evitar uso extenso", "Seguro - tópico", "Seguro - tópico"),
+    ("BETAMETASONA CREME", "Betnovate", "Aplicar fina camada 1-2x/dia", "Usar por período limitado", "1-2x/dia", "Temperatura ambiente", "Atrofia, estrias, telangiectasias", "N/A", "Nenhuma - uso tópico", False, "simples", "Pele mais sensível - cuidado", "Evitar uso prolongado", "Cat. C - evitar extenso", "Evitar uso extenso", "Seguro - tópico", "Seguro - tópico"),
+    ("MUPIROCINA", "Bactroban", "Aplicar 3x/dia por 5-10 dias", "Aplicar na área afetada", "8/8h", "Temperatura ambiente", "Irritação, queimação local", "N/A", "Nenhuma significativa", False, "simples", "Seguro", "Seguro ≥ 2 meses", "Cat. B", "Provavelmente seguro", "Usar com cautela em área extensa", "Seguro"),
+    ("NEOMICINA + BACITRACINA", "Nebacetin", "Aplicar 2-3x/dia", "Limpar área antes de aplicar", "2-3x/dia", "Temperatura ambiente", "Sensibilização, dermatite de contato", "N/A", "Nenhuma - uso tópico", False, "livre", "Risco de sensibilização", "Seguro", "Cat. C - evitar extenso", "Provavelmente seguro", "Evitar em áreas extensas", "Seguro"),
+
+    # Ginecológicos
+    ("METRONIDAZOL GEL VAGINAL", "Flagyl gel", "1 aplicador 1x/dia por 5 dias", "Aplicar à noite ao deitar", "À noite", "Temperatura ambiente", "Irritação vaginal", "N/A", "Nenhuma significativa - tópico", False, "simples", "Seguro", "Não aplicável", "Evitar 1º trimestre", "Provavelmente seguro", "Seguro", "Seguro"),
+    ("CLOTRIMAZOL CREME VAGINAL", "Gino-Canesten", "1 aplicador à noite por 7 dias", "Aplicar à noite ao deitar", "À noite por 7 dias", "Temperatura ambiente", "Irritação local", "N/A", "Nenhuma - uso tópico", False, "livre", "Seguro", "Não aplicável", "1º tri com cautela", "Provavelmente seguro", "Seguro", "Seguro"),
+    ("MICONAZOL CREME VAGINAL", "Gyno-Daktarin", "1 aplicador à noite por 7 dias", "Aplicar à noite ao deitar", "À noite por 7 dias", "Temperatura ambiente", "Irritação, coceira local", "N/A", "Nenhuma - uso tópico", False, "livre", "Seguro", "Não aplicável", "Cat. C - usar se necessário", "Provavelmente seguro", "Seguro", "Seguro"),
+
+    # Anticonvulsivantes
+    ("CARBAMAZEPINA", "Tegretol", "200-1200mg/dia dividido", "Tomar com alimentos", "8/8h ou 12/12h com alimentos", "Temperatura ambiente", "Tontura, sonolência, rash, hiponatremia", "Com alimentos", "Muitas - indutor enzimático", True, "especial", "Maior risco de hiponatremia", "Dose por peso", "Categoria D - teratogênico", "Excretado no leite", "Sem ajuste", "Reduzir dose"),
+    ("ÁCIDO VALPROICO", "Depakene", "500-2000mg/dia dividido", "Tomar com alimentos", "8/8h ou 12/12h", "Temperatura ambiente", "Tremor, ganho peso, hepatotoxicidade", "Com alimentos", "Lamotrigina, carbamazepina", True, "especial", "Maior risco de hepatotoxicidade", "Dose por peso", "ALTAMENTE TERATOGÊNICO - evitar", "Excretado no leite - cautela", "Sem ajuste", "Contraindicado se grave"),
+    ("FENITOÍNA", "Hidantal", "200-400mg/dia", "Tomar com alimentos para reduzir GI", "1x/dia ou dividido", "Temperatura ambiente", "Hiperplasia gengival, ataxia, rash", "Com alimentos", "Muitas - indutor enzimático", True, "especial", "Monitorar níveis séricos", "Dose por peso", "Categoria D - teratogênico", "Excretado no leite", "Sem ajuste mas monitorar", "Reduzir dose"),
+    ("TOPIRAMATO", "Topamax", "50-400mg/dia dividido", "Pode tomar com ou sem alimentos", "12/12h", "Temperatura ambiente", "Parestesias, perda peso, litíase renal", "Manter hidratação", "ACO podem perder eficácia", True, "especial", "Risco cognitivo maior", "Dose por peso ≥ 2 anos", "Categoria D - fendas orais", "Excretado no leite", "Ajustar dose", "Usar com cautela"),
+    ("LAMOTRIGINA", "Lamictal", "25-400mg/dia", "Pode tomar com ou sem alimentos", "1-2x/dia", "Temperatura ambiente", "Rash (pode ser grave), cefaleia, tontura", "Sem restrições", "Valproato aumenta nível, ACO reduzem", True, "especial", "Titular muito devagar", "Dose por peso ≥ 2 anos", "Menor risco - preferido", "Excretado no leite", "Ajustar dose", "Ajustar dose"),
+
+    # Psiquiátricos adicionais
+    ("BUPROPIONA", "Wellbutrin", "150-300mg/dia", "Não tomar à noite (insônia)", "Manhã (e almoço se 2x)", "Temperatura ambiente", "Insônia, cefaleia, boca seca", "Evitar álcool", "IMAO contraindicado, reduz limiar convulsivo", True, "especial", "Seguro, boa opção", "Não indicado", "Cat. C - avaliar", "Excretado no leite", "Reduzir dose", "Usar com cautela"),
+    ("VENLAFAXINA", "Efexor", "75-225mg/dia", "Tomar com alimentos", "1x/dia (XR) ou 2-3x/dia", "Temperatura ambiente", "Náusea, cefaleia, HAS em doses altas", "Com alimentos", "IMAO contraindicado", True, "especial", "Monitorar PA em doses altas", "Não indicado < 18 anos", "Cat. C - síndrome abstinência RN", "Excretado no leite", "Reduzir dose 50%", "Reduzir dose"),
+    ("DULOXETINA", "Cymbalta", "30-60mg/dia", "Pode tomar com ou sem alimentos", "1x/dia", "Temperatura ambiente", "Náusea, boca seca, constipação", "Evitar álcool", "IMAO contraindicado", True, "especial", "Iniciar 30mg", "Não indicado < 18 anos", "Cat. C", "Excretado no leite - evitar", "Evitar se ClCr < 30", "Evitar"),
+    ("QUETIAPINA", "Seroquel", "25-800mg/dia", "Pode tomar com ou sem alimentos", "1-2x/dia", "Temperatura ambiente", "Sonolência, ganho peso, hipotensão", "Evitar álcool", "Inibidores CYP3A4", True, "especial", "Iniciar muito baixo, titular devagar", "Uso criterioso", "Cat. C", "Excretado no leite", "Sem ajuste", "Titular devagar"),
+]
+
+def main():
+    conn = pymysql.connect(
+        host='localhost',
+        port=3307,
+        user='root',
+        password='f68interdb',
+        database='copilot',
+        charset='utf8mb4'
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM copilot_medicamento_info")
+    count_atual = cursor.fetchone()[0]
+    print(f"Registros atuais: {count_atual}")
+
+    sql = """
+    INSERT INTO copilot_medicamento_info
+        (principio_ativo, nome_comercial, posologia_padrao, orientacao_uso,
+         horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos,
+         interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso,
+         alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal,
+         alerta_hepatico, fonte)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'bulario_anvisa')
+    """
+
+    inseridos = 0
+    for med in MEDICAMENTOS_FINAIS:
+        try:
+            cursor.execute(sql, med)
+            inseridos += 1
+        except pymysql.err.IntegrityError as e:
+            print(f"Duplicado: {med[0]}")
+        except Exception as e:
+            print(f"Erro em {med[0]}: {e}")
+
+    conn.commit()
+
+    cursor.execute("SELECT COUNT(*) FROM copilot_medicamento_info")
+    count_final = cursor.fetchone()[0]
+
+    print(f"\nInseridos: {inseridos}")
+    print(f"Total final: {count_final}")
+
+    cursor.execute("""
+        SELECT tipo_receita, COUNT(*) as qtd
+        FROM copilot_medicamento_info
+        GROUP BY tipo_receita
+        ORDER BY qtd DESC
+    """)
+    print("\nDistribuicao por tipo de receita:")
+    for row in cursor.fetchall():
+        print(f"  {row[0]}: {row[1]}")
+
+    cursor.close()
+    conn.close()
+
+if __name__ == '__main__':
+    main()

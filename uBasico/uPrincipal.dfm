@@ -38,9 +38,9 @@ object FrmPrincipal: TFrmPrincipal
       1098
       58)
     object PanelMenu: TLMDSimplePanel
-      Left = 333
+      Left = 269
       Top = 5
-      Width = 430
+      Width = 560
       Height = 50
       Anchors = [akLeft, akTop, akBottom]
       Color = 4144959

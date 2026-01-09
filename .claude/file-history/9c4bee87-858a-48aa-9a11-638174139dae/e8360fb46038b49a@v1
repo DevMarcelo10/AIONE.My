@@ -1,0 +1,244 @@
+unit uCopilotConfig;
+
+interface
+
+uses
+   System.SysUtils, System.Classes, System.IniFiles, System.IOUtils,
+   Winapi.Windows;
+
+type
+   TCopilotConfig = class
+   private
+      FConfigPath: string;
+
+      // Conexao
+      FBackendURL: string;
+      FFilialID: Integer;
+
+      // Terminal - Identificacao da venda atual
+      FTabelaVendas: string;
+      FCampoIDVenda: string;
+      FCampoIdentificador: string;
+      FValorIdentificador: string;
+      FCampoStatusVenda: string;
+      FValorVendaAberta: string;
+      FCampoData: string;
+      FCampoCliente: string;
+      FOrdenarPor: string;
+
+      // Posicao do icone
+      FIconPosX: Integer;
+      FIconPosY: Integer;
+
+      // Hotkey
+      FHotKeyModifiers: Cardinal;
+      FHotKeyVirtualKey: Cardinal;
+
+      // Preferencias
+      FAutoStart: Boolean;
+      FShowNotifications: Boolean;
+      FTheme: string;
+
+      function GetConfigFilePath: string;
+      function GetAppDataPath: string;
+   public
+      constructor Create;
+      destructor Destroy; override;
+
+      procedure Load;
+      procedure Save;
+      procedure Reset;
+
+      // Conexao
+      property BackendURL: string read FBackendURL write FBackendURL;
+      property FilialID: Integer read FFilialID write FFilialID;
+
+      // Terminal - Identificacao da venda atual
+      property TabelaVendas: string read FTabelaVendas write FTabelaVendas;
+      property CampoIDVenda: string read FCampoIDVenda write FCampoIDVenda;
+      property CampoIdentificador: string read FCampoIdentificador write FCampoIdentificador;
+      property ValorIdentificador: string read FValorIdentificador write FValorIdentificador;
+      property CampoStatusVenda: string read FCampoStatusVenda write FCampoStatusVenda;
+      property ValorVendaAberta: string read FValorVendaAberta write FValorVendaAberta;
+      property CampoData: string read FCampoData write FCampoData;
+      property CampoCliente: string read FCampoCliente write FCampoCliente;
+      property OrdenarPor: string read FOrdenarPor write FOrdenarPor;
+
+      // Posicao do icone
+      property IconPosX: Integer read FIconPosX write FIconPosX;
+      property IconPosY: Integer read FIconPosY write FIconPosY;
+
+      // Hotkey
+      property HotKeyModifiers: Cardinal read FHotKeyModifiers write FHotKeyModifiers;
+      property HotKeyVirtualKey: Cardinal read FHotKeyVirtualKey write FHotKeyVirtualKey;
+
+      // Preferencias
+      property AutoStart: Boolean read FAutoStart write FAutoStart;
+      property ShowNotifications: Boolean read FShowNotifications write FShowNotifications;
+      property Theme: string read FTheme write FTheme;
+
+      // Paths
+      property ConfigPath: string read FConfigPath;
+   end;
+
+var
+   CopilotConfig: TCopilotConfig;
+
+implementation
+
+{ TCopilotConfig }
+
+constructor TCopilotConfig.Create;
+begin
+   inherited Create;
+   FConfigPath := GetAppDataPath;
+
+   // Cria pasta se nao existir
+   if not TDirectory.Exists(FConfigPath) then
+   begin
+      TDirectory.CreateDirectory(FConfigPath);
+   end;
+
+   // Valores padrao
+   Reset;
+end;
+
+destructor TCopilotConfig.Destroy;
+begin
+   inherited;
+end;
+
+function TCopilotConfig.GetAppDataPath: string;
+var
+   AppDataDir: string;
+begin
+   // Usa %APPDATA% que e o local padrao para configs no Windows
+   AppDataDir := GetEnvironmentVariable('APPDATA');
+   if AppDataDir = '' then
+   begin
+      // Fallback para pasta do usuario
+      AppDataDir := TPath.GetHomePath;
+   end;
+   Result := TPath.Combine(AppDataDir, 'PharmaCopilot');
+end;
+
+function TCopilotConfig.GetConfigFilePath: string;
+begin
+   Result := TPath.Combine(FConfigPath, 'config.ini');
+end;
+
+procedure TCopilotConfig.Reset;
+begin
+   // Conexao
+   FBackendURL := 'http://localhost:8000';
+   FFilialID := 1;
+
+   // Terminal - Valores padrao para AIONE
+   FTabelaVendas := 'arqpedido';
+   FCampoIDVenda := 'IDPed';
+   FCampoIdentificador := 'IDFilial';
+   FValorIdentificador := '1';
+   FCampoStatusVenda := 'Status';
+   FValorVendaAberta := 'A';
+   FCampoData := 'Datped';
+   FCampoCliente := 'IDPess';
+   FOrdenarPor := 'Datped DESC';
+
+   // Posicao padrao (canto direito)
+   FIconPosX := -1;  // -1 = calcular automaticamente
+   FIconPosY := -1;
+
+   // Hotkey padrao: Ctrl+Shift+P
+   FHotKeyModifiers := MOD_CONTROL or MOD_SHIFT;
+   FHotKeyVirtualKey := Ord('P');
+
+   // Preferencias
+   FAutoStart := False;
+   FShowNotifications := True;
+   FTheme := 'light';
+end;
+
+procedure TCopilotConfig.Load;
+var
+   Ini: TIniFile;
+begin
+   if not TFile.Exists(GetConfigFilePath) then
+   begin
+      // Primeira execucao - salva configuracao padrao
+      Save;
+      Exit;
+   end;
+
+   Ini := TIniFile.Create(GetConfigFilePath);
+   try
+      // Conexao
+      FBackendURL := Ini.ReadString('Connection', 'BackendURL', FBackendURL);
+      FFilialID := Ini.ReadInteger('Connection', 'FilialID', FFilialID);
+
+      // Terminal
+      FTabelaVendas := Ini.ReadString('Terminal', 'TabelaVendas', FTabelaVendas);
+      FCampoIDVenda := Ini.ReadString('Terminal', 'CampoIDVenda', FCampoIDVenda);
+      FCampoIdentificador := Ini.ReadString('Terminal', 'CampoIdentificador', FCampoIdentificador);
+      FValorIdentificador := Ini.ReadString('Terminal', 'ValorIdentificador', FValorIdentificador);
+      FCampoStatusVenda := Ini.ReadString('Terminal', 'CampoStatusVenda', FCampoStatusVenda);
+      FValorVendaAberta := Ini.ReadString('Terminal', 'ValorVendaAberta', FValorVendaAberta);
+      FCampoData := Ini.ReadString('Terminal', 'CampoData', FCampoData);
+      FCampoCliente := Ini.ReadString('Terminal', 'CampoCliente', FCampoCliente);
+      FOrdenarPor := Ini.ReadString('Terminal', 'OrdenarPor', FOrdenarPor);
+
+      // Posicao
+      FIconPosX := Ini.ReadInteger('Position', 'IconX', FIconPosX);
+      FIconPosY := Ini.ReadInteger('Position', 'IconY', FIconPosY);
+
+      // Hotkey
+      FHotKeyModifiers := Ini.ReadInteger('HotKey', 'Modifiers', FHotKeyModifiers);
+      FHotKeyVirtualKey := Ini.ReadInteger('HotKey', 'VirtualKey', FHotKeyVirtualKey);
+
+      // Preferencias
+      FAutoStart := Ini.ReadBool('Preferences', 'AutoStart', FAutoStart);
+      FShowNotifications := Ini.ReadBool('Preferences', 'ShowNotifications', FShowNotifications);
+      FTheme := Ini.ReadString('Preferences', 'Theme', FTheme);
+   finally
+      FreeAndNil(Ini);
+   end;
+end;
+
+procedure TCopilotConfig.Save;
+var
+   Ini: TIniFile;
+begin
+   Ini := TIniFile.Create(GetConfigFilePath);
+   try
+      // Conexao
+      Ini.WriteString('Connection', 'BackendURL', FBackendURL);
+      Ini.WriteInteger('Connection', 'FilialID', FFilialID);
+
+      // Terminal
+      Ini.WriteString('Terminal', 'TabelaVendas', FTabelaVendas);
+      Ini.WriteString('Terminal', 'CampoIDVenda', FCampoIDVenda);
+      Ini.WriteString('Terminal', 'CampoIdentificador', FCampoIdentificador);
+      Ini.WriteString('Terminal', 'ValorIdentificador', FValorIdentificador);
+      Ini.WriteString('Terminal', 'CampoStatusVenda', FCampoStatusVenda);
+      Ini.WriteString('Terminal', 'ValorVendaAberta', FValorVendaAberta);
+      Ini.WriteString('Terminal', 'CampoData', FCampoData);
+      Ini.WriteString('Terminal', 'CampoCliente', FCampoCliente);
+      Ini.WriteString('Terminal', 'OrdenarPor', FOrdenarPor);
+
+      // Posicao
+      Ini.WriteInteger('Position', 'IconX', FIconPosX);
+      Ini.WriteInteger('Position', 'IconY', FIconPosY);
+
+      // Hotkey
+      Ini.WriteInteger('HotKey', 'Modifiers', FHotKeyModifiers);
+      Ini.WriteInteger('HotKey', 'VirtualKey', FHotKeyVirtualKey);
+
+      // Preferencias
+      Ini.WriteBool('Preferences', 'AutoStart', FAutoStart);
+      Ini.WriteBool('Preferences', 'ShowNotifications', FShowNotifications);
+      Ini.WriteString('Preferences', 'Theme', FTheme);
+   finally
+      FreeAndNil(Ini);
+   end;
+end;
+
+end.

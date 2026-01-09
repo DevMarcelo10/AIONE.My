@@ -1,0 +1,72 @@
+"""Endpoints de alertas de segurança."""
+
+from typing import Optional
+from fastapi import APIRouter, HTTPException
+
+from models.schemas import Alert
+from services.alert_service import AlertService
+
+router = APIRouter()
+
+alert_service = AlertService()
+
+
+@router.get("/venda/{venda_id}", response_model=list[Alert])
+async def get_alertas_venda(
+    venda_id: int,
+    cliente_id: Optional[int] = None,
+):
+    """
+    Retorna alertas de segurança para a venda atual.
+
+    Verifica:
+    - Interações medicamentosas entre itens
+    - Duplicidade de princípio ativo
+    - Alergias do cliente (se cadastradas)
+    - Contraindicações
+    """
+    try:
+        return await alert_service.get_alertas_venda(venda_id, cliente_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/interacoes", response_model=list[Alert])
+async def check_interacoes(produtos: str):
+    """
+    Verifica interações entre lista de produtos.
+
+    Args:
+        produtos: IDs separados por vírgula (ex: "1,2,3")
+    """
+    try:
+        produto_ids = [int(p.strip()) for p in produtos.split(",")]
+        return await alert_service.check_interacoes(produto_ids)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="IDs de produtos inválidos")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/estoque/vencendo", response_model=list[Alert])
+async def get_alertas_vencimento(dias: int = 90):
+    """
+    Retorna alertas de produtos próximos do vencimento.
+
+    Útil para gestão de estoque e FEFO.
+    """
+    try:
+        return await alert_service.get_alertas_vencimento(dias)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/estoque/baixo", response_model=list[Alert])
+async def get_alertas_estoque_baixo():
+    """
+    Retorna alertas de produtos com estoque abaixo do mínimo.
+    """
+    try:
+        return await alert_service.get_alertas_estoque_baixo()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

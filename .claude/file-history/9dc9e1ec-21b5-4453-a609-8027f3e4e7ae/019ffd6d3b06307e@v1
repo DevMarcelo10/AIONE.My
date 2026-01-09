@@ -1,0 +1,197 @@
+# Guia de Instalação do MCP MySQL para AIONE.My
+
+## Pré-requisitos
+
+### 1. Instalar Python
+
+Você precisa ter o Python 3.8 ou superior instalado. Escolha uma das opções:
+
+**Opção A: Instalador Oficial (RECOMENDADO)**
+1. Baixe o Python em: https://www.python.org/downloads/
+2. Execute o instalador
+3. ✅ **IMPORTANTE**: Marque a opção "Add Python to PATH"
+4. Clique em "Install Now"
+
+**Opção B: Microsoft Store**
+1. Abra a Microsoft Store
+2. Busque por "Python 3.12" ou "Python 3.11"
+3. Clique em "Obter" e instale
+
+### 2. Verificar Instalação do Python
+
+Abra um novo terminal (PowerShell ou CMD) e execute:
+
+```bash
+python --version
+```
+
+Ou:
+
+```bash
+py --version
+```
+
+Deve mostrar algo como: `Python 3.12.x`
+
+## Instalação do MCP
+
+### Passo 1: Instalar Dependências
+
+Abra um terminal na pasta do MCP:
+
+```bash
+cd C:\Fontes\AIONE.My\mcp-mysql-aione
+```
+
+Instale as dependências:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Ou, se o comando acima não funcionar:
+
+```bash
+py -m pip install -r requirements.txt
+```
+
+### Passo 2: Configurar o Banco de Dados
+
+Edite o arquivo `config.ini` e ajuste as credenciais:
+
+```ini
+[Database]
+host = localhost
+port = 3307
+user = root
+password = SUA_SENHA_AQUI
+database = aione
+```
+
+### Passo 3: Configurar o Claude Code
+
+O arquivo de configuração já foi criado em:
+- Windows: `%USERPROFILE%\.claude-code\mcp.json`
+- Linux/Mac: `~/.claude-code/mcp.json`
+
+Conteúdo do arquivo:
+
+```json
+{
+  "mcpServers": {
+    "mysql-aione": {
+      "command": "python",
+      "args": [
+        "C:\\Fontes\\AIONE.My\\mcp-mysql-aione\\server.py"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "query_select",
+        "list_tables",
+        "describe_table",
+        "get_table_count",
+        "search_table"
+      ]
+    }
+  }
+}
+```
+
+**NOTA**: Se você usa `py` em vez de `python`, altere `"command": "python"` para `"command": "py"`
+
+### Passo 4: Testar o MCP
+
+Execute o servidor manualmente para testar:
+
+```bash
+cd C:\Fontes\AIONE.My\mcp-mysql-aione
+python server.py
+```
+
+Se tudo estiver correto, o servidor ficará aguardando conexões (não mostrará nenhuma mensagem).
+
+Pressione `Ctrl+C` para parar.
+
+### Passo 5: Reiniciar o Claude Code
+
+Após a instalação, reinicie completamente o Claude Code para que ele reconheça o novo MCP.
+
+## Verificação
+
+Após reiniciar o Claude Code, você pode testar o MCP com comandos como:
+
+- "Liste todas as tabelas do banco de dados"
+- "Mostre a estrutura da tabela arqproduto"
+- "Quantos registros tem na tabela arqpessoa?"
+
+## Solução de Problemas
+
+### Erro: "Python não foi encontrado"
+
+- Reinstale o Python marcando "Add to PATH"
+- Ou use o caminho completo: `C:\Python312\python.exe`
+
+### Erro: "No module named 'mcp'"
+
+Execute novamente:
+```bash
+pip install -r requirements.txt
+```
+
+### Erro: "Can't connect to MySQL server"
+
+- Verifique se o servidor IAServer.exe está rodando
+- Confirme as credenciais no arquivo config.ini
+- Verifique a porta 3307 no firewall
+
+### Erro: "Access denied for user"
+
+- Verifique o usuário e senha no config.ini
+- Certifique-se de que o usuário tem permissões no banco
+
+## Comandos Úteis
+
+### Listar MCPs Ativos
+No Claude Code, digite:
+```
+/mcp list
+```
+
+### Desabilitar o MCP
+Edite `~/.claude-code/mcp.json` e altere:
+```json
+"disabled": true
+```
+
+### Ver Logs do MCP
+Os logs aparecem no console do Claude Code.
+
+## Segurança
+
+⚠️ **IMPORTANTE**:
+
+1. **Nunca commite o arquivo config.ini** com senhas reais
+2. Use o .gitignore fornecido
+3. Considere usar variáveis de ambiente para senhas
+4. Limite as permissões do usuário MySQL
+5. Sempre revise queries de escrita (INSERT/UPDATE/DELETE)
+
+## Estrutura de Arquivos
+
+```
+mcp-mysql-aione/
+├── server.py          # Servidor MCP principal
+├── config.ini         # Configuração do banco (não commitar!)
+├── requirements.txt   # Dependências Python
+├── mcp.json          # Config do Claude Code
+├── README.md         # Documentação
+├── INSTALACAO.md     # Este arquivo
+└── .gitignore        # Arquivos a ignorar no git
+```
+
+## Recursos Adicionais
+
+- Documentação MCP: https://github.com/modelcontextprotocol
+- Python MySQL Connector: https://dev.mysql.com/doc/connector-python/
+- Claude Code: https://claude.com/code

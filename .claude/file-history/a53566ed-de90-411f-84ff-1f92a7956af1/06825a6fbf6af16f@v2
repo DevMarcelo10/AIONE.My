@@ -1,0 +1,196 @@
+"""
+Serviço de integração com LLMs.
+Suporta múltiplos providers: Anthropic, OpenAI, Google.
+"""
+
+from typing import Optional
+import structlog
+
+from config.settings import settings
+
+logger = structlog.get_logger()
+
+
+class LLMService:
+    """Serviço para comunicação com LLMs."""
+
+    def __init__(self):
+        self.provider = settings.LLM_PROVIDER
+        self.model = settings.LLM_MODEL
+        self.max_tokens = settings.LLM_MAX_TOKENS
+        self.temperature = settings.LLM_TEMPERATURE
+        self._client = None
+
+    def _get_client(self):
+        """Inicializa cliente do provider configurado."""
+        if self._client is not None:
+            return self._client
+
+        if self.provider == "anthropic":
+            from anthropic import Anthropic
+            self._client = Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+
+        elif self.provider == "openai":
+            from openai import OpenAI
+            self._client = OpenAI(api_key=settings.OPENAI_API_KEY)
+
+        elif self.provider == "deepseek":
+            from openai import OpenAI
+            self._client = OpenAI(
+                api_key=settings.DEEPSEEK_API_KEY,
+                base_url="https://api.deepseek.com"
+            )
+
+        elif self.provider == "google":
+            import google.generativeai as genai
+            genai.configure(api_key=settings.GOOGLE_API_KEY)
+            self._client = genai.GenerativeModel(self.model)
+
+        else:
+            raise ValueError(f"Provider nao suportado: {self.provider}")
+
+        return self._client
+
+    async def generate(
+        self,
+        prompt: str,
+        system_prompt: Optional[str] = None,
+        history: Optional[list[dict]] = None,
+    ) -> str:
+        """
+        Gera resposta do LLM.
+
+        Args:
+            prompt: Mensagem do usuário
+            system_prompt: Instruções do sistema
+            history: Histórico de mensagens
+
+        Returns:
+            Resposta do modelo
+        """
+        client = self._get_client()
+        history = history or []
+
+        try:
+            if self.provider == "anthropic":
+                return await self._generate_anthropic(
+                    client, prompt, system_prompt, history
+                )
+            elif self.provider in ("openai", "deepseek"):
+                return await self._generate_openai(
+                    client, prompt, system_prompt, history
+                )
+            elif self.provider == "google":
+                return await self._generate_google(
+                    client, prompt, system_prompt, history
+                )
+
+        except Exception as e:
+            logger.error("llm_error", provider=self.provider, error=str(e))
+            raise
+
+    async def _generate_anthropic(
+        self,
+        client,
+        prompt: str,
+        system_prompt: Optional[str],
+        history: list[dict],
+    ) -> str:
+        """Gera resposta usando Claude."""
+        messages = []
+
+        # Adiciona histórico
+        for msg in history:
+            messages.append({
+                "role": msg["role"],
+                "content": msg["content"],
+            })
+
+        # Adiciona mensagem atual
+        messages.append({"role": "user", "content": prompt})
+
+        response = client.messages.create(
+            model=self.model,
+            max_tokens=self.max_tokens,
+            temperature=self.temperature,
+            system=system_prompt or self._default_system_prompt(),
+            messages=messages,
+        )
+
+        return response.content[0].text
+
+    async def _generate_openai(
+        self,
+        client,
+        prompt: str,
+        system_prompt: Optional[str],
+        history: list[dict],
+    ) -> str:
+        """Gera resposta usando GPT."""
+        messages = []
+
+        # System prompt
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        else:
+            messages.append({"role": "system", "content": self._default_system_prompt()})
+
+        # Adiciona histórico
+        for msg in history:
+            messages.append({
+                "role": msg["role"],
+                "content": msg["content"],
+            })
+
+        # Adiciona mensagem atual
+        messages.append({"role": "user", "content": prompt})
+
+        response = client.chat.completions.create(
+            model=self.model,
+            max_tokens=self.max_tokens,
+            temperature=self.temperature,
+            messages=messages,
+        )
+
+        return response.choices[0].message.content
+
+    async def _generate_google(
+        self,
+        client,
+        prompt: str,
+        system_prompt: Optional[str],
+        history: list[dict],
+    ) -> str:
+        """Gera resposta usando Gemini."""
+        # Constrói contexto
+        full_prompt = ""
+
+        if system_prompt:
+            full_prompt += f"Instruções: {system_prompt}\n\n"
+        else:
+            full_prompt += f"Instruções: {self._default_system_prompt()}\n\n"
+
+        # Adiciona histórico
+        for msg in history:
+            role = "Usuário" if msg["role"] == "user" else "Assistente"
+            full_prompt += f"{role}: {msg['content']}\n"
+
+        full_prompt += f"Usuário: {prompt}\nAssistente:"
+
+        response = client.generate_content(full_prompt)
+        return response.text
+
+    def _default_system_prompt(self) -> str:
+        """Prompt padrão do sistema."""
+        return """Você é o PharmaCopilot, um assistente especializado para vendedores de farmácia.
+
+Seu papel é ajudar o vendedor durante o atendimento ao cliente com:
+- Sugestões de genéricos e similares mais baratos
+- Alertas de interações medicamentosas
+- Informações sobre medicamentos
+- Sugestões de venda cruzada
+- Lembretes de recompra para clientes
+
+Seja conciso e objetivo nas respostas. Priorize a segurança do paciente.
+Sempre mencione quando um medicamento requer receita.
+Nunca recomende medicamentos controlados sem prescrição médica."""

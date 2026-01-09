@@ -1,0 +1,589 @@
+unit uCopilotIcon;
+
+interface
+
+uses
+   Winapi.Windows,
+   Winapi.Messages,
+   System.SysUtils,
+   System.Classes,
+   System.JSON,
+   System.Threading,
+   Vcl.Graphics,
+   Vcl.Controls,
+   Vcl.Forms,
+   Vcl.ExtCtrls,
+   Vcl.Menus,
+   vcl.Dialogs,
+   Vcl.Imaging.pngimage,
+   uCopilotConfig,
+   uCopilotAPI;
+
+type
+   TStatusColor = (scGray, scBlue, scGreen, scYellow, scRed);
+
+   TFrmCopilotIcon = class(TForm)
+      imgIcon: TImage;
+      tmrBlink: TTimer;
+      PopupMenu: TPopupMenu;
+      mnuAbrir: TMenuItem;
+      mnuSeparator1: TMenuItem;
+      mnuConfig: TMenuItem;
+      mnuSeparator2: TMenuItem;
+      mnuSair: TMenuItem;
+      TrayIcon: TTrayIcon;
+      procedure FormCreate(Sender: TObject);
+      procedure FormDestroy(Sender: TObject);
+      procedure FormMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+      procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+      procedure FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+      procedure imgIconClick(Sender: TObject);
+      procedure imgIconDblClick(Sender: TObject);
+      procedure tmrBlinkTimer(Sender: TObject);
+      procedure mnuAbrirClick(Sender: TObject);
+      procedure mnuConfigClick(Sender: TObject);
+      procedure mnuSairClick(Sender: TObject);
+      procedure TrayIconDblClick(Sender: TObject);
+   private
+      FDragging: Boolean;
+      FDragStartX: Integer;
+      FDragStartY: Integer;
+      FHotKeyID: Integer;
+      FBlinkState: Boolean;
+      FHasNotification: Boolean;
+      FCurrentColor: TStatusColor;
+      FAlertsCount: Integer;
+      FSuggestionsCount: Integer;
+      FtmrStatus: TTimer;
+      FClosing: Boolean;
+      procedure RegisterGlobalHotKey;
+      procedure UnregisterGlobalHotKey;
+      procedure WMHotKey(var Msg: TWMHotKey); message WM_HOTKEY;
+      procedure LoadIconPosition;
+      procedure SaveIconPosition;
+      procedure SetNotification(AValue: Boolean);
+      procedure SetStatusColor(AColor: TStatusColor);
+      procedure FetchStatus;
+      procedure tmrStatusTimer(Sender: TObject);
+      function StringToStatusColor(const AColor: string): TStatusColor;
+      function StatusColorToVCLColor(AColor: TStatusColor): TColor;
+   public
+      procedure ShowNotification(const ATitle, AMessage: string);
+      procedure TogglePanel;
+      procedure RefreshStatus;
+      property HasNotification: Boolean read FHasNotification write SetNotification;
+      property CurrentColor: TStatusColor read FCurrentColor;
+      property AlertsCount: Integer read FAlertsCount;
+      property SuggestionsCount: Integer read FSuggestionsCount;
+   end;
+
+var
+   FrmCopilotIcon: TFrmCopilotIcon;
+
+implementation
+
+uses
+   System.Math,
+   uCopilotPanel,
+   uCopilotSettings;
+
+{$R *.dfm}
+
+const
+   HOTKEY_ID = 1;
+
+procedure TFrmCopilotIcon.FormCreate(Sender: TObject);
+begin
+   // Configura janela sem borda, sempre visivel
+   BorderStyle := bsNone;
+   FormStyle := fsStayOnTop;
+   AlphaBlend := True;
+   AlphaBlendValue := 230;
+   TransparentColor := True;
+   TransparentColorValue := clFuchsia;
+   Color := clFuchsia;
+
+   // Dimensoes do icone
+   Width := 48;
+   Height := 48;
+
+   // Inicializa variaveis
+   FDragging := False;
+   FBlinkState := False;
+   FHasNotification := False;
+   FHotKeyID := 0;
+   FCurrentColor := scGray;
+   FAlertsCount := 0;
+   FSuggestionsCount := 0;
+   FClosing := False;
+
+   // Carrega posicao salva
+   LoadIconPosition;
+
+   // Registra hotkey global (Ctrl+Shift+P)
+   RegisterGlobalHotKey;
+
+   // Configura TrayIcon
+   TrayIcon.Visible := True;
+   TrayIcon.Hint := 'PharmaCopilot - Seu assistente de vendas';
+
+   // Configura timer de status (polling a cada 5 segundos)
+   FtmrStatus := TTimer.Create(Self);
+   FtmrStatus.Interval := 5000;
+   FtmrStatus.OnTimer := tmrStatusTimer;
+   FtmrStatus.Enabled := True;
+
+   // Aplica cor inicial
+   SetStatusColor(scGray);
+end;
+
+procedure TFrmCopilotIcon.FormDestroy(Sender: TObject);
+begin
+   // Sinaliza que estamos fechando para parar tasks em background
+   FClosing := True;
+
+   // Para timers antes de destruir para evitar acesso a objetos ja liberados
+   if Assigned(FtmrStatus) then
+   begin
+      FtmrStatus.Enabled := False;
+      FreeAndNil(FtmrStatus);
+   end;
+   tmrBlink.Enabled := False;
+
+   // Aguarda um pouco para tasks em andamento terminarem
+   Sleep(100);
+   Application.ProcessMessages;
+
+   SaveIconPosition;
+   UnregisterGlobalHotKey;
+end;
+
+procedure TFrmCopilotIcon.RegisterGlobalHotKey;
+var
+   Modifiers: Cardinal;
+   VKey: Cardinal;
+begin
+   // Pega configuracao de hotkey
+   Modifiers := CopilotConfig.HotKeyModifiers;
+   VKey := CopilotConfig.HotKeyVirtualKey;
+
+   if RegisterHotKey(Handle, HOTKEY_ID, Modifiers, VKey) then
+   begin
+      FHotKeyID := HOTKEY_ID;
+   end;
+end;
+
+procedure TFrmCopilotIcon.UnregisterGlobalHotKey;
+begin
+   if FHotKeyID > 0 then
+   begin
+      UnregisterHotKey(Handle, FHotKeyID);
+      FHotKeyID := 0;
+   end;
+end;
+
+procedure TFrmCopilotIcon.WMHotKey(var Msg: TWMHotKey);
+begin
+   if Msg.HotKey = HOTKEY_ID then
+   begin
+      TogglePanel;
+   end;
+end;
+
+procedure TFrmCopilotIcon.LoadIconPosition;
+var
+   X, Y: Integer;
+begin
+   if not Assigned(CopilotConfig) then
+   begin
+      Exit;
+   end;
+
+   X := CopilotConfig.IconPosX;
+   Y := CopilotConfig.IconPosY;
+
+   // Valida se posicao esta dentro da tela
+   if (X < 0) or (X > Screen.Width - Width) then
+   begin
+      X := Screen.Width - Width - 20;
+   end;
+
+   if (Y < 0) or (Y > Screen.Height - Height) then
+   begin
+      Y := (Screen.Height - Height) div 2;
+   end;
+
+   Left := X;
+   Top := Y;
+end;
+
+procedure TFrmCopilotIcon.SaveIconPosition;
+begin
+   // Verifica se config ainda existe (pode estar sendo destruido)
+   if not Assigned(CopilotConfig) then
+   begin
+      Exit;
+   end;
+
+   CopilotConfig.IconPosX := Left;
+   CopilotConfig.IconPosY := Top;
+   CopilotConfig.Save;
+end;
+
+procedure TFrmCopilotIcon.FormMouseDown(Sender: TObject; Button: TMouseButton;
+   Shift: TShiftState; X, Y: Integer);
+begin
+   if Button = mbLeft then
+   begin
+      FDragging := True;
+      FDragStartX := X;
+      FDragStartY := Y;
+   end;
+end;
+
+procedure TFrmCopilotIcon.FormMouseMove(Sender: TObject; Shift: TShiftState;
+   X, Y: Integer);
+begin
+   if FDragging then
+   begin
+      Left := Left + X - FDragStartX;
+      Top := Top + Y - FDragStartY;
+   end;
+end;
+
+procedure TFrmCopilotIcon.FormMouseUp(Sender: TObject; Button: TMouseButton;
+   Shift: TShiftState; X, Y: Integer);
+begin
+   if FDragging then
+   begin
+      FDragging := False;
+      SaveIconPosition;
+   end;
+end;
+
+procedure TFrmCopilotIcon.imgIconClick(Sender: TObject);
+begin
+   // Clique simples - mostra menu
+   if not FDragging then
+   begin
+      PopupMenu.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+   end;
+end;
+
+procedure TFrmCopilotIcon.imgIconDblClick(Sender: TObject);
+begin
+   TogglePanel;
+end;
+
+procedure TFrmCopilotIcon.TogglePanel;
+begin
+   if Assigned(FrmCopilotPanel) then
+   begin
+      if FrmCopilotPanel.Visible then
+      begin
+         FrmCopilotPanel.HidePanel;
+      end else
+      begin
+         FrmCopilotPanel.ShowPanel;
+      end;
+   end;
+
+   // Limpa notificacao ao abrir
+   HasNotification := False;
+end;
+
+procedure TFrmCopilotIcon.SetNotification(AValue: Boolean);
+begin
+   FHasNotification := AValue;
+   tmrBlink.Enabled := AValue;
+   if not AValue then
+   begin
+      FBlinkState := False;
+      // Restaura icone normal
+      AlphaBlendValue := 230;
+   end;
+end;
+
+procedure TFrmCopilotIcon.tmrBlinkTimer(Sender: TObject);
+begin
+   FBlinkState := not FBlinkState;
+   if FBlinkState then
+   begin
+      AlphaBlendValue := 255;
+   end
+   else
+   begin
+      AlphaBlendValue := 180;
+   end;
+end;
+
+procedure TFrmCopilotIcon.ShowNotification(const ATitle, AMessage: string);
+begin
+   HasNotification := True;
+   TrayIcon.BalloonTitle := ATitle;
+   TrayIcon.BalloonHint := AMessage;
+   TrayIcon.ShowBalloonHint;
+end;
+
+procedure TFrmCopilotIcon.mnuAbrirClick(Sender: TObject);
+begin
+   TogglePanel;
+end;
+
+procedure TFrmCopilotIcon.mnuConfigClick(Sender: TObject);
+begin
+   if ShowCopilotSettings then
+   begin
+      // Recarrega hotkey se foi alterada
+      UnregisterGlobalHotKey;
+      RegisterGlobalHotKey;
+
+      // Forca atualizacao do status com novas configs
+      RefreshStatus;
+   end;
+end;
+
+procedure TFrmCopilotIcon.mnuSairClick(Sender: TObject);
+begin
+   Application.Terminate;
+end;
+
+procedure TFrmCopilotIcon.TrayIconDblClick(Sender: TObject);
+begin
+   TogglePanel;
+end;
+
+// ============================================
+// STATUS / CORES
+// ============================================
+
+procedure TFrmCopilotIcon.tmrStatusTimer(Sender: TObject);
+begin
+   // Busca status em background
+   FetchStatus;
+end;
+
+procedure TFrmCopilotIcon.FetchStatus;
+begin
+   // Verifica se estamos fechando ou API nao disponivel
+   if FClosing or (not Assigned(CopilotAPI)) then
+   begin
+      Exit;
+   end;
+
+   TTask.Run(
+      procedure
+      var
+         Response: string;
+         JSON: TJSONObject;
+         ColorStr: string;
+         NewColor: TStatusColor;
+         AlertsCount, SuggestionsCount: Integer;
+         VendaIDFromJSON, ClienteIDFromJSON, FilialIDFromJSON: Integer;
+         PrevColor: TStatusColor;
+      begin
+         try
+            // Verifica novamente dentro da thread
+            if FClosing or (not Assigned(CopilotAPI)) then
+            begin
+               Exit;
+            end;
+
+            Response := CopilotAPI.GetCopilotStatus;
+
+            // Verifica novamente apos a chamada HTTP
+            if FClosing then
+            begin
+               Exit;
+            end;
+
+            JSON := TJSONObject.ParseJSONValue(Response) as TJSONObject;
+            if Assigned(JSON) then
+            begin
+               try
+                  ColorStr := JSON.GetValue<string>('status_color', 'gray');
+                  AlertsCount := JSON.GetValue<Integer>('alerts_count', 0);
+                  SuggestionsCount := JSON.GetValue<Integer>('suggestions_count', 0);
+                  NewColor := StringToStatusColor(ColorStr);
+
+                  // Extrai venda_id e cliente_id ANTES do Synchronize
+                  VendaIDFromJSON := JSON.GetValue<Integer>('venda_id', 0);
+                  ClienteIDFromJSON := JSON.GetValue<Integer>('cliente_id', 0);
+                  FilialIDFromJSON := JSON.GetValue<Integer>('filial_id', 1);
+
+                  TThread.Synchronize(nil,
+                     procedure
+                     begin
+                        // Verifica se estamos fechando antes de atualizar UI
+                        if FClosing then
+                        begin
+                           Exit;
+                        end;
+
+                        // Seta os valores no CopilotAPI (thread principal)
+                        CopilotAPI.VendaID := VendaIDFromJSON;
+                        CopilotAPI.ClienteID := ClienteIDFromJSON;
+                        CopilotAPI.FilialID := FilialIDFromJSON;
+
+                        PrevColor := FCurrentColor;
+                        FAlertsCount := AlertsCount;
+                        FSuggestionsCount := SuggestionsCount;
+
+                        // Muda a cor do icone
+                        SetStatusColor(NewColor);
+
+                        // Notifica se mudou para vermelho ou amarelo
+                        if (NewColor in [scRed, scYellow]) and (PrevColor = scGray) then
+                        begin
+                           if NewColor = scRed then
+                           begin
+                              ShowNotification('Alerta Critico',
+                                 'Verificar interacoes medicamentosas!');
+                           end
+                           else
+                           begin
+                              ShowNotification('Atencao',
+                                 'Ha alertas pendentes na venda.');
+                           end;
+                        end;
+
+                        // Atualiza hint do TrayIcon
+                        TrayIcon.Hint := Format('PharmaCopilot - %d alertas, %d sugestoes',
+                           [FAlertsCount, FSuggestionsCount]);
+                     end
+                  );
+               finally
+                  JSON.Free;
+               end;
+            end;
+         except
+            // Silencioso - falha de conexao nao deve atrapalhar
+            if not FClosing then
+            begin
+               TThread.Synchronize(nil,
+                  procedure
+                  begin
+                     if not FClosing then
+                     begin
+                        SetStatusColor(scGray);
+                     end;
+                  end
+               );
+            end;
+         end;
+      end
+   );
+end;
+
+procedure TFrmCopilotIcon.RefreshStatus;
+begin
+   // Forca atualizacao imediata do status
+   FetchStatus;
+end;
+
+function TFrmCopilotIcon.StringToStatusColor(const AColor: string): TStatusColor;
+begin
+   if AColor = 'red' then
+   begin
+      Result := scRed;
+   end
+   else if AColor = 'yellow' then
+   begin
+      Result := scYellow;
+   end
+   else if AColor = 'green' then
+   begin
+      Result := scGreen;
+   end
+   else if AColor = 'blue' then
+   begin
+      Result := scBlue;
+   end
+   else
+   begin
+      Result := scGray;
+   end;
+end;
+
+function TFrmCopilotIcon.StatusColorToVCLColor(AColor: TStatusColor): TColor;
+begin
+   case AColor of
+      scRed:    Result := $004040FF;  // Vermelho (BGR)
+      scYellow: Result := $0000D7FF;  // Amarelo (BGR)
+      scGreen:  Result := $0000C000;  // Verde (BGR)
+      scBlue:   Result := $00FF8000;  // Azul (BGR)
+   else
+      Result := $00808080;  // Cinza (BGR)
+   end;
+end;
+
+procedure TFrmCopilotIcon.SetStatusColor(AColor: TStatusColor);
+var
+   IconColor: TColor;
+   Bmp: TBitmap;
+   TargetR, TargetG, TargetB: Byte;
+begin
+   if FCurrentColor = AColor then
+   begin
+      Exit;
+   end;
+
+   FCurrentColor := AColor;
+   IconColor := StatusColorToVCLColor(AColor);
+
+   // Extrai componentes RGB do IconColor (formato BGR)
+   TargetR := GetRValue(IconColor);
+   TargetG := GetGValue(IconColor);
+   TargetB := GetBValue(IconColor);
+
+   // Cria bitmap colorizado
+   Bmp := TBitmap.Create;
+   try
+      Bmp.SetSize(imgIcon.Width, imgIcon.Height);
+      Bmp.PixelFormat := pf32bit;
+
+      // Desenha circulo colorido com gradiente
+      Bmp.Canvas.Brush.Color := clFuchsia;  // Cor transparente
+      Bmp.Canvas.FillRect(Rect(0, 0, Bmp.Width, Bmp.Height));
+
+      // Desenha o icone base (circulo)
+      Bmp.Canvas.Pen.Color := IconColor;
+      Bmp.Canvas.Brush.Color := IconColor;
+      Bmp.Canvas.Ellipse(4, 4, Bmp.Width - 4, Bmp.Height - 4);
+
+      // Adiciona borda mais escura
+      Bmp.Canvas.Pen.Color := RGB(
+         Round(TargetR * 0.7),
+         Round(TargetG * 0.7),
+         Round(TargetB * 0.7)
+      );
+      Bmp.Canvas.Pen.Width := 2;
+      Bmp.Canvas.Brush.Style := bsClear;
+      Bmp.Canvas.Ellipse(4, 4, Bmp.Width - 4, Bmp.Height - 4);
+
+      // Adiciona brilho central
+      Bmp.Canvas.Pen.Color := RGB(
+         Min(255, TargetR + 60),
+         Min(255, TargetG + 60),
+         Min(255, TargetB + 60)
+      );
+      Bmp.Canvas.Pen.Width := 1;
+      Bmp.Canvas.Arc(8, 8, Bmp.Width - 16, Bmp.Height - 16, 0, 0, Bmp.Width, 0);
+
+      imgIcon.Picture.Bitmap.Assign(Bmp);
+   finally
+      Bmp.Free;
+   end;
+
+   // Pisca se for alerta critico
+   if AColor = scRed then
+   begin
+      HasNotification := True;
+   end
+   else if AColor = scGray then
+   begin
+      HasNotification := False;
+   end;
+end;
+
+end.

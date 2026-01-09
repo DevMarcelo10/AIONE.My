@@ -1,0 +1,569 @@
+2025-12-19T22:59:48.663Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-19T22:59:48.701Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185188701
+2025-12-19T22:59:48.701Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:48.704Z [DEBUG] Temp file written successfully, size: 60559 bytes
+2025-12-19T22:59:48.704Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:48.705Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185188701 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:48.705Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:48.712Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-19T22:59:48.712Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-19T22:59:48.712Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-19T22:59:48.718Z [DEBUG] LSP server manager initialized successfully
+2025-12-19T22:59:48.718Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-19T22:59:48.719Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2025-12-19T22:59:48.724Z [DEBUG] Stats cache is up to date
+2025-12-19T22:59:48.729Z [DEBUG] Loading skills from: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\DevDelphi\.claude\skills, project=[]
+2025-12-19T22:59:48.742Z [DEBUG] Loaded 0 installed plugins from C:\Users\DevDelphi\.claude\plugins\installed_plugins.json
+2025-12-19T22:59:48.808Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-19T22:59:48.808Z [DEBUG] Looking for shell config file: C:\Users\DevDelphi\.bashrc
+2025-12-19T22:59:48.808Z [DEBUG] Shell config file not found: C:\Users\DevDelphi\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-19T22:59:48.808Z [DEBUG] Snapshots directory: C:\Users\DevDelphi\.claude\shell-snapshots
+2025-12-19T22:59:48.821Z [DEBUG] Creating snapshot at: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1766185188808-loatsl.sh
+2025-12-19T22:59:48.821Z [DEBUG] Shell binary exists: true
+2025-12-19T22:59:48.821Z [DEBUG] Execution timeout: 10000ms
+2025-12-19T22:59:48.826Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\583eb035-f2de-43b4-aebb-09f4f5384d76-agent-583eb035-f2de-43b4-aebb-09f4f5384d76.json.tmp.16552.1766185188826
+2025-12-19T22:59:48.830Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-19T22:59:48.830Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\583eb035-f2de-43b4-aebb-09f4f5384d76-agent-583eb035-f2de-43b4-aebb-09f4f5384d76.json.tmp.16552.1766185188826 to C:\Users\DevDelphi\.claude\todos\583eb035-f2de-43b4-aebb-09f4f5384d76-agent-583eb035-f2de-43b4-aebb-09f4f5384d76.json
+2025-12-19T22:59:48.830Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\583eb035-f2de-43b4-aebb-09f4f5384d76-agent-583eb035-f2de-43b4-aebb-09f4f5384d76.json written atomically
+2025-12-19T22:59:48.838Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2025-12-19T22:59:48.838Z [DEBUG] Total plugin skills loaded: 0
+2025-12-19T22:59:48.838Z [DEBUG] Total plugin commands loaded: 0
+2025-12-19T22:59:48.838Z [DEBUG] Registered 0 hooks from 0 plugins
+2025-12-19T22:59:48.863Z [DEBUG] Loaded 0 unique skills (managed: 0, user: 0, project: 0, legacy commands: 0)
+2025-12-19T22:59:48.864Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills
+2025-12-19T22:59:48.871Z [DEBUG] Git remote URL: https://github.com/aionefarma/AIONE.git
+2025-12-19T22:59:48.871Z [DEBUG] Parsed repository: aionefarma/AIONE from https://github.com/aionefarma/AIONE.git
+2025-12-19T22:59:48.871Z [DEBUG] Parsed repository: aionefarma/AIONE from URL: https://github.com/aionefarma/AIONE.git
+2025-12-19T22:59:48.871Z [DEBUG] Path C:\Fontes\AIONE.My already tracked for repo aionefarma/aione
+2025-12-19T22:59:49.040Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189040
+2025-12-19T22:59:49.041Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.044Z [DEBUG] Temp file written successfully, size: 61662 bytes
+2025-12-19T22:59:49.044Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.044Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189040 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.044Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.516Z [DEBUG] Total plugin agents loaded: 0
+2025-12-19T22:59:49.539Z [DEBUG] Shell snapshot created successfully (346 bytes)
+2025-12-19T22:59:49.541Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\DevDelphi\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2025-12-19T22:59:49.601Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189601
+2025-12-19T22:59:49.601Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.607Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-19T22:59:49.607Z [DEBUG] Temp file written successfully, size: 61697 bytes
+2025-12-19T22:59:49.607Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.607Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189601 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.607Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.610Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189610
+2025-12-19T22:59:49.610Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.612Z [DEBUG] Temp file written successfully, size: 61749 bytes
+2025-12-19T22:59:49.612Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.612Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189610 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.613Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.616Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189616
+2025-12-19T22:59:49.617Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.621Z [DEBUG] Temp file written successfully, size: 61779 bytes
+2025-12-19T22:59:49.621Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.621Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189616 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.622Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.625Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189625
+2025-12-19T22:59:49.625Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.628Z [DEBUG] Temp file written successfully, size: 61836 bytes
+2025-12-19T22:59:49.628Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.628Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189625 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.628Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.633Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189633
+2025-12-19T22:59:49.633Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.636Z [DEBUG] Temp file written successfully, size: 61866 bytes
+2025-12-19T22:59:49.636Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.636Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189633 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.636Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.640Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189640
+2025-12-19T22:59:49.640Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.642Z [DEBUG] Temp file written successfully, size: 61891 bytes
+2025-12-19T22:59:49.642Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.642Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189640 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.642Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.656Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189656
+2025-12-19T22:59:49.656Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.659Z [DEBUG] Temp file written successfully, size: 61891 bytes
+2025-12-19T22:59:49.659Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.659Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189656 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.660Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:49.666Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189666
+2025-12-19T22:59:49.666Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:49.670Z [DEBUG] Temp file written successfully, size: 61928 bytes
+2025-12-19T22:59:49.671Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:49.671Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185189666 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:49.672Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:50.647Z [DEBUG] MCP server "local-mcp": Initializing HTTP transport to http://127.0.0.1:9001/mcp
+2025-12-19T22:59:50.647Z [DEBUG] MCP server "local-mcp": Node version: v24.12.0, Platform: win32
+2025-12-19T22:59:50.647Z [DEBUG] MCP server "local-mcp": Environment: {"NODE_OPTIONS":"not set","UV_THREADPOOL_SIZE":"default","HTTP_PROXY":"not set","HTTPS_PROXY":"not set","NO_PROXY":"not set"}
+2025-12-19T22:59:50.651Z [DEBUG] MCP server "context7": Starting connection with timeout of 30000ms
+2025-12-19T22:59:50.716Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2025-12-19T22:59:50.718Z [DEBUG] MCP server "local-mcp": Proxy options: default
+2025-12-19T22:59:50.718Z [DEBUG] MCP server "local-mcp": HTTP transport options: {"url":"http://127.0.0.1:9001/mcp","headers":{"User-Agent":"claude-code/2.0.74"},"hasAuthProvider":true,"timeoutMs":60000}
+2025-12-19T22:59:50.719Z [DEBUG] MCP server "local-mcp": HTTP transport created successfully
+2025-12-19T22:59:50.719Z [DEBUG] MCP server "local-mcp": Client created, setting up request handler
+2025-12-19T22:59:50.719Z [DEBUG] MCP server "local-mcp": Starting connection with timeout of 30000ms
+2025-12-19T22:59:50.719Z [DEBUG] MCP server "local-mcp": Testing basic HTTP connectivity to http://127.0.0.1:9001/mcp
+2025-12-19T22:59:50.719Z [DEBUG] MCP server "local-mcp": Parsed URL: host=127.0.0.1, port=9001, protocol=http:
+2025-12-19T22:59:50.719Z [DEBUG] MCP server "local-mcp": Using loopback address: 127.0.0.1
+2025-12-19T22:59:50.729Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190729
+2025-12-19T22:59:50.729Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:50.733Z [DEBUG] Temp file written successfully, size: 61929 bytes
+2025-12-19T22:59:50.733Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:50.733Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190729 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:50.734Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:50.750Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2025-12-19T22:59:50.750Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T22:59:50.750Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2025-12-19T22:59:50.754Z [DEBUG] MCP server "local-mcp": No token data found
+2025-12-19T22:59:50.776Z [DEBUG] MCP server "local-mcp": HTTP Connection failed after 129ms: fetch failed (code: none, errno: none)
+2025-12-19T22:59:50.776Z [ERROR] MCP server "local-mcp" TypeError: fetch failed
+2025-12-19T22:59:50.792Z [DEBUG] MCP server "local-mcp": Connection failed after 145ms: fetch failed
+2025-12-19T22:59:50.793Z [ERROR] MCP server "local-mcp" Connection failed: fetch failed
+2025-12-19T22:59:50.804Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-19T22:59:50.804Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T22:59:50.804Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-19T22:59:50.824Z [DEBUG] Getting matching hook commands for SubagentStart with query: Plan
+2025-12-19T22:59:50.824Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T22:59:50.824Z [DEBUG] Matched 0 unique hooks for query "Plan" (0 before deduplication)
+2025-12-19T22:59:50.900Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190899
+2025-12-19T22:59:50.900Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:50.903Z [DEBUG] Temp file written successfully, size: 61856 bytes
+2025-12-19T22:59:50.903Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:50.903Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190899 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:50.904Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:50.908Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190908
+2025-12-19T22:59:50.909Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:50.911Z [DEBUG] Temp file written successfully, size: 61856 bytes
+2025-12-19T22:59:50.911Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:50.911Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190908 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:50.912Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:50.923Z [DEBUG] performStartupChecks called
+2025-12-19T22:59:50.923Z [DEBUG] Starting background plugin installations
+2025-12-19T22:59:50.924Z [DEBUG] performBackgroundPluginInstallations called
+2025-12-19T22:59:50.967Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-19T22:59:50.974Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190974
+2025-12-19T22:59:50.974Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:50.977Z [DEBUG] Temp file written successfully, size: 61905 bytes
+2025-12-19T22:59:50.977Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:50.977Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190974 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:50.978Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:50.984Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190984
+2025-12-19T22:59:50.984Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:50.988Z [DEBUG] Temp file written successfully, size: 61978 bytes
+2025-12-19T22:59:50.988Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:50.988Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190984 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:50.988Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:50.992Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190992
+2025-12-19T22:59:50.992Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:50.995Z [DEBUG] Temp file written successfully, size: 62025 bytes
+2025-12-19T22:59:50.995Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:50.995Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185190992 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:50.996Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:51.640Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (638.8ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=21620\").Pare
+2025-12-19T22:59:52.129Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (488.9ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=24700\").Pare
+2025-12-19T22:59:52.131Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2025-12-19T22:59:52.132Z [DEBUG] Attempting to auto-install official marketplace
+2025-12-19T22:59:52.145Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2025-12-19T22:59:52.171Z [ERROR] MCP server "context7" Server stderr: npm notice Access token expired or revoked. Please try logging in again.
+npm notice Access token expired or revoked. Please try logging in again.
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@context7%2fmcp-server - Not found
+npm error 404
+npm error 404  The requested resource '@context7/mcp-server@*' could not be found or you do not have permission to access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm error A complete log of this run can be found in: C:\Users\DevDelphi\AppData\Local\npm-cache\_logs\2025-12-19T22_59_50_934Z-debug-0.log
+2025-12-19T22:59:52.227Z [DEBUG] MCP server "context7": Connection failed after 1579ms: MCP error -32000: Connection closed
+2025-12-19T22:59:52.227Z [ERROR] MCP server "context7" Connection failed: MCP error -32000: Connection closed
+2025-12-19T22:59:52.234Z [DEBUG] Skills and commands included in Skill tool:
+2025-12-19T22:59:52.267Z [DEBUG] MCP server "ide": Starting connection with timeout of 30000ms
+2025-12-19T22:59:52.276Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192276
+2025-12-19T22:59:52.276Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:52.280Z [DEBUG] Temp file written successfully, size: 62025 bytes
+2025-12-19T22:59:52.280Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:52.280Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192276 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:52.281Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:52.295Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192295
+2025-12-19T22:59:52.295Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:52.298Z [DEBUG] Temp file written successfully, size: 62025 bytes
+2025-12-19T22:59:52.298Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:52.298Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192295 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:52.298Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:52.319Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-19T22:59:52.324Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-19T22:59:52.330Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192330
+2025-12-19T22:59:52.330Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:52.333Z [DEBUG] Temp file written successfully, size: 62071 bytes
+2025-12-19T22:59:52.334Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:52.334Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192330 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:52.334Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:52.364Z [DEBUG] MCP server "ide": Successfully connected to ws-ide server in 99ms
+2025-12-19T22:59:52.364Z [DEBUG] MCP server "ide": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Claude Code VSCode MCP","version":"2.0.62"}}
+2025-12-19T22:59:52.412Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192412
+2025-12-19T22:59:52.413Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:52.417Z [DEBUG] Temp file written successfully, size: 62071 bytes
+2025-12-19T22:59:52.417Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:52.417Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185192412 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:52.418Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:52.442Z [DEBUG] Summarizing all 471 messages (~115997 tokens)
+2025-12-19T22:59:52.446Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-19T22:59:53.090Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (461.4ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=21620\").Pare
+2025-12-19T22:59:53.494Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults_DEPRECATED (404.3ms): powershell.exe -NoProfile -Command "(Get-CimInstance Win32_Process -Filter \"ProcessId=24700\").Pare
+2025-12-19T22:59:53.505Z [ERROR] Error streaming, falling back to non-streaming mode: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsmJ2vmp2aDtMdpsnrs"}
+2025-12-19T22:59:53.511Z [INFO] SSH not configured for GitHub, using HTTPS for anthropics/claude-plugins-official
+2025-12-19T22:59:53.941Z [ERROR] Error in non-streaming fallback: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsmNFgG5M5NCR8tPFXL"}
+2025-12-19T22:59:53.942Z [ERROR] Error: Error: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsmNFgG5M5NCR8tPFXL"}
+    at F9.generate (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:510:11261)
+    at OT.makeStatusError (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:2195)
+    at OT.makeRequest (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:5420)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async PW9.d71.model (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6345)
+    at async d71 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1346:19540)
+    at async PW9 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6499)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3557
+    at async d00 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1007:2037)
+    at async Cd (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3528)
+2025-12-19T22:59:53.946Z [DEBUG] Summarizing all 116 messages (~30509 tokens)
+2025-12-19T22:59:53.947Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-19T22:59:53.960Z [DEBUG] Stream started - received first chunk
+2025-12-19T22:59:54.221Z [ERROR] Error streaming, falling back to non-streaming mode: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsmQA2Q1RNtow5nGYMd"}
+2025-12-19T22:59:54.511Z [ERROR] Error in non-streaming fallback: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsmRKj59avUkMJBPA5G"}
+2025-12-19T22:59:54.511Z [ERROR] Error: Error: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsmRKj59avUkMJBPA5G"}
+    at F9.generate (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:510:11261)
+    at OT.makeStatusError (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:2195)
+    at OT.makeRequest (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:5420)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async PW9.d71.model (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6345)
+    at async d71 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1346:19540)
+    at async PW9 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6499)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3557
+    at async d00 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1007:2037)
+    at async Cd (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3528)
+2025-12-19T22:59:54.702Z [DEBUG] Stream started - received first chunk
+2025-12-19T22:59:54.858Z [DEBUG] Added marketplace source: claude-plugins-official
+2025-12-19T22:59:54.858Z [DEBUG] Successfully auto-installed official marketplace
+2025-12-19T22:59:54.860Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185194860
+2025-12-19T22:59:54.860Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T22:59:54.863Z [DEBUG] Temp file written successfully, size: 62013 bytes
+2025-12-19T22:59:54.863Z [DEBUG] Applied original permissions to temp file
+2025-12-19T22:59:54.863Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185194860 to C:\Users\DevDelphi\.claude.json
+2025-12-19T22:59:54.863Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T22:59:54.864Z [DEBUG] Showing marketplace installation success notification
+2025-12-19T22:59:56.295Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-19T22:59:56.295Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T22:59:56.295Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-19T23:00:41.406Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-19T23:00:41.406Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-19T23:00:41.407Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-19T23:00:41.407Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-19T23:00:41.765Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-19T23:00:41.765Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T23:00:41.765Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-19T23:00:41.767Z [DEBUG] FileHistory: Added snapshot for 02960be5-467c-450c-930d-1c79646fda49, tracking 0 files
+2025-12-19T23:00:41.789Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-19T23:00:41.794Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185241794
+2025-12-19T23:00:41.794Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:00:41.798Z [DEBUG] Temp file written successfully, size: 62058 bytes
+2025-12-19T23:00:41.798Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:00:41.798Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185241794 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:00:41.798Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:00:41.818Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-19T23:00:41.830Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-19T23:00:41.843Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 54ms
+2025-12-19T23:00:41.855Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-19T23:00:42.221Z [ERROR] Error streaming, falling back to non-streaming mode: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGspwABRV1fbo3Xuqt8W"}
+2025-12-19T23:00:42.496Z [ERROR] Error streaming, falling back to non-streaming mode: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGspwNaPAXc121R31HKt"}
+2025-12-19T23:00:42.502Z [ERROR] Error in non-streaming fallback: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGspxgxPAeX4fGKsKSWG"}
+2025-12-19T23:00:42.503Z [ERROR] Error: Error: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGspxgxPAeX4fGKsKSWG"}
+    at F9.generate (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:510:11261)
+    at OT.makeStatusError (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:2195)
+    at OT.makeRequest (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:5420)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async PW9.d71.model (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6345)
+    at async d71 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1346:19540)
+    at async PW9 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6499)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3557
+    at async d00 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1007:2037)
+    at async Cd (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3528)
+2025-12-19T23:00:42.506Z [ERROR] SyntaxError: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:75:715
+    at B (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:8:6526)
+    at omB (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1008:2823)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2025-12-19T23:00:42.795Z [ERROR] Error in non-streaming fallback: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGspyu8Ma26V1xG3Z8kF"}
+2025-12-19T23:00:42.795Z [ERROR] Error: Error: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGspyu8Ma26V1xG3Z8kF"}
+    at F9.generate (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:510:11261)
+    at OT.makeStatusError (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:2195)
+    at OT.makeRequest (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:5420)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async PW9.d71.model (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6345)
+    at async d71 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1346:19540)
+    at async PW9 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6499)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3799
+    at async d00 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1007:2037)
+    at async zHA (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3769)
+2025-12-19T23:00:42.836Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185242836
+2025-12-19T23:00:42.836Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:00:42.843Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.7ms)
+2025-12-19T23:00:42.843Z [DEBUG] Temp file written successfully, size: 62086 bytes
+2025-12-19T23:00:42.843Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:00:42.843Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185242836 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:00:42.845Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:00:42.874Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-19T23:00:42.874Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T23:00:42.874Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-19T23:00:42.956Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185242956
+2025-12-19T23:00:42.956Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:00:42.960Z [DEBUG] Temp file written successfully, size: 62115 bytes
+2025-12-19T23:00:42.960Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:00:42.960Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185242956 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:00:42.960Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:00:42.973Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185242973
+2025-12-19T23:00:42.973Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:00:42.976Z [DEBUG] Temp file written successfully, size: 62144 bytes
+2025-12-19T23:00:42.976Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:00:42.976Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185242973 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:00:42.976Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:01:50.578Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-19T23:01:50.578Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T23:01:50.578Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-19T23:01:58.334Z [DEBUG] FileHistory: Making snapshot for message 920b9e86-0e38-42ef-a339-56a44726d98c
+2025-12-19T23:01:58.335Z [DEBUG] FileHistory: Added snapshot for 920b9e86-0e38-42ef-a339-56a44726d98c, tracking 0 files
+2025-12-19T23:01:58.340Z [DEBUG] UserCommandMessage rendering: "rate-limit-options" (args: "none")
+2025-12-19T23:01:58.340Z [DEBUG] isSkillFormat: false
+2025-12-19T23:01:58.374Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-19T23:01:58.442Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185318442
+2025-12-19T23:01:58.442Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:01:58.445Z [DEBUG] Temp file written successfully, size: 62167 bytes
+2025-12-19T23:01:58.445Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:01:58.445Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185318442 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:01:58.445Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:01:58.461Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185318461
+2025-12-19T23:01:58.461Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:01:58.464Z [DEBUG] Temp file written successfully, size: 62186 bytes
+2025-12-19T23:01:58.464Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:01:58.464Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185318461 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:01:58.464Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:02:24.305Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-19T23:02:24.306Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-19T23:02:24.306Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-19T23:02:24.306Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-19T23:02:24.306Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-19T23:02:24.377Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 72ms
+2025-12-19T23:02:24.389Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-19T23:02:24.389Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T23:02:24.389Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-19T23:02:24.390Z [DEBUG] FileHistory: Making snapshot for message 9029dd28-ed12-47cd-afdd-6b56bf83cdc5
+2025-12-19T23:02:24.390Z [DEBUG] FileHistory: Added snapshot for 9029dd28-ed12-47cd-afdd-6b56bf83cdc5, tracking 0 files
+2025-12-19T23:02:24.412Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-19T23:02:24.430Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-19T23:02:24.458Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 46ms
+2025-12-19T23:02:24.471Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-19T23:02:24.780Z [ERROR] Error streaming, falling back to non-streaming mode: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsxVs8QudfZmHHVydcE"}
+2025-12-19T23:02:24.966Z [ERROR] Error streaming, falling back to non-streaming mode: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsxW8kVeQVV8aX5a5Bj"}
+2025-12-19T23:02:25.072Z [ERROR] Error in non-streaming fallback: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsxX9mdvPC9Fy8WEVbD"}
+2025-12-19T23:02:25.073Z [ERROR] Error: Error: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsxX9mdvPC9Fy8WEVbD"}
+    at F9.generate (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:510:11261)
+    at OT.makeStatusError (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:2195)
+    at OT.makeRequest (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:5420)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async PW9.d71.model (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6345)
+    at async d71 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1346:19540)
+    at async PW9 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6499)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3557
+    at async d00 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1007:2037)
+    at async Cd (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3528)
+2025-12-19T23:02:25.271Z [ERROR] Error in non-streaming fallback: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsxY27CXfnGrStrPb8Y"}
+2025-12-19T23:02:25.271Z [ERROR] Error: Error: 429 {"type":"error","error":{"type":"rate_limit_error","message":"This request would exceed your account's rate limit. Please try again later."},"request_id":"req_011CWGsxY27CXfnGrStrPb8Y"}
+    at F9.generate (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:510:11261)
+    at OT.makeStatusError (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:2195)
+    at OT.makeRequest (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:857:5420)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async PW9.d71.model (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6345)
+    at async d71 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1346:19540)
+    at async PW9 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4595:6499)
+    at async file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3799
+    at async d00 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1007:2037)
+    at async zHA (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:4593:3769)
+2025-12-19T23:02:25.307Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185345307
+2025-12-19T23:02:25.307Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:02:25.311Z [DEBUG] Temp file written successfully, size: 62186 bytes
+2025-12-19T23:02:25.311Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:02:25.311Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185345307 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:02:25.312Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:02:25.324Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-19T23:02:25.324Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T23:02:25.324Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-19T23:02:25.399Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766185345399
+2025-12-19T23:02:25.399Z [DEBUG] Preserving file permissions: 100666
+2025-12-19T23:02:25.403Z [DEBUG] Temp file written successfully, size: 62208 bytes
+2025-12-19T23:02:25.404Z [DEBUG] Applied original permissions to temp file
+2025-12-19T23:02:25.404Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766185345399 to C:\Users\DevDelphi\.claude.json
+2025-12-19T23:02:25.404Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-19T23:02:30.095Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-19T23:03:30.100Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-19T23:03:30.100Z [DEBUG] Found 0 hook matchers in settings
+2025-12-19T23:03:30.100Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2025-12-20T00:34:36.094Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-20T00:34:36.094Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-20T00:34:36.094Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-20T00:34:36.094Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-20T00:34:36.094Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-20T00:34:36.176Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 82ms
+2025-12-20T00:34:36.276Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-20T00:34:36.276Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:34:36.276Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-20T00:34:36.277Z [DEBUG] FileHistory: Making snapshot for message 7a83e467-1dda-4b2d-ad58-fa20181b5938
+2025-12-20T00:34:36.277Z [DEBUG] FileHistory: Added snapshot for 7a83e467-1dda-4b2d-ad58-fa20181b5938, tracking 0 files
+2025-12-20T00:34:36.298Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-20T00:34:36.318Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-20T00:34:36.347Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 49ms
+2025-12-20T00:34:36.358Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-20T00:34:37.388Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:34:39.084Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:34:43.827Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-20T00:34:43.832Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-20T00:34:43.832Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:34:43.832Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-20T00:34:44.863Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-20T00:34:44.863Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:34:44.863Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-20T00:34:44.894Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-20T00:34:44.894Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-20T00:34:44.894Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-20T00:34:44.894Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-20T00:34:44.894Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-20T00:34:44.901Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 7ms
+2025-12-20T00:34:45.037Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-20T00:34:47.667Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:36:55.059Z [WARN] Streaming stall detected: 123.2s gap between events (stall #1)
+2025-12-20T00:36:55.916Z [WARN] Streaming completed with 1 stall(s), total stall time: 123.2s
+2025-12-20T00:36:56.151Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-20T00:36:56.177Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-20T00:36:56.177Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:36:56.178Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-20T00:36:58.417Z [DEBUG] Permission suggestions for Write: [
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-20T00:36:58.752Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-20T00:36:58.761Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766191018761
+2025-12-20T00:36:58.762Z [DEBUG] Preserving file permissions: 100666
+2025-12-20T00:36:58.767Z [DEBUG] Temp file written successfully, size: 62249 bytes
+2025-12-20T00:36:58.767Z [DEBUG] Applied original permissions to temp file
+2025-12-20T00:36:58.767Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766191018761 to C:\Users\DevDelphi\.claude.json
+2025-12-20T00:36:58.769Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-20T00:36:58.832Z [DEBUG] MCP server "ide": Calling MCP tool: openDiff
+2025-12-20T00:36:59.177Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-20T00:36:59.177Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:36:59.177Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-20T00:37:04.848Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-20T00:37:04.848Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:37:04.848Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-20T00:37:27.390Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-20T00:37:27.411Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-20T00:37:27.412Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-20T00:37:27.416Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 26ms
+2025-12-20T00:37:27.416Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 4ms
+2025-12-20T00:37:27.416Z [ERROR] b82: b82: Diagnostics file path mismatch: expected C:\Fontes\AIONE.My\CLAUDE.md, got file://c:\fontes\aione.my\claude.md/)
+    at MP.beforeFileEdited (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1212:51449)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Object.call (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1265:1253)
+    at async tg5 (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:2207:17438)
+2025-12-20T00:37:27.418Z [DEBUG] Writing to temp file: C:\Fontes\AIONE.My\CLAUDE.md.tmp.16552.1766191047418
+2025-12-20T00:37:27.418Z [DEBUG] Preserving file permissions: 100666
+2025-12-20T00:37:27.421Z [DEBUG] Temp file written successfully, size: 17152 bytes
+2025-12-20T00:37:27.421Z [DEBUG] Applied original permissions to temp file
+2025-12-20T00:37:27.421Z [DEBUG] Renaming C:\Fontes\AIONE.My\CLAUDE.md.tmp.16552.1766191047418 to C:\Fontes\AIONE.My\CLAUDE.md
+2025-12-20T00:37:27.422Z [DEBUG] File C:\Fontes\AIONE.My\CLAUDE.md written atomically
+2025-12-20T00:37:27.448Z [DEBUG] MCP server "ide": Tool 'openDiff' completed successfully in 28s
+2025-12-20T00:37:27.448Z [DEBUG] MCP server "ide": Calling MCP tool: close_tab
+2025-12-20T00:37:27.454Z [DEBUG] FileHistory: Tracked file modification for C:\Fontes\AIONE.My\CLAUDE.md
+2025-12-20T00:37:27.465Z [DEBUG] MCP server "ide": Tool 'close_tab' completed successfully in 17ms
+2025-12-20T00:37:27.478Z [DEBUG] [lspRecommendation] Looking for LSP plugins for .md
+2025-12-20T00:37:27.492Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-20T00:37:27.492Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:37:27.492Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-20T00:37:27.784Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-20T00:37:27.784Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-20T00:37:27.785Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-20T00:37:27.785Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-20T00:37:27.785Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-20T00:37:27.870Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 86ms
+2025-12-20T00:37:27.917Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-20T00:37:30.622Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:37:41.398Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-20T00:37:41.398Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:37:41.398Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-20T00:37:41.400Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-20T00:37:43.629Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:37:49.580Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-20T00:37:49.580Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:37:49.580Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-20T00:39:15.482Z [DEBUG] MCP server "ide": Calling MCP tool: getDiagnostics
+2025-12-20T00:39:15.482Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-20T00:39:15.482Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-20T00:39:15.482Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-20T00:39:15.482Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-20T00:39:15.552Z [DEBUG] MCP server "ide": Tool 'getDiagnostics' completed successfully in 70ms
+2025-12-20T00:39:15.564Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-20T00:39:15.564Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:39:15.565Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-20T00:39:15.567Z [DEBUG] FileHistory: Making snapshot for message 50e9bfc7-425a-4999-8082-19a62a5bad0c
+2025-12-20T00:39:15.569Z [DEBUG] FileHistory: Added snapshot for 50e9bfc7-425a-4999-8082-19a62a5bad0c, tracking 1 files
+2025-12-20T00:39:15.595Z [DEBUG] MCP server "ide": Calling MCP tool: closeAllDiffTabs
+2025-12-20T00:39:15.626Z [DEBUG] Tool search enabled: 0 MCP tools will be deferred
+2025-12-20T00:39:15.651Z [DEBUG] MCP server "ide": Tool 'closeAllDiffTabs' completed successfully in 56ms
+2025-12-20T00:39:15.659Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-20T00:39:16.605Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:39:17.867Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:39:20.367Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-20T00:39:20.367Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:39:20.367Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-20T00:39:20.456Z [DEBUG] Tool search enabled: 2 MCP tools will be deferred
+2025-12-20T00:39:22.975Z [DEBUG] Stream started - received first chunk
+2025-12-20T00:39:29.238Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-20T00:39:29.238Z [DEBUG] Found 0 hook matchers in settings
+2025-12-20T00:39:29.238Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-20T02:11:57.398Z [DEBUG] npm view failed with code 1
+2025-12-20T02:11:57.398Z [DEBUG] npm stderr: (empty)
+2025-12-20T18:40:01.123Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2025-12-20T18:40:01.123Z [DEBUG] AutoUpdater: Using global update method
+2025-12-20T18:40:05.757Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766256005757
+2025-12-20T18:40:05.758Z [DEBUG] Preserving file permissions: 100666
+2025-12-20T18:40:05.762Z [DEBUG] Temp file written successfully, size: 62249 bytes
+2025-12-20T18:40:05.762Z [DEBUG] Applied original permissions to temp file
+2025-12-20T18:40:05.762Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766256005757 to C:\Users\DevDelphi\.claude.json
+2025-12-20T18:40:05.764Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-20T19:10:00.677Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2025-12-20T19:10:00.677Z [DEBUG] AutoUpdater: Using global update method
+2025-12-20T19:10:03.964Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766257803964
+2025-12-20T19:10:03.964Z [DEBUG] Preserving file permissions: 100666
+2025-12-20T19:10:03.968Z [DEBUG] Temp file written successfully, size: 62249 bytes
+2025-12-20T19:10:03.969Z [DEBUG] Applied original permissions to temp file
+2025-12-20T19:10:03.969Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766257803964 to C:\Users\DevDelphi\.claude.json
+2025-12-20T19:10:03.969Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-20T19:40:00.680Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2025-12-20T19:40:00.680Z [DEBUG] AutoUpdater: Using global update method
+2025-12-20T19:40:04.099Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766259604099
+2025-12-20T19:40:04.100Z [DEBUG] Preserving file permissions: 100666
+2025-12-20T19:40:04.106Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.1ms)
+2025-12-20T19:40:04.106Z [DEBUG] Temp file written successfully, size: 62249 bytes
+2025-12-20T19:40:04.106Z [DEBUG] Applied original permissions to temp file
+2025-12-20T19:40:04.106Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766259604099 to C:\Users\DevDelphi\.claude.json
+2025-12-20T19:40:04.108Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-20T20:10:00.909Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2025-12-20T20:10:00.909Z [DEBUG] AutoUpdater: Using global update method
+2025-12-20T20:10:04.668Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.16552.1766261404668
+2025-12-20T20:10:04.669Z [DEBUG] Preserving file permissions: 100666
+2025-12-20T20:10:04.680Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (11.8ms)
+2025-12-20T20:10:04.680Z [DEBUG] Temp file written successfully, size: 62249 bytes
+2025-12-20T20:10:04.681Z [DEBUG] Applied original permissions to temp file
+2025-12-20T20:10:04.681Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.16552.1766261404668 to C:\Users\DevDelphi\.claude.json
+2025-12-20T20:10:04.682Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically

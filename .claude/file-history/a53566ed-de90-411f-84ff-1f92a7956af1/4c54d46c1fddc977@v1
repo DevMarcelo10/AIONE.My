@@ -1,0 +1,171 @@
+"""
+Serviço de chat com IA.
+Gerencia sessões e contexto de conversação.
+"""
+
+from typing import Optional
+from uuid import uuid4
+import structlog
+
+from config.settings import settings
+from models.schemas import ChatResponse, Suggestion, Alert
+from integrations import ConnectorFactory
+from .llm_service import LLMService
+from .suggestion_service import SuggestionService
+from .alert_service import AlertService
+
+logger = structlog.get_logger()
+
+
+class ChatService:
+    """Serviço de chat com assistente IA."""
+
+    def __init__(self):
+        self.llm = LLMService()
+        self.suggestion_service = SuggestionService()
+        self.alert_service = AlertService()
+
+        # Cache de sessões (em produção usar Redis)
+        self._sessions: dict[str, list[dict]] = {}
+
+    async def process_message(
+        self,
+        message: str,
+        session_id: str,
+        venda_id: Optional[int] = None,
+        cliente_id: Optional[int] = None,
+        context: Optional[dict] = None,
+    ) -> ChatResponse:
+        """
+        Processa mensagem do usuário.
+
+        Args:
+            message: Mensagem do vendedor
+            session_id: ID da sessão de chat
+            venda_id: ID da venda atual (opcional)
+            cliente_id: ID do cliente (opcional)
+            context: Contexto adicional
+
+        Returns:
+            Resposta com mensagem, sugestões e alertas
+        """
+        logger.info(
+            "chat_message_received",
+            session_id=session_id,
+            venda_id=venda_id,
+            cliente_id=cliente_id,
+        )
+
+        # Recupera histórico da sessão
+        history = self._sessions.get(session_id, [])
+
+        # Constrói contexto enriquecido
+        system_prompt = await self._build_context(
+            venda_id=venda_id,
+            cliente_id=cliente_id,
+            context=context,
+        )
+
+        # Gera resposta do LLM
+        response_text = await self.llm.generate(
+            prompt=message,
+            system_prompt=system_prompt,
+            history=history,
+        )
+
+        # Atualiza histórico
+        history.append({"role": "user", "content": message})
+        history.append({"role": "assistant", "content": response_text})
+        self._sessions[session_id] = history[-20:]  # Mantém últimas 20 mensagens
+
+        # Busca sugestões e alertas relevantes
+        suggestions: list[Suggestion] = []
+        alerts: list[Alert] = []
+
+        if venda_id:
+            suggestions = await self.suggestion_service.get_sugestoes_venda(
+                venda_id, cliente_id
+            )
+            alerts = await self.alert_service.get_alertas_venda(
+                venda_id, cliente_id
+            )
+
+        return ChatResponse(
+            message=response_text,
+            session_id=session_id,
+            suggestions=suggestions[:5],  # Top 5
+            alerts=alerts,
+        )
+
+    async def _build_context(
+        self,
+        venda_id: Optional[int] = None,
+        cliente_id: Optional[int] = None,
+        context: Optional[dict] = None,
+    ) -> str:
+        """
+        Constrói contexto para o LLM baseado nos dados disponíveis.
+        """
+        parts = [self.llm._default_system_prompt()]
+
+        try:
+            connector = ConnectorFactory.create(
+                settings.ERP_TYPE,
+                settings.erp_connection_string,
+            )
+
+            # Adiciona contexto do cliente
+            if cliente_id:
+                cliente = connector.get_cliente(cliente_id)
+                if cliente:
+                    parts.append(f"\n\nCliente atual: {cliente.nome}")
+                    if cliente.convenio_nome:
+                        parts.append(f"Convênio: {cliente.convenio_nome}")
+
+                    # Histórico resumido
+                    historico = connector.get_historico_cliente(cliente_id, dias=180)
+                    if historico:
+                        produtos_freq = {}
+                        for venda in historico[:20]:
+                            for item in venda.itens:
+                                produtos_freq[item.produto_nome] = (
+                                    produtos_freq.get(item.produto_nome, 0) + 1
+                                )
+
+                        top_produtos = sorted(
+                            produtos_freq.items(),
+                            key=lambda x: x[1],
+                            reverse=True
+                        )[:5]
+
+                        if top_produtos:
+                            parts.append(
+                                f"Produtos frequentes: {', '.join(p[0] for p in top_produtos)}"
+                            )
+
+            # Adiciona contexto da venda atual
+            if venda_id:
+                venda = connector.get_venda_atual(venda_id)
+                if venda and venda.itens:
+                    itens_str = ", ".join(
+                        f"{item.produto_nome} (x{item.quantidade})"
+                        for item in venda.itens
+                    )
+                    parts.append(f"\n\nItens na venda atual: {itens_str}")
+                    parts.append(f"Total parcial: R$ {venda.total:.2f}")
+
+        except Exception as e:
+            logger.warning("context_build_error", error=str(e))
+
+        # Adiciona contexto customizado
+        if context:
+            for key, value in context.items():
+                parts.append(f"\n{key}: {value}")
+
+        return "\n".join(parts)
+
+    async def clear_session(self, session_id: str) -> None:
+        """Limpa histórico de uma sessão."""
+        if session_id in self._sessions:
+            del self._sessions[session_id]
+            logger.info("session_cleared", session_id=session_id)

@@ -1,0 +1,70 @@
+-- ============================================================================
+-- AIONE.My - Módulo Comprador Virtual IA
+-- Tabela: ia_config_parametros
+-- Descrição: Configurações de parâmetros para cálculo de sugestões de compra
+--            por nível hierárquico (Global → Categoria → Produto)
+-- ============================================================================
+
+DROP TABLE IF EXISTS ia_config_parametros;
+
+CREATE TABLE ia_config_parametros (
+   id                    INT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+   -- Tipo de configuração: define o nível hierárquico
+   -- GLOBAL: Configuração padrão do sistema (referencia_id = NULL)
+   -- CATEGORIA: Configuração por grupo de produtos (referencia_id = arqgrupo.IDGrupo)
+   -- PRODUTO: Configuração específica do produto (referencia_id = arqproduto.IDProduto)
+   tipo                  ENUM('GLOBAL', 'CATEGORIA', 'PRODUTO') NOT NULL DEFAULT 'GLOBAL',
+
+   -- ID de referência conforme o tipo
+   -- NULL para GLOBAL, IDGrupo para CATEGORIA, IDProduto para PRODUTO
+   referencia_id         INT UNSIGNED NULL,
+
+   -- Dias mínimos de estoque que a compra deve cobrir
+   dias_cobertura_min    TINYINT UNSIGNED NOT NULL DEFAULT 15,
+
+   -- Dias máximos de estoque (limite superior para evitar excesso)
+   dias_cobertura_max    TINYINT UNSIGNED NOT NULL DEFAULT 45,
+
+   -- Dias extras de segurança para variações de demanda
+   estoque_seguranca_dias TINYINT UNSIGNED NOT NULL DEFAULT 5,
+
+   -- Lead time padrão em dias (tempo entre pedido e entrega)
+   -- Usado quando não há histórico real do fornecedor
+   lead_time_padrao      TINYINT UNSIGNED NOT NULL DEFAULT 3,
+
+   -- Percentual de variação de demanda aceito (para sazonalidade)
+   variacao_demanda_pct  DECIMAL(5,2) NOT NULL DEFAULT 20.00,
+
+   -- Considera produtos com curva ABC? (A=alta rotação, C=baixa)
+   considerar_curva_abc  TINYINT(1) NOT NULL DEFAULT 1,
+
+   -- Status do registro
+   ativo                 TINYINT(1) NOT NULL DEFAULT 1,
+
+   -- Auditoria
+   created_at            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+   PRIMARY KEY (id),
+
+   -- Índice único para evitar duplicidade de configuração
+   UNIQUE KEY uk_tipo_referencia (tipo, referencia_id),
+
+   -- Índice para busca por referência (join com arqgrupo/arqproduto)
+   KEY idx_referencia (referencia_id),
+
+   -- Índice para filtrar apenas ativos
+   KEY idx_ativo (ativo)
+
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Configurações de parâmetros do Comprador Virtual IA por nível hierárquico';
+
+-- ============================================================================
+-- Inserir configuração GLOBAL padrão
+-- ============================================================================
+INSERT INTO ia_config_parametros (tipo, referencia_id, dias_cobertura_min, dias_cobertura_max,
+                                   estoque_seguranca_dias, lead_time_padrao, ativo)
+VALUES ('GLOBAL', NULL, 15, 45, 5, 3, 1);

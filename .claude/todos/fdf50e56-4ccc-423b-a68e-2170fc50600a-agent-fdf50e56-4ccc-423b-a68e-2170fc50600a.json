@@ -1,0 +1,17 @@
+[
+  {
+    "content": "Encontrar todos os arquivos .dfm no projeto",
+    "status": "completed",
+    "activeForm": "Encontrando arquivos .dfm"
+  },
+  {
+    "content": "Identificar arquivos com BinaryRequest = False",
+    "status": "completed",
+    "activeForm": "Identificando arquivos com BinaryRequest = False"
+  },
+  {
+    "content": "Atualizar BinaryRequest para True em cada arquivo (76 arquivos encontrados)",
+    "status": "in_progress",
+    "activeForm": "Atualizando BinaryRequest para True"
+  }
+]

@@ -1,0 +1,223 @@
+# PharmaCopilot - Guia de Desenvolvimento
+
+## Comportamento
+
+- Converse em Português brasileiro
+- Execute correções diretamente sem pedir confirmação
+- Este é um **produto standalone**, não um módulo do AIONE
+- Foco em arquitetura extensível para múltiplos ERPs
+
+## Visão Geral
+
+PharmaCopilot é um **assistente IA independente** para vendedores de farmácia que conecta a qualquer ERP do mercado.
+
+**Modelo de Negócio:**
+- Produto vendido separadamente
+- Licenciamento por farmácia/terminal
+- Compatível com: AIONE, Linx, Trier, Profarma, e qualquer sistema com acesso ao banco
+
+**Stack:**
+- Widget: Delphi RAD 12 (VCL) - Overlay standalone
+- Backend: Python FastAPI
+- Integração: Conectores para bancos de terceiros (READ-ONLY)
+- Banco próprio: MySQL/PostgreSQL para dados do copilot
+- LLMs: Multi-provider (Anthropic, OpenAI, Google)
+
+## Estrutura do Projeto
+
+```
+C:\Projetos\PharmaCopilot\
+│
+├── CLAUDE.md                    # Este arquivo
+├── README.md
+│
+├── widget\                      # Frontend Delphi (standalone)
+│   ├── PharmaCopilot.dproj
+│   └── src\
+│       ├── uCopilotIcon.pas
+│       ├── uCopilotPanel.pas
+│       ├── uCopilotAPI.pas
+│       └── uCopilotConfig.pas
+│
+├── backend\                     # Backend Python
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── config\
+│   ├── routers\
+│   ├── services\
+│   ├── models\
+│   └── integrations\            # ★ CAMADA DE INTEGRAÇÃO
+│       ├── base_connector.py    # Interface abstrata
+│       ├── connector_factory.py
+│       ├── connectors\          # Implementações
+│       │   ├── aione.py
+│       │   ├── linx.py
+│       │   └── generic_mysql.py
+│       └── mappings\            # Mapeamentos de campos
+│           ├── aione_mapping.json
+│           └── linx_mapping.json
+│
+├── database\                    # Scripts SQL
+│   └── copilot_schema.sql       # Banco próprio
+│
+├── installer\
+│   └── setup.iss
+│
+└── docs\
+    ├── INSTALL.md
+    └── NEW_CONNECTOR.md
+```
+
+## Princípio Central: Camada de Integração
+
+**REGRA FUNDAMENTAL:** O PharmaCopilot NUNCA escreve no banco do ERP. Apenas leitura.
+
+```
+┌─────────────────┐      ┌──────────────────┐      ┌─────────────────┐
+│   ERP Cliente   │ READ │  Integration     │      │  Copilot DB     │
+│   (MySQL/MSSQL/ │◄─────│  Layer           │─────►│  (próprio)      │
+│    Firebird)    │ ONLY │  BaseConnector   │ R/W  │  MySQL/Postgres │
+└─────────────────┘      └──────────────────┘      └─────────────────┘
+```
+
+### Interface BaseERPConnector
+
+Todo conector DEVE implementar:
+```python
+get_cliente(id) -> Cliente
+search_cliente(termo) -> List[Cliente]
+get_produto(id) -> Produto
+get_produto_by_ean(ean) -> Produto
+get_genericos(principio_ativo) -> List[Produto]
+get_estoque(produto_id) -> float
+get_lotes_vencendo(dias) -> List[LoteEstoque]
+get_historico_cliente(cliente_id, dias) -> List[Venda]
+get_venda_atual(venda_id) -> Venda
+```
+
+### Mappings JSON
+
+Cada ERP tem um arquivo de mapeamento:
+```json
+{
+  "erp_name": "AIONE.My",
+  "database_type": "mysql",
+  "clientes": {
+    "tabela": "arqpessoa",
+    "campos": {
+      "id": "IDPessoa",
+      "nome": "NomePessoa"
+    }
+  }
+}
+```
+
+## Padrões de Código
+
+### Python (Backend)
+- Type hints obrigatórios
+- Pydantic para schemas
+- SQLAlchemy para queries
+- Async quando possível
+- Docstrings em português
+
+### Delphi (Widget)
+- Indentação: 3 espaços
+- `FreeAndNil` sempre
+- `try-finally` para recursos
+- Nomenclatura: `TFrmXxx`, `uNomeUnit.pas`
+- Config em `%APPDATA%\PharmaCopilot\`
+
+## Bancos de Dados
+
+**IMPORTANTE:** O PharmaCopilot usa DOIS bancos de dados separados:
+
+### Banco do ERP (READ-ONLY)
+- **Database:** `dbaione` (ou equivalente do ERP)
+- **Conexão:** Configurada pelo usuário no config
+- **Permissão:** Apenas SELECT permitido
+- **Uso:** Dados de clientes, produtos, vendas, estoque
+- Cada ERP tem seu conector específico
+
+### Banco do Copilot (READ-WRITE) - SEPARADO!
+- **Database:** `copilot` (banco próprio do PharmaCopilot)
+- **Conexão:** `mysql://root:f68interdb@localhost:3307/copilot`
+- **Permissão:** SELECT, INSERT, UPDATE, DELETE
+- **Schema:** `database/copilot_schema.sql`
+
+**Tabelas do banco `copilot`:**
+- `copilot_cross_sell` - Regras de venda cruzada (gatilhos e sugestões)
+- `copilot_cliente_perfil` - Dados extras do cliente (alergias, preferências)
+- `copilot_medicamento_info` - Informações farmacêuticas
+- `copilot_interacao` - Interações medicamentosas
+- `copilot_drug_cache` - Cache de dados de medicamentos
+- `copilot_chat_session` - Sessões de chat
+- `copilot_chat_message` - Mensagens do chat
+- `copilot_log` - Analytics e logs
+- `copilot_licenca` - Licenciamento
+- `copilot_terminal` - Terminais registrados
+
+**REGRA:** Ao buscar dados de cross-sell, interações, ou qualquer funcionalidade do copilot, SEMPRE usar o banco `copilot`, NUNCA o banco do ERP.
+
+## Desenvolvimento
+
+### Criar novo conector
+```bash
+# 1. Criar arquivo do conector
+backend/integrations/connectors/novo_erp.py
+
+# 2. Criar mapping
+backend/integrations/mappings/novo_erp_mapping.json
+
+# 3. Registrar na factory
+ConnectorFactory.register('novo_erp', NovoERPConnector)
+```
+
+### Testar conector
+```python
+from integrations import ConnectorFactory
+
+connector = ConnectorFactory.create(
+    'aione',
+    'mysql://user:pass@localhost/dbaione',
+    mapping
+)
+
+assert connector.test_connection()
+cliente = connector.get_cliente(1)
+```
+
+## Checklist de Revisão
+
+### Backend Python
+- [ ] Type hints em todas funções
+- [ ] Pydantic schemas para I/O
+- [ ] Tratamento de erros
+- [ ] Logging adequado
+- [ ] Conexões com pool
+
+### Conectores
+- [ ] Implementa toda interface BaseERPConnector
+- [ ] Mapping JSON completo
+- [ ] Queries parametrizadas (sem SQL injection)
+- [ ] Tratamento de NULL
+- [ ] Timeout configurado
+
+### Widget Delphi
+- [ ] Não depende de nenhum ERP
+- [ ] Config em AppData
+- [ ] Hotkey global funcional
+- [ ] Executa sem privilégio admin
+
+## Skills Relacionadas
+
+- `pharmacopilot` - Documentação completa do módulo
+- Para padrões Delphi genéricos, consulte projeto AIONE
+
+## Comandos
+
+```bash
+/copilot init                    # Criar estrutura
+/copilot backend connector novo  # Criar novo conector
+/copilot test connector aione    # Testar conector
+```

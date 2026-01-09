@@ -1,0 +1,449 @@
+unit uCopilotSettings;
+
+interface
+
+uses
+   Winapi.Windows,
+   Winapi.Messages,
+   System.SysUtils,
+   System.Variants,
+   System.Classes,
+   System.JSON,
+   Vcl.Graphics,
+   Vcl.Controls,
+   Vcl.Forms,
+   Vcl.Dialogs,
+   Vcl.StdCtrls,
+   Vcl.ComCtrls,
+   Vcl.ExtCtrls,
+   uCopilotConfig,
+   uCopilotAPI;
+
+type
+   TfrmCopilotSettings = class(TForm)
+      PageControl1: TPageControl;
+      TabConexao: TTabSheet;
+      TabTerminal: TTabSheet;
+      TabPreferencias: TTabSheet;
+      Label1: TLabel;
+      edtBackendURL: TEdit;
+      btnTestarConexao: TButton;
+      lblStatusConexao: TLabel;
+      Label2: TLabel;
+      cmbTabelaVendas: TComboBox;
+      Label3: TLabel;
+      cmbCampoIDVenda: TComboBox;
+      Label4: TLabel;
+      cmbCampoIdentificador: TComboBox;
+      Label5: TLabel;
+      edtValorIdentificador: TEdit;
+      Label6: TLabel;
+      cmbCampoStatus: TComboBox;
+      Label7: TLabel;
+      edtValorAberta: TEdit;
+      Label8: TLabel;
+      cmbCampoData: TComboBox;
+      Label9: TLabel;
+      cmbCampoCliente: TComboBox;
+      Label10: TLabel;
+      edtOrdenarPor: TEdit;
+      btnTestarConfig: TButton;
+      lblResultadoTeste: TLabel;
+      chkAutoStart: TCheckBox;
+      chkNotificacoes: TCheckBox;
+      GroupBox1: TGroupBox;
+      chkCtrl: TCheckBox;
+      chkShift: TCheckBox;
+      chkAlt: TCheckBox;
+      edtHotKey: TEdit;
+      Label11: TLabel;
+      btnSalvar: TButton;
+      btnCancelar: TButton;
+      btnRestaurar: TButton;
+      procedure FormCreate(Sender: TObject);
+      procedure FormDestroy(Sender: TObject);
+      procedure btnTestarConexaoClick(Sender: TObject);
+      procedure cmbTabelaVendasDropDown(Sender: TObject);
+      procedure cmbTabelaVendasChange(Sender: TObject);
+      procedure btnTestarConfigClick(Sender: TObject);
+      procedure btnSalvarClick(Sender: TObject);
+      procedure btnRestaurarClick(Sender: TObject);
+   private
+      FApi: TCopilotAPI;
+      FTablesLoaded: Boolean;
+      procedure LoadFromConfig;
+      procedure SaveToConfig;
+      procedure SaveTerminalConfigToBackend;
+      procedure LoadTables;
+      procedure LoadColumns(const ATabela: string);
+      procedure UpdateColumnCombos;
+   public
+   end;
+
+function ShowCopilotSettings: Boolean;
+
+implementation
+
+{$R *.dfm}
+
+function ShowCopilotSettings: Boolean;
+var
+   Frm: TfrmCopilotSettings;
+begin
+   Frm := TfrmCopilotSettings.Create(nil);
+   try
+      Result := Frm.ShowModal = mrOk;
+   finally
+      FreeAndNil(Frm);
+   end;
+end;
+
+{ TfrmCopilotSettings }
+
+procedure TfrmCopilotSettings.FormCreate(Sender: TObject);
+begin
+   FApi := TCopilotAPI.Create;
+   FTablesLoaded := False;
+
+   // Carrega configuracoes atuais
+   LoadFromConfig;
+end;
+
+procedure TfrmCopilotSettings.FormDestroy(Sender: TObject);
+begin
+   FreeAndNil(FApi);
+end;
+
+procedure TfrmCopilotSettings.LoadFromConfig;
+begin
+   // Conexao
+   edtBackendURL.Text := CopilotConfig.BackendURL;
+   FApi.BaseURL := CopilotConfig.BackendURL;
+
+   // Terminal
+   cmbTabelaVendas.Text := CopilotConfig.TabelaVendas;
+   cmbCampoIDVenda.Text := CopilotConfig.CampoIDVenda;
+   cmbCampoIdentificador.Text := CopilotConfig.CampoIdentificador;
+   edtValorIdentificador.Text := CopilotConfig.ValorIdentificador;
+   cmbCampoStatus.Text := CopilotConfig.CampoStatusVenda;
+   edtValorAberta.Text := CopilotConfig.ValorVendaAberta;
+   cmbCampoData.Text := CopilotConfig.CampoData;
+   cmbCampoCliente.Text := CopilotConfig.CampoCliente;
+   edtOrdenarPor.Text := CopilotConfig.OrdenarPor;
+
+   // Preferencias
+   chkAutoStart.Checked := CopilotConfig.AutoStart;
+   chkNotificacoes.Checked := CopilotConfig.ShowNotifications;
+
+   // HotKey
+   chkCtrl.Checked := (CopilotConfig.HotKeyModifiers and MOD_CONTROL) <> 0;
+   chkShift.Checked := (CopilotConfig.HotKeyModifiers and MOD_SHIFT) <> 0;
+   chkAlt.Checked := (CopilotConfig.HotKeyModifiers and MOD_ALT) <> 0;
+   if CopilotConfig.HotKeyVirtualKey > 0 then
+   begin
+      edtHotKey.Text := Chr(CopilotConfig.HotKeyVirtualKey);
+   end;
+end;
+
+procedure TfrmCopilotSettings.SaveToConfig;
+var
+   Modifiers: Cardinal;
+begin
+   // Conexao
+   CopilotConfig.BackendURL := edtBackendURL.Text;
+
+   // Terminal
+   CopilotConfig.TabelaVendas := cmbTabelaVendas.Text;
+   CopilotConfig.CampoIDVenda := cmbCampoIDVenda.Text;
+   CopilotConfig.CampoIdentificador := cmbCampoIdentificador.Text;
+   CopilotConfig.ValorIdentificador := edtValorIdentificador.Text;
+   CopilotConfig.CampoStatusVenda := cmbCampoStatus.Text;
+   CopilotConfig.ValorVendaAberta := edtValorAberta.Text;
+   CopilotConfig.CampoData := cmbCampoData.Text;
+   CopilotConfig.CampoCliente := cmbCampoCliente.Text;
+   CopilotConfig.OrdenarPor := edtOrdenarPor.Text;
+
+   // Preferencias
+   CopilotConfig.AutoStart := chkAutoStart.Checked;
+   CopilotConfig.ShowNotifications := chkNotificacoes.Checked;
+
+   // HotKey
+   Modifiers := 0;
+   if chkCtrl.Checked then
+   begin
+      Modifiers := Modifiers or MOD_CONTROL;
+   end;
+   if chkShift.Checked then
+   begin
+      Modifiers := Modifiers or MOD_SHIFT;
+   end;
+   if chkAlt.Checked then
+   begin
+      Modifiers := Modifiers or MOD_ALT;
+   end;
+   CopilotConfig.HotKeyModifiers := Modifiers;
+
+   if Length(edtHotKey.Text) > 0 then
+   begin
+      CopilotConfig.HotKeyVirtualKey := Ord(UpCase(edtHotKey.Text[1]));
+   end;
+
+   // Salva no arquivo
+   CopilotConfig.Save;
+
+   // Envia configuracao para o backend
+   SaveTerminalConfigToBackend;
+end;
+
+procedure TfrmCopilotSettings.SaveTerminalConfigToBackend;
+var
+   ConfigJSON: TJSONObject;
+begin
+   ConfigJSON := TJSONObject.Create;
+   try
+      ConfigJSON.AddPair('tabela_vendas', cmbTabelaVendas.Text);
+      ConfigJSON.AddPair('campo_id_venda', cmbCampoIDVenda.Text);
+      ConfigJSON.AddPair('campo_identificador', cmbCampoIdentificador.Text);
+      ConfigJSON.AddPair('valor_identificador', edtValorIdentificador.Text);
+      ConfigJSON.AddPair('campo_status_venda', cmbCampoStatus.Text);
+      ConfigJSON.AddPair('valor_venda_aberta', edtValorAberta.Text);
+      ConfigJSON.AddPair('campo_data', cmbCampoData.Text);
+      ConfigJSON.AddPair('campo_cliente', cmbCampoCliente.Text);
+      ConfigJSON.AddPair('ordenar_por', edtOrdenarPor.Text);
+
+      try
+         FApi.SaveTerminalConfig(ConfigJSON);
+      except
+         // Ignora erro - config local ja foi salva
+      end;
+   finally
+      FreeAndNil(ConfigJSON);
+   end;
+end;
+
+procedure TfrmCopilotSettings.btnTestarConexaoClick(Sender: TObject);
+begin
+   Screen.Cursor := crHourGlass;
+   lblStatusConexao.Caption := 'Testando...';
+   lblStatusConexao.Font.Color := clGray;
+   Application.ProcessMessages;
+   try
+      FApi.BaseURL := edtBackendURL.Text;
+
+      if FApi.TestConnection then
+      begin
+         lblStatusConexao.Caption := 'Conexao OK!';
+         lblStatusConexao.Font.Color := clGreen;
+      end
+      else
+      begin
+         lblStatusConexao.Caption := 'Falha na conexao';
+         lblStatusConexao.Font.Color := clRed;
+      end;
+   except
+      on E: Exception do
+      begin
+         lblStatusConexao.Caption := 'Erro: ' + E.Message;
+         lblStatusConexao.Font.Color := clRed;
+      end;
+   end;
+   Screen.Cursor := crDefault;
+end;
+
+procedure TfrmCopilotSettings.LoadTables;
+var
+   Response: string;
+   JSONArray: TJSONArray;
+   I: Integer;
+   TableObj: TJSONObject;
+   TableName: string;
+begin
+   if FTablesLoaded then
+   begin
+      Exit;
+   end;
+
+   Screen.Cursor := crHourGlass;
+   try
+      FApi.BaseURL := edtBackendURL.Text;
+      Response := FApi.GetTables;
+
+      JSONArray := TJSONObject.ParseJSONValue(Response) as TJSONArray;
+      if Assigned(JSONArray) then
+      begin
+         try
+            cmbTabelaVendas.Items.Clear;
+            for I := 0 to JSONArray.Count - 1 do
+            begin
+               TableObj := JSONArray.Items[I] as TJSONObject;
+               TableName := TableObj.GetValue<string>('name');
+               cmbTabelaVendas.Items.Add(TableName);
+            end;
+            FTablesLoaded := True;
+         finally
+            FreeAndNil(JSONArray);
+         end;
+      end;
+   except
+      on E: Exception do
+      begin
+         ShowMessage('Erro ao carregar tabelas: ' + E.Message);
+      end;
+   end;
+   Screen.Cursor := crDefault;
+end;
+
+procedure TfrmCopilotSettings.LoadColumns(const ATabela: string);
+var
+   Response: string;
+   JSONArray: TJSONArray;
+   I: Integer;
+   ColObj: TJSONObject;
+   ColName: string;
+   Columns: TStringList;
+begin
+   if ATabela = '' then
+   begin
+      Exit;
+   end;
+
+   Screen.Cursor := crHourGlass;
+   Columns := TStringList.Create;
+   try
+      FApi.BaseURL := edtBackendURL.Text;
+      Response := FApi.GetColumns(ATabela);
+
+      JSONArray := TJSONObject.ParseJSONValue(Response) as TJSONArray;
+      if Assigned(JSONArray) then
+      begin
+         try
+            for I := 0 to JSONArray.Count - 1 do
+            begin
+               ColObj := JSONArray.Items[I] as TJSONObject;
+               ColName := ColObj.GetValue<string>('name');
+               Columns.Add(ColName);
+            end;
+         finally
+            FreeAndNil(JSONArray);
+         end;
+      end;
+
+      // Atualiza todos os combos de colunas
+      cmbCampoIDVenda.Items.Assign(Columns);
+      cmbCampoIdentificador.Items.Assign(Columns);
+      cmbCampoStatus.Items.Assign(Columns);
+      cmbCampoData.Items.Assign(Columns);
+      cmbCampoCliente.Items.Assign(Columns);
+   except
+      on E: Exception do
+      begin
+         ShowMessage('Erro ao carregar colunas: ' + E.Message);
+      end;
+   end;
+   FreeAndNil(Columns);
+   Screen.Cursor := crDefault;
+end;
+
+procedure TfrmCopilotSettings.UpdateColumnCombos;
+begin
+   LoadColumns(cmbTabelaVendas.Text);
+end;
+
+procedure TfrmCopilotSettings.cmbTabelaVendasDropDown(Sender: TObject);
+begin
+   LoadTables;
+end;
+
+procedure TfrmCopilotSettings.cmbTabelaVendasChange(Sender: TObject);
+begin
+   UpdateColumnCombos;
+end;
+
+procedure TfrmCopilotSettings.btnTestarConfigClick(Sender: TObject);
+var
+   ConfigJSON: TJSONObject;
+   Response: string;
+   ResultJSON: TJSONObject;
+   Success: Boolean;
+   Msg: string;
+   VendaID: Integer;
+begin
+   Screen.Cursor := crHourGlass;
+   lblResultadoTeste.Caption := 'Testando...';
+   lblResultadoTeste.Font.Color := clGray;
+   Application.ProcessMessages;
+
+   ConfigJSON := TJSONObject.Create;
+   try
+      ConfigJSON.AddPair('tabela_vendas', cmbTabelaVendas.Text);
+      ConfigJSON.AddPair('campo_id_venda', cmbCampoIDVenda.Text);
+      ConfigJSON.AddPair('campo_identificador', cmbCampoIdentificador.Text);
+      ConfigJSON.AddPair('valor_identificador', edtValorIdentificador.Text);
+      ConfigJSON.AddPair('campo_status_venda', cmbCampoStatus.Text);
+      ConfigJSON.AddPair('valor_venda_aberta', edtValorAberta.Text);
+      ConfigJSON.AddPair('campo_data', cmbCampoData.Text);
+      ConfigJSON.AddPair('campo_cliente', cmbCampoCliente.Text);
+      ConfigJSON.AddPair('ordenar_por', edtOrdenarPor.Text);
+
+      try
+         FApi.BaseURL := edtBackendURL.Text;
+         Response := FApi.TestTerminalConfig(ConfigJSON);
+
+         ResultJSON := TJSONObject.ParseJSONValue(Response) as TJSONObject;
+         if Assigned(ResultJSON) then
+         begin
+            try
+               Success := ResultJSON.GetValue<Boolean>('success');
+               Msg := ResultJSON.GetValue<string>('message');
+
+               if Success then
+               begin
+                  if ResultJSON.TryGetValue<Integer>('venda_id', VendaID) then
+                  begin
+                     lblResultadoTeste.Caption := Format('OK! Venda #%d encontrada', [VendaID]);
+                  end
+                  else
+                  begin
+                     lblResultadoTeste.Caption := Msg;
+                  end;
+                  lblResultadoTeste.Font.Color := clGreen;
+               end
+               else
+               begin
+                  lblResultadoTeste.Caption := 'Erro: ' + Msg;
+                  lblResultadoTeste.Font.Color := clRed;
+               end;
+            finally
+               FreeAndNil(ResultJSON);
+            end;
+         end;
+      except
+         on E: Exception do
+         begin
+            lblResultadoTeste.Caption := 'Erro: ' + E.Message;
+            lblResultadoTeste.Font.Color := clRed;
+         end;
+      end;
+   finally
+      FreeAndNil(ConfigJSON);
+      Screen.Cursor := crDefault;
+   end;
+end;
+
+procedure TfrmCopilotSettings.btnSalvarClick(Sender: TObject);
+begin
+   SaveToConfig;
+   ModalResult := mrOk;
+end;
+
+procedure TfrmCopilotSettings.btnRestaurarClick(Sender: TObject);
+begin
+   if MessageDlg('Restaurar todas as configuracoes para os valores padrao?',
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+      CopilotConfig.Reset;
+      LoadFromConfig;
+   end;
+end;
+
+end.

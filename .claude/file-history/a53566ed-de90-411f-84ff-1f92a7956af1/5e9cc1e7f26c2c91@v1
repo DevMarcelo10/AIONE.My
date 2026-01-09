@@ -1,0 +1,137 @@
+"""Script para inserir regras de cross-sell no banco copilot."""
+
+import pymysql
+
+conn = pymysql.connect(
+    host='localhost',
+    port=3307,
+    user='root',
+    password='f68interdb',
+    database='copilot',
+    autocommit=True
+)
+
+cursor = conn.cursor()
+
+# Limpar regras anteriores
+cursor.execute('DELETE FROM copilot_cross_sell WHERE id > 0')
+
+# Regras de cross-sell
+regras = [
+    # ANALGESICOS E ANTITERMICOS
+    ('principio_ativo', 'DIPIRONA', 'categoria', 'TERMOMETRO', 'Termometro Digital', 80, 'Vai precisar de um termometro para acompanhar a febre?'),
+    ('principio_ativo', 'PARACETAMOL', 'categoria', 'TERMOMETRO', 'Termometro Digital', 80, 'Ja tem termometro em casa para monitorar?'),
+    ('principio_ativo', 'IBUPROFENO', 'categoria', 'PROTETOR_GASTRICO', 'Protetor Gastrico', 75, 'Anti-inflamatorio pode irritar o estomago. Vai levar um protetor gastrico?'),
+    ('principio_ativo', 'NIMESULIDA', 'categoria', 'PROTETOR_GASTRICO', 'Protetor Gastrico', 75, 'Para proteger o estomago, recomendo associar com um protetor gastrico.'),
+    ('principio_ativo', 'DICLOFENACO', 'categoria', 'PROTETOR_GASTRICO', 'Protetor Gastrico', 80, 'Diclofenaco pode ser agressivo ao estomago. Leva um omeprazol junto?'),
+
+    # ANTIBIOTICOS
+    ('principio_ativo', 'AMOXICILINA', 'categoria', 'PROBIOTICO', 'Probiotico', 85, 'Antibiotico pode afetar a flora intestinal. Recomendo um probiotico para proteger.'),
+    ('principio_ativo', 'AZITROMICINA', 'categoria', 'PROBIOTICO', 'Probiotico', 85, 'Para evitar desconforto intestinal, leva um probiotico?'),
+    ('principio_ativo', 'CEFALEXINA', 'categoria', 'PROBIOTICO', 'Probiotico', 85, 'Antibiotico pode causar diarreia. Um probiotico ajuda a prevenir.'),
+    ('principio_ativo', 'LEVOFLOXACINO', 'categoria', 'PROBIOTICO', 'Probiotico', 85, 'Esse antibiotico e forte. Recomendo associar com probiotico.'),
+    ('principio_ativo', 'CIPROFLOXACINO', 'categoria', 'PROBIOTICO', 'Probiotico', 85, 'Fluoroquinolona e forte. Probiotico ajuda a proteger o intestino.'),
+
+    # GRIPES E RESFRIADOS
+    ('classe_terapeutica', 'ANTIGRIPAL', 'categoria', 'VITAMINA_C', 'Vitamina C', 70, 'Vitamina C ajuda na recuperacao. Quer levar?'),
+    ('classe_terapeutica', 'ANTIGRIPAL', 'categoria', 'PASTILHA_GARGANTA', 'Pastilhas para Garganta', 65, 'Esta com dor de garganta tambem? Temos pastilhas que aliviam.'),
+    ('classe_terapeutica', 'ANTIGRIPAL', 'categoria', 'LENCO_PAPEL', 'Lencos de Papel', 50, 'Vai precisar de lencos de papel?'),
+    ('classe_terapeutica', 'DESCONGESTIONANTE', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 75, 'Soro fisiologico ajuda a limpar as vias nasais. Leva junto?'),
+    ('principio_ativo', 'LORATADINA', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 70, 'Para alergia, lavar o nariz com soro ajuda bastante.'),
+    ('principio_ativo', 'DESLORATADINA', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 70, 'Soro fisiologico complementa o tratamento da alergia.'),
+    ('principio_ativo', 'FEXOFENADINA', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 70, 'Lavagem nasal com soro ajuda no alivio.'),
+
+    # DERMATOLOGICOS
+    ('classe_terapeutica', 'ACIDO_RETINOICO', 'categoria', 'PROTETOR_SOLAR', 'Protetor Solar FPS50+', 95, 'IMPORTANTE: Acido retinoico aumenta sensibilidade ao sol. Protetor solar e obrigatorio!'),
+    ('classe_terapeutica', 'ACIDO_GLICOLICO', 'categoria', 'PROTETOR_SOLAR', 'Protetor Solar FPS50+', 95, 'Acidos deixam a pele sensivel. Precisa usar protetor solar todos os dias.'),
+    ('principio_ativo', 'ADAPALENO', 'categoria', 'PROTETOR_SOLAR', 'Protetor Solar FPS50+', 95, 'Adapaleno sensibiliza a pele. Use protetor solar diariamente!'),
+    ('principio_ativo', 'TRETINOINA', 'categoria', 'PROTETOR_SOLAR', 'Protetor Solar FPS50+', 95, 'Tretinoina exige protetor solar todos os dias, sem excecao.'),
+    ('classe_terapeutica', 'ANTIACNE', 'categoria', 'SABONETE_FACIAL', 'Sabonete Facial', 70, 'Para acne, um sabonete facial adequado potencializa o tratamento.'),
+    ('classe_terapeutica', 'HIDRATANTE', 'categoria', 'PROTETOR_LABIAL', 'Protetor Labial', 55, 'Os labios tambem ressecam. Quer levar um protetor labial?'),
+
+    # DIABETES
+    ('principio_ativo', 'METFORMINA', 'categoria', 'LANCETA', 'Lancetas', 60, 'Esta precisando de lancetas para o glicosimetro?'),
+    ('principio_ativo', 'METFORMINA', 'categoria', 'FITA_GLICOSE', 'Fitas de Glicose', 65, 'Precisa de fitas para medir a glicose?'),
+    ('principio_ativo', 'GLIBENCLAMIDA', 'categoria', 'FITA_GLICOSE', 'Fitas de Glicose', 65, 'Esta precisando de fitas para o glicosimetro?'),
+    ('principio_ativo', 'INSULINA', 'categoria', 'SERINGA_INSULINA', 'Seringas de Insulina', 90, 'Vai precisar de seringas para insulina?'),
+    ('principio_ativo', 'INSULINA', 'categoria', 'ALGODAO', 'Algodao', 50, 'Leva algodao para aplicacao?'),
+    ('principio_ativo', 'INSULINA', 'categoria', 'ALCOOL', 'Alcool 70%', 55, 'Alcool 70% para limpar o local da aplicacao?'),
+    ('classe_terapeutica', 'ANTIDIABETICO', 'categoria', 'ADOCANTE', 'Adocante', 45, 'Ja tem adocante em casa?'),
+
+    # HIPERTENSAO
+    ('principio_ativo', 'LOSARTANA', 'categoria', 'APARELHO_PRESSAO', 'Aparelho de Pressao', 55, 'Tem aparelho para medir pressao em casa? E importante monitorar.'),
+    ('principio_ativo', 'ATENOLOL', 'categoria', 'APARELHO_PRESSAO', 'Aparelho de Pressao', 55, 'Controlar a pressao em casa ajuda no tratamento.'),
+    ('principio_ativo', 'ENALAPRIL', 'categoria', 'APARELHO_PRESSAO', 'Aparelho de Pressao', 55, 'Monitorar a pressao em casa e fundamental.'),
+    ('principio_ativo', 'ANLODIPINO', 'categoria', 'APARELHO_PRESSAO', 'Aparelho de Pressao', 55, 'Ja tem aparelho para acompanhar a pressao?'),
+    ('classe_terapeutica', 'ANTI-HIPERTENSIVO', 'categoria', 'SAL_LIGHT', 'Sal Light/Hipossodico', 40, 'Para hipertensao, sal light ajuda a reduzir o sodio na dieta.'),
+
+    # GASTRO
+    ('principio_ativo', 'OMEPRAZOL', 'categoria', 'CHA_DIGESTIVO', 'Cha Digestivo', 40, 'Cha de boldo ou camomila tambem ajuda na digestao.'),
+    ('principio_ativo', 'PANTOPRAZOL', 'categoria', 'CHA_DIGESTIVO', 'Cha Digestivo', 40, 'Cha digestivo pode complementar o tratamento.'),
+    ('principio_ativo', 'LOPERAMIDA', 'categoria', 'SORO_REIDRATANTE', 'Soro Reidratante', 85, 'Diarreia desidrata. E importante repor liquidos com soro reidratante.'),
+    ('principio_ativo', 'RACECADOTRILA', 'categoria', 'SORO_REIDRATANTE', 'Soro Reidratante', 85, 'Hidratacao e fundamental. Leva soro reidratante?'),
+    ('classe_terapeutica', 'LAXANTE', 'categoria', 'FIBRAS', 'Suplemento de Fibras', 60, 'Para regularizar o intestino, fibras no dia a dia ajudam bastante.'),
+
+    # MULHER / GINECOLOGIA
+    ('classe_terapeutica', 'ANTIFUNGICO_VAGINAL', 'categoria', 'SABONETE_INTIMO', 'Sabonete Intimo', 70, 'Sabonete intimo com pH adequado ajuda na prevencao de infeccoes.'),
+    ('principio_ativo', 'FLUCONAZOL', 'categoria', 'SABONETE_INTIMO', 'Sabonete Intimo', 65, 'Sabonete intimo ajuda a manter o pH da regiao.'),
+    ('classe_terapeutica', 'ANTICONCEPCIONAL', 'categoria', 'LUBRIFICANTE', 'Lubrificante Intimo', 35, 'Precisa de lubrificante intimo?'),
+    ('principio_ativo', 'ACIDO_FOLICO', 'categoria', 'VITAMINA_PRENATAL', 'Vitaminas Pre-natal', 75, 'Esta planejando gravidez? Vitaminas pre-natais complementam o acido folico.'),
+
+    # INFANTIL
+    ('categoria', 'MEDICAMENTO_PEDIATRICO', 'categoria', 'SERINGA_DOSADORA', 'Seringa Dosadora', 70, 'Para dar remedio para crianca, a seringa dosadora facilita.'),
+    ('categoria', 'FORMULA_INFANTIL', 'categoria', 'MAMADEIRA', 'Mamadeira', 50, 'Precisa de mamadeira?'),
+    ('categoria', 'FRALDA', 'categoria', 'POMADA_ASSADURA', 'Pomada para Assadura', 75, 'Leva pomada para prevenir assaduras?'),
+    ('categoria', 'FRALDA', 'categoria', 'LENCO_UMEDECIDO', 'Lencos Umedecidos', 70, 'Vai precisar de lencos umedecidos tambem?'),
+
+    # DORES MUSCULARES / ORTOPEDIA
+    ('classe_terapeutica', 'RELAXANTE_MUSCULAR', 'categoria', 'BOLSA_TERMICA', 'Bolsa Termica', 60, 'Compressa quente ajuda a relaxar a musculatura. Temos bolsas termicas.'),
+    ('classe_terapeutica', 'ANTI-INFLAMATORIO_TOPICO', 'categoria', 'FAIXA_ELASTICA', 'Faixa Elastica', 50, 'Para imobilizar, uma faixa elastica pode ajudar.'),
+    ('principio_ativo', 'CICLOBENZAPRINA', 'categoria', 'ADESIVO_TERMICO', 'Adesivo Termico', 55, 'Adesivo termico mantem o calor no local e alivia a dor.'),
+    ('principio_ativo', 'CARISOPRODOL', 'categoria', 'BOLSA_TERMICA', 'Bolsa Termica', 55, 'Calor local ajuda no relaxamento muscular.'),
+
+    # OLHOS
+    ('classe_terapeutica', 'COLIRIO', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 65, 'Soro fisiologico serve para lavar os olhos e e mais economico.'),
+    ('classe_terapeutica', 'COLIRIO_LUBRIFICANTE', 'categoria', 'COMPRESSA_OCULAR', 'Compressa Ocular', 45, 'Compressa fria alivia olhos cansados.'),
+
+    # CURATIVOS / PRIMEIROS SOCORROS
+    ('categoria', 'CURATIVO', 'categoria', 'SORO_FISIOLOGICO', 'Soro Fisiologico', 75, 'Para limpar o ferimento, soro fisiologico e o mais indicado.'),
+    ('categoria', 'CURATIVO', 'categoria', 'ANTISSEPTICO', 'Antisseptico', 70, 'Vai precisar de antisseptico para limpar o ferimento?'),
+    ('categoria', 'ATADURA', 'categoria', 'ESPARADRAPO', 'Esparadrapo', 65, 'Leva esparadrapo para fixar a atadura?'),
+    ('categoria', 'GAZE', 'categoria', 'MICROPORE', 'Micropore', 60, 'Micropore para fixar a gaze?'),
+
+    # SUPLEMENTOS
+    ('principio_ativo', 'CALCIO', 'categoria', 'VITAMINA_D', 'Vitamina D', 80, 'Vitamina D ajuda na absorcao do calcio. Leva junto?'),
+    ('principio_ativo', 'FERRO', 'categoria', 'VITAMINA_C', 'Vitamina C', 75, 'Vitamina C aumenta a absorcao do ferro. Recomendo associar.'),
+    ('principio_ativo', 'OMEGA_3', 'categoria', 'VITAMINA_E', 'Vitamina E', 50, 'Vitamina E e antioxidante e combina com omega 3.'),
+    ('principio_ativo', 'COLAGENO', 'categoria', 'VITAMINA_C', 'Vitamina C', 70, 'Vitamina C potencializa a producao de colageno.'),
+
+    # COLESTEROL
+    ('principio_ativo', 'SINVASTATINA', 'categoria', 'OMEGA_3', 'Omega 3', 50, 'Omega 3 ajuda no controle do colesterol.'),
+    ('principio_ativo', 'ATORVASTATINA', 'categoria', 'OMEGA_3', 'Omega 3', 50, 'Omega 3 complementa o tratamento do colesterol.'),
+    ('principio_ativo', 'ROSUVASTATINA', 'categoria', 'OMEGA_3', 'Omega 3', 50, 'Omega 3 e um bom complemento para o colesterol.'),
+]
+
+sql = '''INSERT INTO copilot_cross_sell
+         (gatilho_tipo, gatilho_valor, sugestao_tipo, sugestao_valor, sugestao_nome, prioridade, mensagem_vendedor)
+         VALUES (%s, %s, %s, %s, %s, %s, %s)'''
+
+cursor.executemany(sql, regras)
+print(f'Regras inseridas: {len(regras)}')
+
+# Verificar
+cursor.execute('SELECT COUNT(*) FROM copilot_cross_sell')
+total = cursor.fetchone()[0]
+print(f'Total no banco: {total}')
+
+cursor.execute('SELECT gatilho_tipo, COUNT(*) as qtd FROM copilot_cross_sell GROUP BY gatilho_tipo')
+for row in cursor.fetchall():
+    print(f'  {row[0]}: {row[1]} regras')
+
+cursor.execute('SHOW TABLES')
+tabelas = [t[0] for t in cursor.fetchall()]
+print(f'Tabelas no banco copilot: {len(tabelas)}')
+
+cursor.close()
+conn.close()
+print('Concluido!')

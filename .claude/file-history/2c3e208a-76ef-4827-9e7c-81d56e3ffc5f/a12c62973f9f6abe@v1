@@ -1,0 +1,162 @@
+-- ============================================================================
+-- AIONE.My - Módulo Comprador Virtual IA
+-- Tabela: ia_pedido_pendente
+-- Descrição: Controle de pedidos de compra em aberto para cálculo de
+--            estoque virtual (estoque atual + pedidos pendentes)
+-- ============================================================================
+
+DROP TABLE IF EXISTS ia_pedido_pendente;
+
+CREATE TABLE ia_pedido_pendente (
+   id                      INT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+   -- Referência ao pedido de compra no sistema principal
+   -- FK: arqpedido.IDPedido
+   pedido_compra_id        INT UNSIGNED NOT NULL,
+
+   -- Item do pedido (para rastrear produto específico)
+   -- FK: arqpedidoite.IDPedidoIte
+   pedido_item_id          INT UNSIGNED NULL,
+
+   -- Fornecedor do pedido
+   -- FK: arqpessoa.IDPessoa
+   fornecedor_id           INT UNSIGNED NOT NULL,
+
+   -- Produto pedido
+   -- FK: arqproduto.IDProduto
+   produto_id              INT UNSIGNED NOT NULL,
+
+   -- Filial de destino
+   -- FK: arqfilial.IDFilial
+   filial_id               INT UNSIGNED NOT NULL,
+
+   -- Quantidades
+   quantidade_pedida       DECIMAL(15,4) NOT NULL,
+   quantidade_recebida     DECIMAL(15,4) NOT NULL DEFAULT 0,
+   quantidade_pendente     DECIMAL(15,4) GENERATED ALWAYS AS
+                           (quantidade_pedida - quantidade_recebida) STORED,
+
+   -- Valor unitário no momento do pedido
+   valor_unitario          DECIMAL(15,4) NULL,
+
+   -- Datas de controle
+   data_pedido             DATE NOT NULL,
+   data_prevista_entrega   DATE NULL COMMENT 'Data estimada baseada no lead time',
+   data_ultima_atualizacao DATE NULL COMMENT 'Última vez que o status foi verificado',
+
+   -- Status do pedido
+   -- PENDENTE: Aguardando envio ou confirmação do fornecedor
+   -- EM_TRANSITO: Confirmado pelo fornecedor, em transporte
+   -- PARCIAL: Recebido parcialmente
+   -- RECEBIDO: Totalmente recebido
+   -- CANCELADO: Cancelado (não será entregue)
+   status                  ENUM('PENDENTE', 'EM_TRANSITO', 'PARCIAL', 'RECEBIDO', 'CANCELADO')
+                           NOT NULL DEFAULT 'PENDENTE',
+
+   -- Número de rastreamento (quando disponível)
+   codigo_rastreio         VARCHAR(50) NULL,
+
+   -- Observações adicionais
+   observacao              VARCHAR(500) NULL,
+
+   -- Auditoria
+   created_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+   PRIMARY KEY (id),
+
+   -- Índice único para evitar duplicidade de item
+   UNIQUE KEY uk_pedido_item (pedido_compra_id, pedido_item_id),
+
+   -- Índice principal: buscar pendentes por produto/filial (cálculo de estoque virtual)
+   KEY idx_produto_filial_status (produto_id, filial_id, status),
+
+   -- Índice para buscar por fornecedor
+   KEY idx_fornecedor_status (fornecedor_id, status, data_prevista_entrega),
+
+   -- Índice para buscar apenas pendentes (status != RECEBIDO e != CANCELADO)
+   KEY idx_pendentes (status, data_prevista_entrega),
+
+   -- Índice para buscar por filial
+   KEY idx_filial (filial_id, status),
+
+   -- Índice para limpeza de registros antigos
+   KEY idx_data_pedido (data_pedido),
+
+   -- Índice para rastrear pedido original
+   KEY idx_pedido_compra (pedido_compra_id)
+
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Controle de pedidos pendentes para cálculo de estoque virtual';
+
+-- ============================================================================
+-- View auxiliar: Estoque virtual por produto/filial (atual + pendentes)
+-- ============================================================================
+CREATE OR REPLACE VIEW vw_ia_estoque_pendente AS
+SELECT
+   produto_id,
+   filial_id,
+   SUM(quantidade_pendente) AS qtd_pendente_total,
+   MIN(data_prevista_entrega) AS proxima_entrega,
+   COUNT(*) AS pedidos_abertos
+FROM ia_pedido_pendente
+WHERE status IN ('PENDENTE', 'EM_TRANSITO', 'PARCIAL')
+GROUP BY produto_id, filial_id;
+
+-- ============================================================================
+-- View auxiliar: Pedidos atrasados (previsão passou e não foi recebido)
+-- ============================================================================
+CREATE OR REPLACE VIEW vw_ia_pedidos_atrasados AS
+SELECT
+   pp.*,
+   DATEDIFF(CURDATE(), data_prevista_entrega) AS dias_atraso
+FROM ia_pedido_pendente pp
+WHERE status IN ('PENDENTE', 'EM_TRANSITO')
+  AND data_prevista_entrega < CURDATE();
+
+-- ============================================================================
+-- Trigger: Atualizar lead_time_historico quando pedido for recebido
+-- ============================================================================
+DELIMITER //
+
+CREATE TRIGGER trg_ia_pedido_recebido
+AFTER UPDATE ON ia_pedido_pendente
+FOR EACH ROW
+BEGIN
+   -- Se o status mudou para RECEBIDO, registrar o lead time
+   IF NEW.status = 'RECEBIDO' AND OLD.status != 'RECEBIDO' THEN
+      INSERT INTO ia_lead_time_historico (
+         fornecedor_id,
+         produto_id,
+         filial_id,
+         pedido_id,
+         data_pedido,
+         data_prevista,
+         data_entrega,
+         dias_lead_time,
+         dias_variacao,
+         qtd_pedida,
+         qtd_recebida
+      ) VALUES (
+         NEW.fornecedor_id,
+         NEW.produto_id,
+         NEW.filial_id,
+         NEW.pedido_compra_id,
+         NEW.data_pedido,
+         NEW.data_prevista_entrega,
+         CURDATE(),
+         DATEDIFF(CURDATE(), NEW.data_pedido),
+         CASE
+            WHEN NEW.data_prevista_entrega IS NOT NULL
+            THEN DATEDIFF(CURDATE(), NEW.data_prevista_entrega)
+            ELSE NULL
+         END,
+         NEW.quantidade_pedida,
+         NEW.quantidade_recebida
+      );
+   END IF;
+END//
+
+DELIMITER ;

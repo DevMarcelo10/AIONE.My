@@ -1,0 +1,56 @@
+# Schema - Comprador Virtual IA
+
+## Ordem de Execução
+
+```bash
+1. 01_ia_config_parametros.sql
+2. 02_ia_lead_time_historico.sql
+3. 03_ia_pedido_pendente.sql
+```
+
+## Diagrama de Relacionamentos
+
+```
+┌─────────────────────────┐
+│  ia_config_parametros   │
+├─────────────────────────┤
+│ tipo: GLOBAL/CATEGORIA/ │
+│       PRODUTO           │
+│ referencia_id ──────────┼──→ arqgrupo.IDGrupo (CATEGORIA)
+│                         │──→ arqproduto.IDProduto (PRODUTO)
+└─────────────────────────┘
+
+┌─────────────────────────┐
+│ ia_lead_time_historico  │
+├─────────────────────────┤
+│ fornecedor_id ──────────┼──→ arqpessoa.IDPessoa (tipo=2)
+│ produto_id ─────────────┼──→ arqproduto.IDProduto
+│ filial_id ──────────────┼──→ arqfilial.IDFilial
+│ pedido_id ──────────────┼──→ arqpedido.IDPedido
+│ entrada_id ─────────────┼──→ arqentrada.IDEntrada
+└─────────────────────────┘
+         ▲
+         │ (trigger insere automaticamente)
+         │
+┌─────────────────────────┐
+│   ia_pedido_pendente    │
+├─────────────────────────┤
+│ pedido_compra_id ───────┼──→ arqpedido.IDPedido
+│ fornecedor_id ──────────┼──→ arqpessoa.IDPessoa (tipo=2)
+│ produto_id ─────────────┼──→ arqproduto.IDProduto
+│ filial_id ──────────────┼──→ arqfilial.IDFilial
+└─────────────────────────┘
+```
+
+## Views Criadas
+
+| View | Descrição |
+|------|-----------|
+| `vw_ia_lead_time_fornecedor` | Lead time médio por fornecedor (90 dias) |
+| `vw_ia_lead_time_produto` | Lead time por fornecedor+produto (180 dias) |
+| `vw_ia_estoque_pendente` | Quantidade pendente por produto/filial |
+| `vw_ia_pedidos_atrasados` | Pedidos com entrega atrasada |
+
+## Trigger
+
+- `trg_ia_pedido_recebido`: Ao marcar pedido como RECEBIDO, registra automaticamente o lead time real no histórico.

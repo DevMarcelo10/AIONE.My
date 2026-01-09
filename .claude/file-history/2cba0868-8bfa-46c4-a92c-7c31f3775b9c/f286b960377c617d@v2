@@ -1,0 +1,589 @@
+---
+name: ui-components
+description: Componentes VCL, LMD Tools e TMS usados no projeto. Use quando criar interfaces visuais, formulários, ou trabalhar com DBGrid.
+---
+
+# Componentes UI do Projeto
+
+## Formulário Base (TForm)
+```pascal
+object FrmXxx: TFrmXxx
+  Align = alClient
+  AlphaBlend = True
+  AlphaBlendValue = 0
+  BorderStyle = bsNone
+  Color = 4144959              // Fundo cinza escuro
+  Ctl3D = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = 4276545         // Texto cinza escuro
+  Font.Height = -12
+  Font.Name = 'Roboto'
+  KeyPreview = True
+  Position = poDesigned
+end
+```
+
+## Formulário Filho/Embed (sem borda)
+```pascal
+object FrmXxxChild: TFrmXxxChild
+  Align = alClient
+  BorderStyle = bsNone
+  Color = 15855599             // Fundo claro
+  Font.Name = 'Roboto'
+end
+```
+
+## TAdvSmoothPanel (Painel Principal)
+```pascal
+object PanelCadastro: TAdvSmoothPanel
+  Fill.Color = 16382200        // Branco gelo
+  Fill.ColorTo = 16382200
+  Fill.BorderColor = clWhite
+  Fill.BorderWidth = 0
+  Fill.Rounding = 14           // Cantos arredondados
+  Fill.ShadowOffset = 0
+  Caption.ColorStart = 4474440
+  Caption.ColorEnd = 4474440
+end
+```
+
+## Componentes LMD Tools
+
+### TLMDSimplePanel
+Painel básico com bordas customizáveis.
+```pascal
+object PanelCadastro: TLMDSimplePanel
+   Bevel.StyleOuter = bvNormal
+   Bevel.WidthOuter = 0
+   Bevel.BorderColor = 13948116
+   Bevel.BorderWidth = 1
+   Color = 16382200
+end
+```
+
+### TLMDDBLabeledEdit
+Campo de edição com label integrado.
+```pascal
+object edNompes: TLMDDBLabeledEdit
+  Bevel.StyleOuter = bvNormal
+  Bevel.WidthOuter = 0
+  Bevel.BorderColor = 15657192  // Borda clara
+  Bevel.BorderWidth = 1
+  Bevel.Mode = bmCustom
+  Color = clWhite
+  TabOnEnter = True
+  CharCase = ecUpperCase        // Opcional: maiúsculas
+  CustomButtons = <>
+  DataField = 'Nompes'
+  DataSource = SouPess
+  EditLabel.Font.Charset = DEFAULT_CHARSET
+  EditLabel.Font.Color = 9600112  // Marrom label
+  EditLabel.Font.Height = -11
+  EditLabel.Font.Name = 'Roboto'
+  EditLabel.Font.Style = [fsBold]
+  EditLabel.Caption = 'NOME'
+end
+```
+
+### TLMDDBLabeledEdit (ReadOnly)
+Campo somente leitura com fundo diferenciado.
+```pascal
+object edCodigo: TLMDDBLabeledEdit
+  Color = 16052978              // Cinza claro (readonly)
+  TabStop = False
+  Font.Style = [fsBold]
+  Alignment = taCenter
+  ReadOnly = True
+  DataField = 'IDPess'
+  DataSource = SouPess
+end
+```
+
+### TLMDDBLabeledListComboBox
+ComboBox vinculado a banco com label.
+```pascal
+object lbEmissor: TLMDDBLabeledListComboBox
+   DataField = 'Emissor'
+   DataSource = SouPess
+   LabelCaption = 'EMISSOR'
+   Items.Strings = (
+      'SSP'
+      'DETRAN'
+      'PM')
+end
+```
+
+## TAdvGlowButton
+Botões customizados com efeitos.
+```pascal
+object btSalvar: TAdvGlowButton
+   Caption = 'Salvar'
+   Font.Height = -13
+   Font.Name = 'Roboto'
+   Rounded = True
+   OnClick = btSalvarClick
+   
+   Appearance.Color = 12308991
+   Appearance.ColorHot = 16444643
+   Appearance.BorderColor = 7709439
+end
+```
+
+## TDBGridEx (Grid Avançado)
+Grid customizado com recursos extras (checkbox, imagens, seleção colorida).
+
+### Configuração Padrão
+```pascal
+object DBGridEx1: TDBGridEx
+  Align = alClient
+  BorderStyle = bsNone
+  Color = clWhite
+  Ctl3D = False
+  FixedColor = 15790320        // Cabeçalho cinza claro
+  Font.Color = clBlack
+  Font.Height = -13
+  Font.Name = 'Roboto'
+  Options = [dgEditing, dgTitles, dgColumnResize, dgColLines,
+             dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit,
+             dgTitleClick, dgTitleHotTrack]
+  TitleFont.Height = -13
+  TitleFont.Name = 'Roboto'
+  TitleFont.Style = [fsBold]
+  RowHeightEx = 23
+  SelectionColor = 15265791    // Seleção azul claro
+  SelectionTextColor = clBlack
+  UseDateEditor = True
+  Images = DM.ImagesGer        // ImageList para ícones
+end
+```
+
+### Colunas com Checkbox
+```pascal
+item
+  Alignment = taCenter
+  FieldName = 'IndAtivo'
+  Title.Alignment = taCenter
+  Title.Caption = 'ATIVO'
+  Width = 44
+  CheckBox = True
+  ValueChecked = 'True'
+  ValueUnchecked = 'False'
+end
+```
+
+### Coluna com Ícone (Exclusão)
+```pascal
+item
+  Alignment = taCenter
+  Title.Alignment = taCenter
+  Width = 21
+  ImageIndex = 0               // Índice no ImageList
+end
+```
+
+## TDBGrid (VCL Padrão)
+Grid básico para casos simples.
+
+### Configuração Básica
+```pascal
+object dgProduto: TDBGrid
+   DataSource = SouCompRecIt
+   Options = [dgTitles, dgIndicator, dgColumnResize,
+              dgColLines, dgRowLines, dgTabs]
+   ReadOnly = False
+   OnDrawColumnCell = dgProdutoDrawColumnCell
+end
+```
+
+### Colorir Linhas Alternadas
+```pascal
+procedure dgProdutoDrawColumnCell(Sender: TObject;
+   const Rect: TRect; DataCol: Integer; Column: TColumn;
+   State: TGridDrawState);
+var
+   Grid: TDBGrid;
+begin
+   Grid := Sender as TDBGrid;
+
+   if not (gdSelected in State) then
+   begin
+      if Odd(Grid.DataSource.DataSet.RecNo) then
+         Grid.Canvas.Brush.Color := clWhite
+      else
+         Grid.Canvas.Brush.Color := $00F5F5F5;
+   end;
+
+   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+```
+
+## TDBDateEdit (RxLib)
+Campo de data com calendário.
+```pascal
+object DBDateEdit1: TDBDateEdit
+   DataField = 'DatnasPes'
+   DataSource = SouPess
+   DialogTitle = 'Entre com Data'
+   GlyphKind = gkCustom
+end
+```
+
+## Padrão de Layout
+
+### Estrutura Típica
+```
+┌─ PanelTop (Título + Fechar) ─────────────┐
+├─ PanelCadastro ──────────────────────────┤
+│  ┌─ Campos de Edição ──────────────────┐ │ 
+│  │											     │ │
+│  └─────────────────────────────────────┘ │ 
+├─ PanelItens (se Master-Detail) ──────────┤
+│  ┌─ DBGrid ────────────────────────────┐ │ 
+│  │												  │ │
+│  └─────────────────────────────────────┘ │ 
+├─ PanelRodape (Totais) ───────────────────┤
+└─ PanelButtons (Botões de ação) ──────────┘
+```
+
+### Nomenclatura de Painéis
+```pascal
+PanelTop         // Cabeçalho
+PanelCadastro    // Área principal
+PanelSubCad      // Sub-área
+PanelItens       // Área de itens
+PanelRodape      // Rodapé com totais
+PanelButtons     // Botões de ação
+```
+
+## Cores Padrão
+
+```pascal
+// === BACKGROUNDS ===
+clWhite                 // Branco puro
+16382200 ($F9F9F8)      // Branco gelo (painéis principais)
+16052978 ($F4F4F2)      // Cinza claro (campos readonly)
+15855599 ($F1F1EF)      // Fundo formulários filhos
+4144959 ($3F3F3F)       // Fundo escuro (form principal)
+
+// === BORDAS ===
+15657192 ($EFEBE8)      // Borda clara (edits)
+13948116 ($D4CDD4)      // Cinza médio
+7709439 ($75757F)       // Cinza escuro
+
+// === TEXTOS ===
+4276545 ($414141)       // Cinza escuro (títulos/campos)
+9600112 ($928370)       // Marrom (labels)
+8811110 ($866B66)       // Marrom título central
+clBlack                 // Preto (grid)
+
+// === GRID ===
+15790320 ($F0F0F0)      // FixedColor (cabeçalho)
+15265791 ($E8FFFF)      // SelectionColor (seleção)
+
+// === BOTÕES VERDE (Novo/Salvar) ===
+7039851 ($6B6B6B)       // Font.Color
+8695039 ($849FFF)       // BorderColor
+14017279 ($D5FFFF)      // Color (gradiente início)
+9943551 ($97DFFF)       // ColorTo (gradiente fim)
+7972351 ($79ADFF)       // ColorHot
+
+// === BOTÕES VERMELHO (Excluir) ===
+5723991 ($575757)       // Font.Color
+2412287 ($24C3FF)       // BorderColor (laranja invertido)
+11792127 ($B4007F)      // Color
+50175 ($0000C3FF)       // ColorTo (vermelho)
+1887487 ($001CBFFF)     // ColorHot
+```
+
+## Efeitos Visuais
+
+### Fade In/Out
+```pascal
+procedure FormShow(Sender: TObject);
+begin
+   FadeInOut(Self, 'In', 10);
+   // ... resto do código
+end;
+
+procedure FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   FadeInOut(Self, 'Out', 10);
+   Action := caFree;
+end;
+```
+
+### Ajuste de DPI
+```pascal
+procedure FormCreate(Sender: TObject);
+begin
+   AdjustZoom(Self);
+end;
+```
+
+## Melhores Práticas
+
+1. Use LMD para campos de edição (melhor que VCL padrão)
+
+2. TAdvGlowButton para botões (visual moderno)
+	2.1 - Propriedades botão novo registro:
+	     object btNovo: TAdvGlowButton
+        AlignWithMargins = True
+        Left = 0
+        Top = 0
+        Width = 100
+        Height = 28
+        Cursor = crHandPoint
+        Margins.Top = 0
+        Margins.Right = 8
+        Margins.Bottom = 0
+        Align = alRight
+        Caption = 'Novo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 7039851
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        Font.Quality = fqClearType
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -12
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        Picture.Data = {
+          89504E470D0A1A0A0000000D4948445200000010000000101004000000E56AEB
+          A9000000206348524D00007A26000080840000FA00000080E8000075300000EA
+          6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+          485973000000600000006000F06B42CF0000000774494D4507E70802140117DC
+          0BBDFA000000EA4944415438CBC5933B0AC2401445EFC4A4B410ADD3650D621B
+          45F103B6EE40C8C82CC12CC14234B8035BC10F8ABDB885D1CE3EB682669E8536
+          EA0CA820DEEAC2BB1CDE87C76090885DF712AFD70040996231CA1E0EBA9C6D02
+          24AD7A9D799E07006CD7680051A4CB592600368EA3F56F03DED4FF01B6885D37
+          1996CB685B8FB085EF637BF703DFE7D5D3E9A13E522A15AC562CD84BC97AB76D
+          7FACA39416EB127DDD7F4864AB7EA9644595CAEB08B51AB6CD2600203F99A03A
+          9F3F8FA072CBA511CED342704EC439114F0B61CAFDFF8C3F0414CE67AD7F92F1
+          1B53E3D92CE948899048E5A65364F5B92B4C674F3CED4A6AC10000000049454E
+          44AE426082}
+        Rounded = True
+        Spacing = 3
+        TabOrder = 0
+        OnClick = btNovoClick
+        Appearance.BorderColor = 8695039
+        Appearance.BorderColorHot = 2846975
+        Appearance.BorderColorCheckedHot = 8695039
+        Appearance.BorderColorDown = 8695039
+        Appearance.BorderColorChecked = 8695039
+        Appearance.BorderColorDisabled = 8695039
+        Appearance.BorderColorFocused = 8695039
+        Appearance.Color = 14017279
+        Appearance.ColorTo = 9943551
+        Appearance.ColorChecked = 9943551
+        Appearance.ColorCheckedTo = 9943551
+        Appearance.ColorDisabled = 9943551
+        Appearance.ColorDisabledTo = 9943551
+        Appearance.ColorDown = 9943551
+        Appearance.ColorDownTo = 9943551
+        Appearance.ColorHot = 7972351
+        Appearance.ColorHotTo = 10337791
+        Appearance.ColorMirror = 9943551
+        Appearance.ColorMirrorTo = 9943551
+        Appearance.ColorMirrorHot = 7972351
+        Appearance.ColorMirrorHotTo = 7972351
+        Appearance.ColorMirrorDown = 9943551
+        Appearance.ColorMirrorDownTo = 9943551
+        Appearance.ColorMirrorChecked = 9943551
+        Appearance.ColorMirrorCheckedTo = 9943551
+        Appearance.ColorMirrorDisabled = 9943551
+        Appearance.ColorMirrorDisabledTo = 9943551
+        Appearance.GradientHot = ggVertical
+        Appearance.GradientMirrorHot = ggVertical
+        Appearance.GradientDown = ggVertical
+        Appearance.GradientMirrorDown = ggVertical
+        Appearance.GradientChecked = ggVertical
+        Appearance.TextColorChecked = 3750459
+        Appearance.TextColorDown = 2303013
+        Appearance.TextColorHot = 2303013
+        Appearance.TextColorDisabled = 13948116
+      end
+
+		2.2 Propriedades botão Excluir regsitro:
+      object btExcluir: TAdvGlowButton
+        AlignWithMargins = True
+        Left = 111
+        Top = 0
+        Width = 100
+        Height = 28
+        Cursor = crHandPoint
+        Margins.Top = 0
+        Margins.Right = 8
+        Margins.Bottom = 0
+        Align = alRight
+        Caption = 'Excluir'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 5723991
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        Font.Quality = fqClearType
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -12
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        Picture.Data = {
+          89504E470D0A1A0A0000000D49484452000000180000001810040000001AEE29
+          30000000206348524D00007A26000080840000FA00000080E8000075300000EA
+          6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+          485973000000600000006000F06B42CF0000000774494D4507E707191513379B
+          1BC099000001DF4944415448C7ED92C14BDB501CC7BF2F31B8BCD246DB9332D8
+          6105C18BBB889A0E0423AD4118B2BF6196D557D97AF4B4D3987737E786B7E18E
+          22281AA9DE66A0D8EE2E7408C23C0CA4A6264889E6ED3283B8B689DB4DFC1EDF
+          EFF73E9FFCF27BC07DEE7CC4568557BCAB6BE0B8B3B3F2BDD1680798DD8CC59E
+          4444B15271DD6675A1D961C18CC72F5E54AB52FFE1218B0E0DB582E7E752294F
+          3A3A92760E0E0AA62C871600007E4A12AADDDD58DDDECE2587879BC1F9ECD616
+          D614855728151785D6AC6661A591113661598C71CE44DBCE7D1D1DBDAAE54E54
+          951DD7EB8C71CE8AA7A7EDA6244112BC310C3C8EC5B0E438DE97C949645C5768
+          1806DE46A398B22C3CCF643E9C954AFF24F84BF2EDFC1CAF394799D230F05002
+          5FA2168B781989000059711C7EA9694170A0DD92AFC54B128265E27F0C7F2408
+          5CA734CCDD4041EE4455858661A04C2964DBC692E3E0A92C137D6323FF796CEC
+          BF043EFC6AA19FC6C7BD5FE9347ED4EB2853CAA5F5F52089101AFE67A11F13A6
+          E9ADE8FA75C98CAB69617E979F6CB6A7C77FE70F6BB5196D70F0664F7E2E95F2
+          7B44DBCE3FEBED0D3DC183794982DED18164ADC6FBD2E9C5DDFDFD9B3DEFDFED
+          ED91055DC794656199908B4B12EA45FA61A544223BAD2881D34E2B4AC18CC76F
+          05BFCFDDCA6FE813D275370C23920000000049454E44AE426082}
+        Rounded = True
+        TabOrder = 1
+        OnClick = btExcluirClick
+        Appearance.BorderColor = 2412287
+        Appearance.BorderColorHot = 50943
+        Appearance.BorderColorCheckedHot = 50175
+        Appearance.BorderColorDown = 46826
+        Appearance.BorderColorChecked = 50175
+        Appearance.BorderColorDisabled = 50175
+        Appearance.BorderColorFocused = 50175
+        Appearance.Color = 11792127
+        Appearance.ColorTo = 50175
+        Appearance.ColorChecked = 50175
+        Appearance.ColorCheckedTo = 50175
+        Appearance.ColorDisabled = 50175
+        Appearance.ColorDisabledTo = 50175
+        Appearance.ColorDown = 50175
+        Appearance.ColorDownTo = 50175
+        Appearance.ColorHot = 1887487
+        Appearance.ColorHotTo = 1887487
+        Appearance.ColorMirror = 50175
+        Appearance.ColorMirrorTo = 50175
+        Appearance.ColorMirrorHot = 1887487
+        Appearance.ColorMirrorHotTo = 1887487
+        Appearance.ColorMirrorDown = 50175
+        Appearance.ColorMirrorDownTo = 50175
+        Appearance.ColorMirrorChecked = 50175
+        Appearance.ColorMirrorCheckedTo = 50175
+        Appearance.ColorMirrorDisabled = 50175
+        Appearance.ColorMirrorDisabledTo = 50175
+        Appearance.GradientHot = ggVertical
+        Appearance.GradientMirrorHot = ggVertical
+        Appearance.GradientDown = ggVertical
+        Appearance.GradientMirrorDown = ggVertical
+        Appearance.GradientChecked = ggVertical
+        Appearance.TextColorChecked = 3750459
+        Appearance.TextColorDown = 2303013
+        Appearance.TextColorHot = 2303013
+        Appearance.TextColorDisabled = 13948116
+      end
+
+		2.3 Propriedades Botão Salvar registro:
+		  object btSalvar: TAdvGlowButton
+        AlignWithMargins = True
+        Left = 222
+        Top = 0
+        Width = 100
+        Height = 28
+        Cursor = crHandPoint
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alRight
+        Caption = 'Salvar'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 7039851
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        Font.Quality = fqClearType
+        NotesFont.Charset = DEFAULT_CHARSET
+        NotesFont.Color = clWindowText
+        NotesFont.Height = -12
+        NotesFont.Name = 'Tahoma'
+        NotesFont.Style = []
+        ParentFont = False
+        Picture.Data = {
+          89504E470D0A1A0A0000000D49484452000000180000001810040000001AEE29
+          30000000206348524D00007A26000080840000FA00000080E8000075300000EA
+          6000003A98000017709CBA513C00000002624B47440000AA8D23320000000970
+          485973000000600000006000F06B42CF0000000774494D4507E70719150F0A25
+          04D1D50000017F4944415448C763601805A3801450FF9F89095D8C891C83D041
+          EE3665E5AC3BB76EBDE17CF62C779BB232B21C0B350CFF9773E000A3A78C0C43
+          3203C3DF2F86860C0C77EF52C50730C3193C6564181818181884B66DFBB37BE3
+          46AAF820FDBF82C2BF977BF6C00DF7DEB1E38B6770F042C6DFBF91D561F82097
+          D3CC2C779B96162197B3281F3ECCD0ACA0007339134340C042C61F3FD0D5A258
+          90B9CCDEFE5FD2C993FF122F5ECCC90E0D253658982C8382267BFDFC894D3D8A
+          054C5BFEFF6760606060086161F9BF66D932744B48359C81818181199973FAF2
+          C387A62E9F3E31FE747767D0626262700E0A32DF7FE7CEA9AF972FA7FF575060
+          E4DBB78FE1999C1C3CCCD3828266A9E1361CC30206060686D3474E9C305DF2E5
+          0BE349373786FB4C4C0CD7FDFD4DF3BE7C614E9B3D1B6EB8D0B66D4CB2818184
+          0C6760606060C42591555958C8F8A9AF0F43C27BC78E2F9E8181D82294281FA0
+          F804165C641A4E14C849CDCFCF7AF3F367F6C9D5AB73B7B1B353CD606480AD10
+          1B05A3000E006DFDA65FD6E403700000000049454E44AE426082}
+        Rounded = True
+        TabOrder = 2
+        OnClick = btSalvarClick
+        Appearance.BorderColor = 8695039
+        Appearance.BorderColorHot = 2846975
+        Appearance.BorderColorCheckedHot = 8695039
+        Appearance.BorderColorDown = 8695039
+        Appearance.BorderColorChecked = 8695039
+        Appearance.BorderColorDisabled = 8695039
+        Appearance.BorderColorFocused = 8695039
+        Appearance.Color = 14017279
+        Appearance.ColorTo = 9943551
+        Appearance.ColorChecked = 9943551
+        Appearance.ColorCheckedTo = 9943551
+        Appearance.ColorDisabled = 9943551
+        Appearance.ColorDisabledTo = 9943551
+        Appearance.ColorDown = 9943551
+        Appearance.ColorDownTo = 9943551
+        Appearance.ColorHot = 7972351
+        Appearance.ColorHotTo = 10337791
+        Appearance.ColorMirror = 9943551
+        Appearance.ColorMirrorTo = 9943551
+        Appearance.ColorMirrorHot = 7972351
+        Appearance.ColorMirrorHotTo = 7972351
+        Appearance.ColorMirrorDown = 9943551
+        Appearance.ColorMirrorDownTo = 9943551
+        Appearance.ColorMirrorChecked = 9943551
+        Appearance.ColorMirrorCheckedTo = 9943551
+        Appearance.ColorMirrorDisabled = 9943551
+        Appearance.ColorMirrorDisabledTo = 9943551
+        Appearance.GradientHot = ggVertical
+        Appearance.GradientMirrorHot = ggVertical
+        Appearance.GradientDown = ggVertical
+        Appearance.GradientMirrorDown = ggVertical
+        Appearance.GradientChecked = ggVertical
+        Appearance.TextColorChecked = 3750459
+        Appearance.TextColorDown = 2303013
+        Appearance.TextColorHot = 2303013
+        Appearance.TextColorDisabled = 13948116
+      end
+    end
+
+3. Sempre ajuste DPI com `AdjustZoom` no FormCreate
+
+4. Use FadeInOut para transições suaves
+
+5. Cores consistentes em todo o projeto
+
+6. Labels em MAIÚSCULAS para campos
+
+7. Fonte Roboto para interface

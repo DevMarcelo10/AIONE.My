@@ -1,0 +1,104 @@
+-- ============================================================================
+-- AIONE.My - Módulo Comprador Virtual IA
+-- Tabela: ia_lead_time_historico
+-- Descrição: Histórico real de prazos de entrega por fornecedor/produto
+--            Usado para calcular lead time médio e prever entregas futuras
+-- ============================================================================
+
+DROP TABLE IF EXISTS ia_lead_time_historico;
+
+CREATE TABLE ia_lead_time_historico (
+   id                    INT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+   -- Fornecedor que realizou a entrega
+   -- FK: arqpessoa.IDPessoa WHERE IDEsppes = 2
+   fornecedor_id         INT UNSIGNED NOT NULL,
+
+   -- Produto entregue (opcional, NULL = lead time geral do fornecedor)
+   -- FK: arqproduto.IDProduto
+   produto_id            INT UNSIGNED NULL,
+
+   -- Filial que recebeu a mercadoria
+   -- FK: arqfilial.IDFilial
+   filial_id             INT UNSIGNED NOT NULL,
+
+   -- Referência ao pedido de compra original
+   -- FK: arqpedido.IDPedido
+   pedido_id             INT UNSIGNED NULL,
+
+   -- Referência à nota de entrada
+   -- FK: arqentrada.IDEntrada
+   entrada_id            INT UNSIGNED NULL,
+
+   -- Datas do ciclo de entrega
+   data_pedido           DATE NOT NULL COMMENT 'Data em que o pedido foi enviado',
+   data_prevista         DATE NULL COMMENT 'Data prevista informada pelo fornecedor',
+   data_entrega          DATE NOT NULL COMMENT 'Data efetiva do recebimento',
+
+   -- Lead time calculado em dias úteis
+   dias_lead_time        SMALLINT UNSIGNED NOT NULL COMMENT 'Dias entre pedido e entrega',
+
+   -- Variação em relação ao previsto (positivo = atrasou, negativo = adiantou)
+   dias_variacao         SMALLINT NULL COMMENT 'Diferença entre previsto e real',
+
+   -- Quantidade pedida vs recebida (para análise de fulfillment)
+   qtd_pedida            DECIMAL(15,4) NULL,
+   qtd_recebida          DECIMAL(15,4) NULL,
+
+   -- Auditoria
+   created_at            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+   PRIMARY KEY (id),
+
+   -- Índice para buscar lead time por fornecedor (consulta mais comum)
+   KEY idx_fornecedor (fornecedor_id, data_entrega DESC),
+
+   -- Índice para buscar lead time por fornecedor+produto
+   KEY idx_fornecedor_produto (fornecedor_id, produto_id, data_entrega DESC),
+
+   -- Índice para buscar por filial
+   KEY idx_filial (filial_id, data_entrega DESC),
+
+   -- Índice para análise temporal
+   KEY idx_data_entrega (data_entrega),
+
+   -- Índice para rastrear origem (pedido/entrada)
+   KEY idx_pedido (pedido_id),
+   KEY idx_entrada (entrada_id)
+
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Histórico de lead times reais para cálculo de previsões de entrega';
+
+-- ============================================================================
+-- View auxiliar: Lead time médio por fornecedor (últimos 90 dias)
+-- ============================================================================
+CREATE OR REPLACE VIEW vw_ia_lead_time_fornecedor AS
+SELECT
+   fornecedor_id,
+   COUNT(*) AS total_entregas,
+   ROUND(AVG(dias_lead_time), 1) AS lead_time_medio,
+   MIN(dias_lead_time) AS lead_time_min,
+   MAX(dias_lead_time) AS lead_time_max,
+   ROUND(STDDEV(dias_lead_time), 1) AS desvio_padrao,
+   ROUND(AVG(CASE WHEN dias_variacao > 0 THEN dias_variacao ELSE 0 END), 1) AS atraso_medio
+FROM ia_lead_time_historico
+WHERE data_entrega >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)
+GROUP BY fornecedor_id;
+
+-- ============================================================================
+-- View auxiliar: Lead time médio por fornecedor+produto (últimos 180 dias)
+-- ============================================================================
+CREATE OR REPLACE VIEW vw_ia_lead_time_produto AS
+SELECT
+   fornecedor_id,
+   produto_id,
+   COUNT(*) AS total_entregas,
+   ROUND(AVG(dias_lead_time), 1) AS lead_time_medio,
+   MIN(dias_lead_time) AS lead_time_min,
+   MAX(dias_lead_time) AS lead_time_max
+FROM ia_lead_time_historico
+WHERE data_entrega >= DATE_SUB(CURDATE(), INTERVAL 180 DAY)
+  AND produto_id IS NOT NULL
+GROUP BY fornecedor_id, produto_id;

@@ -1,0 +1,205 @@
+"""
+Script para adicionar novas interacoes medicamentosas.
+"""
+
+import pymysql
+
+conn = pymysql.connect(
+    host='localhost',
+    port=3307,
+    user='root',
+    password='f68interdb',
+    database='copilot',
+    charset='utf8mb4'
+)
+cur = conn.cursor()
+
+INTERACOES = [
+    # 1. SILDENAFIL + Nitratos (contraindicada)
+    ('SILDENAFIL', 'ISOSSORBIDA', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 24h (48h para tadalafil)', 'FDA'),
+    ('SILDENAFIL', 'MONONITRATO DE ISOSSORBIDA', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 24h (48h para tadalafil)', 'FDA'),
+    ('SILDENAFIL', 'DINITRATO DE ISOSSORBIDA', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 24h (48h para tadalafil)', 'FDA'),
+    ('SILDENAFIL', 'PROPATILNITRATO', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 24h (48h para tadalafil)', 'FDA'),
+
+    # 2. TADALAFIL + Nitratos (contraindicada)
+    ('TADALAFIL', 'ISOSSORBIDA', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 48h apos tadalafil', 'FDA'),
+    ('TADALAFIL', 'MONONITRATO DE ISOSSORBIDA', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 48h apos tadalafil', 'FDA'),
+    ('TADALAFIL', 'DINITRATO DE ISOSSORBIDA', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 48h apos tadalafil', 'FDA'),
+    ('TADALAFIL', 'PROPATILNITRATO', 'contraindicada',
+     'Vasodilatacao sinergica causa hipotensao grave, risco de infarto e morte',
+     'CONTRAINDICADO. Intervalo minimo 48h apos tadalafil', 'FDA'),
+
+    # 3. TRAMADOL + ISRS/IRSN (grave)
+    ('TRAMADOL', 'FLUOXETINA', 'grave',
+     'Risco de sindrome serotoninergica',
+     'Evitar. Se necessario, monitorar sinais: agitacao, tremor, hipertermia', 'Micromedex'),
+    ('TRAMADOL', 'SERTRALINA', 'grave',
+     'Risco de sindrome serotoninergica',
+     'Evitar. Se necessario, monitorar sinais: agitacao, tremor, hipertermia', 'Micromedex'),
+    ('TRAMADOL', 'PAROXETINA', 'grave',
+     'Risco de sindrome serotoninergica',
+     'Evitar. Se necessario, monitorar sinais: agitacao, tremor, hipertermia', 'Micromedex'),
+    ('TRAMADOL', 'ESCITALOPRAM', 'grave',
+     'Risco de sindrome serotoninergica',
+     'Evitar. Se necessario, monitorar sinais: agitacao, tremor, hipertermia', 'Micromedex'),
+    ('TRAMADOL', 'VENLAFAXINA', 'grave',
+     'Risco de sindrome serotoninergica',
+     'Evitar. Se necessario, monitorar sinais: agitacao, tremor, hipertermia', 'Micromedex'),
+
+    # 4. METOTREXATO + AINEs (grave)
+    ('METOTREXATO', 'IBUPROFENO', 'grave',
+     'AINEs reduzem excrecao renal do metotrexato',
+     'Evitar AINEs. Usar paracetamol', 'Micromedex'),
+    ('METOTREXATO', 'DICLOFENACO', 'grave',
+     'AINEs reduzem excrecao renal do metotrexato',
+     'Evitar AINEs. Usar paracetamol', 'Micromedex'),
+    ('METOTREXATO', 'NAPROXENO', 'grave',
+     'AINEs reduzem excrecao renal do metotrexato',
+     'Evitar AINEs. Usar paracetamol', 'Micromedex'),
+
+    # 5. METOTREXATO + TRIMETOPRIMA/SULFA (grave)
+    ('METOTREXATO', 'TRIMETOPRIMA', 'grave',
+     'Ambos inibem acido folico, mielotoxicidade aditiva',
+     'EVITAR combinacao', 'Micromedex'),
+    ('METOTREXATO', 'SULFAMETOXAZOL', 'grave',
+     'Ambos inibem acido folico, mielotoxicidade aditiva',
+     'EVITAR combinacao', 'Micromedex'),
+
+    # 6. TEOFILINA + Antibioticos (grave)
+    ('TEOFILINA', 'CIPROFLOXACINO', 'grave',
+     'Inibicao do metabolismo da teofilina, risco de convulsoes',
+     'Reduzir dose de teofilina 50%', 'Micromedex'),
+    ('TEOFILINA', 'ERITROMICINA', 'grave',
+     'Inibicao do metabolismo da teofilina, risco de convulsoes',
+     'Reduzir dose de teofilina 50%', 'Micromedex'),
+    ('TEOFILINA', 'CLARITROMICINA', 'grave',
+     'Inibicao do metabolismo da teofilina, risco de convulsoes',
+     'Reduzir dose de teofilina 50%', 'Micromedex'),
+
+    # 7. COLCHICINA + CLARITROMICINA (grave)
+    ('COLCHICINA', 'CLARITROMICINA', 'grave',
+     'Toxicidade fatal por acumulo de colchicina',
+     'EVITAR. Casos de morte relatados', 'FDA Warning'),
+
+    # 8. LEVOTIROXINA + Interferentes (moderada)
+    ('LEVOTIROXINA', 'CARBONATO DE CALCIO', 'moderada',
+     'Reducao da absorcao de levotiroxina',
+     'Administrar levotiroxina 4 horas antes ou apos', 'UpToDate'),
+    ('LEVOTIROXINA', 'SULFATO FERROSO', 'moderada',
+     'Reducao da absorcao de levotiroxina',
+     'Administrar levotiroxina 4 horas antes ou apos', 'UpToDate'),
+    ('LEVOTIROXINA', 'OMEPRAZOL', 'moderada',
+     'Reducao da absorcao de levotiroxina',
+     'Administrar levotiroxina 4 horas antes ou apos', 'UpToDate'),
+
+    # 9. Quinolonas + Antiacidos/Ferro (moderada)
+    ('CIPROFLOXACINO', 'HIDROXIDO DE ALUMINIO', 'moderada',
+     'Quelacao reduz absorcao da quinolona',
+     'Tomar quinolona 2h antes ou 6h apos antiacido/ferro', 'Micromedex'),
+    ('CIPROFLOXACINO', 'CARBONATO DE CALCIO', 'moderada',
+     'Quelacao reduz absorcao da quinolona',
+     'Tomar quinolona 2h antes ou 6h apos antiacido/ferro', 'Micromedex'),
+    ('CIPROFLOXACINO', 'SULFATO FERROSO', 'moderada',
+     'Quelacao reduz absorcao da quinolona',
+     'Tomar quinolona 2h antes ou 6h apos antiacido/ferro', 'Micromedex'),
+    ('LEVOFLOXACINO', 'HIDROXIDO DE ALUMINIO', 'moderada',
+     'Quelacao reduz absorcao da quinolona',
+     'Tomar quinolona 2h antes ou 6h apos antiacido/ferro', 'Micromedex'),
+    ('LEVOFLOXACINO', 'CARBONATO DE CALCIO', 'moderada',
+     'Quelacao reduz absorcao da quinolona',
+     'Tomar quinolona 2h antes ou 6h apos antiacido/ferro', 'Micromedex'),
+    ('LEVOFLOXACINO', 'SULFATO FERROSO', 'moderada',
+     'Quelacao reduz absorcao da quinolona',
+     'Tomar quinolona 2h antes ou 6h apos antiacido/ferro', 'Micromedex'),
+
+    # 10. METRONIDAZOL + ALCOOL (grave)
+    ('METRONIDAZOL', 'ALCOOL', 'grave',
+     'Reacao tipo dissulfiram: nausea, vomitos, rubor',
+     'NAO consumir alcool durante tratamento e ate 48h apos', 'Literatura'),
+
+    # 11. GINKGO BILOBA + Anticoagulantes (moderada)
+    ('GINKGO BILOBA', 'VARFARINA', 'moderada',
+     'Aumento do risco de sangramento',
+     'Evitar uso conjunto. Informar medico', 'Natural Medicines'),
+    ('GINKGO BILOBA', 'ASPIRINA', 'moderada',
+     'Aumento do risco de sangramento',
+     'Evitar uso conjunto. Informar medico', 'Natural Medicines'),
+    ('GINKGO BILOBA', 'CLOPIDOGREL', 'moderada',
+     'Aumento do risco de sangramento',
+     'Evitar uso conjunto. Informar medico', 'Natural Medicines'),
+
+    # 12. HIPERICO + ISRS (grave)
+    ('HIPERICO', 'FLUOXETINA', 'grave',
+     'Sindrome serotoninergica',
+     'EVITAR', 'Natural Medicines'),
+    ('HIPERICO', 'SERTRALINA', 'grave',
+     'Sindrome serotoninergica',
+     'EVITAR', 'Natural Medicines'),
+
+    # 13. HIPERICO + Anticoncepcionais (grave)
+    ('HIPERICO', 'ETINILESTRADIOL', 'grave',
+     'Reduz eficacia contraceptiva por inducao enzimatica',
+     'ALERTAR: risco de gravidez indesejada', 'Natural Medicines'),
+    ('HIPERICO', 'LEVONORGESTREL', 'grave',
+     'Reduz eficacia contraceptiva por inducao enzimatica',
+     'ALERTAR: risco de gravidez indesejada', 'Natural Medicines'),
+
+    # 14. Corticoides + AINEs (moderada)
+    ('PREDNISONA', 'IBUPROFENO', 'moderada',
+     'Risco aumentado de ulcera e sangramento GI',
+     'Associar protetor gastrico se indispensavel', 'Micromedex'),
+    ('PREDNISONA', 'DICLOFENACO', 'moderada',
+     'Risco aumentado de ulcera e sangramento GI',
+     'Associar protetor gastrico se indispensavel', 'Micromedex'),
+    ('DEXAMETASONA', 'IBUPROFENO', 'moderada',
+     'Risco aumentado de ulcera e sangramento GI',
+     'Associar protetor gastrico se indispensavel', 'Micromedex'),
+    ('DEXAMETASONA', 'DICLOFENACO', 'moderada',
+     'Risco aumentado de ulcera e sangramento GI',
+     'Associar protetor gastrico se indispensavel', 'Micromedex'),
+]
+
+inserted = 0
+for pa1, pa2, sev, desc, rec, fonte in INTERACOES:
+    # Verifica se ja existe
+    cur.execute('''SELECT id FROM copilot_interacao
+                   WHERE principio_ativo_1 = %s AND principio_ativo_2 = %s''', (pa1, pa2))
+    if not cur.fetchone():
+        # Insere par direto
+        cur.execute('''INSERT INTO copilot_interacao
+                       (principio_ativo_1, principio_ativo_2, severidade, descricao, recomendacao, fonte)
+                       VALUES (%s, %s, %s, %s, %s, %s)''', (pa1, pa2, sev, desc, rec, fonte))
+        # Insere par inverso
+        cur.execute('''INSERT INTO copilot_interacao
+                       (principio_ativo_1, principio_ativo_2, severidade, descricao, recomendacao, fonte)
+                       VALUES (%s, %s, %s, %s, %s, %s)''', (pa2, pa1, sev, desc, rec, fonte))
+        inserted += 2
+        print(f'[+] {pa1} + {pa2} ({sev})')
+
+conn.commit()
+print(f'\nInseridos: {inserted} registros')
+
+cur.execute('SELECT COUNT(*) FROM copilot_interacao')
+print(f'Total na tabela: {cur.fetchone()[0]}')
+
+# Conta por severidade
+cur.execute('''SELECT severidade, COUNT(*) FROM copilot_interacao GROUP BY severidade ORDER BY severidade''')
+print('\nPor severidade:')
+for row in cur.fetchall():
+    print(f'  {row[0]}: {row[1]}')
+
+conn.close()

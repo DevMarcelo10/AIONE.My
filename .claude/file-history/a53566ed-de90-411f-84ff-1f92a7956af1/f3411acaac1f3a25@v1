@@ -1,0 +1,174 @@
+"""
+Serviço de alertas de segurança.
+Detecta interações, duplicidades e riscos.
+"""
+
+from typing import Optional
+import structlog
+
+from config.settings import settings
+from models.schemas import Alert, AlertType
+from integrations import ConnectorFactory
+
+logger = structlog.get_logger()
+
+
+class AlertService:
+    """Serviço de alertas de segurança farmacêutica."""
+
+    def __init__(self):
+        self._connector = None
+
+    def _get_connector(self):
+        """Lazy load do conector."""
+        if self._connector is None:
+            self._connector = ConnectorFactory.create(
+                settings.ERP_TYPE,
+                settings.erp_connection_string,
+            )
+        return self._connector
+
+    async def get_alertas_venda(
+        self,
+        venda_id: int,
+        cliente_id: Optional[int] = None,
+    ) -> list[Alert]:
+        """
+        Retorna todos os alertas relevantes para uma venda.
+        """
+        if not settings.ENABLE_ALERTS:
+            return []
+
+        alerts: list[Alert] = []
+
+        try:
+            connector = self._get_connector()
+            venda = connector.get_venda_atual(venda_id)
+
+            if not venda or not venda.itens:
+                return []
+
+            produto_ids = [item.produto_id for item in venda.itens]
+
+            # Verifica interações
+            interacoes = await self.check_interacoes(produto_ids)
+            alerts.extend(interacoes)
+
+            # Verifica duplicidade de princípio ativo
+            duplicidades = await self._check_duplicidades(produto_ids)
+            alerts.extend(duplicidades)
+
+            # Verifica controlados sem receita identificada
+            controlados = await self._check_controlados(produto_ids)
+            alerts.extend(controlados)
+
+            return alerts
+
+        except Exception as e:
+            logger.error("get_alertas_venda_error", venda_id=venda_id, error=str(e))
+            return []
+
+    async def check_interacoes(self, produto_ids: list[int]) -> list[Alert]:
+        """
+        Verifica interações medicamentosas entre produtos.
+
+        TODO: Implementar base de interações no banco do Copilot.
+        Por ora, retorna vazio.
+        """
+        # Placeholder - implementar com tabela copilot_drug_interactions
+        return []
+
+    async def _check_duplicidades(self, produto_ids: list[int]) -> list[Alert]:
+        """
+        Detecta produtos com mesmo princípio ativo na venda.
+        """
+        try:
+            connector = self._get_connector()
+
+            # Agrupa por princípio ativo
+            principios: dict[str, list[int]] = {}
+            for pid in produto_ids:
+                produto = connector.get_produto(pid)
+                if produto and produto.principio_ativo:
+                    pa = produto.principio_ativo.upper()
+                    if pa not in principios:
+                        principios[pa] = []
+                    principios[pa].append(pid)
+
+            # Gera alertas para duplicidades
+            alerts = []
+            for pa, pids in principios.items():
+                if len(pids) > 1:
+                    alerts.append(Alert(
+                        tipo=AlertType.DUPLICIDADE,
+                        severidade="warning",
+                        titulo="Duplicidade de princípio ativo",
+                        mensagem=f"Múltiplos produtos com {pa} na venda. Verifique se é intencional.",
+                        produtos_relacionados=pids,
+                    ))
+
+            return alerts
+
+        except Exception as e:
+            logger.error("check_duplicidades_error", error=str(e))
+            return []
+
+    async def _check_controlados(self, produto_ids: list[int]) -> list[Alert]:
+        """
+        Alerta sobre medicamentos controlados.
+        """
+        try:
+            connector = self._get_connector()
+            alerts = []
+
+            for pid in produto_ids:
+                produto = connector.get_produto(pid)
+                if produto and produto.controlado:
+                    alerts.append(Alert(
+                        tipo=AlertType.CONTRAINDICACAO,
+                        severidade="info",
+                        titulo="Medicamento Controlado",
+                        mensagem=f"{produto.nome} requer receita {produto.tipo_receita or 'especial'}.",
+                        produtos_relacionados=[pid],
+                    ))
+
+            return alerts
+
+        except Exception as e:
+            logger.error("check_controlados_error", error=str(e))
+            return []
+
+    async def get_alertas_vencimento(self, dias: int = 90) -> list[Alert]:
+        """
+        Retorna alertas de lotes próximos do vencimento.
+        """
+        try:
+            connector = self._get_connector()
+            lotes = connector.get_lotes_vencendo(dias)
+
+            alerts = []
+            for lote in lotes[:20]:  # Limita a 20
+                severidade = "danger" if lote.dias_para_vencer <= 30 else "warning"
+
+                alerts.append(Alert(
+                    tipo=AlertType.VENCIMENTO,
+                    severidade=severidade,
+                    titulo="Lote próximo do vencimento",
+                    mensagem=f"{lote.produto_nome} - Lote {lote.lote} vence em {lote.dias_para_vencer} dias ({lote.quantidade} un)",
+                    produtos_relacionados=[lote.produto_id],
+                ))
+
+            return alerts
+
+        except Exception as e:
+            logger.error("get_alertas_vencimento_error", error=str(e))
+            return []
+
+    async def get_alertas_estoque_baixo(self) -> list[Alert]:
+        """
+        Retorna alertas de estoque abaixo do mínimo.
+
+        TODO: Implementar query no conector.
+        """
+        # Placeholder
+        return []

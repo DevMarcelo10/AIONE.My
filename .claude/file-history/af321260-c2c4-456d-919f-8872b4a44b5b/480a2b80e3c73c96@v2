@@ -1,0 +1,240 @@
+"""
+Configura tabela de substancias do Copilot.
+
+1. Cria relacoes faltantes no AIONE (ex: RIVOTRIL -> CLONAZEPAM)
+2. Cria tabela copilot_produto_substancia no banco Copilot
+3. Sincroniza dados do AIONE para o Copilot
+"""
+import os
+import sys
+
+backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(backend_dir)
+sys.path.insert(0, backend_dir)
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import pymysql
+from config.settings import settings
+
+# Configurações
+ERP_HOST = "localhost"
+ERP_PORT = 3307
+ERP_USER = "root"
+ERP_PASS = os.getenv("ERP_DB_PASSWORD", "f68interdb")
+ERP_DB = "dbaione"
+
+# Relacoes faltantes no AIONE (IDProd, IDSubs)
+RELACOES_FALTANTES = [
+    (1273, 518),  # RIVOTRIL 2MG -> CLONAZEPAM
+]
+
+
+def conectar_erp():
+    """Conecta ao banco do ERP (AIONE)."""
+    return pymysql.connect(
+        host=ERP_HOST,
+        port=ERP_PORT,
+        user=ERP_USER,
+        password=ERP_PASS,
+        database=ERP_DB,
+        charset='utf8mb4'
+    )
+
+
+def conectar_copilot():
+    """Conecta ao banco do Copilot."""
+    db_url = settings.COPILOT_DB_URL.replace("+aiomysql", "+pymysql")
+    # Parse da URL: mysql+pymysql://user:pass@host:port/db
+    import re
+    match = re.match(r'mysql\+pymysql://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', db_url)
+    if not match:
+        raise ValueError(f"URL inválida: {db_url}")
+
+    user, passwd, host, port, db = match.groups()
+    # Remove parâmetros extras do db
+    db = db.split('?')[0]
+
+    return pymysql.connect(
+        host=host,
+        port=int(port),
+        user=user,
+        password=passwd,
+        database=db,
+        charset='utf8mb4'
+    )
+
+
+def criar_relacoes_faltantes():
+    """Cria relacoes produto-substancia faltantes no AIONE."""
+    print("\n=== 1. Criando relacoes faltantes no AIONE ===")
+
+    conn = conectar_erp()
+    try:
+        with conn.cursor() as cursor:
+            for id_prod, id_subs in RELACOES_FALTANTES:
+                # Verifica se já existe
+                cursor.execute(
+                    "SELECT 1 FROM arqprodutosub WHERE IDProd = %s AND IDSubs = %s",
+                    (id_prod, id_subs)
+                )
+                if cursor.fetchone():
+                    print(f"  SKIP: Relacao {id_prod} -> {id_subs} ja existe")
+                    continue
+
+                # Busca nomes para log
+                cursor.execute("SELECT Despro FROM arqproduto WHERE IDProd = %s", (id_prod,))
+                prod = cursor.fetchone()
+                cursor.execute("SELECT DesSubs FROM arqsubstancia WHERE IDSubs = %s", (id_subs,))
+                subs = cursor.fetchone()
+
+                if not prod or not subs:
+                    print(f"  ERRO: Produto {id_prod} ou Substancia {id_subs} nao encontrado")
+                    continue
+
+                # Insere relacao
+                cursor.execute(
+                    "INSERT INTO arqprodutosub (IDProd, IDSubs) VALUES (%s, %s)",
+                    (id_prod, id_subs)
+                )
+                print(f"  OK: {prod[0]} -> {subs[0]}")
+
+            conn.commit()
+    finally:
+        conn.close()
+
+
+def criar_tabela_copilot():
+    """Cria tabela copilot_produto_substancia no banco Copilot."""
+    print("\n=== 2. Criando tabela copilot_produto_substancia ===")
+
+    conn = conectar_copilot()
+    try:
+        with conn.cursor() as cursor:
+            # Drop se existir
+            cursor.execute("DROP TABLE IF EXISTS copilot_produto_substancia")
+
+            # Cria tabela
+            cursor.execute("""
+                CREATE TABLE copilot_produto_substancia (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    erp_produto_id INT NOT NULL COMMENT 'ID do produto no ERP',
+                    erp_substancia_id INT COMMENT 'ID da substancia no ERP (opcional)',
+                    substancia_nome VARCHAR(200) NOT NULL COMMENT 'Nome normalizado da substancia',
+                    substancia_nome_normalizado VARCHAR(200) COMMENT 'Nome sem acentos para busca',
+                    controlado TINYINT(1) DEFAULT 0 COMMENT 'Se e substancia controlada',
+                    erp_source VARCHAR(50) DEFAULT 'aione' COMMENT 'ERP de origem',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+                    UNIQUE KEY uk_produto_substancia (erp_produto_id, substancia_nome, erp_source),
+                    INDEX idx_substancia (substancia_nome),
+                    INDEX idx_substancia_normalizado (substancia_nome_normalizado),
+                    INDEX idx_controlado (controlado)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                COMMENT='Relacao produto-substancia sincronizada do ERP'
+            """)
+
+            conn.commit()
+            print("  OK: Tabela criada com sucesso")
+    finally:
+        conn.close()
+
+
+def normalizar_nome(nome: str) -> str:
+    """Remove acentos e normaliza nome para busca."""
+    import unicodedata
+    if not nome:
+        return ""
+    # Remove acentos
+    nfkd = unicodedata.normalize('NFKD', nome)
+    sem_acento = ''.join(c for c in nfkd if not unicodedata.combining(c))
+    # Maiusculas
+    return sem_acento.upper().strip()
+
+
+def sincronizar_dados():
+    """Sincroniza dados do AIONE para o Copilot."""
+    print("\n=== 3. Sincronizando dados AIONE -> Copilot ===")
+
+    conn_erp = conectar_erp()
+    conn_copilot = conectar_copilot()
+
+    try:
+        # Busca todas as relações do AIONE
+        with conn_erp.cursor() as cursor:
+            cursor.execute("""
+                SELECT
+                    ps.IDProd,
+                    ps.IDSubs,
+                    s.DesSubs,
+                    COALESCE(s.IndControle, 0) as IndControle
+                FROM arqprodutosub ps
+                INNER JOIN arqsubstancia s ON s.IDSubs = ps.IDSubs
+                INNER JOIN arqproduto p ON p.IDProd = ps.IDProd
+                WHERE p.Ativo = '1'
+                ORDER BY ps.IDProd
+            """)
+            relacoes = cursor.fetchall()
+
+        print(f"  Encontradas {len(relacoes)} relacoes no AIONE")
+
+        # Insere no Copilot
+        with conn_copilot.cursor() as cursor:
+            # Limpa dados anteriores do AIONE
+            cursor.execute("DELETE FROM copilot_produto_substancia WHERE erp_source = 'aione'")
+
+            inseridos = 0
+            for id_prod, id_subs, des_subs, ind_controle in relacoes:
+                nome_normalizado = normalizar_nome(des_subs)
+
+                try:
+                    cursor.execute("""
+                        INSERT INTO copilot_produto_substancia
+                        (erp_produto_id, erp_substancia_id, substancia_nome, substancia_nome_normalizado, controlado, erp_source)
+                        VALUES (%s, %s, %s, %s, %s, 'aione')
+                    """, (id_prod, id_subs, des_subs, nome_normalizado, ind_controle))
+                    inseridos += 1
+                except Exception as e:
+                    # Ignora duplicatas
+                    pass
+
+            conn_copilot.commit()
+            print(f"  OK: {inseridos} relacoes sincronizadas")
+
+        # Verifica produtos do pedido de teste
+        print("\n  Verificando produtos do pedido 141765:")
+        with conn_copilot.cursor() as cursor:
+            cursor.execute("""
+                SELECT erp_produto_id, substancia_nome, controlado
+                FROM copilot_produto_substancia
+                WHERE erp_produto_id IN (10, 12, 939, 2078, 2124, 435, 1273)
+                AND erp_source = 'aione'
+                ORDER BY erp_produto_id
+            """)
+            for row in cursor.fetchall():
+                ctrl = " [CONTROLADO]" if row[2] else ""
+                print(f"    Produto {row[0]}: {row[1]}{ctrl}")
+
+    finally:
+        conn_erp.close()
+        conn_copilot.close()
+
+
+def main():
+    print("=" * 60)
+    print("SETUP DE SUBSTANCIAS DO PHARMACOPILOT")
+    print("=" * 60)
+
+    criar_relacoes_faltantes()
+    criar_tabela_copilot()
+    sincronizar_dados()
+
+    print("\n" + "=" * 60)
+    print("SETUP CONCLUIDO COM SUCESSO!")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()

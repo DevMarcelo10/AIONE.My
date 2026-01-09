@@ -1,0 +1,198 @@
+{
+  "erp_name": "AIONE.My",
+  "erp_version": "2.x",
+  "database_type": "mysql",
+  "filial_id": 1,
+
+  "clientes": {
+    "tabela": "arqpessoa",
+    "filtro_tipo": "IDEsppes = 1",
+    "campos": {
+      "id": "IDPess",
+      "nome": "Nompes",
+      "cpf_cnpj": "CpfCnpjPes",
+      "telefone": "FonePes",
+      "celular": "CelularPes",
+      "email": "EmailPes",
+      "data_nascimento": "DatnasPes",
+      "endereco": "Endpes",
+      "numero": "NroEnd",
+      "complemento": "CompEnd",
+      "bairro": "Baipes",
+      "cep": "Ceppes",
+      "codigo_municipio": "Codmun",
+      "ativo": "IndAtivo"
+    }
+  },
+
+  "convenios": {
+    "tabela": "arqconvenio",
+    "campos": {
+      "id": "IDConv",
+      "nome": "Nomcon",
+      "limite_credito": "LimCreCli",
+      "ativo": "IndAtivo"
+    }
+  },
+
+  "clientes_convenio": {
+    "tabela": "arqpessconv",
+    "campos": {
+      "cliente_id": "IDPess",
+      "convenio_id": "IDConv",
+      "limite_credito": "LimCredCli",
+      "ativo": "IndAtivo"
+    }
+  },
+
+  "produtos": {
+    "tabela": "arqproduto",
+    "campos": {
+      "id": "IDProd",
+      "nome": "Despro",
+      "ean": "CodEANpri",
+      "fabricante_id": "IDFabr",
+      "grupo_id": "IDGrupo",
+      "subgrupo_id": "IDGruSub",
+      "ncm": "CodNCM",
+      "registro_ms": "RegistoMS",
+      "preco_venda": "PrecoVen",
+      "preco_pmc": "PrecoPMC",
+      "preco_farmacia_popular": "PrecoFP",
+      "preco_fabricante": "PrecoFab",
+      "custo_medio": "CustoMed",
+      "estoque_minimo": "Estmin",
+      "estoque_maximo": "Estmax",
+      "tipo_produto": "TipoPro",
+      "receita_id": "IDRece",
+      "controlado": "IndControle",
+      "uso_continuo": "IndUsoCont",
+      "ativo": "Ativo"
+    },
+    "tipos_produto": {
+      "referencia": "R",
+      "generico": "G",
+      "similar": "S",
+      "outros": "O"
+    }
+  },
+
+  "produtos_ean": {
+    "tabela": "arqprodutoean",
+    "campos": {
+      "produto_id": "IDProd",
+      "ean": "CodEAN"
+    }
+  },
+
+  "principios_ativos": {
+    "tabela": "arqdcb",
+    "campos": {
+      "codigo": "Coddcb",
+      "nome": "Desdcb"
+    },
+    "nota": "Relaciona via SUBSTRING(RegistoMS, 1, 5)"
+  },
+
+  "grupos": {
+    "tabela": "arqgrupo",
+    "campos": {
+      "id": "IDGrupo",
+      "nome": "Desgru"
+    }
+  },
+
+  "subgrupos": {
+    "tabela": "arqgruposub",
+    "campos": {
+      "id": "IDGruSub",
+      "nome": "Dessub"
+    }
+  },
+
+  "receitas": {
+    "tabela": "arqreceitas",
+    "campos": {
+      "id": "IDRece",
+      "nome": "Desrece"
+    }
+  },
+
+  "estoque_lotes": {
+    "tabela": "arqprodutolot",
+    "campos": {
+      "filial_id": "IDFilial",
+      "produto_id": "IDProd",
+      "lote": "Nrolot",
+      "fornecedor_id": "IDPess",
+      "data_fabricacao": "Datfab",
+      "data_validade": "Datven",
+      "quantidade": "Qtdest"
+    }
+  },
+
+  "vendas": {
+    "tabela": "arqpedido",
+    "campos": {
+      "filial_id": "IDFilial",
+      "id": "IDPed",
+      "data": "Datped",
+      "cliente_id": "IDPess",
+      "convenio_id": "IDConv",
+      "vendedor_id": "IDVend",
+      "caixa_id": "IDCaixa",
+      "forma_pagamento_id": "IDForPag",
+      "desconto_valor": "VlrDesc",
+      "desconto_total": "TotDesc",
+      "total": "TotPedido",
+      "status": "Status"
+    },
+    "status": {
+      "aberta": "A",
+      "fechada": "F"
+    }
+  },
+
+  "vendas_itens": {
+    "tabela": "arqpedidoite",
+    "campos": {
+      "filial_id": "IDFilial",
+      "venda_id": "IDPed",
+      "numero_item": "Nroite",
+      "produto_id": "IDProd",
+      "vendedor_id": "IDVend",
+      "preco_venda": "PrecoVen",
+      "preco_pmc": "PrecoPMC",
+      "preco_farmacia_popular": "PrecoFP",
+      "custo_medio": "CustoMed",
+      "quantidade": "Qtdped",
+      "percentual_desconto": "PerDesc",
+      "valor_desconto": "VlrDesc",
+      "valor_total": "VlrVenda"
+    }
+  },
+
+  "municipios": {
+    "tabela": "arqmuni",
+    "campos": {
+      "codigo": "Codmun",
+      "nome": "Desmun",
+      "uf": "UF"
+    }
+  },
+
+  "titulos": {
+    "tabela": "arqtitulo",
+    "campos": {
+      "id": "IDTit",
+      "cliente_id": "IDPess",
+      "tipo": "IndTipTit",
+      "valor_aberto": "VlrAberto",
+      "baixado": "IndBaixado"
+    },
+    "tipos": {
+      "receber": "R",
+      "pagar": "P"
+    }
+  }
+}

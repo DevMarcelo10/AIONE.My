@@ -1,0 +1,159 @@
+2025-12-12T20:34:46.240Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-12T20:34:46.290Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-12T20:34:46.290Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-12T20:34:46.290Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-12T20:34:46.290Z [DEBUG] [LSP SERVER MANAGER] initialize() called
+2025-12-12T20:34:46.290Z [DEBUG] [LSP SERVER MANAGER] Calling getAllLspServers()
+2025-12-12T20:34:46.320Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2025-12-12T20:34:46.324Z [DEBUG] Total LSP servers loaded: 0
+2025-12-12T20:34:46.324Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2025-12-12T20:34:46.324Z [DEBUG] LSP manager initialized with 0 servers
+2025-12-12T20:34:46.324Z [DEBUG] LSP server manager initialized successfully
+2025-12-12T20:34:46.325Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-12T20:34:46.354Z [DEBUG] Loading skills from directories: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\DevDelphi\.claude\skills, project=[]
+2025-12-12T20:34:46.355Z [DEBUG] >>>>> getPluginSkills CALLED <<<<<
+2025-12-12T20:34:46.949Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (579.6ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-12T20:34:46.951Z [DEBUG] Loaded 0 installed plugins from C:\Users\DevDelphi\.claude\plugins\installed_plugins.json (schema version 1)
+2025-12-12T20:34:46.952Z [DEBUG] Official marketplace auto-install already attempted, skipping
+2025-12-12T20:34:46.987Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-12T20:34:46.987Z [DEBUG] Looking for shell config file: C:\Users\DevDelphi\.bashrc
+2025-12-12T20:34:46.987Z [DEBUG] Shell config file not found: C:\Users\DevDelphi\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-12T20:34:46.987Z [DEBUG] Snapshots directory: C:\Users\DevDelphi\.claude\shell-snapshots
+2025-12-12T20:34:47.003Z [DEBUG] Creating snapshot at: C:\Users\DevDelphi\.claude\shell-snapshots\snapshot-bash-1765571686987-zm4v87.sh
+2025-12-12T20:34:47.004Z [DEBUG] Shell binary exists: true
+2025-12-12T20:34:47.004Z [DEBUG] Execution timeout: 10000ms
+2025-12-12T20:34:47.011Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude\todos\c1a69cf6-b9c6-480e-a828-7141a1f35bca-agent-c1a69cf6-b9c6-480e-a828-7141a1f35bca.json.tmp.9836.1765571687011
+2025-12-12T20:34:47.014Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-12T20:34:47.014Z [DEBUG] Renaming C:\Users\DevDelphi\.claude\todos\c1a69cf6-b9c6-480e-a828-7141a1f35bca-agent-c1a69cf6-b9c6-480e-a828-7141a1f35bca.json.tmp.9836.1765571687011 to C:\Users\DevDelphi\.claude\todos\c1a69cf6-b9c6-480e-a828-7141a1f35bca-agent-c1a69cf6-b9c6-480e-a828-7141a1f35bca.json
+2025-12-12T20:34:47.015Z [DEBUG] File C:\Users\DevDelphi\.claude\todos\c1a69cf6-b9c6-480e-a828-7141a1f35bca-agent-c1a69cf6-b9c6-480e-a828-7141a1f35bca.json written atomically
+2025-12-12T20:34:47.036Z [DEBUG] [SLOW OPERATION DETECTED] fs.existsSync (5.6ms)
+2025-12-12T20:34:47.040Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2025-12-12T20:34:47.040Z [DEBUG] Total plugin skills loaded: 0
+2025-12-12T20:34:47.040Z [DEBUG] Total plugin commands loaded: 0
+2025-12-12T20:34:47.040Z [DEBUG] Registered 0 hooks from 0 plugins
+2025-12-12T20:34:47.052Z [DEBUG] Loaded 0 unique skills (managed: 0, user: 0, project: 0, duplicates removed: 0)
+2025-12-12T20:34:47.060Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills
+2025-12-12T20:34:47.064Z [DEBUG] Total plugin agents loaded: 0
+2025-12-12T20:34:47.091Z [DEBUG] Git remote URL: null
+2025-12-12T20:34:47.091Z [DEBUG] No git remote URL found
+2025-12-12T20:34:47.091Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-12T20:34:47.281Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571687281
+2025-12-12T20:34:47.281Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:34:47.283Z [DEBUG] Temp file written successfully, size: 51134 bytes
+2025-12-12T20:34:47.284Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:34:47.284Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571687281 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:34:47.284Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:34:47.388Z [ERROR] AxiosError: AxiosError: Request failed with status code 401
+    at Kj (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:187:1137)
+    at IncomingMessage.<anonymous> (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:188:9852)
+    at IncomingMessage.emit (node:events:520:35)
+    at IncomingMessage.emit (node:domain:489:12)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at XKA.request (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:190:2130)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async t_B (file:///C:/Users/DevDelphi/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:1009:47184)
+2025-12-12T20:34:47.400Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571687400
+2025-12-12T20:34:47.400Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:34:47.401Z [DEBUG] Temp file written successfully, size: 51141 bytes
+2025-12-12T20:34:47.402Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:34:47.402Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571687400 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:34:47.402Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:34:47.408Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571687407
+2025-12-12T20:34:47.408Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:34:47.409Z [DEBUG] Temp file written successfully, size: 51147 bytes
+2025-12-12T20:34:47.410Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:34:47.410Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571687407 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:34:47.410Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:34:47.782Z [DEBUG] Shell snapshot created successfully (346 bytes)
+2025-12-12T20:35:14.729Z [DEBUG] Failed to fetch Grove notice config: AxiosError: Request failed with status code 401
+2025-12-12T20:35:14.747Z [DEBUG] MCP server "local-mcp": Initializing HTTP transport to http://127.0.0.1:9001/mcp
+2025-12-12T20:35:14.747Z [DEBUG] MCP server "local-mcp": Node version: v24.12.0, Platform: win32
+2025-12-12T20:35:14.747Z [DEBUG] MCP server "local-mcp": Environment: {"NODE_OPTIONS":"not set","UV_THREADPOOL_SIZE":"default","HTTP_PROXY":"not set","HTTPS_PROXY":"not set","NO_PROXY":"not set"}
+2025-12-12T20:35:14.767Z [DEBUG] MCP server "context7": Starting connection with timeout of 30000ms
+2025-12-12T20:35:14.860Z [DEBUG] Loaded 0 installed plugins from V2 file at C:\Users\DevDelphi\.claude\plugins\installed_plugins_v2.json
+2025-12-12T20:35:14.860Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2025-12-12T20:35:14.861Z [DEBUG] MCP server "local-mcp": Proxy options: default
+2025-12-12T20:35:14.861Z [DEBUG] MCP server "local-mcp": HTTP transport options: {"url":"http://127.0.0.1:9001/mcp","headers":{"User-Agent":"claude-code/2.0.65"},"hasAuthProvider":true,"timeoutMs":60000}
+2025-12-12T20:35:14.861Z [DEBUG] MCP server "local-mcp": HTTP transport created successfully
+2025-12-12T20:35:14.864Z [DEBUG] MCP server "local-mcp": Client created, setting up request handler
+2025-12-12T20:35:14.864Z [DEBUG] MCP server "local-mcp": Starting connection with timeout of 30000ms
+2025-12-12T20:35:14.864Z [DEBUG] MCP server "local-mcp": Testing basic HTTP connectivity to http://127.0.0.1:9001/mcp
+2025-12-12T20:35:14.864Z [DEBUG] MCP server "local-mcp": Parsed URL: host=127.0.0.1, port=9001, protocol=http:
+2025-12-12T20:35:14.864Z [DEBUG] MCP server "local-mcp": Using loopback address: 127.0.0.1
+2025-12-12T20:35:14.871Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571714871
+2025-12-12T20:35:14.871Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:14.874Z [DEBUG] Temp file written successfully, size: 51147 bytes
+2025-12-12T20:35:14.875Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:14.875Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571714871 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:14.876Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:14.894Z [DEBUG] Skipping SessionStart:startup hook execution - workspace trust not accepted
+2025-12-12T20:35:14.895Z [DEBUG] MCP server "local-mcp": No token data found
+2025-12-12T20:35:14.957Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571714957
+2025-12-12T20:35:14.957Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:14.960Z [DEBUG] Temp file written successfully, size: 51074 bytes
+2025-12-12T20:35:14.960Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:14.960Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571714957 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:14.960Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:14.967Z [DEBUG] performStartupChecks called
+2025-12-12T20:35:14.967Z [DEBUG] Trust not accepted for current directory - skipping plugin installations
+2025-12-12T20:35:14.980Z [DEBUG] AutoUpdaterWrapper: Installation type: npm-global
+2025-12-12T20:35:14.985Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571714985
+2025-12-12T20:35:14.985Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:14.988Z [DEBUG] Temp file written successfully, size: 51147 bytes
+2025-12-12T20:35:14.988Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:14.988Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571714985 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:14.989Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:14.992Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2025-12-12T20:35:15.002Z [DEBUG] MCP server "local-mcp": HTTP Connection failed after 255ms: fetch failed (code: none, errno: none)
+2025-12-12T20:35:15.002Z [ERROR] MCP server "local-mcp" TypeError: fetch failed
+2025-12-12T20:35:15.007Z [DEBUG] MCP server "local-mcp": Connection failed after 260ms: fetch failed
+2025-12-12T20:35:15.007Z [ERROR] MCP server "local-mcp" Connection failed: fetch failed
+2025-12-12T20:35:15.021Z [DEBUG] Skipping SubagentStart:Explore hook execution - workspace trust not accepted
+2025-12-12T20:35:15.040Z [DEBUG] Skipping SubagentStart:Plan hook execution - workspace trust not accepted
+2025-12-12T20:35:15.126Z [DEBUG] Summarizing all 3 messages (~0 tokens)
+2025-12-12T20:35:15.147Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571715147
+2025-12-12T20:35:15.147Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:15.150Z [DEBUG] Temp file written successfully, size: 51147 bytes
+2025-12-12T20:35:15.150Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:15.150Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571715147 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:15.151Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:15.197Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571715197
+2025-12-12T20:35:15.197Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:15.200Z [DEBUG] Temp file written successfully, size: 51147 bytes
+2025-12-12T20:35:15.200Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:15.200Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571715197 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:15.201Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:15.877Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571715877
+2025-12-12T20:35:15.877Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:15.881Z [DEBUG] Temp file written successfully, size: 51147 bytes
+2025-12-12T20:35:15.882Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:15.882Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571715877 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:15.882Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:16.226Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2025-12-12T20:35:16.226Z [DEBUG] AutoUpdater: Using global update method
+2025-12-12T20:35:16.342Z [ERROR] MCP server "context7" Server stderr: npm notice Access token expired or revoked. Please try logging in again.
+2025-12-12T20:35:16.378Z [ERROR] MCP server "context7" Server stderr: npm notice Access token expired or revoked. Please try logging in again.
+2025-12-12T20:35:16.383Z [ERROR] MCP server "context7" Server stderr: npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@context7%2fmcp-server - Not found
+npm error 404
+2025-12-12T20:35:16.383Z [ERROR] MCP server "context7" Server stderr: npm error 404  The requested resource '@context7/mcp-server@*' could not be found or you do not have permission to access it.
+npm error 404
+2025-12-12T20:35:16.383Z [ERROR] MCP server "context7" Server stderr: npm error 404 Note that you can also install from a
+2025-12-12T20:35:16.383Z [ERROR] MCP server "context7" Server stderr: npm error 404 tarball, folder, http url, or git url.
+2025-12-12T20:35:16.384Z [ERROR] MCP server "context7" Server stderr: npm error A complete log of this run can be found in: C:\Users\DevDelphi\AppData\Local\npm-cache\_logs\2025-12-12T20_35_15_248Z-debug-0.log
+2025-12-12T20:35:16.415Z [DEBUG] MCP server "context7": Connection failed after 1667ms: MCP error -32000: Connection closed
+2025-12-12T20:35:16.415Z [ERROR] MCP server "context7" Connection failed: MCP error -32000: Connection closed
+2025-12-12T20:35:16.424Z [DEBUG] Skills and commands included in Skill tool:
+2025-12-12T20:35:16.424Z [DEBUG] Slash commands included in SlashCommand tool:
+2025-12-12T20:35:17.396Z [DEBUG] Stream started - received first chunk
+2025-12-12T20:35:17.744Z [DEBUG] Stream started - received first chunk
+2025-12-12T20:35:18.358Z [DEBUG] Writing to temp file: C:\Users\DevDelphi\.claude.json.tmp.9836.1765571718358
+2025-12-12T20:35:18.358Z [DEBUG] Preserving file permissions: 100666
+2025-12-12T20:35:18.361Z [DEBUG] Temp file written successfully, size: 51176 bytes
+2025-12-12T20:35:18.361Z [DEBUG] Applied original permissions to temp file
+2025-12-12T20:35:18.361Z [DEBUG] Renaming C:\Users\DevDelphi\.claude.json.tmp.9836.1765571718358 to C:\Users\DevDelphi\.claude.json
+2025-12-12T20:35:18.362Z [DEBUG] File C:\Users\DevDelphi\.claude.json written atomically
+2025-12-12T20:35:18.469Z [DEBUG] Stream started - received first chunk
+2025-12-12T20:35:19.650Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2025-12-12T20:35:22.818Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted

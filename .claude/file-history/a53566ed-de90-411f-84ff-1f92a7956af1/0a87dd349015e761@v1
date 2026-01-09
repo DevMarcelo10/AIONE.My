@@ -1,0 +1,109 @@
+"""
+Script para criar estoque de teste para genéricos.
+Permite testar o sistema de cores verde do PharmaCopilot.
+"""
+
+import pymysql
+from datetime import date, timedelta
+
+# Configuração do banco
+DB_CONFIG = {
+    'host': 'localhost',
+    'port': 3307,
+    'user': 'root',
+    'password': 'f68interdb',
+    'database': 'dbaione',
+    'charset': 'utf8mb4',
+}
+
+# Produtos genéricos para criar estoque
+PRODUTOS_ESTOQUE = [
+    # DIPIRONA - genéricos mais baratos que DIPIMED (R$13.43) - não há mais barato
+    # Vamos criar para NOVALGINA (R$21.99) vs DIPIRONA 20ML (R$18.31)
+    {'IDProd': 2779, 'Nrolot': 'TESTE001', 'Qtdest': 50, 'dias_validade': 365},  # DIPIRONA 20ML
+
+    # IBUPROFENO - genéricos mais baratos que ADVIL 400MG (R$42.62)
+    {'IDProd': 5074, 'Nrolot': 'TESTE002', 'Qtdest': 100, 'dias_validade': 365},  # IBUPROFENO 100MG 20ML - R$18.30
+    {'IDProd': 6038, 'Nrolot': 'TESTE003', 'Qtdest': 80, 'dias_validade': 365},   # IBUPROFENO 400MG C/10 - R$23.62
+    {'IDProd': 4338, 'Nrolot': 'TESTE004', 'Qtdest': 60, 'dias_validade': 365},   # IBUPROFENO 600MG CX C20 - R$31.69
+
+    # LOSARTANA - genéricos mais baratos que ARADOIS 100MG (R$153.84)
+    {'IDProd': 3272, 'Nrolot': 'TESTE005', 'Qtdest': 40, 'dias_validade': 365},   # LOSARTANA 50MG - R$20.09
+    {'IDProd': 4210, 'Nrolot': 'TESTE006', 'Qtdest': 30, 'dias_validade': 365},   # LOSARTANA 100MG - R$99.95
+
+    # OMEPRAZOL
+    {'IDProd': 2492, 'Nrolot': 'TESTE007', 'Qtdest': 70, 'dias_validade': 365},   # OMEPRAZOL 10MG - R$23.70
+
+    # PARACETAMOL - genéricos mais baratos que TYLENOL
+    {'IDProd': 10841, 'Nrolot': 'TESTE008', 'Qtdest': 90, 'dias_validade': 365},  # PARACETAMOL 200MG GTS - R$10.92
+    {'IDProd': 2704, 'Nrolot': 'TESTE009', 'Qtdest': 50, 'dias_validade': 365},   # PARACETAMOL 750MG C/20 - R$23.22
+]
+
+
+def criar_estoque():
+    """Cria registros de estoque para produtos de teste."""
+    conn = pymysql.connect(**DB_CONFIG)
+    cursor = conn.cursor()
+
+    try:
+        filial_id = 1
+        fornecedor_id = 0  # Fornecedor padrão
+        data_fab = date.today() - timedelta(days=30)
+
+        for item in PRODUTOS_ESTOQUE:
+            data_ven = date.today() + timedelta(days=item['dias_validade'])
+
+            # Verifica se já existe
+            cursor.execute("""
+                SELECT COUNT(*) FROM arqprodutolot
+                WHERE IDFilial = %s AND IDProd = %s AND Nrolot = %s
+            """, (filial_id, item['IDProd'], item['Nrolot']))
+
+            existe = cursor.fetchone()[0] > 0
+
+            if existe:
+                # Atualiza quantidade
+                cursor.execute("""
+                    UPDATE arqprodutolot
+                    SET Qtdest = %s, Datven = %s
+                    WHERE IDFilial = %s AND IDProd = %s AND Nrolot = %s
+                """, (item['Qtdest'], data_ven, filial_id, item['IDProd'], item['Nrolot']))
+                print(f"[UPDATE] Produto {item['IDProd']} - Lote {item['Nrolot']} - Qtd: {item['Qtdest']}")
+            else:
+                # Insere novo registro
+                cursor.execute("""
+                    INSERT INTO arqprodutolot
+                    (IDFilial, IDProd, Nrolot, IDPess, Datfab, Datven, Qtdest)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """, (filial_id, item['IDProd'], item['Nrolot'], fornecedor_id,
+                      data_fab, data_ven, item['Qtdest']))
+                print(f"[INSERT] Produto {item['IDProd']} - Lote {item['Nrolot']} - Qtd: {item['Qtdest']}")
+
+        conn.commit()
+        print("\n✅ Estoque de teste criado com sucesso!")
+
+        # Lista estoques criados
+        print("\n📦 Estoques criados:")
+        cursor.execute("""
+            SELECT p.IDProd, p.Despro, p.TipoPro, p.PrecoVen, l.Qtdest, c.DesSubs
+            FROM arqprodutolot l
+            INNER JOIN arqproduto p ON p.IDProd = l.IDProd
+            LEFT JOIN arqcmed c ON c.CodEAN = p.CodEANpri
+            WHERE l.IDFilial = 1 AND l.Nrolot LIKE 'TESTE%' AND l.Qtdest > 0
+            ORDER BY c.DesSubs, p.PrecoVen
+        """)
+
+        for row in cursor.fetchall():
+            print(f"  {row[1][:40]:<40} | R${row[3]:>8.2f} | Qtd: {row[4]:>5} | {row[5] or 'N/A'}")
+
+    except Exception as e:
+        conn.rollback()
+        print(f"❌ Erro: {e}")
+        raise
+    finally:
+        cursor.close()
+        conn.close()
+
+
+if __name__ == '__main__':
+    criar_estoque()

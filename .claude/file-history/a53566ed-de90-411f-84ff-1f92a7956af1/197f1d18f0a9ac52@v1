@@ -1,0 +1,122 @@
+"""
+Teste automatizado de GUI do PharmaCopilot.
+Usa PyAutoGUI para simular interações do usuário.
+"""
+
+import subprocess
+import time
+import sys
+
+try:
+    import pyautogui
+    pyautogui.FAILSAFE = True  # Move mouse para canto para abortar
+    pyautogui.PAUSE = 0.5  # Pausa entre ações
+except ImportError:
+    print("ERRO: PyAutoGUI não instalado. Execute: pip install pyautogui pillow")
+    sys.exit(1)
+
+import psutil
+
+
+def find_process(name):
+    """Encontra processo pelo nome."""
+    for proc in psutil.process_iter(['pid', 'name']):
+        if proc.info['name'] and name.lower() in proc.info['name'].lower():
+            return proc
+    return None
+
+
+def kill_process(name):
+    """Mata processo pelo nome."""
+    proc = find_process(name)
+    if proc:
+        proc.kill()
+        proc.wait()
+        return True
+    return False
+
+
+def test_sair():
+    """Testa o menu Sair do PharmaCopilot."""
+    print("=" * 50)
+    print("TESTE: Fechar PharmaCopilot via menu Sair")
+    print("=" * 50)
+
+    # 1. Garante que não há instância rodando
+    print("\n[1] Encerrando instâncias anteriores...")
+    kill_process("PharmaCopilot")
+    time.sleep(1)
+
+    # 2. Inicia o PharmaCopilot
+    print("[2] Iniciando PharmaCopilot...")
+    exe_path = r"C:\Fontes\AIONE.My\PharmaCopilot\widget\src\PharmaCopilot.exe"
+    subprocess.Popen([exe_path], shell=True)
+    time.sleep(3)  # Aguarda inicialização
+
+    # 3. Verifica se está rodando
+    proc = find_process("PharmaCopilot")
+    if not proc:
+        print("ERRO: PharmaCopilot não iniciou!")
+        return False
+    print(f"    PID: {proc.pid}")
+
+    # 4. Pega tamanho da tela
+    screen_width, screen_height = pyautogui.size()
+    print(f"[3] Tela: {screen_width}x{screen_height}")
+
+    # 5. O ícone fica no canto direito por padrão
+    # Vamos procurar na área direita da tela
+    icon_x = screen_width - 40  # 40px da borda direita
+    icon_y = screen_height // 2  # Meio da tela verticalmente
+
+    print(f"[4] Clicando com botão direito em ({icon_x}, {icon_y})...")
+    pyautogui.click(icon_x, icon_y, button='right')
+    time.sleep(0.5)
+
+    # 6. Menu popup aparece - "Sair" é o último item
+    # Clica um pouco abaixo para pegar o menu
+    print("[5] Clicando em 'Sair' no menu...")
+    pyautogui.click(icon_x + 30, icon_y + 80)  # Aproximadamente onde fica "Sair"
+    time.sleep(2)
+
+    # 7. Verifica se fechou
+    print("[6] Verificando se processo encerrou...")
+    proc = find_process("PharmaCopilot")
+    if proc:
+        print("AVISO: Processo ainda rodando. Tentando localizar menu...")
+        # Tenta ESC para fechar menu e tentar novamente
+        pyautogui.press('escape')
+        time.sleep(0.5)
+
+        # Pode ser que o ícone esteja em outra posição
+        # Vamos tentar na system tray
+        print("       Tentando via System Tray...")
+        # System tray fica geralmente no canto inferior direito
+        tray_x = screen_width - 100
+        tray_y = screen_height - 20
+        pyautogui.click(tray_x, tray_y, button='right')
+        time.sleep(0.5)
+        pyautogui.click(tray_x + 30, tray_y - 30)  # "Sair" no menu
+        time.sleep(2)
+
+        proc = find_process("PharmaCopilot")
+        if proc:
+            print("\nFALHA: Processo não encerrou!")
+            print("       Encerrando forçadamente...")
+            kill_process("PharmaCopilot")
+            return False
+
+    print("\n" + "=" * 50)
+    print("SUCESSO: PharmaCopilot fechou corretamente!")
+    print("=" * 50)
+    return True
+
+
+if __name__ == "__main__":
+    try:
+        success = test_sair()
+        sys.exit(0 if success else 1)
+    except Exception as e:
+        print(f"\nERRO durante teste: {e}")
+        kill_process("PharmaCopilot")
+        sys.exit(1)

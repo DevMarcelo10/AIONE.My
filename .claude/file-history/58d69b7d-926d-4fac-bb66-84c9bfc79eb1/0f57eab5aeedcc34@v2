@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+"""Script temporário para listar tabelas do banco AIONE"""
+
+import mysql.connector
+from mysql.connector import Error
+import json
+
+DB_CONFIG = {
+    'host': 'localhost',
+    'port': 3307,
+    'user': 'root',
+    'password': 'f68interdb',
+    'database': 'dbaione',
+    'charset': 'utf8mb4',
+    'collation': 'utf8mb4_general_ci'
+}
+
+connection = None
+try:
+    print("Conectando ao banco de dados MySQL...")
+    connection = mysql.connector.connect(**DB_CONFIG)
+
+    if connection.is_connected():
+        print(f"Conectado ao banco '{DB_CONFIG['database']}' com sucesso!\n")
+
+        cursor = connection.cursor()
+        cursor.execute("SHOW TABLES")
+        tables = cursor.fetchall()
+
+        print(f"Total de tabelas: {len(tables)}\n")
+        print("=" * 60)
+        print("LISTA DE TABELAS:")
+        print("=" * 60)
+
+        for idx, table in enumerate(tables, 1):
+            table_name = table[0]
+
+            # Obter contagem de registros
+            cursor.execute(f"SELECT COUNT(*) FROM `{table_name}`")
+            count = cursor.fetchone()[0]
+
+            print(f"{idx:3d}. {table_name:40s} ({count:10,d} registros)")
+
+        cursor.close()
+        print("\n" + "=" * 60)
+
+except Error as e:
+    print(f"Erro ao conectar ao MySQL: {e}")
+finally:
+    if connection and connection.is_connected():
+        connection.close()
+        print("\nConexão fechada.")

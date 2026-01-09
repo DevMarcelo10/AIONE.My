@@ -1,0 +1,19 @@
+"""Script para rodar o servidor sem janela de console."""
+import subprocess
+import sys
+import os
+
+os.chdir(r"C:\Fontes\AIONE.My\PharmaCopilot\backend")
+
+# Define variaveis de ambiente necessarias
+env = os.environ.copy()
+env["ERP_DB_PASSWORD"] = "f68interdb"
+
+# Roda uvicorn sem janela
+subprocess.Popen(
+    [sys.executable, "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
+    creationflags=subprocess.CREATE_NO_WINDOW,
+    stdout=open("server.log", "w"),
+    stderr=subprocess.STDOUT,
+    env=env
+)

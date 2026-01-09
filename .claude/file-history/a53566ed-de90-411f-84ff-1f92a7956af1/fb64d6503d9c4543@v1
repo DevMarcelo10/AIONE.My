@@ -1,0 +1,5 @@
+"""Routers da API."""
+
+from . import chat, suggestions, alerts, health
+
+__all__ = ["chat", "suggestions", "alerts", "health"]

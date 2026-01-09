@@ -1,0 +1,40 @@
+# PharmaCopilot Backend - Dependencies
+
+# Web Framework
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
+# Validation & Settings
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Database
+sqlalchemy>=2.0.25
+asyncpg>=0.29.0          # PostgreSQL async
+aiomysql>=0.2.0          # MySQL async
+pymysql>=1.1.0           # MySQL sync
+pyodbc>=5.0.1            # SQL Server (Linx, etc)
+
+# LLM Providers
+anthropic>=0.18.0        # Claude
+openai>=1.12.0           # GPT
+google-generativeai>=0.4.0  # Gemini
+
+# HTTP Client
+httpx>=0.26.0
+aiohttp>=3.9.0
+
+# Utilities
+python-dotenv>=1.0.0
+tenacity>=8.2.0          # Retry logic
+structlog>=24.1.0        # Structured logging
+
+# Cache
+redis>=5.0.0
+aiocache>=0.12.0
+
+# Testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+httpx>=0.26.0

@@ -1,0 +1,310 @@
+"""Endpoints de informações farmacêuticas dos medicamentos."""
+
+from typing import Optional
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+import structlog
+import pymysql
+
+from config.settings import settings
+
+router = APIRouter()
+logger = structlog.get_logger()
+
+
+class MedicamentoInfo(BaseModel):
+    """Informações farmacêuticas de um medicamento."""
+
+    id: int
+    ean: Optional[str] = None
+    principio_ativo: str
+    nome_comercial: Optional[str] = None
+
+    # Posologia e Uso
+    posologia_padrao: Optional[str] = None
+    orientacao_uso: Optional[str] = None
+    horario_ideal: Optional[str] = None
+    armazenamento: Optional[str] = None
+
+    # Efeitos e Interações
+    efeitos_colaterais: Optional[str] = None
+    interacao_alimentos: Optional[str] = None
+    interacao_medicamentos: Optional[str] = None
+
+    # Controle de Receita
+    retem_receita: bool = False
+    tipo_receita: str = "livre"
+
+    # Alertas por Grupo de Risco
+    alerta_idoso: Optional[str] = None
+    alerta_pediatrico: Optional[str] = None
+    alerta_gestante: Optional[str] = None
+    alerta_lactante: Optional[str] = None
+    alerta_renal: Optional[str] = None
+    alerta_hepatico: Optional[str] = None
+
+
+class MedicamentoInfoResponse(BaseModel):
+    """Resposta com informações do medicamento."""
+
+    found: bool = False
+    info: Optional[MedicamentoInfo] = None
+    produto_id: Optional[int] = None
+    produto_nome: Optional[str] = None
+
+
+def get_db_connection():
+    """Obtém conexão com o banco de dados."""
+    return pymysql.connect(
+        host=settings.ERP_DB_HOST,
+        port=settings.ERP_DB_PORT,
+        user=settings.ERP_DB_USER,
+        password=settings.ERP_DB_PASSWORD,
+        database=settings.ERP_DB_NAME,
+        charset='utf8mb4',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+
+@router.get("/by-ean/{ean}", response_model=MedicamentoInfoResponse)
+async def get_info_by_ean(ean: str):
+    """
+    Busca informações farmacêuticas pelo código EAN.
+
+    Primeiro busca o produto no ERP, depois as informações na base do Copilot.
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Buscar produto no ERP
+        cursor.execute("""
+            SELECT IDProduto, NomeProduto, Principio
+            FROM arqproduto
+            WHERE IDProduto = %s OR BarProduto = %s
+            LIMIT 1
+        """, (ean, ean))
+
+        produto = cursor.fetchone()
+        if not produto:
+            return MedicamentoInfoResponse(found=False)
+
+        # Buscar info farmacêutica
+        principio = produto.get('Principio', '') or ''
+
+        # Primeiro tenta pelo EAN
+        cursor.execute("""
+            SELECT * FROM copilot_medicamento_info
+            WHERE ean = %s
+            LIMIT 1
+        """, (ean,))
+
+        info = cursor.fetchone()
+
+        # Se não encontrou pelo EAN, tenta pelo princípio ativo
+        if not info and principio:
+            # Normaliza o princípio ativo para busca
+            principio_upper = principio.upper().strip()
+            cursor.execute("""
+                SELECT * FROM copilot_medicamento_info
+                WHERE UPPER(principio_ativo) LIKE %s
+                ORDER BY
+                    CASE WHEN UPPER(principio_ativo) = %s THEN 0 ELSE 1 END,
+                    LENGTH(principio_ativo)
+                LIMIT 1
+            """, (f"%{principio_upper}%", principio_upper))
+
+            info = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if not info:
+            return MedicamentoInfoResponse(
+                found=False,
+                produto_id=produto['IDProduto'],
+                produto_nome=produto['NomeProduto']
+            )
+
+        return MedicamentoInfoResponse(
+            found=True,
+            info=MedicamentoInfo(**info),
+            produto_id=produto['IDProduto'],
+            produto_nome=produto['NomeProduto']
+        )
+
+    except Exception as e:
+        logger.error("erro_buscar_medicamento_info", error=str(e), ean=ean)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/by-produto/{produto_id}", response_model=MedicamentoInfoResponse)
+async def get_info_by_produto(produto_id: int):
+    """
+    Busca informações farmacêuticas pelo ID do produto no ERP.
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Buscar produto no ERP
+        cursor.execute("""
+            SELECT IDProduto, NomeProduto, BarProduto, Principio
+            FROM arqproduto
+            WHERE IDProduto = %s
+            LIMIT 1
+        """, (produto_id,))
+
+        produto = cursor.fetchone()
+        if not produto:
+            return MedicamentoInfoResponse(found=False)
+
+        ean = produto.get('BarProduto', '') or ''
+        principio = produto.get('Principio', '') or ''
+
+        # Primeiro tenta pelo EAN
+        info = None
+        if ean:
+            cursor.execute("""
+                SELECT * FROM copilot_medicamento_info
+                WHERE ean = %s
+                LIMIT 1
+            """, (ean,))
+            info = cursor.fetchone()
+
+        # Se não encontrou pelo EAN, tenta pelo princípio ativo
+        if not info and principio:
+            principio_upper = principio.upper().strip()
+            cursor.execute("""
+                SELECT * FROM copilot_medicamento_info
+                WHERE UPPER(principio_ativo) LIKE %s
+                ORDER BY
+                    CASE WHEN UPPER(principio_ativo) = %s THEN 0 ELSE 1 END,
+                    LENGTH(principio_ativo)
+                LIMIT 1
+            """, (f"%{principio_upper}%", principio_upper))
+            info = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if not info:
+            return MedicamentoInfoResponse(
+                found=False,
+                produto_id=produto['IDProduto'],
+                produto_nome=produto['NomeProduto']
+            )
+
+        return MedicamentoInfoResponse(
+            found=True,
+            info=MedicamentoInfo(**info),
+            produto_id=produto['IDProduto'],
+            produto_nome=produto['NomeProduto']
+        )
+
+    except Exception as e:
+        logger.error("erro_buscar_medicamento_info", error=str(e), produto_id=produto_id)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/by-principio/{principio_ativo}", response_model=MedicamentoInfoResponse)
+async def get_info_by_principio(principio_ativo: str):
+    """
+    Busca informações farmacêuticas pelo princípio ativo.
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        principio_upper = principio_ativo.upper().strip()
+        cursor.execute("""
+            SELECT * FROM copilot_medicamento_info
+            WHERE UPPER(principio_ativo) LIKE %s
+            ORDER BY
+                CASE WHEN UPPER(principio_ativo) = %s THEN 0 ELSE 1 END,
+                LENGTH(principio_ativo)
+            LIMIT 1
+        """, (f"%{principio_upper}%", principio_upper))
+
+        info = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if not info:
+            return MedicamentoInfoResponse(found=False)
+
+        return MedicamentoInfoResponse(
+            found=True,
+            info=MedicamentoInfo(**info)
+        )
+
+    except Exception as e:
+        logger.error("erro_buscar_medicamento_info", error=str(e), principio=principio_ativo)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/search", response_model=list[MedicamentoInfo])
+async def search_medicamentos(q: str, limit: int = 10):
+    """
+    Busca medicamentos por termo (nome comercial ou princípio ativo).
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        termo = f"%{q.upper()}%"
+        cursor.execute("""
+            SELECT * FROM copilot_medicamento_info
+            WHERE UPPER(principio_ativo) LIKE %s
+               OR UPPER(nome_comercial) LIKE %s
+            ORDER BY
+                CASE
+                    WHEN UPPER(principio_ativo) = %s THEN 0
+                    WHEN UPPER(nome_comercial) = %s THEN 1
+                    ELSE 2
+                END,
+                nome_comercial
+            LIMIT %s
+        """, (termo, termo, q.upper(), q.upper(), limit))
+
+        results = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        return [MedicamentoInfo(**row) for row in results]
+
+    except Exception as e:
+        logger.error("erro_buscar_medicamentos", error=str(e), termo=q)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/stats")
+async def get_stats():
+    """Retorna estatísticas da base de informações farmacêuticas."""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) as total FROM copilot_medicamento_info")
+        total = cursor.fetchone()['total']
+
+        cursor.execute("""
+            SELECT tipo_receita, COUNT(*) as qtd
+            FROM copilot_medicamento_info
+            GROUP BY tipo_receita
+        """)
+        por_tipo = {row['tipo_receita']: row['qtd'] for row in cursor.fetchall()}
+
+        cursor.close()
+        conn.close()
+
+        return {
+            "total_medicamentos": total,
+            "por_tipo_receita": por_tipo
+        }
+
+    except Exception as e:
+        logger.error("erro_stats", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))

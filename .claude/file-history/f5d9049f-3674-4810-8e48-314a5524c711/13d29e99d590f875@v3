@@ -1,0 +1,1216 @@
+﻿unit uLibFarm;
+
+interface
+
+uses
+   Windows, Messages, MarcLib, Vcl.Forms, Classes, Controls, Dialogs, ExtCtrls,
+   DateUtils, System.SysUtils, Variants, LMDPNGImageList, Vcl.StdCtrls, uConst,
+   Data.DB, LMDDBEdit, System.Types, LMDLabel, Vcl.Graphics, Vcl.Grids,
+   Vcl.DBGrids, LMDSimplePanel, uRESTDWBasicDB, LMDEdit, Vcl.DBCtrls, IdTCPClient,
+   uMostraMsg, IdHTTP, Wininet, VirtualTable, System.Threading, ACBrNFe,
+   pcnConversao, System.Character, uRESTDWIdBase, Datasnap.DBClient, uShadowForm;
+
+type
+   TDirection  = (dirUp,dirDown,dirLeft,dirRight);
+
+  // Tipo para definir os parâmetros de cada dataset
+   TUpdateParams = record
+      DataSet  : TRESTDWClientSQL;
+      CampoKey : String;
+      FiltroKey: String;
+      IgnorePK : Boolean;
+      CamposIgnorados: TArray<string>;
+      constructor Create(ADataSet: TRESTDWClientSQL; ACampoKey, AFiltroKey: String; AIgnorePK: Boolean = False; ACamposIgnorados: TArray<string> = []);
+   end;
+
+   procedure FechaForm(recNomForm:String);
+   procedure TrimAppMemorySize;
+   procedure AjustaDBGrid(recDBGrid: TDBGrid);
+   procedure FadeInOut(Formulario: TForm; InOut:String; recStep:Integer);
+   procedure LoadPngFromImageList(ImageList: TLMDPNGImageList; ImageIndex: Integer; Image: TImage);
+   procedure MoveComponente(Component: TControl; Direction: TDirection; FinalPosition, Duration: Integer);
+   procedure TypingSimulation(LabelControl: TLMDLabel; const TextToType: string; TypingSpeed, Dormir: Integer);
+   procedure btBuscas(TabelaBus:String; EditBase:TLMDEdit; CampoOri,CampoBus,FiltroRec:String; Carc:Word; IndAll:Boolean = False);
+   procedure btBuscasDB(TabelaRet:TRESTDWClientSQL; TabelaBus:String; EditBase:TDBEdit; CampoRet,CampoOri,CampoBus,recCampoShow,FiltroRec:String; Carc:Word; recWidth:Integer = 0);
+   procedure btBuscasVT(TabelaRet:TVirtualTable; TabelaBus:String; EditBase:TDBEdit; CampoRet,CampoOri,CampoBus,recCampoShow,FiltroRec:String; Carc:Word; recWidth:Integer = 0);
+   procedure AbreSubForm(FormBase,Formulario:TForm; TFormulario:TFormClass; PanelParent:TWinControl);
+   procedure AdjustZoom(recForm:TForm);
+   procedure SimularCliqueControle(AControle: TWinControl);
+   procedure SimularCliqueControlePorNome(const FormName, ControleName: string);
+   procedure SimularTabControle(FormName, ControleName: string);
+   procedure btBuscasCDS(TabelaRet:TClientDataSet; TabelaBus:String; EditBase:TDBEdit; CampoRet,CampoOri,CampoBus,recCampoShow,FiltroRec:String; Carc:Word; recWidth:Integer = 0);
+   procedure CentralizarControl(AChild: TControl; AParent: TWinControl);
+   function  VeDataServer: TDateTime;
+   function  Ping(recIP:String; recPorta:Integer):Boolean;
+   function  IsValidEANCode(const Code: string): Boolean;
+   function  ValidarHoras(recDataHoras:TDateTime):Boolean;
+   function  GeraMyCodigo(Tabela,Campo,Filtro:String):Integer;
+   function  FormatarStrReais(const valor:String; recFormSQL:Boolean):String;
+   function  ClonarRegistro(TabelaOrigem,TabelaDestino,CampoChave:String; ValorChave:Variant; CamposExcluir:TStringList = nil):Variant;
+   function  MyApplayUpdates(aDataSet:TRESTDWClientSQL; CampoKey,FiltroKey:String; dsState:TDataSetState; IgnorePK: Boolean = False):Integer;
+   function  MyApplayUpdatesAll(aDataSet: TRESTDWClientSQL; CampoKey, FiltroKey: String; IgnorePK: Boolean = False): Integer;
+   function  CreateSQL(AConnection: TRESTDWIdDatabase; ASQL: string; const AParams: array of string): TRESTDWClientSQL;
+   function  MyApplayRetVlr(aDataSet:TRESTDWClientSQL; I:Integer):WideString;
+   function  IsInternetConnected:Boolean;
+   function  MostraMsg(const Cab,Msg:String; DlgType:TMsgDlgType; Buttons:TMsgDlgButtons; FormHeight: Integer = 0; FormWidth: Integer = 0):Integer;
+   function  RemoveEspacosEAcentos(const ATexto: string): string;
+   function  Manifestar(recACBrNFe:TACBrNFe;recCNPJFil,recIDChaAce,recJust:String;recOrgao:Integer;recEveNFe:TpcnTpEvento):String;
+   function  TitleCase(const S:String):String;
+   function  obterNroResultado(aXML:String; aTag,aEndTag:String; pStart:Integer):String;
+   function  CodigoUF(recUF:String):String;
+   function  ConsultaStatus_SEFAZ:String;
+   function  EnviaMailDest(recMailNF,recChaveNF,recMENEnvMailNF,recSITEConsNF:String):Boolean;
+   function  NextSequenceID(aTable_Sequence: String; var vErro: String): Integer;
+   function  TrataTecNum(Index: Integer): Char;
+   function  MyApplayUpdatesAllMultiple(const UpdateParams: TArray<TUpdateParams>; var vErro: String): Integer;
+var
+   AguardeThread: TThread;
+
+implementation
+
+uses uDM, uBusca, uBuscaVT, uBuscaCDS;
+
+constructor TUpdateParams.Create(ADataSet: TRESTDWClientSQL; ACampoKey, AFiltroKey: String; AIgnorePK: Boolean = False; ACamposIgnorados: TArray<string> = []);
+begin
+  DataSet := ADataSet;
+  CampoKey := ACampoKey;
+  FiltroKey := AFiltroKey;
+  IgnorePK := AIgnorePK;
+  CamposIgnorados := ACamposIgnorados;
+end;
+
+function MostraMsg(const Cab,Msg:String; DlgType:TMsgDlgType; Buttons:TMsgDlgButtons; FormHeight: Integer = 0; FormWidth: Integer = 0):Integer;
+var
+  auxFormMsg: TFrmMostraMsg;
+begin
+   auxFormMsg := TFrmMostraMsg.Create(Application);
+   with auxFormMsg do
+   begin
+      if FormHeight > 0 then auxFormMsg.Height := FormHeight;
+      if FormWidth  > 0 then auxFormMsg.Width  := FormWidth;
+      Label1.Caption := Cab;
+      Label2.Caption := Msg;
+
+      if mbOK  in Buttons then Button2.Caption := 'Entendi';
+      if mbYes in Buttons then Button2.Caption := 'Sim';
+      if mbNo  in Buttons then Button3.Caption := 'Não';
+
+      Button1.Visible := False; //-> Desativado
+      Button2.Visible := (mbOK in Buttons) or (mbYes in Buttons);
+      Button3.Visible := (mbNo in Buttons);
+      btPadrao := iif((mbOK in Buttons) or (mbYes in Buttons),2,-1);
+
+      imgWarning.Visible     := mtWarning = DlgType;
+      imgError.Visible       := mtError   = DlgType;
+      imgQuestion.Visible    := mtConfirmation = DlgType;
+      imgInformation.Visible := mtInformation  = DlgType;
+
+      try
+         TShadowHelper.ShowModalWithShadow(Application.MainForm, auxFormMsg);
+      finally
+         Result := auxFormMsg.Click;
+         FreeAndNil(auxFormMsg);
+      end;
+   end; //with
+end;
+
+function GeraMyCodigo(Tabela,Campo,Filtro:String):Integer;
+var
+   QueTemp:TRESTDWClientSQL;
+begin
+   QueTemp := TRESTDWClientSQL.Create(nil);
+   try
+      with QueTemp do
+      begin
+         DataBase := DM.DWDataBase;
+         SQL.Text := 'SELECT '+Campo+' FROM '+Tabela +iif(Filtro <> '',' WHERE ','')+Filtro+' ORDER BY '+Campo+' DESC LIMIT 1';
+         Open;
+         if IsEmpty then
+              Result := 1
+         else Result := FieldByName(Campo).AsInteger + 1;
+      end; //with
+   finally
+      QueTemp.Close;
+      FreeAndNil(QueTemp);
+   end;
+end;
+
+function VeDataServer: TDateTime;
+var
+   QueAuxi:TRESTDWClientSQL;
+   vDataHora: TDateTime;
+begin
+   QueAuxi := TRESTDWClientSQL.Create(nil);
+   try
+      try
+         QueAuxi.DataBase := DM.DWDataBase;
+         QueAuxi.SQL.Text := 'SELECT NOW() AS DataServer';
+         QueAuxi.Open;
+         vDataHora := QueAuxi.FieldByName('DataServer').AsDateTime;
+      except
+         Result := NOW;
+      end;
+   finally
+      QueAuxi.Close;
+      FreeAndNil(QueAuxi);
+   end;
+end;
+
+procedure btBuscas(TabelaBus:String; EditBase:TLMDEdit; CampoOri,CampoBus,FiltroRec:String; Carc:Word; IndAll:Boolean = False);
+var
+   lPoint:TPoint;
+begin
+   if Carc = 27 then
+   begin
+      EditBase.Tag  := 0;
+      EditBase.Text := '';
+      Exit;
+   end;
+   if (not (Char(Carc) in ['0'..'9', 'A'..'Z', 'a'..'z'])) and (not IndAll) then Exit;
+   try
+      FrmBusca := TFrmBusca.Create(Application);
+      with FrmBusca do
+      begin
+         lPoint      := EditBase.ClientToScreen(Point(0,0));
+         Left        := lPoint.X;
+         Top         := lPoint.Y;
+         Width       := EditBase.Width;
+         CampoRetor  := '';
+         CampoOrigem := CampoOri;
+         CampoBusca  := CampoBus;
+         ArqBusca    := TabelaBus;
+         ArqRetorno  := nil;
+         recCarc     := Carc;
+         edRetorno   := EditBase;
+         Filtro      := FiltroRec;
+         recIndAll   := IndAll;
+         if (Char(Carc) in ['0'..'9']) or (Char(Carc) in ['A'..'Z']) or (Char(Carc) in ['a'..'z']) then edBusca.Text := Char(Carc);
+         ShowModal;
+      end; // with
+   finally
+      Trim(EditBase.Text);
+      FrmBusca.Free;
+   end;
+end;
+
+procedure btBuscasDB(TabelaRet:TRESTDWClientSQL; TabelaBus:String; EditBase:TDBEdit; CampoRet,CampoOri,CampoBus,recCampoShow,FiltroRec:String; Carc:Word; recWidth:Integer = 0);
+var
+   lPoint: TPoint;
+begin
+   if not(TabelaRet.State in dsEditModes) then TabelaRet.Edit;
+   if Carc = 27 then  //-- Tecla ESC -> Limpa Campo -- //
+   begin
+      EditBase.Tag  := 0;
+      EditBase.Text := '';
+      TabelaRet.FieldByName(CampoRet).AsInteger := 0;
+      TabelaRet.FieldByName(recCampoShow).AsString := '';
+      Exit;
+   end;
+   try
+      FrmBusca := TFrmBusca.Create(Application);
+      with FrmBusca do
+      begin
+         lPoint := EditBase.ClientToScreen(Point(0, 0));
+         Left        := lPoint.X;
+         Top         := lPoint.Y;
+         CampoRetor  := CampoRet;
+         CampoOrigem := CampoOri;
+         CampoBusca  := CampoBus;
+         ArqBusca    := TabelaBus;
+         ArqRetorno  := TabelaRet;
+         Filtro      := FiltroRec;
+         recCarc     := Carc;
+         CampoShow   := recCampoShow;
+         WidthColuna := recWidth;
+         Width       := iif(recWidth > 0, recWidth, EditBase.Width);
+         if (Char(Carc) in ['0'..'9']) or (Char(Carc) in ['A'..'Z']) or (Char(Carc) in ['a'..'z']) then edBusca.Text := Char(Carc);
+         ShowModal;
+      end; // with
+   finally
+      FrmBusca.Free;
+   end;
+end;
+
+procedure btBuscasVT(TabelaRet:TVirtualTable; TabelaBus:String; EditBase:TDBEdit; CampoRet,CampoOri,CampoBus,recCampoShow,FiltroRec:String; Carc:Word; recWidth:Integer = 0);
+var
+   lPoint: TPoint;
+begin
+   if not(TabelaRet.State in dsEditModes) then TabelaRet.Edit;
+   if Carc = 27 then  //-- Tecla ESC -> Limpa Campo -- //
+   begin
+      EditBase.Tag  := 0;
+      EditBase.Text := '';
+      TabelaRet.FieldByName(CampoRet).AsInteger := 0;
+      TabelaRet.FieldByName(recCampoShow).AsString := '';
+      Exit;
+   end;
+   try
+      FrmBuscaVT := TFrmBuscaVT.Create(Application);
+      with FrmBuscaVT do
+      begin
+         lPoint := EditBase.ClientToScreen(Point(0, 0));
+         Left        := lPoint.X;
+         Top         := lPoint.Y;
+         CampoRetor  := CampoRet;
+         CampoOrigem := CampoOri;
+         CampoBusca  := CampoBus;
+         ArqBusca    := TabelaBus;
+         ArqRetorno  := TabelaRet;
+         Filtro      := FiltroRec;
+         recCarc     := Carc;
+         CampoShow   := recCampoShow;
+         WidthColuna := recWidth;
+         Width       := iif(recWidth > 0, recWidth, EditBase.Width);
+         if (Char(Carc) in ['0'..'9']) or (Char(Carc) in ['A'..'Z']) or (Char(Carc) in ['a'..'z']) then edBusca.Text := Char(Carc);
+         ShowModal;
+      end; // with
+   finally
+      FrmBuscaVT.Free;
+   end;
+end;
+
+// ----------------------- Cria Novos Panels ------------------- //
+procedure LoadPngFromImageList(ImageList: TLMDPNGImageList; ImageIndex: Integer; Image:TImage);
+begin
+   if (ImageIndex >= 0) and (ImageIndex < ImageList.Count) then
+   begin
+      Image.Canvas.Lock;
+      try
+         Image.Canvas.FillRect(Image.BoundsRect);
+         ImageList.Draw(Image.Canvas, 0, 0, 0, ImageIndex);
+      finally
+         Image.Canvas.Unlock;
+      end;
+   end;
+end;
+
+procedure TypingSimulation(LabelControl:TLMDLabel; const TextToType:String; TypingSpeed,Dormir:Integer);
+var
+   Thr:TThread;
+begin
+   if LabelControl.Tag = -1 then Exit;
+   try
+      LabelControl.Tag     := -1;
+      LabelControl.Caption := '';
+      Thr := TThread.CreateAnonymousThread(
+      procedure
+      var I: Integer;
+      begin
+         Sleep(Dormir);
+         for I := 1 to Length(TextToType) do
+         begin
+            TThread.Synchronize(nil,
+               procedure
+               begin
+                  LabelControl.Caption := LabelControl.Caption + TextToType[I];
+               end);
+            Sleep(TypingSpeed);
+         end;
+         LabelControl.Tag := 0;
+      end);
+      Thr.Start;
+   except
+   end;
+end;
+
+procedure FadeInOut(Formulario: TForm; InOut: String; recStep: Integer);
+var
+   I,iAlpha:Integer;
+begin
+   with Formulario do
+   begin
+      AlphaBlend := True;
+      if InOut = 'In' then
+      begin
+         AlphaBlendValue := 0;
+         Refresh;
+         for I := 0 to 255 - 1 do
+         begin
+            iAlpha := recStep * I;
+            AlphaBlendValue := iif(iAlpha > 255, 255, iAlpha);
+            Sleep(1);
+            Application.ProcessMessages;
+            if iAlpha > 255 then Break;
+         end;
+         AlphaBlendValue := 255;
+      end else
+      begin
+         iAlpha := 255;
+         while iAlpha > 0 do
+         begin
+            iAlpha := iAlpha - recStep;
+            AlphaBlendValue := iif(iAlpha < 0, 0, iAlpha);
+            Sleep(1);
+            Application.ProcessMessages;
+            if iAlpha <= 0 then Break;
+         end;
+         AlphaBlendValue := 0;
+      end; // if
+   end; // with
+end;
+
+procedure TrimAppMemorySize;
+var
+   MainHandle: THandle;
+begin
+   try
+      MainHandle := OpenProcess(PROCESS_ALL_ACCESS, false, GetCurrentProcessID);
+      SetProcessWorkingSetSize(MainHandle, $FFFFFFFF, $FFFFFFFF);
+      CloseHandle(MainHandle);
+   except
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure AjustaDBGrid(recDBGrid: TDBGrid);
+begin
+   TStringGrid(recDBGrid).DefaultRowHeight := 21;
+   recDBGrid.Width := recDBGrid.Width - 5;
+   recDBGrid.Width := recDBGrid.Width + 5;
+end;
+
+procedure MoveComponente(Component: TControl; Direction: TDirection; FinalPosition, Duration: Integer);
+var
+   StartTime:Cardinal;
+   Percentage: Double;
+   StartPos,TargetPos:Integer;
+begin
+   case Direction of
+      dirUp:    StartPos := Component.Top;
+      dirDown:  StartPos := Component.Top;
+      dirLeft:  StartPos := Component.Left;
+      dirRight: StartPos := Component.Left;
+   end;
+   StartTime := GetTickCount;
+   repeat
+      Percentage := (GetTickCount - StartTime) / Duration;
+      TargetPos  := Round((1 - Percentage) * StartPos + Percentage * FinalPosition);
+      case Direction of
+         dirUp,dirDown:    Component.Top  := TargetPos;
+         dirLeft,dirRight: Component.Left := TargetPos;
+      end;
+      Application.ProcessMessages;
+   until Percentage >= 1;
+   case Direction of
+      dirUp,dirDown:    Component.Top  := TargetPos;
+      dirLeft,dirRight: Component.Left := TargetPos;
+   end;
+end;
+
+procedure AbreSubForm(FormBase,Formulario:TForm; TFormulario:TFormClass; PanelParent:TWinControl);
+begin
+   try
+      Formulario := TFormulario.Create(Application);
+      CentralizarControl(Formulario, FormBase);
+      Formulario.ShowModal;
+   finally
+      Formulario := nil;
+   end;
+end;
+
+function ClonarRegistro(TabelaOrigem,TabelaDestino,CampoChave:String; ValorChave:Variant; CamposExcluir:TStringList = nil):Variant;
+var
+   I:Integer;
+   Campos,nomParam:TStringList;
+   QueryOrigem,QueryDestino:TRESTDWClientSQL;
+begin
+   Result   := Null;
+   Campos   := TStringList.Create;
+   nomParam := TStringList.Create;
+   QueryOrigem  := TRESTDWClientSQL.Create(nil);
+   QueryDestino := TRESTDWClientSQL.Create(nil);
+   try
+      QueryOrigem.DataBase := DM.DWDataBase;
+      QueryOrigem.SQL.Text := 'SELECT * FROM '+TabelaOrigem+' WHERE '+CampoChave+' = :Chave';
+      QueryOrigem.ParamByName('Chave').Value := ValorChave;
+      QueryOrigem.Open;
+      Campos.Clear;
+      for I := 0 to QueryOrigem.FieldCount - 1 do
+      begin
+        if (CamposExcluir = nil) or (CamposExcluir.IndexOf(QueryOrigem.Fields[I].FieldName) = -1) then
+           Campos.Add(QueryOrigem.Fields[I].FieldName);
+      end;
+      if Campos.Count > 0 then
+      begin
+         nomParam.Clear;
+         for I := 0 to Campos.Count - 1 do nomParam.Add(':'+Campos[I]);
+         QueryDestino.DataBase := DM.DWDataBase;
+         QueryDestino.SQL.Text := 'INSERT INTO '+TabelaDestino+'('+Campos.CommaText+') VALUES ('+nomParam.CommaText+')';
+         for I := 0 to Campos.Count - 1 do
+         begin
+            if (TabelaDestino = 'arqproduto') and (QueryOrigem.Fields.FieldByName(Campos[I]).FieldName = 'CodEANpri') then Continue;
+            if QueryOrigem.Fields.FieldByName(Campos[I]).DataType = ftFloat then
+               QueryDestino.ParamByName(QueryOrigem.Fields.FieldByName(Campos[I]).FieldName).AsFloat := QueryOrigem.FieldByName(Campos[I]).AsFloat else
+            if QueryOrigem.Fields.FieldByName(Campos[I]).DataType = ftBoolean then
+               QueryDestino.ParamByName(QueryOrigem.Fields.FieldByName(Campos[I]).FieldName).AsBoolean := QueryOrigem.FieldByName(Campos[I]).AsBoolean
+            else QueryDestino.ParamByName(QueryOrigem.Fields.FieldByName(Campos[I]).FieldName).Value := QueryOrigem.FieldByName(Campos[I]).Value;
+         end; //for
+         QueryDestino.ExecSQL;
+         QueryDestino.Close;
+         QueryDestino.SQL.Text := 'SELECT '+CampoChave+' FROM '+TabelaOrigem+' ORDER BY '+CampoChave+' DESC LIMIT 1';
+         QueryDestino.Open;
+         Result := QueryDestino.FieldByName(CampoChave).AsInteger;
+      end; //if
+   finally
+      Campos.Free;
+      nomParam.Free;
+      QueryOrigem.Free;
+      QueryDestino.Free;
+   end;
+end;
+
+function ValidarHoras(recDataHoras:TDateTime):Boolean;
+var
+   AYear,AMonth,ADay,AHour,AMinute,ASecond,AMilliSecond:Word;
+begin
+   DecodeDateTime(recDataHoras,AYear,AMonth,ADay,AHour,AMinute,ASecond,AMilliSecond);
+   Result := IsValidTime(AHour, AMinute, ASecond, AMilliSecond);
+end;
+
+procedure AdjustZoom(recForm:TForm);
+var
+   CurrentDPI,TargetDPI,NewDPI,ScaleFactor:Integer;
+begin
+   CurrentDPI := Screen.PixelsPerInch; // DPI atual do monitor
+   TargetDPI := (CurrentDPI * BaseFormZoom) div 100; // Calcula o DPI alvo baseado no percentual de zoom desejado
+   recForm.ScaleForPPI(TargetDPI); // Ajusta o formulário para o novo DPI
+   NewDPI := (CurrentDPI * BaseFormZoom) div 100; // Calcula o novo DPI com base no percentual de zoom
+   ScaleFactor := NewDPI div CurrentDPI; // Calcula o fator de escala com base no novo DPI
+   GlobalScaleFactor := NewDPI / CurrentDPI; // Atualiza o fator de escala global
+   BaseRowHeight := Round(OriginalRowHeight * ScaleFactor) + 7;
+end;
+
+procedure CentralizarControl(AChild: TControl; AParent: TWinControl);
+var
+   pt:TPoint;
+   isTopLevelForm:Boolean;
+   targetLeft,targetTop:Integer;
+begin
+   if (AChild = nil) or (AParent = nil) then Exit;
+   // Centro na área cliente do AParent
+   targetLeft := (AParent.ClientWidth  - AChild.Width) div 2;
+   targetTop  := (AParent.ClientHeight - AChild.Height) div 2;
+   // Detecta form top-level (sem Parent)
+   isTopLevelForm := (AChild is TCustomForm) and (TCustomForm(AChild).Parent = nil);
+   if isTopLevelForm then
+   begin
+      // Aplica em coordenadas de tela (form top-level)
+      pt := AParent.ClientToScreen(Point(targetLeft, targetTop));
+      AChild.Left := pt.X;
+      AChild.Top  := pt.Y;
+      Exit;
+   end;
+   if AChild.Parent = AParent then
+   begin
+      // Já está no sistema de coordenadas correto
+      AChild.Left := targetLeft;
+      AChild.Top  := targetTop;
+      Exit;
+   end;
+   if AChild.Parent <> nil then
+   begin
+      // Converter Parent.Client ? Screen ? Child.Parent.Client
+      pt := AParent.ClientToScreen(Point(targetLeft, targetTop));
+      pt := AChild.Parent.ScreenToClient(pt);
+      AChild.Left := pt.X;
+      AChild.Top  := pt.Y;
+      Exit;
+   end;
+   // Edge case: controle sem Parent (não-form). Tratar como tela
+   pt := AParent.ClientToScreen(Point(targetLeft, targetTop));
+   AChild.Left := pt.X;
+   AChild.Top  := pt.Y;
+end;
+
+function IsValidEANCode(const Code: string): Boolean;
+begin
+  Result := (Length(Code) = 14) or (Length(Code) = 13) or (Length(Code) = 8);
+end;
+
+procedure SimularCliqueControle(AControle: TWinControl);
+var
+  Ponto: TPoint;
+begin
+  if AControle <> nil then
+  begin
+    Ponto.X := AControle.Width div 2;
+    Ponto.Y := AControle.Height div 2;
+    Ponto := AControle.ClientToScreen(Ponto);
+    PostMessage(AControle.Handle, WM_LBUTTONDOWN, MK_LBUTTON, (Ponto.Y shl 16) + Ponto.X);
+    PostMessage(AControle.Handle, WM_LBUTTONUP, 0, (Ponto.Y shl 16) + Ponto.X);
+  end;
+end;
+
+procedure SimularCliqueControlePorNome(const FormName, ControleName: string);
+var
+   I:Integer;
+   AForm:TForm;
+   AControle:TWinControl;
+begin
+   AForm := nil;
+   for I := 0 to Screen.FormCount -1 do
+   begin
+      if SameText(Screen.Forms[I].Name, FormName) then
+      begin
+         AForm := Screen.Forms[I];
+         Break;
+      end;
+   end;
+   if AForm = nil then
+     raise Exception.CreateFmt('Formulário "%s" não encontrado.', [FormName]);
+   AControle := AForm.FindComponent(ControleName) as TWinControl;
+   if AControle = nil then
+      raise Exception.CreateFmt('Controle "%s" não encontrado no formulário "%s".', [ControleName, FormName]);
+   AControle.SetFocus;
+   SimularCliqueControle(AControle);
+end;
+
+procedure SimularTabControle(FormName,ControleName:String);
+var
+   I:Integer;
+   AForm:TForm;
+   AControle:TWinControl;
+begin
+   AForm := nil;
+   for I := 0 to Screen.FormCount - 1 do
+   begin
+      if SameText(Screen.Forms[I].Name, FormName) then
+      begin
+         AForm := Screen.Forms[I];
+         Break;
+      end;
+   end;
+   if AForm <> nil then
+   begin
+      AControle := AForm.FindComponent(ControleName) as TWinControl;
+      if AControle = nil then Exit;
+      AControle.SetFocus;
+      if AForm = nil then Exit;
+      AControle := AForm.FindComponent(ControleName) as TWinControl;
+      if AControle = nil then Exit;
+      PostMessage(AControle.Handle, WM_KEYDOWN, VK_TAB, 0);
+      PostMessage(AControle.Handle, WM_KEYUP, VK_TAB, 0);
+   end;
+end;
+
+procedure FechaForm(recNomForm:String);
+var
+   Form: TForm;
+begin
+   Form := Application.FindComponent(recNomForm) as TForm;
+   try
+      if Assigned(Form) then
+      begin
+         Form.Close;
+         FreeAndNil(Form);
+      end;
+   except
+   end;
+end;
+
+function FormatarStrReais(const valor:String; recFormSQL:Boolean):String;
+begin
+   Result := Trim(valor);
+   if Result <> '' then
+   begin
+      if not recFormSQL then
+      begin
+         Result := StringReplace(Result,'.','', [rfReplaceAll]);
+         Result := StringReplace(Result,',','.',[rfReplaceAll]);
+      end;
+   end
+   else Result := '0.00';
+end;
+
+function MyApplayUpdates(aDataSet:TRESTDWClientSQL; CampoKey,FiltroKey:String; dsState:TDataSetState; IgnorePK: Boolean = False):Integer;
+var
+  I:Integer;
+  vErro:String;
+  QueAuxi:TRESTDWClientSQL;
+begin
+   Result := -1;
+   if Assigned(aDataSet) then
+   begin
+      QueAuxi := TRESTDWClientSQL.Create(nil);
+      with QueAuxi do
+      begin
+         try
+            DataBase := DM.DWDataBase;
+            if dsState = dsEdit then
+                 SQL.Text := 'UPDATE '+aDataSet.UpdateTableName+' SET '
+            else SQL.Text := 'INSERT INTO '+aDataSet.UpdateTableName+' (';
+            for I := 0 to aDataSet.Fields.Count-1 do
+            begin
+               if (pfInUpdate in aDataSet.Fields[I].ProviderFlags) and
+                     (IgnorePK or not(pfInKey in aDataSet.Fields[I].ProviderFlags)) then
+               begin
+                  if dsState = dsEdit then
+                       SQL.Add(aDataSet.Fields[I].FieldName+' = '+MyApplayRetVlr(aDataSet,I)+',')
+                  else SQL.Add(aDataSet.Fields[I].FieldName+',');
+               end; //if
+            end; //for
+            if dsState = dsInsert then
+            begin
+               SQL.Text := Copy(SQL.Text,1,LastDelimiter(',',SQL.Text)-1)+') VALUES (';
+               for I := 0 to aDataSet.Fields.Count -1 do
+                  if (pfInUpdate in aDataSet.Fields[I].ProviderFlags) and
+                        (IgnorePK or not(pfInKey in aDataSet.Fields[I].ProviderFlags)) then
+                     SQL.Add(MyApplayRetVlr(aDataSet,I)+',');
+               SQL.Text := Copy(SQL.Text,1,LastDelimiter(',',SQL.Text)-1)+')';
+            end
+            else
+            begin
+              SQL.Text := Copy(SQL.Text,1,LastDelimiter(',',SQL.Text)-1)+iif(FiltroKey <> '',' WHERE '+FiltroKey,' LIMIT 1');
+            end;
+            try
+               if dsState = dsInsert then
+               begin
+                  SQL.Add(';');
+                  SQL.Add('SELECT LAST_INSERT_ID() AS '+CampoKey+';');
+                  QueAuxi.Open;
+                  Result := FieldByName(CampoKey).AsInteger;
+               end else
+               begin
+                  QueAuxi.ExecSQL;
+                  Result := 0;
+               end; //if
+            except
+               on E:Exception do vErro := E.Message;
+            end;
+         finally
+            FreeAndNil(QueAuxi);
+         end;
+      end; //with
+   end; //if
+end;
+
+function MyApplayUpdatesAll(aDataSet: TRESTDWClientSQL; CampoKey, FiltroKey: String; IgnorePK: Boolean = False): Integer;
+var
+  I: Integer;
+  vErro, sqlMontado: String;
+  SQLBlock: TStringList;
+  RegCount: Integer;
+  QueAuxi: TRESTDWClientSQL;
+begin
+  Result := -1;
+  if not Assigned(aDataSet) then
+    Exit;
+  QueAuxi := TRESTDWClientSQL.Create(nil);
+  QueAuxi.DataBase := DM.DWDataBase;
+  SQLBlock := TStringList.Create;
+  RegCount := 0;
+  try
+    aDataSet.First;
+    while not aDataSet.Eof do
+    begin
+      case aDataSet.UpdateStatus of
+        usModified:
+          begin
+            SQLBlock.Add('UPDATE ' + aDataSet.UpdateTableName + ' SET ');
+            for I := 0 to aDataSet.Fields.Count - 1 do
+            begin
+              if (pfInUpdate in aDataSet.Fields[I].ProviderFlags) and
+                 (IgnorePK or not (pfInKey in aDataSet.Fields[I].ProviderFlags)) then
+              begin
+                SQLBlock.Text := SQLBlock.Text + aDataSet.Fields[I].FieldName + ' = ' + MyApplayRetVlr(aDataSet, I) + ',';
+              end;
+            end;
+            SQLBlock.Text := Copy(SQLBlock.Text, 1, LastDelimiter(',', SQLBlock.Text) - 1) +
+                             iif(FiltroKey <> '', ' WHERE ' + FiltroKey, ' LIMIT 1') + ';';
+            Inc(RegCount);
+          end;
+        usUnmodified, usInserted:
+          begin
+            SQLBlock.Add('INSERT INTO ' + aDataSet.UpdateTableName + ' (');
+            for I := 0 to aDataSet.Fields.Count - 1 do
+            begin
+              if (pfInUpdate in aDataSet.Fields[I].ProviderFlags) and
+                 (IgnorePK or not (pfInKey in aDataSet.Fields[I].ProviderFlags)) then
+              begin
+                if (aDataSet.Fields[I].Name <> 'TabPedIteEstTotal') and (aDataSet.Fields[I].Name <> 'TabPedItePrecoUni') then
+                  SQLBlock.Text := SQLBlock.Text + aDataSet.Fields[I].FieldName + ',';
+              end;
+            end;
+            SQLBlock.Text := Copy(SQLBlock.Text, 1, LastDelimiter(',', SQLBlock.Text) - 1) + ') VALUES (';
+            for I := 0 to aDataSet.Fields.Count - 1 do
+            begin
+              if (pfInUpdate in aDataSet.Fields[I].ProviderFlags) and
+                 (IgnorePK or not (pfInKey in aDataSet.Fields[I].ProviderFlags)) then
+              begin
+                if (aDataSet.Fields[I].Name <> 'TabPedIteEstTotal') and (aDataSet.Fields[I].Name <> 'TabPedItePrecoUni') then
+                  SQLBlock.Text := SQLBlock.Text + MyApplayRetVlr(aDataSet, I) + ',';
+              end;
+            end;
+            SQLBlock.Text := Copy(SQLBlock.Text, 1, LastDelimiter(',', SQLBlock.Text) - 1) + ');';
+            Inc(RegCount);
+          end;
+        usDeleted:
+          begin
+            SQLBlock.Add('DELETE FROM ' + aDataSet.UpdateTableName +
+             iif(FiltroKey <> '', ' WHERE ' + FiltroKey, ' LIMIT 1') + ';');
+            Inc(RegCount);
+          end;
+      end;
+      aDataSet.Next;
+    end;
+    if RegCount > 0 then
+    begin
+      QueAuxi.SQL.Text := SQLBlock.Text;
+      try
+        QueAuxi.ExecSQL;
+        Result := 0;
+      except
+        on E: Exception do
+        begin
+          vErro := E.Message;
+          Result := 0;
+        end;
+      end;
+    end else
+    begin
+      Result := 0;
+    end;
+  finally
+    FreeAndNil(QueAuxi);
+    FreeAndNil(SQLBlock);
+  end;
+end;
+
+function CreateSQL(AConnection: TRESTDWIdDatabase; ASQL: string; const AParams: array of string): TRESTDWClientSQL;
+var
+  i: Integer;
+  ParamName: string;
+begin
+  Result := TRESTDWClientSQL.Create(nil);
+  try
+    Result.DataBase := AConnection;
+    Result.SQL.Text := ASQL;
+    if Length(AParams) > 0 then
+    begin
+      if Result.Params.Count <> Length(AParams) then
+        raise Exception.Create('N?mero de par?metros incompat?vel com a SQL.');
+      for i := 0 to High(AParams) do
+      begin
+        ParamName := Result.Params[i].Name;
+        Result.Params.ParamByName(ParamName).Value := AParams[i];
+      end;
+    end;
+    Result.Open;
+  except
+    Result.Free;
+    raise;
+  end;
+end;
+
+function MyApplayRetVlr(aDataSet:TRESTDWClientSQL; I:Integer):WideString;
+begin
+   case aDataSet.Fields[I].DataType of
+      ftSmallint,ftInteger,
+      ftLargeint  : Result := iif(aDataSet.Fields[I].AsString.Trim = '','null',aDataSet.Fields[I].AsString);
+      ftFloat,ftSingle : Result := FormatDouble(aDataSet.Fields[I].AsFloat,10,6);
+      ftBoolean  : Result := iif(aDataSet.Fields[I].AsBoolean,'1','0');
+      ftDate     : Result := iif(aDataSet.Fields[I].AsDateTime > StrToDate('01/01/1900'),Aspas(FormatDateTime('yyyy-mm-dd',aDataSet.Fields[I].AsDateTime)),'null');
+      ftTime     : Result := Aspas(FormatDateTime('hh:mm:ss',aDataSet.Fields[I].AsDateTime));
+      ftDateTime : Result := iif(aDataSet.Fields[I].AsDateTime > StrToDate('01/01/1900'),QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm:ss',aDataSet.Fields[I].AsDateTime)),'null');
+      ftString,ftWideString,ftMemo,ftWideMemo : Result := Aspas(aDataSet.Fields[I].AsString);
+   end; //case
+end;
+
+function Ping(recIP:String; recPorta:Integer):Boolean;
+var
+   Ping:TIdTCPClient;
+begin
+   Result := False;
+   Ping := TIdTCPClient.Create(nil);
+   try
+     Ping.Host := recIP;
+     Ping.Port := recPorta;
+     Ping.ConnectTimeout := 6000;
+     Ping.Connect;
+     Result := Ping.Connected;
+   except
+   end;
+   FreeAndNil(Ping);
+end;
+
+function IsInternetConnected:Boolean;
+var
+   IdHTTP:TIdHTTP;
+   dwConnectionTypes:DWORD;
+begin
+   dwConnectionTypes := INTERNET_CONNECTION_MODEM + INTERNET_CONNECTION_LAN + INTERNET_CONNECTION_PROXY;
+   Result := InternetGetConnectedState(@dwConnectionTypes, 0);
+   if Result then
+   begin
+      IdHTTP := TIdHTTP.Create(nil);
+      try
+         try
+            IdHTTP.Get('http://www.google.com');
+            Result := True;
+         except
+            on E:Exception do Result := False;
+         end;
+      finally
+         IdHTTP.Free;
+      end;
+   end; //if
+end;
+
+function RemoveEspacosEAcentos(const ATexto: string): string;
+var
+  i: Integer;
+  TextoSemAcento, Resultado: string;
+begin
+  // Remove acentos usando Normalize e eliminando caracteres diacríticos
+  TextoSemAcento := '';
+  for i := 1 to ATexto.Length do
+  begin
+    if not ATexto[i].IsLetterOrDigit and not ATexto[i].IsWhiteSpace then
+      Continue;
+    // Remover acento usando Normalize e filtragem
+    case ATexto[i] of
+      'á', 'à', 'ã', 'â', 'ä': TextoSemAcento := TextoSemAcento + 'a';
+      'Á', 'À', 'Ã', 'Â', 'Ä': TextoSemAcento := TextoSemAcento + 'A';
+      'é', 'è', 'ê', 'ë': TextoSemAcento := TextoSemAcento + 'e';
+      'É', 'È', 'Ê', 'Ë': TextoSemAcento := TextoSemAcento + 'E';
+      'í', 'ì', 'î', 'ï': TextoSemAcento := TextoSemAcento + 'i';
+      'Í', 'Ì', 'Î', 'Ï': TextoSemAcento := TextoSemAcento + 'I';
+      'ó', 'ò', 'õ', 'ô', 'ö': TextoSemAcento := TextoSemAcento + 'o';
+      'Ó', 'Ò', 'Õ', 'Ô', 'Ö': TextoSemAcento := TextoSemAcento + 'O';
+      'ú', 'ù', 'û', 'ü': TextoSemAcento := TextoSemAcento + 'u';
+      'Ú', 'Ù', 'Û', 'Ü': TextoSemAcento := TextoSemAcento + 'U';
+      'ç': TextoSemAcento := TextoSemAcento + 'c';
+      'Ç': TextoSemAcento := TextoSemAcento + 'C';
+    else
+      TextoSemAcento := TextoSemAcento + ATexto[i];
+    end;
+  end;
+  // Remove espaços
+  Resultado := '';
+  for i := 1 to TextoSemAcento.Length do
+  begin
+    if not TextoSemAcento[i].IsWhiteSpace then
+      Resultado := Resultado + TextoSemAcento[i];
+  end;
+  Result := Resultado;
+end;
+
+function Manifestar(recACBrNFe:TACBrNFe;recCNPJFil,recIDChaAce,recJust:String;recOrgao:Integer;recEveNFe:TpcnTpEvento):String;
+begin
+   Result := '';
+   recACBrNFe.EventoNFe.Evento.Clear;
+   with recACBrNFe.EventoNFe.Evento.New do
+   begin
+      InfEvento.cOrgao          := recOrgao;    // Ambiente Nacional código informado em cOrgao deve ser sempre 91.
+      InfEvento.chNFe           := recIDChaAce; // Chave da NFe.
+      InfEvento.CNPJ            := recCNPJFil;  // CNPJ/CPF da farmácia.
+      InfEvento.dhEvento        := now;         // Data e hora que está mandando as informações.
+      InfEvento.tpEvento        := recEveNFe;   // Evento da manifestação do destinatário.  1-Ciência da operação  2-Confirmação da operação  3-Operação não realizada  4-Desconhecimento da operação.
+      InfEvento.detEvento.xJust := recJust;     // Texto da justificativa se preciso.
+   end; // with
+   recACBrNFe.EnviarEvento(1);
+   Result := recACBrNFe.WebServices.EnvEvento.EventoRetorno.retEvento[0].RetInfEvento.xEvento;
+end;
+
+function TitleCase(const S: string): string;
+var
+  I: Integer;
+  NewWord: Boolean;
+begin
+  Result := AnsiLowerCase(S);
+  NewWord := True;
+  for I := 1 to Length(Result) do
+  begin
+    if NewWord and (Result[I] in ['a'..'z']) then
+    begin
+      Result[I] := AnsiUpperCase(Result[I])[1];
+      NewWord := False;
+    end
+    else if Result[I] in [' ', #9, #10, #13] then
+      NewWord := True;
+  end;
+end;
+
+// ----------- Obtem parte do conteudo de uma Tag de XML ----------- //
+function obterNroResultado(aXML:String; aTag,aEndTag:String; pStart:Integer):String;
+var
+   _Posini,_Posfim:Integer;
+begin
+   Result  := '';
+   aXML    := Copy(aXML,pStart,Length(aXML));
+   _Posini := AnsiPos(aTag,aXML);
+   _Posfim := AnsiPos(aEndTag,aXML);
+   if _Posini > 0 then
+   begin
+      Inc(_PosIni, aTag.Length);
+      Result := Copy(aXML,_Posini+1,(_PosFim-_PosIni)-1);
+   end;
+end;
+
+// ---------- Retorna o Código Fiscal de Cadas Estado (UF) ---------- //
+function CodigoUF(recUF:String):String;
+begin
+   if recUF = 'AC' then Result := '12' else
+   if recUF = 'AL' then Result := '27' else
+   if recUF = 'AP' then Result := '16' else
+   if recUF = 'AM' then Result := '13' else
+   if recUF = 'BA' then Result := '29' else
+   if recUF = 'CE' then Result := '23' else
+   if recUF = 'DF' then Result := '53' else
+   if recUF = 'ES' then Result := '32' else
+   if recUF = 'GO' then Result := '52' else
+   if recUF = 'MA' then Result := '21' else
+   if recUF = 'MT' then Result := '51' else
+   if recUF = 'MS' then Result := '50' else
+   if recUF = 'MG' then Result := '31' else
+   if recUF = 'PA' then Result := '15' else
+   if recUF = 'PB' then Result := '25' else
+   if recUF = 'PR' then Result := '41' else
+   if recUF = 'PE' then Result := '26' else
+   if recUF = 'PI' then Result := '22' else
+   if recUF = 'RJ' then Result := '33' else
+   if recUF = 'RN' then Result := '24' else
+   if recUF = 'RS' then Result := '43' else
+   if recUF = 'RO' then Result := '11' else
+   if recUF = 'RR' then Result := '14' else
+   if recUF = 'SC' then Result := '42' else
+   if recUF = 'SP' then Result := '35' else
+   if recUF = 'SE' then Result := '28' else
+   if recUF = 'TO' then Result := '17';
+end;
+
+// ------------ Consulta Situação da Operação do SEFAZ ---------- //
+// [107] - Serviço em Operação Alerta
+// [108] - Serviço Paralisado Temporariamente Inativo
+// [109] - Serviço está Paralisado sem Previsão
+function ConsultaStatus_SEFAZ:String;
+var
+   XMLAux:AnsiString;
+begin
+    try
+      XMLAux := DM.spdNFCe.StatusDoServico;
+      Result := obterNroResultado(XMLAux, '<cStat','</cStat', 1);
+   except
+      Result := '999';
+      Exit;
+   end;
+end;
+
+// ----------- Envia Email com NFC (DANFE) P/ Cliente ----------- //
+function EnviaMailDest(recMailNF,recChaveNF,recMENEnvMailNF,recSITEConsNF:String):Boolean;
+begin
+   Result := False;
+   try
+      if recMailNF <> '' then
+      begin
+         DM.spdNFCe.EmailSettings.EmailDestinatario := recMailNF;
+         DM.spdNFCe.EmailSettings.Mensagem := recMENEnvMailNF+#10+#10+'Chave da Nota Fiscal: '+recChaveNF+#10+#10+'Consultar em '+recSITEConsNF;
+         DM.spdNFCe.EnviarNotaDestinatario(recChaveNF,'','');
+         Result := True;
+      end; //if
+   except
+      on E:Exception do
+      begin
+         SalvaLog(USUARIO, PastaLog, 'ERRO ao tentar enviasr mail com NFCe P/ Destinatário (uGeraNFce) -> '+E.Message);
+         Exit;
+      end;
+   end;
+end;
+
+//  TrataTecNum - Função que converte um índice numérico específico em um caractere correspondente.
+//  Índices de 97 a 104 são mapeados diretamente para os caracteres '1' a '8'.
+//  Para outros valores dentro do intervalo válido (0 a 65535), retorna o caractere Unicode correspondente.
+//  Caso o índice esteja fora do intervalo permitido, uma exceção ERangeError é gerada.
+function TrataTecNum(Index: Integer): Char;
+begin
+  case Index of
+    97: Result := '1';
+    98: Result := '2';
+    99: Result := '3';
+   100: Result := '4';
+   101: Result := '5';
+   102: Result := '6';
+   103: Result := '7';
+   104: Result := '8';
+  else
+    if (Index >= 0) and (Index <= 65535) then
+      Result := Chr(Index)
+    else
+      raise ERangeError.CreateFmt('Índice fora do intervalo válido: %d', [Index]);
+  end;
+end;
+
+function NextSequenceID(aTable_Sequence: String; var vErro: String): Integer;
+var
+  qry: TRESTDWClientSQL;
+begin
+  vErro:= EmptyStr;
+  try
+    qry := TRESTDWClientSQL.Create(nil);
+    qry.DataBase := DM.DWDataBase;
+    try
+      // Incrementa o sequencial
+      qry.SQL.Text := 'UPDATE '+aTable_Sequence+' SET next_id = LAST_INSERT_ID(next_id + 1); ' +
+                      'SELECT LAST_INSERT_ID() AS id;' ;
+      qry.Open;
+      //
+      Result := qry.FieldByName('id').AsInteger;
+    except
+      on E: Exception do
+      begin
+        vErro := E.Message;
+        Result := 0;
+      end;
+    end;
+  finally
+    qry.Close;
+    qry.Free;
+  end;
+end;
+
+// ----Busca em tabela temporária usando ClientDataSet---- //
+procedure btBuscasCDS(TabelaRet:TClientDataSet; TabelaBus:String; EditBase:TDBEdit; CampoRet,CampoOri,CampoBus,recCampoShow,FiltroRec:String; Carc:Word; recWidth:Integer = 0);
+var
+   lPoint: TPoint;
+begin
+   if not(TabelaRet.State in dsEditModes) then TabelaRet.Edit;
+   if Carc = 27 then  //-- Tecla ESC -> Limpa Campo -- //
+   begin
+      EditBase.Tag  := 0;
+      EditBase.Text := '';
+      TabelaRet.FieldByName(CampoRet).AsInteger := 0;
+      TabelaRet.FieldByName(recCampoShow).AsString := '';
+      Exit;
+   end;
+   try
+      FrmBuscaCDS := TFrmBuscaCDS.Create(Application);
+      lPoint := EditBase.ClientToScreen(Point(0, 0));
+      FrmBuscaCDS.Left        := lPoint.X;
+      FrmBuscaCDS.Top         := lPoint.Y;
+      FrmBuscaCDS.CampoRetor  := CampoRet;
+      FrmBuscaCDS.CampoOrigem := CampoOri;
+      FrmBuscaCDS.CampoBusca  := CampoBus;
+      FrmBuscaCDS.ArqBusca    := TabelaBus;
+      FrmBuscaCDS.ArqRetorno  := TabelaRet;
+      FrmBuscaCDS.Filtro      := FiltroRec;
+      FrmBuscaCDS.recCarc     := Carc;
+      FrmBuscaCDS.CampoShow   := recCampoShow;
+      FrmBuscaCDS.WidthColuna := recWidth;
+      FrmBuscaCDS.Width       := iif(recWidth > 0, recWidth, EditBase.Width);
+      if (Char(Carc) in ['0'..'9']) or (Char(Carc) in ['A'..'Z']) or (Char(Carc) in ['a'..'z']) then FrmBuscaCDS.edBusca.Text := Char(Carc);
+      FrmBuscaCDS.ShowModal;
+   finally
+      FrmBuscaCDS.Free;
+   end;
+end;
+
+// -------- Versão unificada da função -------- //
+function MyApplayUpdatesAllMultiple(const UpdateParams: TArray<TUpdateParams>; var vErro: String): Integer;
+var
+  I, J: Integer;
+  sqlMontado: String;
+  SQLBlock: TStringList;
+  RegCount: Integer;
+  QueAuxi: TRESTDWClientSQL;
+  CurrentParams: TUpdateParams;
+  function CampoIgnorado(const NomeCampo: string; const ListaIgnorados: TArray<string>): Boolean;
+  var
+    Ignorado: string;
+  begin
+    Result := False;
+    for Ignorado in ListaIgnorados do
+      if SameText(NomeCampo, Ignorado) then Exit(True);
+  end;
+begin
+  vErro  := EmptyStr;
+  Result := -1;
+  QueAuxi := TRESTDWClientSQL.Create(nil);
+  QueAuxi.DataBase := DM.DWDataBase;
+  SQLBlock := TStringList.Create;
+  RegCount := 0;
+  try
+    // Processa cada dataset
+    for CurrentParams in UpdateParams do
+    begin
+      if not Assigned(CurrentParams.DataSet) then Continue;
+      CurrentParams.DataSet.First;
+      while not CurrentParams.DataSet.Eof do
+      begin
+        case CurrentParams.DataSet.UpdateStatus of
+          usModified:
+            begin
+              SQLBlock.Add('UPDATE ' + CurrentParams.DataSet.UpdateTableName + ' SET ');
+              for J := 0 to CurrentParams.DataSet.Fields.Count - 1 do
+              begin
+                if (pfInUpdate in CurrentParams.DataSet.Fields[J].ProviderFlags) and
+                   (CurrentParams.IgnorePK or not (pfInKey in CurrentParams.DataSet.Fields[J].ProviderFlags)) then
+                begin
+                  if not CampoIgnorado(CurrentParams.DataSet.Fields[J].Name, CurrentParams.CamposIgnorados) then
+                    SQLBlock.Text := SQLBlock.Text + CurrentParams.DataSet.Fields[J].FieldName + ' = ' +
+                                   MyApplayRetVlr(CurrentParams.DataSet, J) + ',';
+                end;
+              end;
+              SQLBlock.Text := Copy(SQLBlock.Text, 1, LastDelimiter(',', SQLBlock.Text) - 1) +
+                               iif(CurrentParams.FiltroKey <> '', ' WHERE ' + CurrentParams.FiltroKey, ' LIMIT 1') + ';';
+              Inc(RegCount);
+            end;
+          usUnmodified, usInserted:
+            begin
+              SQLBlock.Add('INSERT INTO ' + CurrentParams.DataSet.UpdateTableName + ' (');
+              for J := 0 to CurrentParams.DataSet.Fields.Count - 1 do
+              begin
+                if (pfInUpdate in CurrentParams.DataSet.Fields[J].ProviderFlags) and
+                   (CurrentParams.IgnorePK or not (pfInKey in CurrentParams.DataSet.Fields[J].ProviderFlags)) then
+                begin
+                  if not CampoIgnorado(CurrentParams.DataSet.Fields[J].Name, CurrentParams.CamposIgnorados) then
+                    SQLBlock.Text := SQLBlock.Text + CurrentParams.DataSet.Fields[J].FieldName + ',';
+                end;
+              end;
+              SQLBlock.Text := Copy(SQLBlock.Text, 1, LastDelimiter(',', SQLBlock.Text) - 1) + ') VALUES (';
+              for J := 0 to CurrentParams.DataSet.Fields.Count - 1 do
+              begin
+                if (pfInUpdate in CurrentParams.DataSet.Fields[J].ProviderFlags) and
+                   (CurrentParams.IgnorePK or not (pfInKey in CurrentParams.DataSet.Fields[J].ProviderFlags)) then
+                begin
+                  if not CampoIgnorado(CurrentParams.DataSet.Fields[J].Name, CurrentParams.CamposIgnorados) then
+                    SQLBlock.Text := SQLBlock.Text + MyApplayRetVlr(CurrentParams.DataSet, J) + ',';
+                end;
+              end;
+              SQLBlock.Text := Copy(SQLBlock.Text, 1, LastDelimiter(',', SQLBlock.Text) - 1) + ');';
+              Inc(RegCount);
+            end;
+          usDeleted:
+            begin
+              SQLBlock.Add('DELETE FROM ' + CurrentParams.DataSet.UpdateTableName +
+                           iif(CurrentParams.FiltroKey <> '', ' WHERE ' + CurrentParams.FiltroKey, ' LIMIT 1') + ';');
+              Inc(RegCount);
+            end;
+        end;
+        CurrentParams.DataSet.Next;
+      end; // while
+    end; //for
+
+    // Executa todas as operações em uma única transação
+    if RegCount > 0 then
+    begin
+      QueAuxi.SQL.Text := 'SET autocommit = 0; START TRANSACTION; '+SQLBlock.Text +' COMMIT; ';
+      try
+         QueAuxi.ExecSQL;
+         Result := 0;
+      except
+         on E: Exception do
+         begin
+            vErro := E.Message;
+            Result := -1; // Retorna erro em caso de exceção //
+         end;
+      end;
+    end
+    else Result := 0;
+  finally
+    FreeAndNil(QueAuxi);
+    FreeAndNil(SQLBlock);
+  end;
+end;
+
+end.
+

@@ -743,6 +743,10 @@
         <DCCReference Include="uniVendas\uSelPBM.pas">
             <Form>FrmSelPBM</Form>
         </DCCReference>
+        <DCCReference Include="uniEstoque\uMenEstoq.pas">
+            <Form>FrmMenEsto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

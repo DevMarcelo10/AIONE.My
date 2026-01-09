@@ -1,0 +1,6 @@
+"""Camada de integração com ERPs."""
+
+from .base_connector import BaseERPConnector
+from .connector_factory import ConnectorFactory
+
+__all__ = ["BaseERPConnector", "ConnectorFactory"]

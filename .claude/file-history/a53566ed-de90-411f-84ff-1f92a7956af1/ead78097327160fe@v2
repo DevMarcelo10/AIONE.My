@@ -1,0 +1,67 @@
+"""
+PharmaCopilot Backend - FastAPI Application
+Assistente IA independente para vendedores de farmácia
+"""
+
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from config.settings import settings
+from routers import chat, suggestions, alerts, health
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia ciclo de vida da aplicação."""
+    # Startup
+    print(f"🚀 PharmaCopilot Backend iniciando...")
+    print(f"📦 Versão: {settings.VERSION}")
+    print(f"🔗 ERP Conectado: {settings.ERP_TYPE}")
+    yield
+    # Shutdown
+    print("👋 PharmaCopilot Backend encerrando...")
+
+
+app = FastAPI(
+    title="PharmaCopilot API",
+    description="Assistente IA para vendedores de farmácia - Multi-ERP",
+    version=settings.VERSION,
+    lifespan=lifespan,
+)
+
+# CORS para widget Delphi
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Routers
+app.include_router(health.router, tags=["Health"])
+app.include_router(chat.router, prefix="/api/v1/chat", tags=["Chat"])
+app.include_router(suggestions.router, prefix="/api/v1/suggestions", tags=["Suggestions"])
+app.include_router(alerts.router, prefix="/api/v1/alerts", tags=["Alerts"])
+
+
+@app.get("/")
+async def root():
+    """Endpoint raiz com informações da API."""
+    return {
+        "app": "PharmaCopilot",
+        "version": settings.VERSION,
+        "status": "online",
+        "docs": "/docs",
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host=settings.HOST,
+        port=settings.PORT,
+        reload=settings.DEBUG,
+    )

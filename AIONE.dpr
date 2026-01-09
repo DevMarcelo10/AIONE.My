@@ -219,7 +219,8 @@ uses
   uReceitaBase in 'uniVendas\Receitas\uReceitaBase.pas' {FrmReceitaBase},
   uReceitaC in 'uniVendas\Receitas\uReceitaC.pas' {FrmReceitaC},
   uReceitaC2 in 'uniVendas\Receitas\uReceitaC2.pas' {FrmReceitaC2},
-  uSelPBM in 'uniVendas\uSelPBM.pas' {FrmSelPBM};
+  uSelPBM in 'uniVendas\uSelPBM.pas' {FrmSelPBM},
+  uMenEstoq in 'uniEstoque\uMenEstoq.pas' {FrmMenEsto};
 
 {$R *.res}
 

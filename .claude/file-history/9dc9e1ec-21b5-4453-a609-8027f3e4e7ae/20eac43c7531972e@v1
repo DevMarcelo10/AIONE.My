@@ -1,0 +1,3 @@
+# Dependências do MCP Server MySQL para AIONE.My
+mcp>=0.9.0
+mysql-connector-python>=8.0.0

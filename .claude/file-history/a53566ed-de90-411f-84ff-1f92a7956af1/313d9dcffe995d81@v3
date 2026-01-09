@@ -1,0 +1,71 @@
+"""
+Configurações centralizadas do PharmaCopilot.
+Usa pydantic-settings para validação e .env loading.
+"""
+
+from typing import Literal
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    """Configurações da aplicação."""
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+    )
+
+    # App
+    VERSION: str = "1.0.0"
+    DEBUG: bool = False
+    HOST: str = "127.0.0.1"
+    PORT: int = 8000
+
+    # ERP Connection (READ-ONLY)
+    ERP_TYPE: Literal["aione", "linx", "trier", "profarma", "generic"] = "aione"
+    ERP_DB_HOST: str = "localhost"
+    ERP_DB_PORT: int = 3307
+    ERP_DB_NAME: str = "dbaione"
+    ERP_DB_USER: str = "root"
+    ERP_DB_PASSWORD: str = ""
+    ERP_DB_DRIVER: Literal["mysql", "mssql", "postgres", "firebird"] = "mysql"
+
+    # Copilot Database (READ-WRITE)
+    COPILOT_DB_URL: str = "mysql+aiomysql://root@localhost/copilot"
+
+    # LLM Providers
+    LLM_PROVIDER: Literal["anthropic", "openai", "google", "deepseek"] = "anthropic"
+    ANTHROPIC_API_KEY: str = ""
+    OPENAI_API_KEY: str = ""
+    GOOGLE_API_KEY: str = ""
+    DEEPSEEK_API_KEY: str = ""
+
+    # LLM Settings
+    LLM_MODEL: str = "deepseek-chat"
+    LLM_MAX_TOKENS: int = 1024
+    LLM_TEMPERATURE: float = 0.3
+
+    # Cache
+    REDIS_URL: str = "redis://localhost:6379/0"
+    CACHE_TTL: int = 300  # 5 minutos
+
+    # Features
+    ENABLE_SUGGESTIONS: bool = True
+    ENABLE_ALERTS: bool = True
+    ENABLE_CROSS_SELL: bool = True
+
+    @property
+    def erp_connection_string(self) -> str:
+        """Gera string de conexão para o ERP."""
+        if self.ERP_DB_DRIVER == "mysql":
+            return f"mysql+pymysql://{self.ERP_DB_USER}:{self.ERP_DB_PASSWORD}@{self.ERP_DB_HOST}:{self.ERP_DB_PORT}/{self.ERP_DB_NAME}"
+        elif self.ERP_DB_DRIVER == "mssql":
+            return f"mssql+pyodbc://{self.ERP_DB_USER}:{self.ERP_DB_PASSWORD}@{self.ERP_DB_HOST}:{self.ERP_DB_PORT}/{self.ERP_DB_NAME}?driver=ODBC+Driver+17+for+SQL+Server"
+        elif self.ERP_DB_DRIVER == "postgres":
+            return f"postgresql+asyncpg://{self.ERP_DB_USER}:{self.ERP_DB_PASSWORD}@{self.ERP_DB_HOST}:{self.ERP_DB_PORT}/{self.ERP_DB_NAME}"
+        else:
+            raise ValueError(f"Driver não suportado: {self.ERP_DB_DRIVER}")
+
+
+settings = Settings()

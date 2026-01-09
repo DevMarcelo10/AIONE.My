@@ -1,0 +1,7 @@
+# Instalar Python como serviço
+
+nssm install AioneIA "C:\Python312\python.exe" "C:\Aione\IA\main.py"
+nssm set AIONE_IA DisplayName "AIONE - Motor de IA"
+nssm set AIONE_IA Description "Serviço de Inteligência Artificial"
+nssm set AIONE_IA Start SERVICE_AUTO_START
+nssm start AIONE_IA

@@ -1,0 +1,22 @@
+[
+  {
+    "content": "Criar tabela copilot_medicamento_info",
+    "status": "in_progress",
+    "activeForm": "Criando tabela copilot_medicamento_info"
+  },
+  {
+    "content": "Criar script de populacao com 100+ medicamentos",
+    "status": "pending",
+    "activeForm": "Criando script de populacao"
+  },
+  {
+    "content": "Criar endpoint no backend para consulta",
+    "status": "pending",
+    "activeForm": "Criando endpoint de consulta"
+  },
+  {
+    "content": "Atualizar widget para exibir informacoes",
+    "status": "pending",
+    "activeForm": "Atualizando widget"
+  }
+]

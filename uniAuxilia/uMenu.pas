@@ -18,6 +18,7 @@ type
     btIA: TAdvGlowButton;
     btConfig: TAdvGlowButton;
     btFiscal: TAdvGlowButton;
+    btEstoque: TAdvGlowButton;
     procedure btMouseEnter(Sender: TObject);
     procedure btMouseLeave(Sender: TObject);
     procedure btVendaClick(Sender: TObject);
@@ -28,6 +29,7 @@ type
     procedure btIAClick(Sender: TObject);
     procedure btConfigClick(Sender: TObject);
     procedure btFiscalClick(Sender: TObject);
+    procedure btEstoqueClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,6 +58,11 @@ end;
 procedure TFrmMenu.btComprasClick(Sender: TObject);
 begin
    FrmPrincipal.btComprasClick(Sender);
+end;
+
+procedure TFrmMenu.btEstoqueClick(Sender: TObject);
+begin
+   FrmPrincipal.btEstoqueClick(Sender);
 end;
 
 procedure TFrmMenu.btFinanceiroClick(Sender: TObject);

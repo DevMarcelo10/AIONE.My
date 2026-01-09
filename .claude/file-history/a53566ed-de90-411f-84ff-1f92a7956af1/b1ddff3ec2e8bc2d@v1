@@ -1,0 +1,38 @@
+"""Endpoints de health check."""
+
+from fastapi import APIRouter
+
+from config.settings import settings
+
+router = APIRouter()
+
+
+@router.get("/health")
+async def health_check():
+    """Verifica saúde da aplicação."""
+    return {
+        "status": "healthy",
+        "version": settings.VERSION,
+        "erp_type": settings.ERP_TYPE,
+        "llm_provider": settings.LLM_PROVIDER,
+    }
+
+
+@router.get("/health/erp")
+async def erp_health_check():
+    """Verifica conexão com ERP."""
+    try:
+        from integrations import ConnectorFactory
+
+        connector = ConnectorFactory.create(
+            settings.ERP_TYPE,
+            settings.erp_connection_string,
+        )
+
+        if connector.test_connection():
+            return {"status": "connected", "erp_type": settings.ERP_TYPE}
+        else:
+            return {"status": "disconnected", "erp_type": settings.ERP_TYPE}
+
+    except Exception as e:
+        return {"status": "error", "erp_type": settings.ERP_TYPE, "error": str(e)}

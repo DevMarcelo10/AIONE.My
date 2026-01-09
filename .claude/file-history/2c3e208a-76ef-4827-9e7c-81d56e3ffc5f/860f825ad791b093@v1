@@ -1,0 +1,211 @@
+-- ============================================================================
+-- AIONE.My - Módulo Comprador Virtual IA
+-- Script Consolidado - Todas as Tabelas, Views e Triggers
+-- Versão: 1.0.0
+-- Data: 2025-12-26
+-- ============================================================================
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ============================================================================
+-- 1. TABELA: ia_config_parametros
+-- Configurações de parâmetros para cálculo de sugestões de compra
+-- ============================================================================
+
+DROP TABLE IF EXISTS ia_config_parametros;
+
+CREATE TABLE ia_config_parametros (
+   id                     INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   tipo                   ENUM('GLOBAL', 'CATEGORIA', 'PRODUTO') NOT NULL DEFAULT 'GLOBAL',
+   referencia_id          INT UNSIGNED NULL,
+   dias_cobertura_min     TINYINT UNSIGNED NOT NULL DEFAULT 15,
+   dias_cobertura_max     TINYINT UNSIGNED NOT NULL DEFAULT 45,
+   estoque_seguranca_dias TINYINT UNSIGNED NOT NULL DEFAULT 5,
+   lead_time_padrao       TINYINT UNSIGNED NOT NULL DEFAULT 3,
+   variacao_demanda_pct   DECIMAL(5,2) NOT NULL DEFAULT 20.00,
+   considerar_curva_abc   TINYINT(1) NOT NULL DEFAULT 1,
+   ativo                  TINYINT(1) NOT NULL DEFAULT 1,
+   created_at             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   PRIMARY KEY (id),
+   UNIQUE KEY uk_tipo_referencia (tipo, referencia_id),
+   KEY idx_referencia (referencia_id),
+   KEY idx_ativo (ativo)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Configurações do Comprador Virtual IA por nível hierárquico';
+
+-- Inserir configuração GLOBAL padrão
+INSERT INTO ia_config_parametros (tipo, referencia_id, dias_cobertura_min, dias_cobertura_max,
+                                   estoque_seguranca_dias, lead_time_padrao, ativo)
+VALUES ('GLOBAL', NULL, 15, 45, 5, 3, 1);
+
+-- ============================================================================
+-- 2. TABELA: ia_lead_time_historico
+-- Histórico real de prazos de entrega por fornecedor/produto
+-- ============================================================================
+
+DROP TABLE IF EXISTS ia_lead_time_historico;
+
+CREATE TABLE ia_lead_time_historico (
+   id                     INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   fornecedor_id          INT UNSIGNED NOT NULL,
+   produto_id             INT UNSIGNED NULL,
+   filial_id              INT UNSIGNED NOT NULL,
+   pedido_id              INT UNSIGNED NULL,
+   entrada_id             INT UNSIGNED NULL,
+   data_pedido            DATE NOT NULL,
+   data_prevista          DATE NULL,
+   data_entrega           DATE NOT NULL,
+   dias_lead_time         SMALLINT UNSIGNED NOT NULL,
+   dias_variacao          SMALLINT NULL,
+   qtd_pedida             DECIMAL(15,4) NULL,
+   qtd_recebida           DECIMAL(15,4) NULL,
+   created_at             DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (id),
+   KEY idx_fornecedor (fornecedor_id, data_entrega DESC),
+   KEY idx_fornecedor_produto (fornecedor_id, produto_id, data_entrega DESC),
+   KEY idx_filial (filial_id, data_entrega DESC),
+   KEY idx_data_entrega (data_entrega),
+   KEY idx_pedido (pedido_id),
+   KEY idx_entrada (entrada_id)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Histórico de lead times reais para cálculo de previsões';
+
+-- ============================================================================
+-- 3. TABELA: ia_pedido_pendente
+-- Controle de pedidos de compra em aberto
+-- ============================================================================
+
+DROP TABLE IF EXISTS ia_pedido_pendente;
+
+CREATE TABLE ia_pedido_pendente (
+   id                      INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   pedido_compra_id        INT UNSIGNED NOT NULL,
+   pedido_item_id          INT UNSIGNED NULL,
+   fornecedor_id           INT UNSIGNED NOT NULL,
+   produto_id              INT UNSIGNED NOT NULL,
+   filial_id               INT UNSIGNED NOT NULL,
+   quantidade_pedida       DECIMAL(15,4) NOT NULL,
+   quantidade_recebida     DECIMAL(15,4) NOT NULL DEFAULT 0,
+   quantidade_pendente     DECIMAL(15,4) GENERATED ALWAYS AS (quantidade_pedida - quantidade_recebida) STORED,
+   valor_unitario          DECIMAL(15,4) NULL,
+   data_pedido             DATE NOT NULL,
+   data_prevista_entrega   DATE NULL,
+   data_ultima_atualizacao DATE NULL,
+   status                  ENUM('PENDENTE', 'EM_TRANSITO', 'PARCIAL', 'RECEBIDO', 'CANCELADO') NOT NULL DEFAULT 'PENDENTE',
+   codigo_rastreio         VARCHAR(50) NULL,
+   observacao              VARCHAR(500) NULL,
+   created_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   updated_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   PRIMARY KEY (id),
+   UNIQUE KEY uk_pedido_item (pedido_compra_id, pedido_item_id),
+   KEY idx_produto_filial_status (produto_id, filial_id, status),
+   KEY idx_fornecedor_status (fornecedor_id, status, data_prevista_entrega),
+   KEY idx_pendentes (status, data_prevista_entrega),
+   KEY idx_filial (filial_id, status),
+   KEY idx_data_pedido (data_pedido),
+   KEY idx_pedido_compra (pedido_compra_id)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Controle de pedidos pendentes para cálculo de estoque virtual';
+
+-- ============================================================================
+-- 4. VIEWS
+-- ============================================================================
+
+-- Lead time médio por fornecedor (últimos 90 dias)
+CREATE OR REPLACE VIEW vw_ia_lead_time_fornecedor AS
+SELECT
+   fornecedor_id,
+   COUNT(*) AS total_entregas,
+   ROUND(AVG(dias_lead_time), 1) AS lead_time_medio,
+   MIN(dias_lead_time) AS lead_time_min,
+   MAX(dias_lead_time) AS lead_time_max,
+   ROUND(STDDEV(dias_lead_time), 1) AS desvio_padrao,
+   ROUND(AVG(CASE WHEN dias_variacao > 0 THEN dias_variacao ELSE 0 END), 1) AS atraso_medio
+FROM ia_lead_time_historico
+WHERE data_entrega >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)
+GROUP BY fornecedor_id;
+
+-- Lead time por fornecedor+produto (últimos 180 dias)
+CREATE OR REPLACE VIEW vw_ia_lead_time_produto AS
+SELECT
+   fornecedor_id,
+   produto_id,
+   COUNT(*) AS total_entregas,
+   ROUND(AVG(dias_lead_time), 1) AS lead_time_medio,
+   MIN(dias_lead_time) AS lead_time_min,
+   MAX(dias_lead_time) AS lead_time_max
+FROM ia_lead_time_historico
+WHERE data_entrega >= DATE_SUB(CURDATE(), INTERVAL 180 DAY)
+  AND produto_id IS NOT NULL
+GROUP BY fornecedor_id, produto_id;
+
+-- Estoque pendente por produto/filial
+CREATE OR REPLACE VIEW vw_ia_estoque_pendente AS
+SELECT
+   produto_id,
+   filial_id,
+   SUM(quantidade_pendente) AS qtd_pendente_total,
+   MIN(data_prevista_entrega) AS proxima_entrega,
+   COUNT(*) AS pedidos_abertos
+FROM ia_pedido_pendente
+WHERE status IN ('PENDENTE', 'EM_TRANSITO', 'PARCIAL')
+GROUP BY produto_id, filial_id;
+
+-- Pedidos atrasados
+CREATE OR REPLACE VIEW vw_ia_pedidos_atrasados AS
+SELECT
+   pp.*,
+   DATEDIFF(CURDATE(), data_prevista_entrega) AS dias_atraso
+FROM ia_pedido_pendente pp
+WHERE status IN ('PENDENTE', 'EM_TRANSITO')
+  AND data_prevista_entrega < CURDATE();
+
+-- ============================================================================
+-- 5. TRIGGER
+-- ============================================================================
+
+DROP TRIGGER IF EXISTS trg_ia_pedido_recebido;
+
+DELIMITER //
+
+CREATE TRIGGER trg_ia_pedido_recebido
+AFTER UPDATE ON ia_pedido_pendente
+FOR EACH ROW
+BEGIN
+   IF NEW.status = 'RECEBIDO' AND OLD.status != 'RECEBIDO' THEN
+      INSERT INTO ia_lead_time_historico (
+         fornecedor_id, produto_id, filial_id, pedido_id,
+         data_pedido, data_prevista, data_entrega,
+         dias_lead_time, dias_variacao, qtd_pedida, qtd_recebida
+      ) VALUES (
+         NEW.fornecedor_id,
+         NEW.produto_id,
+         NEW.filial_id,
+         NEW.pedido_compra_id,
+         NEW.data_pedido,
+         NEW.data_prevista_entrega,
+         CURDATE(),
+         DATEDIFF(CURDATE(), NEW.data_pedido),
+         CASE WHEN NEW.data_prevista_entrega IS NOT NULL
+              THEN DATEDIFF(CURDATE(), NEW.data_prevista_entrega)
+              ELSE NULL END,
+         NEW.quantidade_pedida,
+         NEW.quantidade_recebida
+      );
+   END IF;
+END//
+
+DELIMITER ;
+
+-- ============================================================================
+SET FOREIGN_KEY_CHECKS = 1;
+-- FIM DO SCRIPT
+-- ============================================================================

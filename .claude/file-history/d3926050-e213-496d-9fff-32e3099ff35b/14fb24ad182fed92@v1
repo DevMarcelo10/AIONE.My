@@ -1,0 +1,32 @@
+-- ============================================================
+-- Tabela de Logs do Sistema AIONE.My
+-- ============================================================
+-- Execute este script no MySQL para criar a tabela de logs
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS `arqlogs` (
+  `idlog` INT NOT NULL AUTO_INCREMENT,
+  `datalog` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario` VARCHAR(100) DEFAULT NULL,
+  `idfilial` INT DEFAULT NULL,
+  `modulo` VARCHAR(100) DEFAULT NULL COMMENT 'Origem do log (ex: uniVendas, uniCompra, etc)',
+  `tipolog` ENUM('INFO', 'WARNING', 'ERROR', 'DEBUG', 'CRITICAL') NOT NULL DEFAULT 'INFO',
+  `acao` VARCHAR(255) DEFAULT NULL COMMENT 'Ação executada',
+  `mensagem` TEXT DEFAULT NULL COMMENT 'Descrição detalhada do log',
+  `dados_adicionais` LONGTEXT DEFAULT NULL COMMENT 'Dados extras em formato JSON',
+  `ip_origem` VARCHAR(45) DEFAULT NULL COMMENT 'IP da máquina cliente',
+  `maquina` VARCHAR(100) DEFAULT NULL COMMENT 'Nome da máquina',
+  `stacktrace` TEXT DEFAULT NULL COMMENT 'Stack trace em caso de erro',
+  PRIMARY KEY (`idlog`),
+  INDEX `idx_datalog` (`datalog`),
+  INDEX `idx_usuario` (`usuario`),
+  INDEX `idx_tipolog` (`tipolog`),
+  INDEX `idx_modulo` (`modulo`),
+  INDEX `idx_filial` (`idfilial`),
+  INDEX `idx_data_tipo` (`datalog`, `tipolog`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT='Registro de logs e auditoria do sistema AIONE.My';
+
+-- ============================================================
+-- Fim do script
+-- ============================================================

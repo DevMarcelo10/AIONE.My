@@ -1,0 +1,128 @@
+"""
+Factory para criação de conectores de ERP.
+Carrega o conector correto baseado no tipo configurado.
+"""
+
+import json
+from pathlib import Path
+from typing import Optional, Type
+
+from .base_connector import BaseERPConnector
+
+
+class ConnectorFactory:
+    """Factory para instanciar conectores de ERP."""
+
+    _connectors: dict[str, Type[BaseERPConnector]] = {}
+
+    @classmethod
+    def register(cls, erp_type: str, connector_class: Type[BaseERPConnector]) -> None:
+        """
+        Registra um conector para um tipo de ERP.
+
+        Args:
+            erp_type: Identificador do ERP (aione, linx, etc)
+            connector_class: Classe do conector
+        """
+        cls._connectors[erp_type.lower()] = connector_class
+
+    @classmethod
+    def create(
+        cls,
+        erp_type: str,
+        connection_string: str,
+        mapping: Optional[dict] = None,
+    ) -> BaseERPConnector:
+        """
+        Cria instância do conector apropriado.
+
+        Args:
+            erp_type: Tipo do ERP
+            connection_string: String de conexão
+            mapping: Mapeamento de campos (carrega do arquivo se não fornecido)
+
+        Returns:
+            Instância do conector
+
+        Raises:
+            ValueError: Se o tipo de ERP não for suportado
+        """
+        erp_type = erp_type.lower()
+
+        if erp_type not in cls._connectors:
+            raise ValueError(
+                f"ERP '{erp_type}' não suportado. "
+                f"Disponíveis: {list(cls._connectors.keys())}"
+            )
+
+        # Carrega mapping do arquivo se não fornecido
+        if mapping is None:
+            mapping = cls._load_mapping(erp_type)
+
+        connector_class = cls._connectors[erp_type]
+        return connector_class(connection_string, mapping)
+
+    @classmethod
+    def _load_mapping(cls, erp_type: str) -> dict:
+        """
+        Carrega arquivo de mapping JSON.
+
+        Args:
+            erp_type: Tipo do ERP
+
+        Returns:
+            Dicionário com mapeamentos
+        """
+        mapping_path = (
+            Path(__file__).parent / "mappings" / f"{erp_type}_mapping.json"
+        )
+
+        if not mapping_path.exists():
+            raise FileNotFoundError(
+                f"Mapping não encontrado: {mapping_path}. "
+                f"Crie com: /copilot backend mapping {erp_type}"
+            )
+
+        with open(mapping_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    @classmethod
+    def list_available(cls) -> list[str]:
+        """
+        Lista ERPs com conectores registrados.
+
+        Returns:
+            Lista de tipos de ERP disponíveis
+        """
+        return list(cls._connectors.keys())
+
+
+# Auto-registro de conectores disponíveis
+def _auto_register_connectors():
+    """Registra automaticamente conectores implementados."""
+    try:
+        from .connectors.aione import AIONEConnector
+        ConnectorFactory.register("aione", AIONEConnector)
+    except ImportError:
+        pass
+
+    try:
+        from .connectors.linx import LinxConnector
+        ConnectorFactory.register("linx", LinxConnector)
+    except ImportError:
+        pass
+
+    try:
+        from .connectors.trier import TrierConnector
+        ConnectorFactory.register("trier", TrierConnector)
+    except ImportError:
+        pass
+
+    try:
+        from .connectors.generic_mysql import GenericMySQLConnector
+        ConnectorFactory.register("generic", GenericMySQLConnector)
+    except ImportError:
+        pass
+
+
+_auto_register_connectors()

@@ -1,0 +1,555 @@
+-- ============================================
+-- INSERT MEDICAMENTOS - PharmaCopilot
+-- Gerado em: 2026-01-06
+-- ============================================
+
+-- Usar INSERT IGNORE para evitar duplicatas por principio_ativo
+-- A tabela já possui índice único em principio_ativo
+
+-- ============================================
+-- ANALGÉSICOS E ANTITÉRMICOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DIPIRONA', 'Novalgina', '500mg-1g ate 4x/dia', 'Pode tomar com ou sem alimento', 'qualquer', 'Temperatura ambiente', 'Queda de pressao em aplicacao rapida, reacoes alergicas raras', NULL, 'Potencializa anticoagulantes', 0, 'livre', 'Reduzir dose em idosos', 'Seguro nas doses recomendadas', 'Evitar no 1o e 3o trimestre', 'Compativel', 'Usar com cautela', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('PARACETAMOL', 'Tylenol', '500-750mg ate 4x/dia (max 4g/dia)', 'Pode tomar com ou sem alimento', 'qualquer', 'Temperatura ambiente', 'Raro em doses corretas. Hepatotoxicidade em overdose', 'Alcool aumenta risco hepatico', 'Varfarina: monitorar INR', 0, 'livre', 'Reduzir dose se <50kg', 'Seguro. Dose por peso', 'Seguro', 'Compativel', 'Seguro', 'Reduzir dose. Max 2g/dia', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('IBUPROFENO', 'Advil', '200-600mg 3-4x/dia', 'Tomar com alimento para proteger estomago', 'com_alimento', 'Temperatura ambiente', 'Dor estomago, nausea, tontura, retencao liquido', 'Tomar com alimento', 'AINEs + anticoagulantes: sangramento', 0, 'livre', 'Evitar uso prolongado, risco renal e cardiovascular', 'Dose por peso, evitar <6 meses', 'Evitar no 3o trimestre', 'Compativel em doses baixas', 'Evitar se ClCr <30', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('NAPROXENO', 'Flanax', '250-500mg 2x/dia', 'Tomar com alimento', 'com_alimento', 'Temperatura ambiente', 'Gastrite, nausea, tontura', 'Tomar com alimento', 'Anticoagulantes, AAS', 0, 'livre', 'Evitar uso prolongado', 'Nao recomendado <2 anos', 'Evitar no 3o trimestre', 'Evitar', 'Evitar', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('NIMESULIDA', 'Nisulid', '100mg 2x/dia por ate 5 dias', 'Tomar apos refeicoes', 'com_alimento', 'Temperatura ambiente', 'Dor estomago, tontura, alteracao enzimas hepaticas', 'Tomar apos refeicoes', 'Anticoagulantes, diureticos', 1, 'simples', 'Evitar', 'Contraindicado <12 anos', 'Contraindicado', 'Contraindicado', 'Evitar', 'Contraindicado', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTI-INFLAMATÓRIOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DICLOFENACO', 'Voltaren', '50mg 2-3x/dia', 'Tomar com alimento', 'com_alimento', 'Temperatura ambiente', 'Gastrite, dor abdominal, tontura, edema', 'Sempre com alimento', 'Anticoagulantes, litio, metotrexato', 1, 'simples', 'Alto risco cardiovascular, evitar', 'Nao recomendado', 'Contraindicado 3o trimestre', 'Evitar', 'Contraindicado se grave', 'Reduzir dose', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('MELOXICAM', 'Movatec', '7,5-15mg 1x/dia', 'Pode tomar com ou sem alimento', 'qualquer', 'Temperatura ambiente', 'Nausea, diarreia, tontura', NULL, 'Anticoagulantes, AAS', 1, 'simples', 'Iniciar com 7,5mg', 'Nao estabelecido', 'Contraindicado 3o trimestre', 'Evitar', 'Evitar se grave', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CETOPROFENO', 'Profenid', '50-100mg 2-3x/dia', 'Tomar com alimento', 'com_alimento', 'Temperatura ambiente', 'Dispepsia, nausea', 'Com alimento', 'Anticoagulantes', 1, 'simples', 'Reduzir dose', 'Nao recomendado <15 anos', 'Contraindicado 3o trimestre', 'Evitar', 'Contraindicado se grave', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('PIROXICAM', 'Feldene', '20mg 1x/dia', 'Tomar com alimento', 'com_alimento', 'Temperatura ambiente', 'Gastrite, tontura, edema', 'Com alimento', 'Anticoagulantes, litio', 1, 'simples', 'Evitar se possivel', 'Nao recomendado', 'Contraindicado', 'Evitar', 'Evitar', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIBIÓTICOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('AMOXICILINA', 'Amoxil', '500mg 8/8h ou 875mg 12/12h por 7-10 dias', 'COMPLETAR TODO O TRATAMENTO mesmo se melhorar', 'qualquer', 'Temperatura ambiente, suspensao: geladeira', 'Diarreia, nausea, reacoes alergicas', 'Pode tomar com ou sem alimento', 'Alopurinol: aumenta rash', 1, 'antimicrobiano', 'Ajustar se funcao renal reduzida', 'Dose por peso', 'Seguro', 'Compativel', 'Ajustar dose ClCr <30', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('AZITROMICINA', 'Zitromax', '500mg 1x/dia por 3-5 dias', 'Tomar 1h ANTES ou 2h APOS refeicao', 'jejum', 'Temperatura ambiente', 'Nausea, diarreia, dor abdominal', 'Tomar longe das refeicoes', 'Antiacidos: separar 2h', 1, 'antimicrobiano', 'Cuidado se arritmia', 'Dose por peso', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CEFALEXINA', 'Keflex', '500mg 6/6h por 7-10 dias', 'COMPLETAR TODO O TRATAMENTO', 'qualquer', 'Temperatura ambiente, suspensao: geladeira', 'Diarreia, nausea', 'Pode tomar com ou sem alimento', 'Probenecida aumenta niveis', 1, 'antimicrobiano', 'Ajustar se ClCr reduzido', 'Dose por peso', 'Seguro', 'Compativel', 'Ajustar dose', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CIPROFLOXACINO', 'Cipro', '500mg 12/12h por 7-14 dias', 'NAO tomar com leite, antiacidos ou ferro. Separar 2h', 'qualquer', 'Temperatura ambiente', 'Nausea, diarreia, tontura, fotossensibilidade', 'Evitar laticinios e antiacidos 2h antes/depois', 'Teofilina, varfarina, antiacidos', 1, 'antimicrobiano', 'RISCO DE RUPTURA DE TENDAO - evitar se possivel', 'Nao recomendado <18 anos', 'Contraindicado', 'Evitar', 'Ajustar dose', NULL, 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('LEVOFLOXACINO', 'Levaquin', '500-750mg 1x/dia', 'Separar 2h de antiacidos e ferro', 'qualquer', 'Temperatura ambiente', 'Nausea, diarreia, tontura', 'Evitar antiacidos junto', 'Antiacidos, teofilina', 1, 'antimicrobiano', 'RISCO DE TENDAO - cuidado', 'Nao recomendado <18 anos', 'Contraindicado', 'Evitar', 'Ajustar dose', NULL, 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('NORFLOXACINO', 'Floxacin', '400mg 12/12h por 7-10 dias', 'Tomar com agua. Beber bastante liquido', 'jejum', 'Temperatura ambiente', 'Nausea, tontura', 'Tomar longe das refeicoes', 'Antiacidos, ferro, teofilina', 1, 'antimicrobiano', 'Cuidado tendoes', 'Nao recomendado <18 anos', 'Contraindicado', 'Contraindicado', 'Ajustar dose', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('METRONIDAZOL', 'Flagyl', '250-500mg 8/8h por 7-10 dias', 'PROIBIDO ALCOOL durante tratamento e ate 48h apos. Causa vomitos intensos!', 'com_alimento', 'Temperatura ambiente proteger luz', 'Nausea, gosto metalico, urina escura', 'ALCOOL PROIBIDO - efeito dissulfiram', 'Alcool, varfarina, litio', 1, 'antimicrobiano', 'Usar com cautela', 'Dose por peso', 'Evitar 1o trimestre', 'Evitar', 'Reduzir dose se grave', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('SULFAMETOXAZOL + TRIMETOPRIMA', 'Bactrim', '800/160mg 12/12h por 7-14 dias', 'Beber MUITA agua durante tratamento', 'com_alimento', 'Temperatura ambiente', 'Nausea, rash, fotossensibilidade', 'Beber muita agua', 'Varfarina, metotrexato, fenitoina', 1, 'antimicrobiano', 'Evitar se possivel', 'Dose por peso, evitar <2 meses', 'Contraindicado perto do parto', 'Evitar', 'Contraindicado se grave', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CLARITROMICINA', 'Klaricid', '500mg 12/12h por 7-14 dias', 'Pode tomar com ou sem alimento', 'qualquer', 'Temperatura ambiente', 'Nausea, diarreia, alteracao paladar', NULL, 'Estatinas, carbamazepina, varfarina', 1, 'antimicrobiano', 'Ajustar se renal/hepatico', 'Dose por peso', 'Usar se necessario', 'Compativel', 'Ajustar dose', 'Ajustar dose', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DOXICICLINA', 'Vibramicina', '100mg 12/12h', 'NAO tomar deitado. Evitar sol. Tomar com agua', 'com_alimento', 'Temperatura ambiente', 'Fotossensibilidade, esofagite, nausea', 'Evitar laticinios e antiacidos', 'Antiacidos, ferro, anticoagulantes', 1, 'antimicrobiano', 'Usar com cautela', 'Contraindicado <8 anos (dentes)', 'Contraindicado', 'Contraindicado', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIFÚNGICOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('FLUCONAZOL', 'Zoltec', '150mg dose unica (candidiase vaginal) ou 50-100mg/dia', 'Pode tomar com ou sem alimento', 'qualquer', 'Temperatura ambiente', 'Nausea, dor de cabeca, dor abdominal', NULL, 'Varfarina, fenitoina, estatinas', 1, 'simples', 'Ajustar dose se renal', 'Dose por peso', 'Evitar se possivel', 'Compativel dose unica', 'Ajustar dose', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ITRACONAZOL', 'Sporanox', '100-200mg 1x/dia', 'Tomar COM REFEICAO GORDUROSA para absorver', 'com_alimento', 'Temperatura ambiente', 'Nausea, dor abdominal, alteracao enzimas', 'Necessita gordura para absorver', 'Muitas interacoes - verificar', 1, 'simples', 'Usar com cautela', 'Nao estabelecido', 'Contraindicado', 'Contraindicado', 'Sem ajuste', 'Contraindicado se grave', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('TERBINAFINA', 'Lamisil', '250mg 1x/dia por 6-12 semanas (unha)', 'Pode tomar com ou sem alimento', 'qualquer', 'Temperatura ambiente', 'Dor de cabeca, diarreia, rash, alteracao paladar', NULL, 'Cafeina, ciclosporina', 1, 'simples', 'Usar com cautela', 'Nao recomendado <12 anos', 'Nao recomendado', 'Nao recomendado', 'Nao recomendado ClCr <50', 'Nao recomendado', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTI-HIPERTENSIVOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('LOSARTANA', 'Cozaar', '50-100mg 1x/dia', 'Nao usar com sal light (rico em potassio)', 'qualquer', 'Temperatura ambiente', 'Tontura (inicio), hiperpotassemia, tosse (raro)', 'Evitar excesso de potassio', 'IECA, suplementos de potassio, AINEs', 0, 'simples', 'Iniciar dose baixa', 'Nao estabelecido <6 anos', 'Contraindicado', 'Nao recomendado', 'Ajustar dose', 'Sem ajuste inicial', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ENALAPRIL', 'Renitec', '5-20mg 1-2x/dia', 'Tosse seca e comum - pode indicar troca para losartana', 'qualquer', 'Temperatura ambiente', 'Tosse seca (10-15%), tontura, hiperpotassemia', NULL, 'Potassio, AINEs, litio', 0, 'simples', 'Iniciar dose baixa', 'Dose por peso', 'Contraindicado', 'Nao recomendado', 'Ajustar dose', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CAPTOPRIL', 'Capoten', '25-50mg 2-3x/dia', 'Tomar 1h ANTES das refeicoes - alimento reduz absorcao 40%', 'jejum', 'Temperatura ambiente', 'Tosse seca, tontura, alteracao paladar', 'Alimentos reduzem absorcao', 'Potassio, AINEs, litio', 0, 'simples', 'Iniciar dose baixa', 'Dose por peso', 'Contraindicado', 'Compativel', 'Ajustar dose', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ANLODIPINO', 'Norvasc', '5-10mg 1x/dia', 'Pode tomar em qualquer horario', 'qualquer', 'Temperatura ambiente', 'Edema tornozelos, rubor facial, palpitacao', NULL, 'Sinvastatina: limitar dose', 0, 'simples', 'Iniciar com 2,5mg', 'Dose por peso', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Iniciar dose baixa', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('HIDROCLOROTIAZIDA', 'Clorana', '25-50mg 1x/dia pela manha', 'Tomar de MANHA para evitar urinar a noite', 'manha', 'Temperatura ambiente', 'Perda potassio, caimbras, aumento acido urico', NULL, 'Litio, digoxina', 0, 'simples', 'Pode precipitar gota', 'Dose por peso', 'Evitar 1o trimestre', 'Compativel', 'Ineficaz se ClCr <30', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ATENOLOL', 'Atenol', '25-100mg 1x/dia', 'NAO suspender abruptamente', 'qualquer', 'Temperatura ambiente', 'Cansaco, bradicardia, extremidades frias', NULL, 'Verapamil, diltiazem', 0, 'simples', 'Iniciar dose baixa', 'Dose por peso', 'Evitar se possivel', 'Compativel', 'Ajustar dose', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('PROPRANOLOL', 'Inderal', '40-80mg 2-3x/dia', 'NAO suspender abruptamente', 'qualquer', 'Temperatura ambiente', 'Cansaco, bradicardia, maos frias, broncoespasmo', NULL, 'Verapamil, antidiabeticos', 0, 'simples', 'Iniciar dose baixa', 'Dose por peso', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CARVEDILOL', 'Coreg', '6,25-25mg 2x/dia', 'Tomar COM alimento. Aumentar dose gradualmente', 'com_alimento', 'Temperatura ambiente', 'Tontura, cansaco, bradicardia', 'Tomar com alimento', 'Digoxina, antidiabeticos', 0, 'simples', 'Iniciar 3,125mg 2x/dia', 'Nao estabelecido', 'Usar se necessario', 'Nao recomendado', 'Sem ajuste', 'Contraindicado se grave', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- DIABETES
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('METFORMINA', 'Glifage', '500-850mg 2-3x/dia (max 2550mg)', 'Tomar JUNTO com refeicao para reduzir nausea', 'com_alimento', 'Temperatura ambiente', 'Nausea, diarreia (melhora com tempo), gosto metalico', 'Tomar com alimento reduz efeitos GI', 'Contrastes iodados: suspender', 0, 'simples', 'Avaliar funcao renal anualmente', 'Nao indicado <10 anos', 'Nao recomendado', 'Nao recomendado', 'Contraindicado ClCr <30', 'Nao recomendado se grave', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('GLIBENCLAMIDA', 'Daonil', '2,5-20mg 1-2x/dia', 'Tomar junto com cafe da manha. Comer regularmente', 'com_alimento', 'Temperatura ambiente', 'HIPOGLICEMIA, ganho peso', 'Nao pular refeicoes', 'Alcool, betabloqueadores', 0, 'simples', 'Alto risco hipoglicemia - evitar', 'Nao indicado', 'Contraindicado', 'Contraindicado', 'Evitar', 'Evitar', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('GLICLAZIDA', 'Diamicron', '30-120mg 1x/dia', 'Tomar junto com cafe da manha', 'com_alimento', 'Temperatura ambiente', 'Hipoglicemia (menos que glibenclamida)', 'Com cafe da manha', 'Alcool, AINEs', 0, 'simples', 'Mais seguro que glibenclamida', 'Nao indicado', 'Contraindicado', 'Contraindicado', 'Iniciar dose baixa', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- COLESTEROL
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('SINVASTATINA', 'Zocor', '20-40mg 1x/dia a NOITE', 'Tomar a NOITE - colesterol e produzido durante sono', 'noite', 'Temperatura ambiente', 'Dor muscular, aumento CPK, raro: rabdomiolise', 'EVITAR SUCO DE TORANJA/GRAPEFRUIT', 'Fibratos, amiodarona, anlodipino', 0, 'simples', 'Risco muscular maior', 'Nao indicado <10 anos', 'Contraindicado', 'Contraindicado', 'Iniciar dose baixa', 'Contraindicado se grave', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ATORVASTATINA', 'Lipitor', '10-80mg 1x/dia', 'Pode tomar qualquer horario', 'qualquer', 'Temperatura ambiente', 'Dor muscular, alteracao enzimas hepaticas', NULL, 'Fibratos, claritromicina', 0, 'simples', 'Monitorar dor muscular', 'Nao indicado <10 anos', 'Contraindicado', 'Contraindicado', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ROSUVASTATINA', 'Crestor', '5-20mg 1x/dia', 'Pode tomar qualquer horario', 'qualquer', 'Temperatura ambiente', 'Dor muscular, dor de cabeca', NULL, 'Fibratos, ciclosporina', 0, 'simples', 'Asiaticos: iniciar 5mg', 'Nao indicado <10 anos', 'Contraindicado', 'Contraindicado', 'Max 10mg se grave', 'Contraindicado se grave', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- GASTROPROTETORES
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('OMEPRAZOL', 'Losec', '20-40mg 1x/dia', 'Tomar em JEJUM 30min ANTES do cafe da manha', 'jejum', 'Temperatura ambiente', 'Dor de cabeca, nausea. Longo prazo: deficiencia B12, magnesio', NULL, 'Clopidogrel, metotrexato', 0, 'livre', 'Risco fratura se uso prolongado', 'Dose por peso', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Usar com cautela se grave', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('PANTOPRAZOL', 'Pantozol', '20-40mg 1x/dia', 'Tomar em JEJUM 30min antes de comer', 'jejum', 'Temperatura ambiente', 'Dor de cabeca, diarreia', NULL, 'Metotrexato', 0, 'livre', 'Mesmo do omeprazol', 'Nao indicado <5 anos', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ESOMEPRAZOL', 'Nexium', '20-40mg 1x/dia', 'Tomar em jejum', 'jejum', 'Temperatura ambiente', 'Dor de cabeca, nausea', NULL, 'Clopidogrel', 0, 'livre', 'Mesmo de outros IBPs', 'Dose por peso >1 ano', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIALÉRGICOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('LORATADINA', 'Claritin', '10mg 1x/dia', 'Nao causa sono significativo', 'qualquer', 'Temperatura ambiente', 'Raramente sonolencia, boca seca', NULL, 'Cetoconazol aumenta niveis', 0, 'livre', 'Sem ajuste', 'Dose por peso >2 anos', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DESLORATADINA', 'Desalex', '5mg 1x/dia', 'Nao causa sono', 'qualquer', 'Temperatura ambiente', 'Minimos efeitos', NULL, NULL, 0, 'livre', 'Sem ajuste', '>6 meses: xarope', 'Usar se necessario', 'Compativel', 'Usar com cautela', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('FEXOFENADINA', 'Allegra', '120-180mg 1x/dia', 'Nao causa sono', 'qualquer', 'Temperatura ambiente', 'Dor de cabeca, nausea', 'Evitar com suco de frutas (reduz absorcao)', NULL, 0, 'livre', 'Sem ajuste', '>6 anos', 'Usar se necessario', 'Nao recomendado', 'Sem ajuste se leve', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DEXCLORFENIRAMINA', 'Polaramine', '2mg 3-4x/dia', 'CAUSA MUITO SONO - nao dirigir', 'qualquer', 'Temperatura ambiente', 'Sonolencia intensa, boca seca', 'Alcool potencializa sono', 'Alcool, outros sedativos', 0, 'livre', 'Evitar - alto risco sedacao', '>2 anos, dose por peso', 'Usar se necessario', 'Compativel', 'Usar com cautela', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('PROMETAZINA', 'Fenergan', '25mg 1-3x/dia', 'MUITO SEDATIVO - tomar a noite se possivel', 'noite', 'Temperatura ambiente proteger luz', 'Sonolencia intensa, boca seca, constipacao', 'Alcool potencializa', 'Alcool, opioides, outros sedativos', 1, 'simples', 'Evitar se possivel', 'Evitar <2 anos', 'Usar se necessario', 'Usar com cautela', 'Usar com cautela', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIDEPRESSIVOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('FLUOXETINA', 'Prozac', '20-60mg 1x/dia pela manha', 'Tomar de MANHA - pode causar insonia', 'manha', 'Temperatura ambiente', 'Nausea (inicio), insonia, disfuncao sexual, ansiedade inicial', NULL, 'IMAO (contraindicado), tramadol', 1, 'simples', 'Iniciar 10mg', 'Nao indicado <8 anos', 'Avaliar risco/beneficio', 'Evitar', 'Sem ajuste', 'Reduzir dose', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('SERTRALINA', 'Zoloft', '50-200mg 1x/dia', 'Pode tomar de manha ou a noite', 'qualquer', 'Temperatura ambiente', 'Nausea, diarreia, tontura, disfuncao sexual', NULL, 'IMAO, tramadol, varfarina', 1, 'simples', 'Iniciar 25-50mg', '>6 anos TOC', 'Avaliar risco/beneficio', 'Compativel', 'Sem ajuste', 'Reduzir dose', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ESCITALOPRAM', 'Lexapro', '10-20mg 1x/dia', 'Pode causar sono ou insonia - ajustar horario', 'qualquer', 'Temperatura ambiente', 'Nausea, insonia ou sonolencia, disfuncao sexual', NULL, 'IMAO, tramadol', 1, 'simples', 'Iniciar 5mg', '>12 anos', 'Avaliar risco/beneficio', 'Evitar', 'Sem ajuste', 'Max 10mg', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('AMITRIPTILINA', 'Tryptanol', '25-150mg a noite', 'Tomar a NOITE - causa muito sono', 'noite', 'Temperatura ambiente', 'Sonolencia, boca seca, constipacao, ganho peso, retencao urinaria', NULL, 'IMAO, alcool', 1, 'simples', 'Alto risco efeitos - evitar se possivel', 'Nao recomendado <12 anos', 'Evitar', 'Evitar', 'Usar com cautela', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANSIOLÍTICOS (Controle Especial)
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CLONAZEPAM', 'Rivotril', '0,5-2mg 1-3x/dia', 'Risco de DEPENDENCIA - usar menor tempo possivel', 'qualquer', 'Temperatura ambiente', 'Sonolencia, dependencia, amnesia, ataxia', 'Alcool PROIBIDO', 'Alcool, opioides, outros depressores', 1, 'controlado', 'ALTO RISCO - evitar se possivel', 'Nao recomendado', 'Evitar, risco fenda palatina', 'Evitar', 'Reduzir dose', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ALPRAZOLAM', 'Frontal', '0,25-2mg 2-3x/dia', 'DEPENDENCIA - usar pelo menor tempo', 'qualquer', 'Temperatura ambiente', 'Sonolencia, dependencia, amnesia', 'Alcool proibido', 'Alcool, opioides, cetoconazol', 1, 'controlado', 'Maior risco queda - evitar', 'Nao recomendado', 'Contraindicado', 'Evitar', 'Reduzir dose', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('BROMAZEPAM', 'Lexotan', '1,5-6mg 2-3x/dia', 'Risco de dependencia', 'qualquer', 'Temperatura ambiente', 'Sonolencia, dependencia', 'Alcool proibido', 'Alcool, outros depressores', 1, 'controlado', 'Evitar se possivel', 'Nao recomendado', 'Evitar', 'Evitar', 'Reduzir dose', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DIAZEPAM', 'Valium', '5-10mg 1-3x/dia', 'MEIA-VIDA LONGA - acumula em idosos', 'qualquer', 'Temperatura ambiente', 'Sonolencia intensa, dependencia, ataxia', 'Alcool proibido', 'Alcool, opioides', 1, 'controlado', 'EVITAR - meia-vida 100h em idosos', 'Nao recomendado', 'Evitar', 'Evitar', 'Reduzir dose', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- HIPNÓTICOS (Controle Especial)
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ZOLPIDEM', 'Stilnox', '5-10mg imediatamente antes de deitar', 'Tomar IMEDIATAMENTE antes de deitar - age rapido', 'noite', 'Temperatura ambiente', 'Sonambulismo, amnesia, comportamento anormal', 'Alcool potencializa', 'Alcool, outros sedativos', 1, 'controlado', 'MAXIMO 5mg - alto risco', 'Nao indicado', 'Evitar', 'Evitar', 'Reduzir dose', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- OPIOIDES (Controle Especial)
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('TRAMADOL', 'Tramal', '50-100mg ate 4x/dia (max 400mg)', 'Risco de dependencia e sindrome serotoninergica', 'qualquer', 'Temperatura ambiente', 'Nausea, tontura, constipacao, sonolencia', NULL, 'ISRS, IMAO (contraindicado)', 1, 'controlado', 'Reduzir dose - iniciar 25mg', 'Nao recomendado', 'Evitar especialmente perto do parto', 'Evitar', 'Reduzir dose', 'Reduzir dose', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CODEINA', 'Codein', '30-60mg ate 4x/dia (max 240mg)', 'Causa constipacao - pode precisar de laxante', 'qualquer', 'Temperatura ambiente', 'Constipacao, nausea, sonolencia, dependencia', NULL, 'Alcool, outros sedativos', 1, 'controlado', 'Reduzir dose', 'Contraindicado <12 anos', 'Evitar perto do parto', 'Evitar', 'Reduzir dose', 'Usar com cautela', 'anvisa')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- CORTICOIDES
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('PREDNISONA', 'Meticorten', '5-60mg/dia conforme indicacao', 'Tomar de MANHA para imitar ciclo natural. NUNCA suspender abruptamente', 'manha', 'Temperatura ambiente', 'Aumento apetite, insonia, retencao liquido, hiperglicemia', NULL, 'AINEs, anticoagulantes', 1, 'simples', 'Maior risco efeitos adversos', 'Dose por peso', 'Avaliar risco/beneficio', 'Compativel dose baixa', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DEXAMETASONA', 'Decadron', '0,5-9mg/dia conforme indicacao', 'NUNCA suspender abruptamente se uso >7 dias', 'manha', 'Temperatura ambiente', 'Mesmos da prednisona, mais potente', NULL, 'AINEs, anticoagulantes', 1, 'simples', 'Cuidado com efeitos', 'Dose por peso', 'Avaliar risco/beneficio', 'Compativel dose baixa', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- RELAXANTES MUSCULARES
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CICLOBENZAPRINA', 'Miosan', '5-10mg 3x/dia por ate 2-3 semanas', 'Causa sonolencia - cuidado ao dirigir', 'qualquer', 'Temperatura ambiente', 'Sonolencia, boca seca, tontura', 'Alcool potencializa', 'IMAO, alcool, outros sedativos', 1, 'simples', 'Nao recomendado', 'Nao recomendado <15 anos', 'Evitar', 'Evitar', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CARISOPRODOL', 'Tandrilax', '350mg 3-4x/dia por ate 2-3 semanas', 'Causa sonolencia', 'qualquer', 'Temperatura ambiente', 'Sonolencia, tontura', 'Alcool potencializa', 'Alcool, outros sedativos', 1, 'simples', 'Evitar', 'Nao estabelecido', 'Evitar', 'Evitar', 'Usar com cautela', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- VITAMINAS E SUPLEMENTOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('VITAMINA D3 (COLECALCIFEROL)', 'Depura', '1000-2000UI/dia ou conforme prescricao', 'Tomar COM refeicao gordurosa para absorver melhor', 'com_alimento', 'Temperatura ambiente', 'Raro em doses normais. Excesso: hipercalcemia', 'Necessita gordura para absorver', NULL, 0, 'livre', 'Monitorar niveis em doses altas', 'Dose por peso', 'Seguro nas doses recomendadas', 'Compativel', 'Cuidado em doenca granulomatosa', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('VITAMINA B12 (CIANOCOBALAMINA)', 'Citoneurin', '500-1000mcg/dia', 'Sublingual tem melhor absorcao se problema gastrico', 'qualquer', 'Temperatura ambiente', 'Muito seguro', NULL, NULL, 0, 'livre', 'Comum deficiencia', 'Seguro', 'Seguro', 'Seguro', 'Seguro', 'Seguro', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ACIDO FOLICO', 'Enfol', '5mg/dia', 'ESSENCIAL antes e durante gravidez para prevenir defeitos tubo neural', 'qualquer', 'Temperatura ambiente', 'Muito seguro', NULL, 'Metotrexato (intencional), fenitoina', 0, 'livre', 'Pode mascarar deficiencia B12', 'Seguro', 'ESSENCIAL - previne defeitos', 'Seguro', 'Seguro', 'Seguro', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('SULFATO FERROSO', 'Combiron', '40-80mg ferro elementar/dia', 'Tomar em JEJUM com suco de laranja. Pode escurecer fezes', 'jejum', 'Temperatura ambiente', 'Constipacao, nausea, fezes escuras', 'Cafe, cha, leite REDUZEM absorcao. Vitamina C AUMENTA', 'Antiacidos, levotiroxina, quinolonas', 0, 'livre', 'Constipacao comum', 'Dose por peso', 'Comum necessidade', 'Compativel', 'Cuidado em IRC', 'Contraindicado em hemocromatose', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CARBONATO DE CALCIO', 'Calcium', '500-600mg 2x/dia', 'Tomar COM REFEICOES. Separar 2h de outros medicamentos', 'com_alimento', 'Temperatura ambiente', 'Constipacao, gases', 'Necessita acidez para absorver - tomar com alimento', 'Levotiroxina, quinolonas, bisfosfonatos', 0, 'livre', 'Preferir citrato se usar IBP', 'Dose por peso', 'Importante na gravidez', 'Compativel', 'Cuidado - pode acumular', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- BRONCODILATADORES E ANTIASMÁTICOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('SALBUTAMOL SPRAY', 'Aerolin', '2 jatos quando necessario (max 8 jatos/dia)', 'Agitar antes. USAR ESPACADOR melhora eficacia', 'qualquer', 'Temperatura ambiente', 'Tremor, taquicardia, nervosismo', NULL, 'Betabloqueadores antagonizam', 0, 'livre', 'Pode piorar arritmias', 'Dose por peso', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('BUDESONIDA INALATORIA', 'Pulmicort', '200-400mcg 2x/dia', 'BOCHECHAR com agua apos cada uso para evitar candidiase oral', 'qualquer', 'Temperatura ambiente', 'Candidiase oral, rouquidao', NULL, NULL, 1, 'simples', 'Monitorar densidade ossea', 'Dose por peso >6 anos', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- EXPECTORANTES
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ACETILCISTEINA', 'Fluimucil', '600mg 1x/dia ou 200mg 3x/dia', 'Beber BASTANTE AGUA para fluidificar secrecao', 'qualquer', 'Temperatura ambiente', 'Nausea, vomito', 'Muita agua', NULL, 0, 'livre', 'Seguro', 'Dose por peso >2 anos', 'Usar se necessario', 'Compativel', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('AMBROXOL', 'Mucosolvan', '30mg 2-3x/dia', 'Beber bastante liquido', 'qualquer', 'Temperatura ambiente', 'Nausea, alteracao paladar', NULL, NULL, 0, 'livre', 'Seguro', 'Dose por peso, xarope', 'Evitar 1o trimestre', 'Compativel', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIDIARREICOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('LOPERAMIDA', 'Imosec', '4mg inicial, depois 2mg apos cada evacuacao (max 16mg/dia)', 'REIDRATAR e FUNDAMENTAL. Nao usar se febre alta ou sangue nas fezes', 'qualquer', 'Temperatura ambiente', 'Constipacao, colica', NULL, NULL, 0, 'livre', 'Seguro', 'Nao usar <2 anos', 'Evitar', 'Evitar', 'Usar com cautela', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIPARASITÁRIOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('ALBENDAZOL', 'Zentel', '400mg dose unica (oxiurus) ou 400mg/dia por 3 dias', 'Tomar COM REFEICAO GORDUROSA para absorver', 'com_alimento', 'Temperatura ambiente', 'Dor abdominal, nausea', 'Com gordura para absorver', NULL, 0, 'livre', 'Seguro', 'Dose por peso >2 anos', 'Contraindicado', 'Evitar', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('IVERMECTINA', 'Revectina', '200mcg/kg dose unica', 'Tomar em JEJUM com agua', 'jejum', 'Temperatura ambiente', 'Tontura, nausea', 'Em jejum', NULL, 1, 'simples', 'Seguro', 'Nao recomendado <15kg', 'Contraindicado', 'Evitar', 'Sem ajuste', 'Usar com cautela', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- ANTIVERTIGINOSOS
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('CINARIZINA', 'Stugeron', '75mg 1x/dia ou 25mg 3x/dia', 'Tomar com alimento. Causa sono', 'com_alimento', 'Temperatura ambiente', 'Sonolencia, ganho de peso, parkinsonismo (raro)', NULL, 'Alcool, outros sedativos', 0, 'livre', 'EVITAR - risco parkinsonismo', 'Dose por peso >6 anos', 'Evitar', 'Evitar', 'Usar com cautela', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('BETAISTINA', 'Labirin', '8-16mg 3x/dia', 'Tomar com alimento', 'com_alimento', 'Temperatura ambiente', 'Nausea, dor de cabeca', NULL, 'Anti-histaminicos podem antagonizar', 1, 'simples', 'Seguro', 'Nao estabelecido <18 anos', 'Evitar', 'Evitar', 'Sem ajuste', 'Sem ajuste', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('DIMENIDRINATO', 'Dramin', '50-100mg ate 4x/dia', 'Tomar 30min ANTES da viagem. Causa MUITO SONO', 'qualquer', 'Temperatura ambiente', 'Sonolencia intensa, boca seca', 'Alcool potencializa', 'Alcool, outros sedativos', 0, 'livre', 'Cuidado com sedacao', 'Dose por peso >2 anos', 'Usar se necessario', 'Compativel', 'Usar com cautela', NULL, 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- LAXANTES
+-- ============================================
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('LACTULOSE', 'Lactulona', '15-30ml 1-2x/dia', 'Ajustar dose conforme resposta. Pode levar 2-3 dias para efeito', 'qualquer', 'Temperatura ambiente', 'Gases, colica, flatulencia', NULL, NULL, 0, 'livre', 'Seguro', 'Dose por peso', 'Seguro', 'Compativel', 'Seguro em IRC', 'Cuidado: lactulose e usada para encefalopatia', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+INSERT INTO copilot_medicamento_info
+(principio_ativo, nome_comercial, posologia_padrao, orientacao_uso, horario_ideal, armazenamento, efeitos_colaterais, interacao_alimentos, interacao_medicamentos, retem_receita, tipo_receita, alerta_idoso, alerta_pediatrico, alerta_gestante, alerta_lactante, alerta_renal, alerta_hepatico, fonte)
+VALUES
+('BISACODIL', 'Dulcolax', '5-10mg a noite', 'Efeito em 6-12h. NAO usar por tempo prolongado', 'noite', 'Temperatura ambiente', 'Colica, diarreia', 'Nao tomar com leite ou antiacido', NULL, 0, 'livre', 'Evitar uso cronico', 'Nao usar <4 anos', 'Evitar 1o trimestre', 'Compativel', 'Seguro', 'Seguro', 'bulario')
+ON DUPLICATE KEY UPDATE updated_at = NOW();
+
+-- ============================================
+-- FIM DOS INSERTS
+-- ============================================

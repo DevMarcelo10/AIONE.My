@@ -1,0 +1,124 @@
+"""Endpoints de alertas de segurança."""
+
+from typing import Optional
+from fastapi import APIRouter, HTTPException
+
+from models.schemas import (
+    Alert,
+    AlertsResponse,
+    StatusColor,
+    AlertType,
+)
+from services.alert_service import AlertService
+
+router = APIRouter()
+
+alert_service = AlertService()
+
+
+def get_alerts_color(alerts: list[Alert]) -> StatusColor:
+    """Determina cor baseada nos alertas."""
+    for alert in alerts:
+        if alert.tipo in [
+            AlertType.INTERACAO,
+            AlertType.CONTRAINDICACAO,
+            AlertType.ALERGIA,
+            AlertType.DUPLICIDADE,
+        ]:
+            return StatusColor.RED
+
+    for alert in alerts:
+        if alert.tipo in [
+            AlertType.VENCIMENTO,
+            AlertType.ESTOQUE_BAIXO,
+            AlertType.DOSE_MAXIMA,
+        ]:
+            return StatusColor.YELLOW
+
+    return StatusColor.GRAY
+
+
+@router.get("", response_model=AlertsResponse)
+async def get_alerts_base(
+    cliente_id: int = 0,
+    venda_id: int = 0,
+    filial_id: int = 1,
+):
+    """
+    Retorna alertas baseados no contexto atual.
+    Endpoint base chamado pelo widget.
+    """
+    try:
+        alerts = []
+        if venda_id > 0:
+            alerts = await alert_service.get_alertas_venda(
+                venda_id,
+                cliente_id if cliente_id > 0 else None
+            )
+        return AlertsResponse(
+            alerts=alerts,
+            status_color=get_alerts_color(alerts),
+        )
+    except Exception:
+        return AlertsResponse()
+
+
+@router.get("/venda/{venda_id}", response_model=list[Alert])
+async def get_alertas_venda(
+    venda_id: int,
+    cliente_id: Optional[int] = None,
+):
+    """
+    Retorna alertas de segurança para a venda atual.
+
+    Verifica:
+    - Interações medicamentosas entre itens
+    - Duplicidade de princípio ativo
+    - Alergias do cliente (se cadastradas)
+    - Contraindicações
+    """
+    try:
+        return await alert_service.get_alertas_venda(venda_id, cliente_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/interacoes", response_model=list[Alert])
+async def check_interacoes(produtos: str):
+    """
+    Verifica interações entre lista de produtos.
+
+    Args:
+        produtos: IDs separados por vírgula (ex: "1,2,3")
+    """
+    try:
+        produto_ids = [int(p.strip()) for p in produtos.split(",")]
+        return await alert_service.check_interacoes(produto_ids)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="IDs de produtos inválidos")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/estoque/vencendo", response_model=list[Alert])
+async def get_alertas_vencimento(dias: int = 90):
+    """
+    Retorna alertas de produtos próximos do vencimento.
+
+    Útil para gestão de estoque e FEFO.
+    """
+    try:
+        return await alert_service.get_alertas_vencimento(dias)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/estoque/baixo", response_model=list[Alert])
+async def get_alertas_estoque_baixo():
+    """
+    Retorna alertas de produtos com estoque abaixo do mínimo.
+    """
+    try:
+        return await alert_service.get_alertas_estoque_baixo()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

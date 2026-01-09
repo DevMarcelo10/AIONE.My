@@ -1,0 +1,56 @@
+@echo off
+echo ========================================
+echo   Instalador MCP MySQL para AIONE.My
+echo ========================================
+echo.
+
+echo [1/4] Verificando Python...
+py --version >nul 2>&1
+if errorlevel 1 (
+    echo ERRO: Python nao encontrado!
+    echo Por favor, instale o Python de https://www.python.org/downloads/
+    echo Lembre-se de marcar "Add Python to PATH" durante a instalacao
+    pause
+    exit /b 1
+)
+echo OK: Python encontrado
+
+echo.
+echo [2/4] Instalando dependencias...
+py -m pip install -r requirements.txt
+if errorlevel 1 (
+    echo ERRO: Falha ao instalar dependencias
+    pause
+    exit /b 1
+)
+echo OK: Dependencias instaladas
+
+echo.
+echo [3/4] Configurando Claude Code...
+if not exist "%USERPROFILE%\.claude-code" mkdir "%USERPROFILE%\.claude-code"
+copy /Y mcp.json "%USERPROFILE%\.claude-code\mcp.json" >nul
+echo OK: Configuracao copiada para %USERPROFILE%\.claude-code\mcp.json
+
+echo.
+echo [4/4] Verificando configuracao do banco...
+if not exist "config.ini" (
+    echo AVISO: Arquivo config.ini nao encontrado
+    echo Crie o arquivo config.ini com suas credenciais MySQL
+) else (
+    echo OK: config.ini encontrado
+)
+
+echo.
+echo ========================================
+echo   Instalacao Concluida!
+echo ========================================
+echo.
+echo Proximos passos:
+echo 1. Edite config.ini com suas credenciais MySQL (se ainda nao fez)
+echo 2. Reinicie o Claude Code completamente
+echo 3. Teste com: "Liste todas as tabelas do banco"
+echo.
+echo Para testar o servidor manualmente, execute:
+echo   py server.py
+echo.
+pause

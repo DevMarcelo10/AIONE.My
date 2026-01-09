@@ -65,7 +65,7 @@ begin
    Left := posLeft;
    retIDComp := 0;
    TabAuxi.SQL.Clear;
-   try
+   {try
       TabAuxi.SQL.Text := 'SELECT COM.IDComp, COM.Datped, COM.Status, USU.Nomusu, '+
       '(SELECT COUNT(*) FROM arqcompraite ITE WHERE ITE.IDComp = COM.IDComp) AS TotIte FROM arqcompra '+
       'COM LEFT JOIN arqusuario USU ON USU.IDUsu = COM.IDUsu WHERE FIND_IN_SET(Status,'+Aspas('0,1')+') '+
@@ -74,7 +74,7 @@ begin
    except
       MessageDlg('Não foi possível abrir.'+#10+'Provável perda de conexão com servidor!', mtError, [mbOk], 0);
       PostMessage(Handle, WM_CLOSE, 0, 0);
-   end;
+   end; }
    TStringGrid(DBGrid1).DefaultRowHeight := BaseRowHeight;
    DBGrid1.Width := DBGrid1.Width - 5;
    DBGrid1.Width := DBGrid1.Width + 5;

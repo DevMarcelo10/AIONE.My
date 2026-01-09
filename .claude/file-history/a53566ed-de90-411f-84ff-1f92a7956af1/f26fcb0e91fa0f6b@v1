@@ -1,0 +1,175 @@
+"""
+Schemas Pydantic para PharmaCopilot.
+Modelos de dados unificados para qualquer ERP.
+"""
+
+from datetime import date, datetime
+from decimal import Decimal
+from enum import Enum
+from typing import Optional
+from pydantic import BaseModel, Field
+
+
+# ============================================
+# ENTIDADES DO ERP (Normalizadas)
+# ============================================
+
+class Cliente(BaseModel):
+    """Cliente normalizado de qualquer ERP."""
+
+    id: int
+    nome: str
+    cpf_cnpj: Optional[str] = None
+    telefone: Optional[str] = None
+    email: Optional[str] = None
+    data_nascimento: Optional[date] = None
+    endereco: Optional[str] = None
+    cidade: Optional[str] = None
+    uf: Optional[str] = None
+    convenio_id: Optional[int] = None
+    convenio_nome: Optional[str] = None
+    limite_credito: Decimal = Decimal("0")
+    saldo_devedor: Decimal = Decimal("0")
+
+
+class Produto(BaseModel):
+    """Produto normalizado de qualquer ERP."""
+
+    id: int
+    codigo: str
+    ean: Optional[str] = None
+    nome: str
+    principio_ativo: Optional[str] = None
+    laboratorio: Optional[str] = None
+    grupo: Optional[str] = None
+    subgrupo: Optional[str] = None
+    preco_venda: Decimal
+    preco_custo: Decimal = Decimal("0")
+    estoque: Decimal = Decimal("0")
+    estoque_minimo: Decimal = Decimal("0")
+    controlado: bool = False
+    tipo_receita: Optional[str] = None  # Branca, Azul, Amarela, etc
+    generico: bool = False
+    similar: bool = False
+    referencia: bool = False
+
+
+class LoteEstoque(BaseModel):
+    """Lote de produto em estoque."""
+
+    produto_id: int
+    produto_nome: str
+    lote: str
+    validade: date
+    quantidade: Decimal
+    dias_para_vencer: int
+
+
+class ItemVenda(BaseModel):
+    """Item de uma venda."""
+
+    produto_id: int
+    produto_nome: str
+    quantidade: Decimal
+    preco_unitario: Decimal
+    desconto: Decimal = Decimal("0")
+    total: Decimal
+
+
+class Venda(BaseModel):
+    """Venda normalizada."""
+
+    id: int
+    data: datetime
+    cliente_id: Optional[int] = None
+    cliente_nome: Optional[str] = None
+    vendedor_id: Optional[int] = None
+    vendedor_nome: Optional[str] = None
+    itens: list[ItemVenda] = Field(default_factory=list)
+    subtotal: Decimal
+    desconto: Decimal = Decimal("0")
+    total: Decimal
+    forma_pagamento: Optional[str] = None
+    status: str = "aberta"
+
+
+# ============================================
+# CHAT / LLM
+# ============================================
+
+class ChatMessage(BaseModel):
+    """Mensagem de chat."""
+
+    role: str  # "user" ou "assistant"
+    content: str
+    timestamp: datetime = Field(default_factory=datetime.now)
+
+
+class ChatRequest(BaseModel):
+    """Requisição de chat."""
+
+    message: str
+    session_id: Optional[str] = None
+    venda_id: Optional[int] = None
+    cliente_id: Optional[int] = None
+    context: Optional[dict] = None
+
+
+class ChatResponse(BaseModel):
+    """Resposta de chat."""
+
+    message: str
+    session_id: str
+    suggestions: list["Suggestion"] = Field(default_factory=list)
+    alerts: list["Alert"] = Field(default_factory=list)
+
+
+# ============================================
+# SUGESTÕES
+# ============================================
+
+class SuggestionType(str, Enum):
+    """Tipos de sugestão."""
+
+    GENERICO = "generico"
+    SIMILAR = "similar"
+    CROSS_SELL = "cross_sell"
+    UPSELL = "upsell"
+    RECOMPRA = "recompra"
+    PROMOCAO = "promocao"
+
+
+class Suggestion(BaseModel):
+    """Sugestão de produto."""
+
+    tipo: SuggestionType
+    produto: Produto
+    motivo: str
+    economia: Optional[Decimal] = None  # Para genéricos
+    score: float = 1.0  # Relevância 0-1
+
+
+# ============================================
+# ALERTAS
+# ============================================
+
+class AlertType(str, Enum):
+    """Tipos de alerta."""
+
+    INTERACAO = "interacao"           # Interação medicamentosa
+    DUPLICIDADE = "duplicidade"       # Mesmo princípio ativo
+    ALERGIA = "alergia"               # Cliente alérgico
+    CONTRAINDICACAO = "contraindicacao"
+    DOSE_MAXIMA = "dose_maxima"
+    VENCIMENTO = "vencimento"         # Lote próximo do vencimento
+    ESTOQUE_BAIXO = "estoque_baixo"
+
+
+class Alert(BaseModel):
+    """Alerta de segurança ou operacional."""
+
+    tipo: AlertType
+    severidade: str  # "info", "warning", "danger"
+    titulo: str
+    mensagem: str
+    produtos_relacionados: list[int] = Field(default_factory=list)

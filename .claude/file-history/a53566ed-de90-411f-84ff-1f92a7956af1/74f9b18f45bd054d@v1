@@ -1,0 +1,147 @@
+"""Endpoint de status e cores do PharmaCopilot."""
+
+from decimal import Decimal
+from fastapi import APIRouter
+import structlog
+
+from models.schemas import (
+    StatusResponse,
+    StatusColor,
+    AlertType,
+    SuggestionType,
+)
+from services.suggestion_service import SuggestionService
+from services.alert_service import AlertService
+
+router = APIRouter()
+logger = structlog.get_logger()
+
+suggestion_service = SuggestionService()
+alert_service = AlertService()
+
+
+def calculate_status_color(
+    alerts: list,
+    suggestions: list,
+) -> StatusColor:
+    """
+    Calcula a cor do status baseado em alertas e sugestoes.
+
+    Prioridade (maior para menor):
+    1. RED: interacao, contraindicacao, alergia
+    2. YELLOW: vencimento, estoque_baixo
+    3. GREEN: generico com economia
+    4. BLUE: cross_sell
+    5. GRAY: sem contexto
+    """
+    # Verifica alertas criticos (RED)
+    for alert in alerts:
+        if alert.tipo in [
+            AlertType.INTERACAO,
+            AlertType.CONTRAINDICACAO,
+            AlertType.ALERGIA,
+            AlertType.DUPLICIDADE,
+        ]:
+            return StatusColor.RED
+
+    # Verifica alertas moderados (YELLOW)
+    for alert in alerts:
+        if alert.tipo in [
+            AlertType.VENCIMENTO,
+            AlertType.ESTOQUE_BAIXO,
+            AlertType.DOSE_MAXIMA,
+        ]:
+            return StatusColor.YELLOW
+
+    # Verifica sugestoes de generico com economia (GREEN)
+    for sug in suggestions:
+        if sug.tipo == SuggestionType.GENERICO and sug.economia and sug.economia > 0:
+            return StatusColor.GREEN
+
+    # Verifica sugestoes de cross-sell (BLUE)
+    for sug in suggestions:
+        if sug.tipo == SuggestionType.CROSS_SELL:
+            return StatusColor.BLUE
+
+    # Sem contexto relevante
+    return StatusColor.GRAY
+
+
+@router.get("", response_model=StatusResponse)
+async def get_status(
+    cliente_id: int = 0,
+    venda_id: int = 0,
+    filial_id: int = 1,
+):
+    """
+    Retorna o status atual do contexto.
+
+    Endpoint leve para polling periodico do widget.
+    Retorna cor do icone e contadores.
+    """
+    try:
+        alerts = []
+        suggestions = []
+
+        # Busca alertas e sugestoes se houver contexto
+        if venda_id > 0:
+            alerts = await alert_service.get_alertas_venda(
+                venda_id,
+                cliente_id if cliente_id > 0 else None
+            )
+            suggestions = await suggestion_service.get_sugestoes_venda(
+                venda_id,
+                cliente_id if cliente_id > 0 else None
+            )
+
+        # Calcula cor
+        status_color = calculate_status_color(alerts, suggestions)
+
+        # Conta alertas por severidade
+        alerts_critical = sum(
+            1 for a in alerts
+            if a.tipo in [
+                AlertType.INTERACAO,
+                AlertType.CONTRAINDICACAO,
+                AlertType.ALERGIA,
+            ]
+        )
+        alerts_warning = sum(
+            1 for a in alerts
+            if a.tipo in [
+                AlertType.VENCIMENTO,
+                AlertType.ESTOQUE_BAIXO,
+                AlertType.DUPLICIDADE,
+            ]
+        )
+
+        # Conta sugestoes por tipo
+        suggestions_genericos = sum(
+            1 for s in suggestions
+            if s.tipo == SuggestionType.GENERICO
+        )
+        suggestions_cross_sell = sum(
+            1 for s in suggestions
+            if s.tipo == SuggestionType.CROSS_SELL
+        )
+
+        # Calcula economia total
+        economia_total = sum(
+            s.economia for s in suggestions
+            if s.tipo == SuggestionType.GENERICO and s.economia
+        ) or Decimal("0")
+
+        return StatusResponse(
+            status_color=status_color,
+            alerts_count=len(alerts),
+            alerts_critical=alerts_critical,
+            alerts_warning=alerts_warning,
+            suggestions_count=len(suggestions),
+            suggestions_genericos=suggestions_genericos,
+            suggestions_cross_sell=suggestions_cross_sell,
+            economia_total=economia_total,
+        )
+
+    except Exception as e:
+        logger.error("get_status_error", error=str(e))
+        return StatusResponse(status_color=StatusColor.GRAY)

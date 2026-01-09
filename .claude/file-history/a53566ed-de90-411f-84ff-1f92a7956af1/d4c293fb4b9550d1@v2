@@ -1,0 +1,87 @@
+"""Endpoints de sugestões de produtos."""
+
+from typing import Optional
+from fastapi import APIRouter, HTTPException, Query
+
+from models.schemas import Suggestion
+from services.suggestion_service import SuggestionService
+
+router = APIRouter()
+
+suggestion_service = SuggestionService()
+
+
+@router.get("", response_model=list[Suggestion])
+async def get_suggestions_base(
+    cliente_id: int = 0,
+    venda_id: int = 0,
+    filial_id: int = 1,
+):
+    """
+    Retorna sugestoes baseadas no contexto atual.
+    Endpoint base chamado pelo widget.
+    """
+    try:
+        if venda_id > 0:
+            return await suggestion_service.get_sugestoes_venda(venda_id, cliente_id if cliente_id > 0 else None)
+        return []
+    except Exception:
+        return []
+
+
+@router.get("/genericos/{produto_id}", response_model=list[Suggestion])
+async def get_genericos(produto_id: int):
+    """
+    Retorna genéricos disponíveis para um produto.
+
+    Útil quando cliente pergunta "tem mais barato?".
+    """
+    try:
+        return await suggestion_service.get_genericos(produto_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/cross-sell/{produto_id}", response_model=list[Suggestion])
+async def get_cross_sell(produto_id: int):
+    """
+    Retorna produtos complementares (cross-sell).
+
+    Ex: Antitérmico → Termômetro, Antialérgico → Soro fisiológico
+    """
+    try:
+        return await suggestion_service.get_cross_sell(produto_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/recompra/{cliente_id}", response_model=list[Suggestion])
+async def get_recompra(
+    cliente_id: int,
+    dias: int = Query(default=90, ge=30, le=365),
+):
+    """
+    Retorna produtos que o cliente costuma comprar.
+
+    Analisa histórico e sugere medicamentos de uso contínuo.
+    """
+    try:
+        return await suggestion_service.get_recompra(cliente_id, dias)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/venda-atual/{venda_id}", response_model=list[Suggestion])
+async def get_sugestoes_venda(
+    venda_id: int,
+    cliente_id: Optional[int] = None,
+):
+    """
+    Retorna sugestões baseadas na venda atual.
+
+    Combina: genéricos, cross-sell, promoções e histórico do cliente.
+    """
+    try:
+        return await suggestion_service.get_sugestoes_venda(venda_id, cliente_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

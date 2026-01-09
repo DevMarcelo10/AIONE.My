@@ -61,7 +61,6 @@ object FrmMenComp: TFrmMenComp
     Version = '1.7.1.6'
     Align = alClient
     TabOrder = 0
-    ExplicitTop = -5
     TMSStyle = 0
     object PanelMens: TAdvSmoothPanel
       AlignWithMargins = True
@@ -200,8 +199,6 @@ object FrmMenComp: TFrmMenComp
       Version = '1.7.1.6'
       Align = alRight
       TabOrder = 0
-      ExplicitTop = 531
-      ExplicitHeight = 188
       TMSStyle = 0
     end
     object btCompras: TAdvGlowButton
@@ -833,7 +830,7 @@ object FrmMenComp: TFrmMenComp
   object timAlpha: TTimer
     Interval = 250
     OnTimer = timAlphaTimer
-    Left = 24
-    Top = 512
+    Left = 959
+    Top = 32
   end
 end

@@ -1,0 +1,277 @@
+"""
+Interface abstrata para conectores de ERP.
+REGRA FUNDAMENTAL: Apenas leitura (READ-ONLY) no banco do cliente.
+"""
+
+from abc import ABC, abstractmethod
+from typing import Optional
+
+from models.schemas import (
+    Cliente,
+    Produto,
+    LoteEstoque,
+    Venda,
+)
+
+
+class BaseERPConnector(ABC):
+    """
+    Interface base para todos os conectores de ERP.
+
+    Todo conector DEVE implementar todos os métodos abaixo.
+    NUNCA fazer INSERT/UPDATE/DELETE no banco do ERP.
+    """
+
+    def __init__(self, connection_string: str, mapping: dict):
+        """
+        Inicializa o conector.
+
+        Args:
+            connection_string: String de conexão do banco do ERP
+            mapping: Dicionário com mapeamento de campos
+        """
+        self.connection_string = connection_string
+        self.mapping = mapping
+
+    @abstractmethod
+    def test_connection(self) -> bool:
+        """
+        Testa conexão com o banco do ERP.
+
+        Returns:
+            True se conexão OK, False caso contrário
+        """
+        ...
+
+    # ==========================================
+    # CLIENTES
+    # ==========================================
+
+    @abstractmethod
+    def get_cliente(self, cliente_id: int) -> Optional[Cliente]:
+        """
+        Busca cliente por ID.
+
+        Args:
+            cliente_id: ID do cliente no ERP
+
+        Returns:
+            Cliente normalizado ou None se não encontrado
+        """
+        ...
+
+    @abstractmethod
+    def search_cliente(self, termo: str, limit: int = 10) -> list[Cliente]:
+        """
+        Pesquisa clientes por nome, CPF ou telefone.
+
+        Args:
+            termo: Termo de busca
+            limit: Máximo de resultados
+
+        Returns:
+            Lista de clientes encontrados
+        """
+        ...
+
+    # ==========================================
+    # PRODUTOS
+    # ==========================================
+
+    @abstractmethod
+    def get_produto(self, produto_id: int) -> Optional[Produto]:
+        """
+        Busca produto por ID.
+
+        Args:
+            produto_id: ID do produto no ERP
+
+        Returns:
+            Produto normalizado ou None se não encontrado
+        """
+        ...
+
+    @abstractmethod
+    def get_produto_by_ean(self, ean: str) -> Optional[Produto]:
+        """
+        Busca produto por código de barras (EAN).
+
+        Args:
+            ean: Código EAN/GTIN
+
+        Returns:
+            Produto normalizado ou None se não encontrado
+        """
+        ...
+
+    @abstractmethod
+    def search_produto(self, termo: str, limit: int = 20) -> list[Produto]:
+        """
+        Pesquisa produtos por nome, código ou princípio ativo.
+
+        Args:
+            termo: Termo de busca
+            limit: Máximo de resultados
+
+        Returns:
+            Lista de produtos encontrados
+        """
+        ...
+
+    @abstractmethod
+    def search_produto_categoria(
+        self,
+        categoria: str,
+        limite: int = 5
+    ) -> list[Produto]:
+        """
+        Busca produtos por categoria/grupo.
+
+        Args:
+            categoria: Nome da categoria ou grupo
+            limite: Máximo de resultados
+
+        Returns:
+            Lista de produtos da categoria
+        """
+        ...
+
+    @abstractmethod
+    def get_genericos(self, principio_ativo: str) -> list[Produto]:
+        """
+        Busca genéricos para um princípio ativo.
+
+        Args:
+            principio_ativo: Nome do princípio ativo
+
+        Returns:
+            Lista de produtos genéricos
+        """
+        ...
+
+    @abstractmethod
+    def get_similares(self, produto_id: int) -> list[Produto]:
+        """
+        Busca produtos similares (mesmo princípio ativo).
+
+        Args:
+            produto_id: ID do produto de referência
+
+        Returns:
+            Lista de produtos similares
+        """
+        ...
+
+    # ==========================================
+    # ESTOQUE
+    # ==========================================
+
+    @abstractmethod
+    def get_estoque(self, produto_id: int) -> float:
+        """
+        Retorna estoque atual de um produto.
+
+        Args:
+            produto_id: ID do produto
+
+        Returns:
+            Quantidade em estoque
+        """
+        ...
+
+    @abstractmethod
+    def get_lotes_vencendo(self, dias: int = 90) -> list[LoteEstoque]:
+        """
+        Lista lotes próximos do vencimento.
+
+        Args:
+            dias: Número de dias para considerar
+
+        Returns:
+            Lista de lotes ordenados por validade
+        """
+        ...
+
+    # ==========================================
+    # VENDAS
+    # ==========================================
+
+    @abstractmethod
+    def get_venda_atual(self, venda_id: int) -> Optional[Venda]:
+        """
+        Busca venda em andamento (aberta).
+
+        Args:
+            venda_id: ID da venda
+
+        Returns:
+            Venda com itens ou None
+        """
+        ...
+
+    @abstractmethod
+    def get_historico_cliente(
+        self,
+        cliente_id: int,
+        dias: int = 365
+    ) -> list[Venda]:
+        """
+        Busca histórico de compras do cliente.
+
+        Args:
+            cliente_id: ID do cliente
+            dias: Período em dias
+
+        Returns:
+            Lista de vendas do cliente
+        """
+        ...
+
+    @abstractmethod
+    def get_produtos_mais_vendidos(
+        self,
+        cliente_id: Optional[int] = None,
+        dias: int = 90,
+        limit: int = 10
+    ) -> list[Produto]:
+        """
+        Lista produtos mais vendidos.
+
+        Args:
+            cliente_id: Filtrar por cliente (opcional)
+            dias: Período em dias
+            limit: Máximo de resultados
+
+        Returns:
+            Lista de produtos ordenados por vendas
+        """
+        ...
+
+    # ==========================================
+    # HELPERS
+    # ==========================================
+
+    def _map_field(self, entity: str, field: str) -> str:
+        """
+        Retorna nome do campo no banco conforme mapping.
+
+        Args:
+            entity: Nome da entidade (clientes, produtos, etc)
+            field: Nome do campo normalizado
+
+        Returns:
+            Nome do campo no banco do ERP
+        """
+        return self.mapping.get(entity, {}).get("campos", {}).get(field, field)
+
+    def _map_table(self, entity: str) -> str:
+        """
+        Retorna nome da tabela conforme mapping.
+
+        Args:
+            entity: Nome da entidade
+
+        Returns:
+            Nome da tabela no banco do ERP
+        """
+        return self.mapping.get(entity, {}).get("tabela", entity)
