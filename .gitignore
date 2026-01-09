@@ -64,6 +64,8 @@ Desktop.ini
 ~$*.xls*
 
 # Specific project exclusions
+config.ini
+nul
 Server/doc/*.dat
 ServerFar/doc/*.dat
 
