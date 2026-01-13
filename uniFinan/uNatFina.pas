@@ -6,21 +6,20 @@ uses
    Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
    System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
    LMDControl, LMDCustomControl,LMDCustomPanel, LMDDBEdit, LMDSimplePanel,
-   LMDBaseEdit, LMDCustomEdit, LMDLabel, Vcl.StdCtrls, RxToolEdit,
+   LMDBaseEdit, LMDCustomEdit, LMDLabel, RxToolEdit, LMDDBRadioGroup,
    LMDBaseControl, LMDBaseGraphicControl,LMDBaseLabel, LMDCustomLabel,
    LMDCustomBevelPanel, Data.DB, Vcl.ExtCtrls, AdvGlowButton, MarcLib,
-   AdvEdit, LMDEdit, Vcl.DBCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-   uRESTDWBasicTypes, uRESTDWBasicDB, LMDCustomParentPanel, LMDCustomGroupBox,
-   LMDCustomButtonGroup, LMDCustomRadioGroup, LMDDBRadioGroup;
+   AdvEdit, LMDEdit, Vcl.DBCtrls, uRESTDWBasicDB, LMDCustomParentPanel,
+   LMDCustomGroupBox, LMDCustomButtonGroup, LMDCustomRadioGroup,
+   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+   FireDAC.Comp.DataSet, FireDAC.Comp.Client, uRESTDWBasicTypes;
 
 type
    TFrmNatFin = class(TForm)
     PanelCadastro: TLMDSimplePanel;
     timAlpha: TTimer;
     SouNatFin: TDataSource;
-    TabNatFin: TRESTDWClientSQL;
     PanelButtons: TLMDSimplePanel;
     btSalvar: TAdvGlowButton;
     btExcluir: TAdvGlowButton;
@@ -31,8 +30,6 @@ type
     Shape1: TShape;
     PanelBase: TLMDSimplePanel;
     PanelBckBut: TLMDSimplePanel;
-    TabNatFinIDNatfin: TFDAutoIncField;
-    TabNatFinDesnat: TWideStringField;
     PanelPagRec: TLMDSimplePanel;
     LMDDBLabeledEdit23: TLMDDBLabeledEdit;
     LMDDBLabeledEdit26: TLMDDBLabeledEdit;
@@ -47,17 +44,20 @@ type
     Shape2: TShape;
     LMDDBLabeledEdit2: TLMDDBLabeledEdit;
     LMDDBLabeledEdit0: TLMDDBLabeledEdit;
+    edBusNat: TLMDLabeledEdit;
+    LMDDBRadioGroup1: TLMDDBRadioGroup;
+    TabNatFin: TRESTDWClientSQL;
+    TabNatFinIDNatfin: TFDAutoIncField;
+    TabNatFinDesnat: TWideStringField;
     TabNatFinCodconDebPro: TWideStringField;
     TabNatFinCodconCrePro: TWideStringField;
     TabNatFinCodconDebBai: TWideStringField;
     TabNatFinCodconCreBai: TWideStringField;
+    TabNatFinRecDes: TWideStringField;
     TabNatFinNomconDebPro: TWideStringField;
     TabNatFinNomconCrePro: TWideStringField;
     TabNatFinNomconDebBai: TWideStringField;
     TabNatFinNomconCreBai: TWideStringField;
-    edBusNat: TLMDLabeledEdit;
-    LMDDBRadioGroup1: TLMDDBRadioGroup;
-    TabNatFinRecDes: TWideStringField;
     procedure timAlphaTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -114,7 +114,8 @@ end;
 
 procedure TFrmNatFin.FormShow(Sender: TObject);
 begin
-   auxSQL := 'SELECT NAT.*,'+
+   auxSQL :=
+   'SELECT NAT.*,'+
    'DEB1.Nomcon AS NomconDebPro,CRE1.Nomcon AS NomconCrePro,'+
    'DEB2.Nomcon AS NomconDebBai,CRE2.Nomcon AS NomconCreBai '+
    'FROM arqnatfin NAT '+
@@ -122,7 +123,6 @@ begin
    'LEFT JOIN arqplacon CRE1 ON NAT.CodconCrePro = CRE1.Codcon '+
    'LEFT JOIN arqplacon DEB2 ON NAT.CodconDebBai = DEB2.Codcon '+
    'LEFT JOIN arqplacon CRE2 ON NAT.CodconCreBai = CRE2.Codcon ';
-   SouNatFin.DataSet  := nil;
    TabNatFin.SQL.Text := auxSQL + 'ORDER BY NAT.Desnat LIMIT 1';
    TabNatFin.Open;
    TabNatFin.Append;
@@ -309,6 +309,7 @@ procedure TFrmNatFin.LMDDBLabeledEdit4CustomButtons0Click(Sender: TObject; index
 begin
    btBuscasDB(TabNatFin,'arqplacon',TDBEdit(LMDDBLabeledEdit4),'CodconDebBai','Codcon','Nomcon','NomconDebBai','Nivcon > "2"', 0);
 end;
+
 procedure TFrmNatFin.LMDDBLabeledEdit4KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    if key <> VK_RETURN then
@@ -319,6 +320,7 @@ procedure TFrmNatFin.LMDDBLabeledEdit6CustomButtons0Click(Sender: TObject; index
 begin
    btBuscasDB(TabNatFin,'arqplacon',TDBEdit(LMDDBLabeledEdit6),'CodconCreBai','Codcon','Nomcon','NomconCreBai','Nivcon > "2"', 0);
 end;
+
 procedure TFrmNatFin.LMDDBLabeledEdit6KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
    if key <> VK_RETURN then

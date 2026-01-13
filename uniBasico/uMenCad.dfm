@@ -2,35 +2,37 @@ object FrmMenCad: TFrmMenCad
   AlignWithMargins = True
   Left = 0
   Top = 0
-  Margins.Left = 1
-  Margins.Top = 1
-  Margins.Right = 1
-  Margins.Bottom = 1
+  Margins.Left = 5
+  Margins.Top = 5
+  Margins.Right = 5
+  Margins.Bottom = 5
   Align = alClient
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'Menu Cadadastro'
-  ClientHeight = 645
-  ClientWidth = 864
-  Color = 4144959
-  TransparentColorValue = 15855315
+  ClientHeight = 773
+  ClientWidth = 1035
+  Color = clFuchsia
+  TransparentColor = True
+  TransparentColorValue = clFuchsia
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 5395026
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Roboto'
   Font.Style = []
   Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
-  TextHeight = 14
+  PixelsPerInch = 115
+  TextHeight = 17
   object PanelBtMenu: TAdvSmoothPanel
     AlignWithMargins = True
     Left = 1
     Top = 1
-    Width = 87
-    Height = 643
+    Width = 104
+    Height = 771
     Cursor = crDefault
     Margins.Left = 1
     Margins.Top = 1
@@ -44,7 +46,7 @@ object FrmMenCad: TFrmMenCad
     Caption.HTMLFont.Style = []
     Caption.Font.Charset = DEFAULT_CHARSET
     Caption.Font.Color = clWindowText
-    Caption.Font.Height = -16
+    Caption.Font.Height = -19
     Caption.Font.Name = 'Tahoma'
     Caption.Font.Style = []
     Caption.ColorStart = 4474440
@@ -59,7 +61,7 @@ object FrmMenCad: TFrmMenCad
     Fill.GradientMirrorType = gtVertical
     Fill.BorderColor = clWhite
     Fill.BorderWidth = 0
-    Fill.Rounding = 12
+    Fill.Rounding = 0
     Fill.RoundingType = rtLeft
     Fill.ShadowColor = clWhite
     Fill.ShadowOffset = 0
@@ -73,10 +75,10 @@ object FrmMenCad: TFrmMenCad
     TMSStyle = 0
     object AdvSmoothPanel3: TAdvSmoothPanel
       AlignWithMargins = True
-      Left = 87
-      Top = 581
+      Left = 104
+      Top = 696
       Width = 0
-      Height = 62
+      Height = 75
       Cursor = crDefault
       Margins.Left = 0
       Margins.Top = 0
@@ -90,7 +92,7 @@ object FrmMenCad: TFrmMenCad
       Caption.HTMLFont.Style = []
       Caption.Font.Charset = DEFAULT_CHARSET
       Caption.Font.Color = clWindowText
-      Caption.Font.Height = -16
+      Caption.Font.Height = -19
       Caption.Font.Name = 'Tahoma'
       Caption.Font.Style = []
       Caption.ColorStart = 4474440
@@ -104,7 +106,7 @@ object FrmMenCad: TFrmMenCad
       Fill.GradientType = gtVertical
       Fill.GradientMirrorType = gtVertical
       Fill.BorderColor = 16382200
-      Fill.Rounding = 8
+      Fill.Rounding = 10
       Fill.ShadowColor = 13748681
       Fill.ShadowOffset = 0
       Fill.ShadowType = stSurround
@@ -118,13 +120,14 @@ object FrmMenCad: TFrmMenCad
     end
     object btPessoas: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 60
-      Width = 84
-      Height = 59
+      Left = 4
+      Top = 72
+      Width = 100
+      Height = 71
       Cursor = crHandPoint
       Hint = 'Cadastro de Pessoas'
-      Margins.Top = 60
+      Margins.Left = 4
+      Margins.Top = 72
       Margins.Right = 0
       Margins.Bottom = 0
       Align = alTop
@@ -133,7 +136,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Pessoas'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqAntialiased
@@ -178,11 +181,11 @@ object FrmMenCad: TFrmMenCad
         6E9FF04B504404A5410D9C39F37F09095671D900910C0BE2009DCEEFAA7C35A0
         52D5BFABFE8EB1C387CDEBFF05D7F69B071F0EA0750000000049454E44AE4260
         82}
-      MarginVert = 8
+      MarginVert = 12
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -248,12 +251,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btConvenio: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 174
-      Width = 84
-      Height = 57
+      Left = 4
+      Top = 208
+      Width = 100
+      Height = 69
       Cursor = crHandPoint
       Hint = 'Rela'#231#245'es com Conv'#234'nios'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -263,7 +267,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Conv'#234'nios'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -339,11 +343,11 @@ object FrmMenCad: TFrmMenCad
         DFB923D64AAC983C6EDC50C194BB154655C30387D74FFE79FE8078BCBD5DFA50
         982F3E1C316228B90900B5BF53B1CA7AE9126620EFC967FF07BCB9710DF44A8C
         510000000049454E44AE426082}
-      MarginVert = 10
+      MarginVert = 11
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -411,12 +415,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btDescontos: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 285
-      Width = 84
-      Height = 53
+      Left = 4
+      Top = 341
+      Width = 100
+      Height = 64
       Cursor = crHandPoint
       Hint = 'Regras de Descontos'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -426,7 +431,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Descontos'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -457,11 +462,11 @@ object FrmMenCad: TFrmMenCad
         C87A81F6E11F6478F8663649DA074735373F636BEB5E5613A7F2C65C35647CD1
         B29AE409CF6A90D1E41070C8F1A2C9D0D07D4A4A9EE0769B689A8DD7FBF63070
         807FA9A541B0334A6E8A0000000049454E44AE426082}
-      MarginVert = 8
+      MarginVert = 10
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -529,12 +534,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btMetVen: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 466
-      Width = 84
-      Height = 60
+      Left = 4
+      Top = 558
+      Width = 100
+      Height = 72
       Cursor = crHandPoint
       Hint = 'Metas de Vendas'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -544,7 +550,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Metas'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -621,11 +627,11 @@ object FrmMenCad: TFrmMenCad
         FE5DF9BF17A00BC878035100F22620BB07373FF081847754CA3E5040F6E0F7C3
         012E8019004A960E59A0A82A4635081F7C76BCA737A0FFDBF56F13F5A78DFC91
         03050000000049454E44AE426082}
-      MarginVert = 10
+      MarginVert = 12
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -705,12 +711,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btSNGPC: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 402
-      Width = 84
-      Height = 64
+      Left = 4
+      Top = 482
+      Width = 100
+      Height = 76
       Cursor = crHandPoint
       Hint = 'Processos com SNGPC'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -720,7 +727,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'SNGPC'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -821,11 +828,11 @@ object FrmMenCad: TFrmMenCad
         2B2BF4426A69387D4E64E69859E4DC1C0E0E8EE3D122FDA81828A470E96FE3BA
         33C9F2D3CF5444CAF01C8F3ED7A1492858FE4244F62C8FF13C8FBF6611FC95CB
         FF0D004976FB16114663670000000049454E44AE426082}
-      MarginVert = 8
+      MarginVert = 10
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -931,12 +938,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btProduto: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 119
-      Width = 84
-      Height = 55
+      Left = 4
+      Top = 143
+      Width = 100
+      Height = 65
       Cursor = crHandPoint
       Hint = 'Cadstro de Produtos'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -946,7 +954,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Produtos'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -1003,7 +1011,7 @@ object FrmMenCad: TFrmMenCad
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -1071,12 +1079,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btComis: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 338
-      Width = 84
-      Height = 64
+      Left = 4
+      Top = 405
+      Width = 100
+      Height = 77
       Cursor = crHandPoint
       Hint = 'Regras de Comiss'#245'es'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -1086,7 +1095,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Comiss'#245'es'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -1159,11 +1168,11 @@ object FrmMenCad: TFrmMenCad
         C808C05C48546C29BFB1DB7A96313332456B7D5786CD8B89308213B5C57D794A
         2AB32359316A1FB05EF7971C00FE031B4D9B4443E8FE730000000049454E44AE
         426082}
-      MarginVert = 10
+      MarginVert = 12
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -1260,12 +1269,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btUsuario: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 526
-      Width = 84
-      Height = 55
+      Left = 4
+      Top = 630
+      Width = 100
+      Height = 66
       Cursor = crHandPoint
       Hint = 'Usu'#225'rio do Sistema'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -1275,7 +1285,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Usu'#225'rios'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -1306,11 +1316,11 @@ object FrmMenCad: TFrmMenCad
         19D22543E130552F3A071CDDE7CE3B469588E34A7CE19F95D4F695B29D5C40EC
         E913CAE45B11BC7397FC7F95A831BE0D00684D6332D6E696A60000000049454E
         44AE426082}
-      MarginVert = 8
+      MarginVert = 10
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -1371,12 +1381,13 @@ object FrmMenCad: TFrmMenCad
     end
     object btPromocao: TAdvGlowButton
       AlignWithMargins = True
-      Left = 3
-      Top = 231
-      Width = 84
-      Height = 54
+      Left = 4
+      Top = 277
+      Width = 100
+      Height = 64
       Cursor = crHandPoint
       Hint = 'Cria'#231#227'o de Promo'#231#245'es'
+      Margins.Left = 4
       Margins.Top = 0
       Margins.Right = 0
       Margins.Bottom = 0
@@ -1386,7 +1397,7 @@ object FrmMenCad: TFrmMenCad
       Caption = 'Promo'#231#245'es'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -1448,7 +1459,7 @@ object FrmMenCad: TFrmMenCad
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -1531,10 +1542,10 @@ object FrmMenCad: TFrmMenCad
   end
   object PanelShow: TAdvSmoothPanel
     AlignWithMargins = True
-    Left = 88
+    Left = 105
     Top = 1
-    Width = 775
-    Height = 643
+    Width = 929
+    Height = 771
     Cursor = crDefault
     Margins.Left = 0
     Margins.Top = 1
@@ -1547,7 +1558,7 @@ object FrmMenCad: TFrmMenCad
     Caption.HTMLFont.Style = []
     Caption.Font.Charset = DEFAULT_CHARSET
     Caption.Font.Color = clWindowText
-    Caption.Font.Height = -16
+    Caption.Font.Height = -19
     Caption.Font.Name = 'Tahoma'
     Caption.Font.Style = []
     Caption.ColorStart = 4474440
@@ -1561,7 +1572,7 @@ object FrmMenCad: TFrmMenCad
     Fill.GradientMirrorType = gtSolid
     Fill.BorderColor = clWhite
     Fill.BorderWidth = 0
-    Fill.Rounding = 12
+    Fill.Rounding = 0
     Fill.RoundingType = rtRight
     Fill.ShadowOffset = 0
     Fill.Glow = gmNone

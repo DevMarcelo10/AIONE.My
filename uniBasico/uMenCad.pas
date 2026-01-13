@@ -111,7 +111,7 @@ begin
    Formu := TFormu.Create(Application);
    Formu.Parent := FrmPrincipal.PanelBas;
    CentralizarControl(Formu, Self);
-   Formu.Show
+   Formu.Show;
 end;
 
 procedure TFrmMenCad.FormResize(Sender: TObject);

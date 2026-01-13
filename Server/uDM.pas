@@ -24,7 +24,7 @@ type
     FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink;
     FDConnect: TFDConnection;
     RESTDWDriverFD: TRESTDWDriverFD;
-    DWServerEvents: TRESTDWServerEvents;
+    DWServerEvents1: TRESTDWServerEvents;
     procedure ServerMethodDataModuleDestroy(Sender: TObject);
     procedure ServerMethodDataModuleCreate(Sender: TObject);
     procedure DWServerEvents1EventsDownloadFileReplyEvent(var Params:TRESTDWParams; var Result: string);

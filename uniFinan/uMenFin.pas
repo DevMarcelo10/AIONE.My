@@ -93,7 +93,7 @@ end;
 procedure TFrmMenFin.AbreForm(Formu: TForm; TFormu: TFormClass);
 begin
    PanelBtMenu.Visible := False;
-   FrmPrincipal.FechaForms;
+   FechaForms;
    TrimAppMemorySize;
    Formu := TFormu.Create(Application);
    Formu.Parent := FrmPrincipal.PanelBas;

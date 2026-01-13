@@ -1,17 +1,21 @@
 object FrmNatFin: TFrmNatFin
   Left = 470
   Top = 249
+  Margins.Left = 4
+  Margins.Top = 4
+  Margins.Right = 4
+  Margins.Bottom = 4
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'Financeiro - Natureza Financeira'
-  ClientHeight = 485
-  ClientWidth = 535
+  ClientHeight = 554
+  ClientWidth = 641
   Color = 16381167
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 4276545
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Roboto'
   Font.Style = []
   KeyPreview = True
@@ -19,13 +23,17 @@ object FrmNatFin: TFrmNatFin
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  TextHeight = 14
+  PixelsPerInch = 115
+  TextHeight = 17
   object PanelCadastro: TLMDSimplePanel
     Left = 0
     Top = 0
-    Width = 535
-    Height = 485
-    Margins.Right = 4
+    Width = 641
+    Height = 554
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 5
+    Margins.Bottom = 4
     Align = alClient
     Bevel.StyleOuter = bvNormal
     Bevel.WidthOuter = 0
@@ -34,35 +42,44 @@ object FrmNatFin: TFrmNatFin
     Color = 16382200
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 7039851
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitHeight = 581
     object Shape1: TShape
       Left = 1
-      Top = 483
-      Width = 533
+      Top = 552
+      Width = 639
       Height = 1
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alBottom
       Pen.Color = 14211288
-      ExplicitTop = 171
-      ExplicitWidth = 501
+      ExplicitTop = 579
     end
     object PanelButtons: TLMDSimplePanel
-      Left = 198
-      Top = 436
-      Width = 320
-      Height = 28
+      Left = 237
+      Top = 506
+      Width = 384
+      Height = 34
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       ParentColor = True
       TabOrder = 1
       object btSalvar: TAdvGlowButton
         AlignWithMargins = True
-        Left = 220
+        Left = 265
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 119
+        Height = 34
         Cursor = crHandPoint
+        Margins.Left = 4
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
@@ -70,13 +87,13 @@ object FrmNatFin: TFrmNatFin
         Caption = 'Salvar'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -140,26 +157,26 @@ object FrmNatFin: TFrmNatFin
       end
       object btExcluir: TAdvGlowButton
         AlignWithMargins = True
-        Left = 111
+        Left = 134
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 120
+        Height = 34
         Cursor = crHandPoint
         Margins.Left = 2
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Align = alRight
         Caption = 'Excluir'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 5723991
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -226,25 +243,26 @@ object FrmNatFin: TFrmNatFin
       end
       object btNovo: TAdvGlowButton
         AlignWithMargins = True
-        Left = 3
+        Left = 6
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 119
+        Height = 34
         Cursor = crHandPoint
+        Margins.Left = 4
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Align = alRight
         Caption = 'Novo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -306,54 +324,57 @@ object FrmNatFin: TFrmNatFin
     end
     object PanelTop: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 6
-      Top = 6
-      Width = 525
-      Height = 37
-      Margins.Left = 5
-      Margins.Top = 5
+      Left = 7
+      Top = 7
+      Width = 629
+      Height = 38
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alTop
       ParentColor = True
       TabOrder = 2
       object LMDLabel2: TLMDLabel
         AlignWithMargins = True
-        Left = 15
-        Top = 6
-        Width = 167
-        Height = 28
-        Margins.Left = 15
-        Margins.Top = 6
+        Left = 18
+        Top = 4
+        Width = 200
+        Height = 29
+        Margins.Left = 18
+        Margins.Top = 4
         Margins.Right = 0
+        Margins.Bottom = 5
         Align = alLeft
         Alignment = agCenterLeft
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 8811110
-        Font.Height = -16
+        Font.Height = -19
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
         ParentFont = False
         Caption = 'Natureza Financeira'
-        ExplicitLeft = 11
+        ExplicitHeight = 30
       end
       object btFechar: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 501
+        Left = 600
         Top = 1
-        Width = 24
-        Height = 28
+        Width = 29
+        Height = 27
         Cursor = crHandPoint
         Margins.Left = 0
         Margins.Top = 1
         Margins.Right = 0
-        Margins.Bottom = 8
+        Margins.Bottom = 10
         Align = alRight
         AntiAlias = aaAntiAlias
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -377,7 +398,7 @@ object FrmNatFin: TFrmNatFin
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -440,22 +461,31 @@ object FrmNatFin: TFrmNatFin
         Appearance.TextColorDown = 2303013
         Appearance.TextColorHot = 2303013
         Appearance.TextColorDisabled = 13948116
+        ExplicitHeight = 34
       end
     end
     object PanelBase: TLMDSimplePanel
-      Left = 16
-      Top = 53
-      Width = 502
-      Height = 368
+      Left = 19
+      Top = 51
+      Width = 602
+      Height = 441
+      Margins.Left = 4
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 4
       Color = 16382200
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
       object PanelPagRec: TLMDSimplePanel
         Left = 0
-        Top = 31
-        Width = 502
-        Height = 337
+        Top = 41
+        Width = 602
+        Height = 400
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alClient
         Bevel.StyleInner = bvNormal
         Bevel.StyleOuter = bvNormal
@@ -465,18 +495,28 @@ object FrmNatFin: TFrmNatFin
         Bevel.BorderWidth = 1
         Color = 16514043
         TabOrder = 1
+        ExplicitTop = 51
+        ExplicitHeight = 404
         object Shape2: TShape
-          Left = 17
-          Top = 206
-          Width = 468
+          Left = 20
+          Top = 247
+          Width = 561
           Height = 1
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Pen.Color = 13092807
         end
         object LMDDBLabeledEdit23: TLMDDBLabeledEdit
-          Left = 103
-          Top = 110
-          Width = 380
-          Height = 23
+          Left = 123
+          Top = 132
+          Width = 456
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -491,7 +531,7 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'a subst'#226'ncia'
           Font.Charset = ANSI_CHARSET
           Font.Color = 7039851
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           CharCase = ecUpperCase
@@ -1059,29 +1099,37 @@ object FrmNatFin: TFrmNatFin
               UsePngGlyph = True
             end>
           CustomButtonsStyle = ubsExplorer
-          CustomButtonWidth = 18
+          CustomButtonWidth = 22
           CustomButtonParentCtlXP = False
           TabOnEnter = True
           DataField = 'NomconDebPro'
           DataSource = SouNatFin
           LabelSpacing = -18
-          EditLabel.Width = 109
-          EditLabel.Height = 15
+          EditLabel.Width = 127
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.AutoSize = False
           EditLabel.Font.Charset = ANSI_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'LMDDBLabeledEdit20'
         end
         object LMDDBLabeledEdit26: TLMDDBLabeledEdit
-          Left = 810
-          Top = 171
-          Width = 58
-          Height = 23
+          Left = 970
+          Top = 205
+          Width = 70
+          Height = 27
           Hint = 'Imp. S/ Importa'#231#227'o'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -1095,25 +1143,34 @@ object FrmNatFin: TFrmNatFin
           CharCase = ecUpperCase
           Alignment = taRightJustify
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'AliqIMP'
           LabelSpacing = 1
-          EditLabel.Width = 57
-          EditLabel.Height = 15
+          EditLabel.Width = 67
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'I.IMPOR. %'
         end
         object LMDDBLabeledEdit27: TLMDDBLabeledEdit
-          Left = 885
-          Top = 171
-          Width = 57
-          Height = 23
+          Left = 1060
+          Top = 205
+          Width = 68
+          Height = 27
           Hint = 'Fundo Comb.Pobreza'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -1127,24 +1184,33 @@ object FrmNatFin: TFrmNatFin
           CharCase = ecUpperCase
           Alignment = taRightJustify
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'AliqFCP'
           LabelSpacing = 1
-          EditLabel.Width = 33
-          EditLabel.Height = 15
+          EditLabel.Width = 38
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'FCP %'
         end
         object LMDDBLabeledEdit11: TLMDDBLabeledEdit
-          Left = 19
-          Top = 110
-          Width = 78
-          Height = 23
+          Left = 23
+          Top = 132
+          Width = 93
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -1161,24 +1227,33 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'CST PIS/COFINS Entradas'
           CharCase = ecUpperCase
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'CodconDebPro'
           DataSource = SouNatFin
-          EditLabel.Width = 232
-          EditLabel.Height = 15
+          EditLabel.Width = 265
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'CONTAS OU GRUPO PARA D'#201'BITO PROVIS'#195'O'
         end
         object LMDDBLabeledEdit1: TLMDDBLabeledEdit
-          Left = 105
-          Top = 163
-          Width = 380
-          Height = 23
+          Left = 126
+          Top = 195
+          Width = 455
+          Height = 28
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -1193,7 +1268,7 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'a subst'#226'ncia'
           Font.Charset = ANSI_CHARSET
           Font.Color = 7039851
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           CharCase = ecUpperCase
@@ -1761,28 +1836,36 @@ object FrmNatFin: TFrmNatFin
               UsePngGlyph = True
             end>
           CustomButtonsStyle = ubsExplorer
-          CustomButtonWidth = 18
+          CustomButtonWidth = 22
           CustomButtonParentCtlXP = False
           TabOnEnter = True
           DataField = 'NomconCrePro'
           DataSource = SouNatFin
           LabelSpacing = -18
-          EditLabel.Width = 66
-          EditLabel.Height = 15
+          EditLabel.Width = 76
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.AutoSize = False
           EditLabel.Font.Charset = ANSI_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'edCSTPisEnt'
         end
         object LMDDBLabeledEdit3: TLMDDBLabeledEdit
-          Left = 19
-          Top = 163
-          Width = 78
-          Height = 23
+          Left = 23
+          Top = 195
+          Width = 93
+          Height = 28
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -1799,24 +1882,33 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'CST PIS/COFINS Entradas'
           CharCase = ecUpperCase
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'CodconCrePro'
           DataSource = SouNatFin
-          EditLabel.Width = 239
-          EditLabel.Height = 15
+          EditLabel.Width = 273
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'CONTAS OU GRUPO PARA CR'#201'DITO PROVIS'#195'O'
         end
         object LMDDBLabeledEdit4: TLMDDBLabeledEdit
-          Left = 105
-          Top = 240
-          Width = 380
-          Height = 23
+          Left = 126
+          Top = 288
+          Width = 455
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -1831,7 +1923,7 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'a subst'#226'ncia'
           Font.Charset = ANSI_CHARSET
           Font.Color = 7039851
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           CharCase = ecUpperCase
@@ -2399,28 +2491,36 @@ object FrmNatFin: TFrmNatFin
               UsePngGlyph = True
             end>
           CustomButtonsStyle = ubsExplorer
-          CustomButtonWidth = 18
+          CustomButtonWidth = 22
           CustomButtonParentCtlXP = False
           TabOnEnter = True
           DataField = 'NomconDebBai'
           DataSource = SouNatFin
           LabelSpacing = -18
-          EditLabel.Width = 66
-          EditLabel.Height = 15
+          EditLabel.Width = 76
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.AutoSize = False
           EditLabel.Font.Charset = ANSI_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'edCSTPisEnt'
         end
         object LMDDBLabeledEdit5: TLMDDBLabeledEdit
-          Left = 19
-          Top = 240
-          Width = 77
-          Height = 23
+          Left = 23
+          Top = 288
+          Width = 92
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -2437,24 +2537,33 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'CST PIS/COFINS Entradas'
           CharCase = ecUpperCase
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'CodconDebBai'
           DataSource = SouNatFin
-          EditLabel.Width = 216
-          EditLabel.Height = 15
+          EditLabel.Width = 247
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'CONTAS OU GRUPO PARA D'#201'BITO BAIXAS'
         end
         object LMDDBLabeledEdit6: TLMDDBLabeledEdit
-          Left = 105
-          Top = 292
-          Width = 380
-          Height = 23
+          Left = 126
+          Top = 350
+          Width = 455
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -2469,7 +2578,7 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'a subst'#226'ncia'
           Font.Charset = ANSI_CHARSET
           Font.Color = 7039851
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           CharCase = ecUpperCase
@@ -3037,28 +3146,36 @@ object FrmNatFin: TFrmNatFin
               UsePngGlyph = True
             end>
           CustomButtonsStyle = ubsExplorer
-          CustomButtonWidth = 18
+          CustomButtonWidth = 22
           CustomButtonParentCtlXP = False
           TabOnEnter = True
           DataField = 'NomconCreBai'
           DataSource = SouNatFin
           LabelSpacing = -18
-          EditLabel.Width = 66
-          EditLabel.Height = 15
+          EditLabel.Width = 76
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.AutoSize = False
           EditLabel.Font.Charset = ANSI_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'edCSTPisEnt'
         end
         object LMDDBLabeledEdit7: TLMDDBLabeledEdit
-          Left = 19
-          Top = 292
-          Width = 78
-          Height = 23
+          Left = 23
+          Top = 350
+          Width = 93
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -3075,25 +3192,34 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'CST PIS/COFINS Entradas'
           CharCase = ecUpperCase
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'CodconCreBai'
           DataSource = SouNatFin
-          EditLabel.Width = 216
-          EditLabel.Height = 15
+          EditLabel.Width = 247
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'CONTAS OU GRUPO PARA CR'#201'DITO BAIXA'
         end
         object LMDDBLabeledEdit2: TLMDDBLabeledEdit
-          Left = 68
-          Top = 44
-          Width = 315
-          Height = 23
+          Left = 80
+          Top = 53
+          Width = 378
+          Height = 27
           Hint = 'Parcela / Desdobramento'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -3107,24 +3233,33 @@ object FrmNatFin: TFrmNatFin
           ValidationMsgString = 'a descri'#231#227'o da conta'
           CharCase = ecUpperCase
           CustomButtons = <>
+          CustomButtonWidth = 19
           TabOnEnter = True
           DataField = 'Desnat'
           DataSource = SouNatFin
-          EditLabel.Width = 117
-          EditLabel.Height = 15
+          EditLabel.Width = 135
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'DESCRI'#199#195'O DA CONTA'
         end
         object LMDDBLabeledEdit0: TLMDDBLabeledEdit
-          Left = 19
-          Top = 44
-          Width = 41
-          Height = 23
+          Left = 23
+          Top = 53
+          Width = 49
+          Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.StyleOuter = bvNormal
           Bevel.WidthOuter = 0
           Bevel.BorderColor = 15657192
@@ -3138,32 +3273,41 @@ object FrmNatFin: TFrmNatFin
           TabStop = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 7039851
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Roboto'
           Font.Style = [fsBold]
           ParentFont = False
           Alignment = taCenter
           CustomButtons = <>
+          CustomButtonWidth = 19
           DataField = 'IDNatfin'
           DataSource = SouNatFin
           ReadOnly = True
           OnDataChange = LMDDBLabeledEdit0DataChange
-          EditLabel.Width = 12
-          EditLabel.Height = 15
+          EditLabel.Width = 15
+          EditLabel.Height = 17
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.AutoSize = False
           EditLabel.Font.Charset = DEFAULT_CHARSET
           EditLabel.Font.Color = 9600112
-          EditLabel.Font.Height = -11
+          EditLabel.Font.Height = -13
           EditLabel.Font.Name = 'Roboto'
           EditLabel.Font.Style = [fsBold]
           EditLabel.ParentFont = False
           EditLabel.Caption = 'ID'
         end
         object LMDDBRadioGroup1: TLMDDBRadioGroup
-          Left = 411
-          Top = 22
-          Width = 85
-          Height = 65
+          Left = 492
+          Top = 26
+          Width = 102
+          Height = 78
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Bevel.WidthInner = 0
           Bevel.WidthOuter = 0
           Bevel.Mode = bmCustom
@@ -3176,7 +3320,7 @@ object FrmNatFin: TFrmNatFin
           CaptionParentFont = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 2434341
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           Items.Strings = (
@@ -3193,10 +3337,15 @@ object FrmNatFin: TFrmNatFin
         end
       end
       object PanelBckBut: TLMDSimplePanel
+        AlignWithMargins = True
         Left = 0
         Top = 0
-        Width = 502
-        Height = 31
+        Width = 602
+        Height = 37
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 4
         Align = alTop
         Bevel.StyleOuter = bvNormal
         Bevel.WidthInner = 0
@@ -3205,15 +3354,18 @@ object FrmNatFin: TFrmNatFin
         Bevel.BorderWidth = 1
         Color = 14674687
         TabOrder = 0
+        ExplicitTop = -3
         object edBusNat: TLMDLabeledEdit
           AlignWithMargins = True
-          Left = 92
-          Top = 5
-          Width = 331
-          Height = 21
+          Left = 110
+          Top = 6
+          Width = 397
+          Height = 25
           Hint = 'Busca natureza financeira'
-          Margins.Top = 4
-          Margins.Bottom = 4
+          Margins.Left = 4
+          Margins.Top = 5
+          Margins.Right = 4
+          Margins.Bottom = 5
           Bevel.StyleOuter = bvNormal
           Bevel.WidthInner = 0
           Bevel.WidthOuter = 0
@@ -3228,7 +3380,7 @@ object FrmNatFin: TFrmNatFin
           OnKeyDown = edBusNatKeyDown
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           CharCase = ecUpperCase
@@ -3239,24 +3391,37 @@ object FrmNatFin: TFrmNatFin
               Cursor = crHandPoint
               ParentFont = False
               PngGlyph.Data = {
-                89504E470D0A1A0A0000000D494844520000001200000014080600000080976D
-                4A000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                00097048597300000EC300000EC301C76FA864000001C44944415478DAD592BD
-                CB816114C6AF6751468324B37C44A48430B029038A0C2CFE006236C83FC0C840
-                210C762329313019503E2265A0641386F77DEF3328799EB7F76B79CF76779FF3
-                3BE75CE7E2DE3E027F10DCFF02CD6633E4723974BB5D5CAF57701C07B7DB8D44
-                2201A3D1F835102B0E068390C96454ACD3E930994C301C0EB15C2E51A954E0F7
-                FB3F076D361B58AD562A6E369B904AA58F3F3659281442A7D341BFDF87C16010
-                06259349D46A352C160B48249297692F970B012C160BE5F1824EA7136C361BEC
-                763BCAE5B2A0B8A9540AAD560BBBDD8E1FB4DD6EA1D7EB91C9642859288AC522
-                D2E9348EC7233FE876BBC1E17040A954A25EAF0B82E2F138DAED36092FA8513E
-                9F47369BC56030805AAD7E819CCF67984C26B85C2E944A256110EB140E874927
-                0655A9548FBFF57A4DC7604D7ABD1EB45A2D3F68341A21128960BFDFD35B2C16
-                231008D0AAABD58AAEC42EC934F2783CFC3E1A8FC7E4112620F34EA150C0743A
-                45A3D1C07C3E8742A180D7EB452C168346A379DAE20162A346A3511C0E077233
-                33A2D96CA6A4FBFD4E676693F0F9EA09C40CC6F697CBE5A856ABE4ECEFC403E4
-                F3F9A82B13D7E9747E0B2278B59FC4138899512412FD1EF49B7807C22803D414
-                9A2D2C0000000049454E44AE426082}
+                89504E470D0A1A0A0000000D4948445200000016000000180806000000FEBE0D
+                4B000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                000970485973000011AF000011AF01F7FD4B840000018769545874584D4C3A63
+                6F6D2E61646F62652E786D7000000000003C3F787061636B657420626567696E
+                3D27EFBBBF272069643D2757354D304D7043656869487A7265537A4E54637A6B
+                633964273F3E0D0A3C783A786D706D65746120786D6C6E733A783D2261646F62
+                653A6E733A6D6574612F223E3C7264663A52444620786D6C6E733A7264663D22
+                687474703A2F2F7777772E77332E6F72672F313939392F30322F32322D726466
+                2D73796E7461782D6E7323223E3C7264663A4465736372697074696F6E207264
+                663A61626F75743D22757569643A66616635626464352D626133642D31316461
+                2D616433312D6433336437353138326631622220786D6C6E733A746966663D22
+                687474703A2F2F6E732E61646F62652E636F6D2F746966662F312E302F223E3C
+                746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269656E7461
+                74696F6E3E3C2F7264663A4465736372697074696F6E3E3C2F7264663A524446
+                3E3C2F783A786D706D6574613E0D0A3C3F787061636B657420656E643D277727
+                3F3E2C94980B000001C44944415478DAED93BDAB816118C6AF77341A2499E523
+                222584814D19506460F10710B341FE0146060A61B01B498981C980F211290325
+                9B309C739E7B38CBCBE93D4EEA0CAEEDED7E9FDF733FD77DDDDCC797F002716F
+                F0FF004FA75364B359743A1D5C2E17701C0797CB85783C0E83C1F01C98C10281
+                00A45229C1B45A2DC6E331068301168B05CAE5327C3EDFEFC0EBF51A168B8560
+                8D46031289E4BBC63A0F068368B7DBE8F57AD0EBF5C2C1894402D56A15F3F91C
+                62B198573F9FCF04349BCDF49F20F0F17884D56A85CD6643A9547A6855329944
+                B3D9C476BB1506DE6C36D0E97448A7D374F8910A850252A9140E878330F0F57A
+                85DD6E8742A140AD567B088EC56268B55A3448C11EE77239643219F4FB7DA854
+                2A5EFD743AC16834C2E974A2582C0A07B34E42A110F9CC2E512A95DFB5D56A45
+                C3659776BB5D68341A61E0E1708870388CDD6E47DF2291087EBF9FAC592E9794
+                029614E6B1DBEDE69DBF0B1E8D469451361096DD7C3E8FC964827ABD8ED96C06
+                B95C0E8FC78368340AB55A7DF7B53C307B5A2412C17EBFA76D638B613299A876
+                BBDD2856ACD37BB9FE11CC02CFFC93C964A8542AB479CF8807F67ABDD4151B96
+                C3E1780AFAE3F0FEAA37F8F5E04F763110C8804E7E0F0000000049454E44AE42
+                6082}
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3267,7 +3432,7 @@ object FrmNatFin: TFrmNatFin
               OnClick = edBusNatCustomButtons0Click
               UsePngGlyph = True
             end>
-          CustomButtonWidth = 18
+          CustomButtonWidth = 22
           PasswordChar = #0
           Spelling.LiveSpell = True
           TabOnEnter = True
@@ -3275,8 +3440,12 @@ object FrmNatFin: TFrmNatFin
           LabelPosition = lpLeft
           LabelSpacing = 4
           LabelSync = True
-          EditLabel.Width = 38
-          EditLabel.Height = 21
+          EditLabel.Width = 46
+          EditLabel.Height = 25
+          EditLabel.Margins.Left = 4
+          EditLabel.Margins.Top = 4
+          EditLabel.Margins.Right = 4
+          EditLabel.Margins.Bottom = 4
           EditLabel.AutoSize = False
           EditLabel.Caption = 'Busca'
         end
@@ -3286,23 +3455,75 @@ object FrmNatFin: TFrmNatFin
   object timAlpha: TTimer
     Interval = 250
     OnTimer = timAlphaTimer
-    Left = 146
-    Top = 436
+    Left = 181
+    Top = 477
   end
   object SouNatFin: TDataSource
-    DataSet = TabNatFin
-    Left = 82
-    Top = 435
+    Left = 105
+    Top = 476
   end
   object TabNatFin: TRESTDWClientSQL
-    Active = False
-    AfterInsert = TabNatFinAfterInsert
+    Active = True
     Filtered = False
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'IDNatfin'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'Desnat'
+        DataType = ftWideString
+        Size = 40
+      end
+      item
+        Name = 'CodconDebPro'
+        DataType = ftWideString
+        Size = 8
+      end
+      item
+        Name = 'CodconCrePro'
+        DataType = ftWideString
+        Size = 8
+      end
+      item
+        Name = 'CodconDebBai'
+        DataType = ftWideString
+        Size = 8
+      end
+      item
+        Name = 'CodconCreBai'
+        DataType = ftWideString
+        Size = 8
+      end
+      item
+        Name = 'RecDes'
+        DataType = ftWideString
+        Size = 1
+      end
+      item
+        Name = 'NomconDebPro'
+        DataType = ftWideString
+        Size = 45
+      end
+      item
+        Name = 'NomconCrePro'
+        DataType = ftWideString
+        Size = 45
+      end
+      item
+        Name = 'NomconDebBai'
+        DataType = ftWideString
+        Size = 45
+      end
+      item
+        Name = 'NomconCreBai'
+        DataType = ftWideString
+        Size = 45
+      end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.AssignedValues = [rvStoreItems, rvSilentMode]
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
@@ -3325,7 +3546,7 @@ object FrmNatFin: TFrmNatFin
       'LEFT JOIN arqplacon CRE1 ON NAT.CodconCrePro = CRE1.Codcon'
       'LEFT JOIN arqplacon DEB2 ON NAT.CodconDebBai = DEB2.Codcon'
       'LEFT JOIN arqplacon CRE2 ON NAT.CodconCreBai = CRE2.Codcon'
-      'ORDER BY NAT.IDNatFin')
+      'ORDER BY NAT.Desnat LIMIT 10')
     UpdateTableName = 'arqnatfin'
     CacheUpdateRecords = False
     AutoCommitData = True
@@ -3333,8 +3554,8 @@ object FrmNatFin: TFrmNatFin
     ThreadRequest = False
     RaiseErrors = True
     ReflectChanges = True
-    Left = 21
-    Top = 435
+    Left = 34
+    Top = 477
     object TabNatFinIDNatfin: TFDAutoIncField
       FieldName = 'IDNatfin'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3343,55 +3564,47 @@ object FrmNatFin: TFrmNatFin
     end
     object TabNatFinDesnat: TWideStringField
       FieldName = 'Desnat'
-      Size = 53
+      Size = 40
+    end
+    object TabNatFinCodconDebPro: TWideStringField
+      FieldName = 'CodconDebPro'
+      Size = 8
+    end
+    object TabNatFinCodconCrePro: TWideStringField
+      FieldName = 'CodconCrePro'
+      Size = 8
+    end
+    object TabNatFinCodconDebBai: TWideStringField
+      FieldName = 'CodconDebBai'
+      Size = 8
+    end
+    object TabNatFinCodconCreBai: TWideStringField
+      FieldName = 'CodconCreBai'
+      Size = 8
     end
     object TabNatFinRecDes: TWideStringField
       FieldName = 'RecDes'
       Size = 1
     end
-    object TabNatFinCodconDebPro: TWideStringField
-      DisplayWidth = 8
-      FieldName = 'CodconDebPro'
-      EditMask = '#.#.#.##.###;0;_'
-      Size = 8
-    end
-    object TabNatFinCodconCrePro: TWideStringField
-      DisplayWidth = 8
-      FieldName = 'CodconCrePro'
-      EditMask = '#.#.#.##.###;0;_'
-      Size = 8
-    end
-    object TabNatFinCodconDebBai: TWideStringField
-      DisplayWidth = 8
-      FieldName = 'CodconDebBai'
-      EditMask = '#.#.#.##.###;0;_'
-      Size = 8
-    end
-    object TabNatFinCodconCreBai: TWideStringField
-      DisplayWidth = 8
-      FieldName = 'CodconCreBai'
-      EditMask = '#.#.#.##.###;0;_'
-      Size = 8
-    end
     object TabNatFinNomconDebPro: TWideStringField
       FieldName = 'NomconDebPro'
       ProviderFlags = []
-      Size = 60
+      Size = 45
     end
     object TabNatFinNomconCrePro: TWideStringField
       FieldName = 'NomconCrePro'
       ProviderFlags = []
-      Size = 60
+      Size = 45
     end
     object TabNatFinNomconDebBai: TWideStringField
       FieldName = 'NomconDebBai'
       ProviderFlags = []
-      Size = 60
+      Size = 45
     end
     object TabNatFinNomconCreBai: TWideStringField
       FieldName = 'NomconCreBai'
       ProviderFlags = []
-      Size = 60
+      Size = 45
     end
   end
 end

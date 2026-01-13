@@ -1,17 +1,21 @@
 object FrmBancos: TFrmBancos
   Left = 470
   Top = 249
+  Margins.Left = 4
+  Margins.Top = 4
+  Margins.Right = 4
+  Margins.Bottom = 4
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'Financeiro - Bancos'
-  ClientHeight = 446
-  ClientWidth = 527
+  ClientHeight = 534
+  ClientWidth = 631
   Color = 16381167
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 4276545
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Roboto'
   Font.Style = []
   KeyPreview = True
@@ -19,13 +23,17 @@ object FrmBancos: TFrmBancos
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  TextHeight = 14
+  PixelsPerInch = 115
+  TextHeight = 17
   object PanelCadastro: TLMDSimplePanel
     Left = 0
     Top = 0
-    Width = 527
-    Height = 446
-    Margins.Right = 4
+    Width = 631
+    Height = 534
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 5
+    Margins.Bottom = 4
     Align = alClient
     Bevel.StyleOuter = bvNormal
     Bevel.WidthOuter = 0
@@ -34,29 +42,35 @@ object FrmBancos: TFrmBancos
     Color = 16382200
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 7039851
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
     TabOrder = 0
     object Shape1: TShape
       Left = 1
-      Top = 444
-      Width = 525
+      Top = 532
+      Width = 629
       Height = 1
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alBottom
       Pen.Color = 14211288
-      ExplicitTop = 171
-      ExplicitWidth = 501
     end
     object LMDLabel1: TLMDLabel
-      Left = 309
-      Top = 313
-      Width = 11
-      Height = 16
+      Left = 370
+      Top = 375
+      Width = 12
+      Height = 19
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 9600112
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       Options = []
@@ -64,13 +78,17 @@ object FrmBancos: TFrmBancos
       Caption = '%'
     end
     object LMDLabel3: TLMDLabel
-      Left = 378
-      Top = 313
-      Width = 11
-      Height = 16
+      Left = 453
+      Top = 375
+      Width = 12
+      Height = 19
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 9600112
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       Options = []
@@ -78,19 +96,24 @@ object FrmBancos: TFrmBancos
       Caption = '%'
     end
     object PanelButtons: TLMDSimplePanel
-      Left = 189
-      Top = 403
-      Width = 320
-      Height = 28
+      Left = 226
+      Top = 483
+      Width = 384
+      Height = 33
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       ParentColor = True
       TabOrder = 18
       object btSalvar: TAdvGlowButton
         AlignWithMargins = True
-        Left = 220
+        Left = 265
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 119
+        Height = 33
         Cursor = crHandPoint
+        Margins.Left = 4
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
@@ -98,13 +121,13 @@ object FrmBancos: TFrmBancos
         Caption = 'Salvar'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -168,26 +191,26 @@ object FrmBancos: TFrmBancos
       end
       object btExcluir: TAdvGlowButton
         AlignWithMargins = True
-        Left = 111
+        Left = 134
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 120
+        Height = 33
         Cursor = crHandPoint
         Margins.Left = 2
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Align = alRight
         Caption = 'Excluir'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 5723991
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -254,25 +277,26 @@ object FrmBancos: TFrmBancos
       end
       object btNovo: TAdvGlowButton
         AlignWithMargins = True
-        Left = 3
+        Left = 6
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 119
+        Height = 33
         Cursor = crHandPoint
+        Margins.Left = 4
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Align = alRight
         Caption = 'Novo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -334,53 +358,57 @@ object FrmBancos: TFrmBancos
     end
     object PanelTop: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 6
-      Top = 6
-      Width = 517
-      Height = 37
-      Margins.Left = 5
-      Margins.Top = 5
+      Left = 7
+      Top = 7
+      Width = 619
+      Height = 41
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 4
       Margins.Bottom = 0
       Align = alTop
       ParentColor = True
       TabOrder = 20
       object LMDLabel2: TLMDLabel
         AlignWithMargins = True
-        Left = 10
-        Top = 6
-        Width = 59
-        Height = 28
-        Margins.Left = 10
-        Margins.Top = 6
+        Left = 12
+        Top = 7
+        Width = 71
+        Height = 30
+        Margins.Left = 12
+        Margins.Top = 7
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alLeft
         Alignment = agCenterLeft
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 8811110
-        Font.Height = -16
+        Font.Height = -19
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
         ParentFont = False
         Caption = 'Bancos'
+        ExplicitHeight = 34
       end
       object btFechar: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 493
+        Left = 591
         Top = 1
-        Width = 24
-        Height = 28
+        Width = 28
+        Height = 30
         Cursor = crHandPoint
         Margins.Left = 0
         Margins.Top = 1
         Margins.Right = 0
-        Margins.Bottom = 8
+        Margins.Bottom = 10
         Align = alRight
         AntiAlias = aaAntiAlias
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -404,7 +432,7 @@ object FrmBancos: TFrmBancos
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -467,14 +495,19 @@ object FrmBancos: TFrmBancos
         Appearance.TextColorDown = 2303013
         Appearance.TextColorHot = 2303013
         Appearance.TextColorDisabled = 13948116
+        ExplicitHeight = 34
       end
     end
     object LMDDBLabeledEdit1: TLMDDBLabeledEdit
-      Left = 15
-      Top = 149
-      Width = 39
-      Height = 23
+      Left = 18
+      Top = 178
+      Width = 47
+      Height = 28
       Hint = 'C'#243'digo do banco'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -488,25 +521,34 @@ object FrmBancos: TFrmBancos
       OnEnter = LMDDBLabeledEdit1Enter
       ValidationMsgString = 'o c'#243'digo do banco'
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'Codban'
       DataSource = SouBanco
-      EditLabel.Width = 42
-      EditLabel.Height = 15
+      EditLabel.Width = 50
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'C'#211'DIGO'
     end
     object LMDDBLabeledEdit2: TLMDDBLabeledEdit
-      Left = 66
-      Top = 149
-      Width = 320
-      Height = 23
+      Left = 79
+      Top = 178
+      Width = 383
+      Height = 28
       Hint = 'Nome do banco'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -520,14 +562,19 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'o nome do banco'
       CharCase = ecUpperCase
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'Nomban'
       DataSource = SouBanco
-      EditLabel.Width = 92
-      EditLabel.Height = 15
+      EditLabel.Width = 104
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
@@ -536,12 +583,13 @@ object FrmBancos: TFrmBancos
     object PanelBckBut: TLMDSimplePanel
       AlignWithMargins = True
       Left = 2
-      Top = 43
-      Width = 523
-      Height = 74
+      Top = 48
+      Width = 627
+      Height = 88
       Margins.Left = 1
       Margins.Top = 0
       Margins.Right = 1
+      Margins.Bottom = 4
       Align = alTop
       Bevel.StyleOuter = bvNormal
       Bevel.WidthInner = 0
@@ -550,15 +598,18 @@ object FrmBancos: TFrmBancos
       Bevel.BorderWidth = 1
       Color = 14674687
       TabOrder = 19
+      ExplicitLeft = 3
       object edBusBan: TLMDLabeledEdit
         AlignWithMargins = True
-        Left = 72
-        Top = 41
-        Width = 325
-        Height = 21
+        Left = 86
+        Top = 49
+        Width = 390
+        Height = 25
         Hint = 'Busca banco'
-        Margins.Top = 4
-        Margins.Bottom = 4
+        Margins.Left = 4
+        Margins.Top = 5
+        Margins.Right = 4
+        Margins.Bottom = 5
         Bevel.StyleOuter = bvNormal
         Bevel.WidthInner = 0
         Bevel.WidthOuter = 0
@@ -573,7 +624,7 @@ object FrmBancos: TFrmBancos
         OnKeyDown = edBusBanKeyDown
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         CharCase = ecUpperCase
@@ -584,24 +635,37 @@ object FrmBancos: TFrmBancos
             Cursor = crHandPoint
             ParentFont = False
             PngGlyph.Data = {
-              89504E470D0A1A0A0000000D494844520000001200000014080600000080976D
-              4A000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              00097048597300000EC300000EC301C76FA864000001C44944415478DAD592BD
-              CB816114C6AF6751468324B37C44A48430B029038A0C2CFE006236C83FC0C840
-              210C762329313019503E2265A0641386F77DEF3328799EB7F76B79CF76779FF3
-              3BE75CE7E2DE3E027F10DCFF02CD6633E4723974BB5D5CAF57701C07B7DB8D44
-              2201A3D1F835102B0E068390C96454ACD3E930994C301C0EB15C2E51A954E0F7
-              FB3F076D361B58AD562A6E369B904AA58F3F3659281442A7D341BFDF87C16010
-              06259349D46A352C160B48249297692F970B012C160BE5F1824EA7136C361BEC
-              763BCAE5B2A0B8A9540AAD560BBBDD8E1FB4DD6EA1D7EB91C9642859288AC522
-              D2E9348EC7233FE876BBC1E17040A954A25EAF0B82E2F138DAED36092FA8513E
-              9F47369BC56030805AAD7E819CCF67984C26B85C2E944A256110EB140E874927
-              0655A9548FBFF57A4DC7604D7ABD1EB45A2D3F68341A21128960BFDFD35B2C16
-              231008D0AAABD58AAEC42EC934F2783CFC3E1A8FC7E4112620F34EA150C0743A
-              45A3D1C07C3E8742A180D7EB452C168346A379DAE20162A346A3511C0E077233
-              33A2D96CA6A4FBFD4E676693F0F9EA09C40CC6F697CBE5A856ABE4ECEFC403E4
-              F3F9A82B13D7E9747E0B2278B59FC4138899512412FD1EF49B7807C22803D414
-              9A2D2C0000000049454E44AE426082}
+              89504E470D0A1A0A0000000D4948445200000016000000180806000000FEBE0D
+              4B000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              000970485973000011AF000011AF01F7FD4B840000018769545874584D4C3A63
+              6F6D2E61646F62652E786D7000000000003C3F787061636B657420626567696E
+              3D27EFBBBF272069643D2757354D304D7043656869487A7265537A4E54637A6B
+              633964273F3E0D0A3C783A786D706D65746120786D6C6E733A783D2261646F62
+              653A6E733A6D6574612F223E3C7264663A52444620786D6C6E733A7264663D22
+              687474703A2F2F7777772E77332E6F72672F313939392F30322F32322D726466
+              2D73796E7461782D6E7323223E3C7264663A4465736372697074696F6E207264
+              663A61626F75743D22757569643A66616635626464352D626133642D31316461
+              2D616433312D6433336437353138326631622220786D6C6E733A746966663D22
+              687474703A2F2F6E732E61646F62652E636F6D2F746966662F312E302F223E3C
+              746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269656E7461
+              74696F6E3E3C2F7264663A4465736372697074696F6E3E3C2F7264663A524446
+              3E3C2F783A786D706D6574613E0D0A3C3F787061636B657420656E643D277727
+              3F3E2C94980B000001C44944415478DAED93BDAB816118C6AF77341A2499E523
+              222584814D19506460F10710B341FE0146060A61B01B498981C980F211290325
+              9B309C739E7B38CBCBE93D4EEA0CAEEDED7E9FDF733FD77DDDDCC797F002716F
+              F0FF004FA75364B359743A1D5C2E17701C0797CB85783C0E83C1F01C98C10281
+              00A45229C1B45A2DC6E331068301168B05CAE5327C3EDFEFC0EBF51A168B8560
+              8D46031289E4BBC63A0F068368B7DBE8F57AD0EBF5C2C1894402D56A15F3F91C
+              62B198573F9FCF04349BCDF49F20F0F17884D56A85CD6643A9547A6855329944
+              B3D9C476BB1506DE6C36D0E97448A7D374F8910A850252A9140E878330F0F57A
+              85DD6E8742A140AD567B088EC56268B55A3448C11EE77239643219F4FB7DA854
+              2A5EFD743AC16834C2E974A2582C0A07B34E42A110F9CC2E512A95DFB5D56A45
+              C3659776BB5D68341A61E0E1708870388CDD6E47DF2291087EBF9FAC592E9794
+              029614E6B1DBEDE69DBF0B1E8D469451361096DD7C3E8FC964827ABD8ED96C06
+              B95C0E8FC78368340AB55A7DF7B53C307B5A2412C17EBFA76D638B613299A876
+              BBDD2856ACD37BB9FE11CC02CFFC93C964A8542AB479CF8807F67ABDD4151B96
+              C3E1780AFAE3F0FEAA37F8F5E04F763110C8804E7E0F0000000049454E44AE42
+              6082}
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -612,27 +676,40 @@ object FrmBancos: TFrmBancos
             OnClick = edBusBanCustomButtons0Click
             UsePngGlyph = True
           end>
-        CustomButtonWidth = 18
+        CustomButtonWidth = 22
         PasswordChar = #0
         Spelling.LiveSpell = True
         TabOnEnter = True
         Text = ''
         LabelPosition = lpLeft
+        LabelSpacing = 5
         LabelSync = True
-        EditLabel.Width = 38
-        EditLabel.Height = 21
+        EditLabel.Width = 47
+        EditLabel.Height = 25
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 4802889
+        EditLabel.Font.Height = -16
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
         EditLabel.Caption = 'Banco'
       end
       object edBusFil: TLMDLabeledEdit
         AlignWithMargins = True
-        Left = 72
-        Top = 11
-        Width = 325
-        Height = 21
+        Left = 86
+        Top = 13
+        Width = 390
+        Height = 25
         Hint = 'Busca banco'
-        Margins.Top = 4
-        Margins.Bottom = 4
+        Margins.Left = 4
+        Margins.Top = 5
+        Margins.Right = 4
+        Margins.Bottom = 5
         Bevel.StyleOuter = bvNormal
         Bevel.WidthInner = 0
         Bevel.WidthOuter = 0
@@ -647,7 +724,7 @@ object FrmBancos: TFrmBancos
         OnKeyDown = edBusFilKeyDown
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         CharCase = ecUpperCase
@@ -658,24 +735,37 @@ object FrmBancos: TFrmBancos
             Cursor = crHandPoint
             ParentFont = False
             PngGlyph.Data = {
-              89504E470D0A1A0A0000000D494844520000001200000014080600000080976D
-              4A000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              00097048597300000EC300000EC301C76FA864000001C44944415478DAD592BD
-              CB816114C6AF6751468324B37C44A48430B029038A0C2CFE006236C83FC0C840
-              210C762329313019503E2265A0641386F77DEF3328799EB7F76B79CF76779FF3
-              3BE75CE7E2DE3E027F10DCFF02CD6633E4723974BB5D5CAF57701C07B7DB8D44
-              2201A3D1F835102B0E068390C96454ACD3E930994C301C0EB15C2E51A954E0F7
-              FB3F076D361B58AD562A6E369B904AA58F3F3659281442A7D341BFDF87C16010
-              06259349D46A352C160B48249297692F970B012C160BE5F1824EA7136C361BEC
-              763BCAE5B2A0B8A9540AAD560BBBDD8E1FB4DD6EA1D7EB91C9642859288AC522
-              D2E9348EC7233FE876BBC1E17040A954A25EAF0B82E2F138DAED36092FA8513E
-              9F47369BC56030805AAD7E819CCF67984C26B85C2E944A256110EB140E874927
-              0655A9548FBFF57A4DC7604D7ABD1EB45A2D3F68341A21128960BFDFD35B2C16
-              231008D0AAABD58AAEC42EC934F2783CFC3E1A8FC7E4112620F34EA150C0743A
-              45A3D1C07C3E8742A180D7EB452C168346A379DAE20162A346A3511C0E077233
-              33A2D96CA6A4FBFD4E676693F0F9EA09C40CC6F697CBE5A856ABE4ECEFC403E4
-              F3F9A82B13D7E9747E0B2278B59FC4138899512412FD1EF49B7807C22803D414
-              9A2D2C0000000049454E44AE426082}
+              89504E470D0A1A0A0000000D4948445200000016000000180806000000FEBE0D
+              4B000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              000970485973000011AF000011AF01F7FD4B840000018769545874584D4C3A63
+              6F6D2E61646F62652E786D7000000000003C3F787061636B657420626567696E
+              3D27EFBBBF272069643D2757354D304D7043656869487A7265537A4E54637A6B
+              633964273F3E0D0A3C783A786D706D65746120786D6C6E733A783D2261646F62
+              653A6E733A6D6574612F223E3C7264663A52444620786D6C6E733A7264663D22
+              687474703A2F2F7777772E77332E6F72672F313939392F30322F32322D726466
+              2D73796E7461782D6E7323223E3C7264663A4465736372697074696F6E207264
+              663A61626F75743D22757569643A66616635626464352D626133642D31316461
+              2D616433312D6433336437353138326631622220786D6C6E733A746966663D22
+              687474703A2F2F6E732E61646F62652E636F6D2F746966662F312E302F223E3C
+              746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269656E7461
+              74696F6E3E3C2F7264663A4465736372697074696F6E3E3C2F7264663A524446
+              3E3C2F783A786D706D6574613E0D0A3C3F787061636B657420656E643D277727
+              3F3E2C94980B000001C44944415478DAED93BDAB816118C6AF77341A2499E523
+              222584814D19506460F10710B341FE0146060A61B01B498981C980F211290325
+              9B309C739E7B38CBCBE93D4EEA0CAEEDED7E9FDF733FD77DDDDCC797F002716F
+              F0FF004FA75364B359743A1D5C2E17701C0797CB85783C0E83C1F01C98C10281
+              00A45229C1B45A2DC6E331068301168B05CAE5327C3EDFEFC0EBF51A168B8560
+              8D46031289E4BBC63A0F068368B7DBE8F57AD0EBF5C2C1894402D56A15F3F91C
+              62B198573F9FCF04349BCDF49F20F0F17884D56A85CD6643A9547A6855329944
+              B3D9C476BB1506DE6C36D0E97448A7D374F8910A850252A9140E878330F0F57A
+              85DD6E8742A140AD567B088EC56268B55A3448C11EE77239643219F4FB7DA854
+              2A5EFD743AC16834C2E974A2582C0A07B34E42A110F9CC2E512A95DFB5D56A45
+              C3659776BB5D68341A61E0E1708870388CDD6E47DF2291087EBF9FAC592E9794
+              029614E6B1DBEDE69DBF0B1E8D469451361096DD7C3E8FC964827ABD8ED96C06
+              B95C0E8FC78368340AB55A7DF7B53C307B5A2412C17EBFA76D638B613299A876
+              BBDD2856ACD37BB9FE11CC02CFFC93C964A8542AB479CF8807F67ABDD4151B96
+              C3E1780AFAE3F0FEAA37F8F5E04F763110C8804E7E0F0000000049454E44AE42
+              6082}
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -686,39 +776,50 @@ object FrmBancos: TFrmBancos
             OnClick = edBusFilCustomButtons0Click
             UsePngGlyph = True
           end>
-        CustomButtonWidth = 18
+        CustomButtonWidth = 22
         PasswordChar = #0
         Spelling.LiveSpell = True
         TabOnEnter = True
         Text = ''
         LabelPosition = lpLeft
+        LabelSpacing = 5
         LabelSync = True
-        EditLabel.Width = 28
-        EditLabel.Height = 21
+        EditLabel.Width = 36
+        EditLabel.Height = 25
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
+        EditLabel.Font.Charset = DEFAULT_CHARSET
+        EditLabel.Font.Color = 4802889
+        EditLabel.Font.Height = -16
+        EditLabel.Font.Name = 'Roboto'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
         EditLabel.Caption = 'Filial'
       end
       object btBusca: TAdvGlowButton
         AlignWithMargins = True
-        Left = 410
-        Top = 39
-        Width = 86
-        Height = 24
+        Left = 491
+        Top = 47
+        Width = 103
+        Height = 28
         Cursor = crHandPoint
         Margins.Left = 2
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Caption = 'Buscar'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 5723991
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -785,11 +886,15 @@ object FrmBancos: TFrmBancos
       end
     end
     object LMDDBLabeledEdit10: TLMDDBLabeledEdit
-      Left = 177
-      Top = 252
-      Width = 80
-      Height = 22
+      Left = 212
+      Top = 302
+      Width = 96
+      Height = 26
       Hint = 'Conta'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -801,31 +906,40 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'o n'#250'mero da conta'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'ContaBco'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 82
-      EditLabel.Height = 15
+      EditLabel.Width = 96
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'CONTA / D'#205'GITO'
     end
     object LMDDBLabeledEdit3: TLMDDBLabeledEdit
-      Left = 267
-      Top = 252
-      Width = 22
-      Height = 22
+      Left = 320
+      Top = 302
+      Width = 26
+      Height = 26
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -837,35 +951,44 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'o d'#237'gito da conta'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
       Alignment = taCenter
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'DigitoBco'
       DataSource = SouBanco
       LabelPosition = lpLeft
       LabelSpacing = 1
       LabelSync = True
-      EditLabel.Width = 7
-      EditLabel.Height = 22
+      EditLabel.Width = 8
+      EditLabel.Height = 26
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -13
+      EditLabel.Font.Height = -16
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = '/'
     end
     object LMDDBLabeledEdit4: TLMDDBLabeledEdit
-      Left = 66
-      Top = 256
-      Width = 57
-      Height = 22
+      Left = 79
+      Top = 307
+      Width = 68
+      Height = 26
       Hint = 'Ag'#234'ncia'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -877,31 +1000,40 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'o n'#250'mero da ag'#234'ncia'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'AgeBco'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 91
-      EditLabel.Height = 15
+      EditLabel.Width = 108
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'AG'#202'NCIA / D'#205'GITO'
     end
     object LMDDBLabeledEdit5: TLMDDBLabeledEdit
-      Left = 139
-      Top = 252
-      Width = 25
-      Height = 22
+      Left = 167
+      Top = 302
+      Width = 29
+      Height = 26
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -912,19 +1044,68 @@ object FrmBancos: TFrmBancos
       TabOrder = 4
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
       Alignment = taCenter
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'DigAgeBco'
       DataSource = SouBanco
       LabelPosition = lpLeft
       LabelSync = True
-      EditLabel.Width = 7
-      EditLabel.Height = 22
+      EditLabel.Width = 8
+      EditLabel.Height = 26
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
+      EditLabel.AutoSize = False
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = 9600112
+      EditLabel.Font.Height = -16
+      EditLabel.Font.Name = 'Roboto'
+      EditLabel.Font.Style = [fsBold]
+      EditLabel.ParentFont = False
+      EditLabel.Caption = '/'
+    end
+    object LMDDBLabeledSpinEdit1: TLMDDBLabeledSpinEdit
+      Left = 79
+      Top = 370
+      Width = 66
+      Height = 28
+      Hint = 'Tipo da carteira'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caret.BlinkRate = 530
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 8
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 7039851
+      Font.Height = -16
+      Font.Name = 'Roboto'
+      Font.Style = []
+      AutoSelect = True
+      ParentFont = False
+      CustomButtons = <>
+      CustomButtonWidth = 19
+      TabOnEnter = True
+      MaxValue = 999
+      DataField = 'CarCobBco'
+      DataSource = SouBanco
+      LabelSpacing = 2
+      LabelSync = True
+      EditLabel.Width = 66
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
@@ -932,74 +1113,48 @@ object FrmBancos: TFrmBancos
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
-      EditLabel.Caption = '/'
-    end
-    object LMDDBLabeledSpinEdit1: TLMDDBLabeledSpinEdit
-      Left = 66
-      Top = 309
-      Width = 55
-      Height = 23
-      Hint = 'Tipo da carteira'
-      Caret.BlinkRate = 530
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 8
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 7039851
-      Font.Height = -13
-      Font.Name = 'Roboto'
-      Font.Style = []
-      AutoSelect = True
-      ParentFont = False
-      CustomButtons = <>
-      TabOnEnter = True
-      MaxValue = 999
-      DataField = 'CarCobBco'
-      DataSource = SouBanco
-      LabelSpacing = 2
-      LabelSync = True
-      EditLabel.Width = 55
-      EditLabel.Height = 15
-      EditLabel.AutoSize = False
-      EditLabel.Font.Charset = DEFAULT_CHARSET
-      EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
-      EditLabel.Font.Name = 'Roboto'
-      EditLabel.Font.Style = [fsBold]
-      EditLabel.ParentFont = False
       EditLabel.Caption = 'CARTEIRA'
       Value = 0
     end
     object LMDDBLabeledSpinEdit2: TLMDDBLabeledSpinEdit
-      Left = 141
-      Top = 309
-      Width = 54
-      Height = 23
+      Left = 169
+      Top = 370
+      Width = 65
+      Height = 28
       Hint = 'Modalidade da cobran'#231'a'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caret.BlinkRate = 530
       ParentShowHint = False
       ShowHint = True
       TabOrder = 9
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       AutoSelect = True
       ParentFont = False
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       MaxValue = 999
       DataField = 'ModCobBco'
       DataSource = SouBanco
       LabelSpacing = 2
       LabelSync = True
-      EditLabel.Width = 54
-      EditLabel.Height = 15
+      EditLabel.Width = 65
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
@@ -1007,10 +1162,14 @@ object FrmBancos: TFrmBancos
       Value = 0
     end
     object LMDDBLabeledEdit7: TLMDDBLabeledEdit
-      Left = 410
-      Top = 202
-      Width = 100
-      Height = 22
+      Left = 491
+      Top = 242
+      Width = 120
+      Height = 26
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1021,57 +1180,71 @@ object FrmBancos: TFrmBancos
       TabOrder = 13
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'CodTraBco'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 104
-      EditLabel.Height = 15
+      EditLabel.Width = 120
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'C'#211'D.TRANSMISS'#195'O'
     end
     object LMDDBLabeledSpinEdit3: TLMDDBLabeledSpinEdit
-      Left = 410
-      Top = 252
-      Width = 100
-      Height = 23
+      Left = 491
+      Top = 302
+      Width = 120
+      Height = 28
       Hint = #217'ltimo Nosso Numero registrado no banco'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caret.BlinkRate = 530
       ParentShowHint = False
       ShowHint = True
       TabOrder = 14
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       AutoSelect = True
       ParentFont = False
       Alignment = taRightJustify
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       MaxValue = 0
       DataField = 'UltNosNBco'
       DataSource = SouBanco
       LabelSpacing = 2
       LabelSync = True
-      EditLabel.Width = 100
-      EditLabel.Height = 15
+      EditLabel.Width = 120
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
@@ -1079,11 +1252,15 @@ object FrmBancos: TFrmBancos
       Value = 0
     end
     object LMDDBLabeledEdit8: TLMDDBLabeledEdit
-      Left = 267
-      Top = 309
-      Width = 38
-      Height = 23
+      Left = 320
+      Top = 370
+      Width = 45
+      Height = 28
       Hint = 'Multa por atraso'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1096,33 +1273,42 @@ object FrmBancos: TFrmBancos
       TabOrder = 10
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       Alignment = taRightJustify
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'PerMulBco'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 39
-      EditLabel.Height = 15
+      EditLabel.Width = 44
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'MULTA'
     end
     object LMDDBLabeledEdit9: TLMDDBLabeledEdit
-      Left = 335
-      Top = 309
-      Width = 38
-      Height = 23
+      Left = 401
+      Top = 370
+      Width = 46
+      Height = 28
       Hint = 'Mora por atraso'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1135,40 +1321,49 @@ object FrmBancos: TFrmBancos
       TabOrder = 11
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       Alignment = taRightJustify
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'PerMorBco'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 34
-      EditLabel.Height = 15
+      EditLabel.Width = 38
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'MORA'
     end
     object LMDDBCheckBox5: TLMDDBCheckBox
-      Left = 405
-      Top = 310
-      Width = 115
-      Height = 20
+      Left = 485
+      Top = 371
+      Width = 138
+      Height = 24
       Hint = 'Aceite boleto '#224' receber'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caption = 'ACEITE BOLETO'
       Alignment.Alignment = agTopLeft
       Alignment.Spacing = 4
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 9600112
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentCtl3D = False
@@ -1182,10 +1377,14 @@ object FrmBancos: TFrmBancos
       ValueUnchecked = '0'
     end
     object LMDDBLabeledEdit23: TLMDDBLabeledEdit
-      Left = 141
-      Top = 366
-      Width = 369
-      Height = 23
+      Left = 169
+      Top = 438
+      Width = 442
+      Height = 28
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1200,7 +1399,7 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'a subst'#226'ncia'
       Font.Charset = ANSI_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
@@ -1768,28 +1967,36 @@ object FrmBancos: TFrmBancos
           UsePngGlyph = True
         end>
       CustomButtonsStyle = ubsExplorer
-      CustomButtonWidth = 18
+      CustomButtonWidth = 22
       CustomButtonParentCtlXP = False
       TabOnEnter = True
       DataField = 'Nomcon'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 101
-      EditLabel.Height = 15
+      EditLabel.Width = 116
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = ANSI_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'CONTA ASSOCIADA'
     end
     object LMDDBLabeledEdit6: TLMDDBLabeledEdit
-      Left = 410
-      Top = 149
-      Width = 100
-      Height = 23
+      Left = 491
+      Top = 178
+      Width = 120
+      Height = 28
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1800,32 +2007,41 @@ object FrmBancos: TFrmBancos
       TabOrder = 12
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'CodCedBco'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 73
-      EditLabel.Height = 15
+      EditLabel.Width = 86
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'C'#211'D.CEDENTE'
     end
     object edCNABMod: TLMDLabeledListComboBox
-      Left = 66
-      Top = 366
-      Width = 55
-      Height = 23
+      Left = 79
+      Top = 438
+      Width = 66
+      Height = 28
       Hint = 'C'#243'digo CNAB pra envio de boletos'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthInner = 0
       Bevel.WidthOuter = 0
@@ -1838,31 +2054,40 @@ object FrmBancos: TFrmBancos
       TabOrder = 15
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1447446
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
       Alignment = taCenter
+      CustomButtonWidth = 19
       Items.Strings = (
         '240'
         '400')
       ItemIndex = 1
-      EditLabel.Width = 56
-      EditLabel.Height = 15
+      EditLabel.Width = 65
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'COD.CNAB'
     end
     object LMDDBLabeledEdit11: TLMDDBLabeledEdit
-      Left = 304
-      Top = 252
-      Width = 82
-      Height = 22
+      Left = 364
+      Top = 302
+      Width = 98
+      Height = 26
       Hint = 'Ag'#234'ncia'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1874,32 +2099,41 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'conv'#234'nio com o banco'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = []
       CharCase = ecUpperCase
       ParentFont = False
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'Convenio'
       DataSource = SouBanco
       LabelSpacing = 2
-      EditLabel.Width = 85
-      EditLabel.Height = 15
+      EditLabel.Width = 97
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'CONV'#202'NIO BCO.'
     end
     object LMDDBLabeledEdit12: TLMDDBLabeledEdit
-      Left = 66
-      Top = 202
-      Width = 320
-      Height = 23
+      Left = 79
+      Top = 242
+      Width = 383
+      Height = 28
       Hint = 'Fornecedor, Cliente, Funcion'#225'rio...'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -1914,7 +2148,7 @@ object FrmBancos: TFrmBancos
       ValidationMsgString = 'o nome da filial'
       Font.Charset = ANSI_CHARSET
       Font.Color = 2236186
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Tahoma'
       Font.Style = []
       CharCase = ecLowerCase
@@ -2482,17 +2716,21 @@ object FrmBancos: TFrmBancos
           UsePngGlyph = True
         end>
       CustomButtonsStyle = ubsExplorer
-      CustomButtonWidth = 18
+      CustomButtonWidth = 22
       CustomButtonParentCtlXP = False
       TabOnEnter = True
       DataField = 'Nomfil'
       DataSource = SouBanco
-      EditLabel.Width = 85
-      EditLabel.Height = 15
+      EditLabel.Width = 98
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = ANSI_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
@@ -2502,8 +2740,8 @@ object FrmBancos: TFrmBancos
   object timAlpha: TTimer
     Interval = 250
     OnTimer = timAlphaTimer
-    Left = 18
-    Top = 340
+    Left = 15
+    Top = 358
   end
   object SouBanco: TDataSource
     DataSet = TabBanco

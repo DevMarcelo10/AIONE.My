@@ -1,17 +1,21 @@
 object FrmPlaCon: TFrmPlaCon
   Left = 470
   Top = 249
+  Margins.Left = 4
+  Margins.Top = 4
+  Margins.Right = 4
+  Margins.Bottom = 4
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'Financeiro - Pano de Contas'
-  ClientHeight = 592
-  ClientWidth = 620
-  Color = 16381167
+  ClientHeight = 709
+  ClientWidth = 743
+  Color = clWhite
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 4276545
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Roboto'
   Font.Style = []
   KeyPreview = True
@@ -19,13 +23,17 @@ object FrmPlaCon: TFrmPlaCon
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  TextHeight = 14
+  PixelsPerInch = 115
+  TextHeight = 17
   object PanelCadastro: TLMDSimplePanel
     Left = 0
     Top = 0
-    Width = 620
-    Height = 592
-    Margins.Right = 4
+    Width = 743
+    Height = 709
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 5
+    Margins.Bottom = 4
     Align = alClient
     Bevel.StyleOuter = bvNormal
     Bevel.WidthOuter = 0
@@ -34,35 +42,43 @@ object FrmPlaCon: TFrmPlaCon
     Color = 16382200
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 7039851
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
     TabOrder = 0
     object Shape1: TShape
       Left = 1
-      Top = 182
-      Width = 618
+      Top = 216
+      Width = 741
       Height = 1
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alBottom
       Pen.Color = 14211288
-      ExplicitTop = 171
-      ExplicitWidth = 501
+      ExplicitTop = 218
     end
     object PanelButtons: TLMDSimplePanel
-      Left = 183
-      Top = 144
-      Width = 320
-      Height = 28
+      Left = 219
+      Top = 173
+      Width = 384
+      Height = 33
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       ParentColor = True
       TabOrder = 3
       object btSalvar: TAdvGlowButton
         AlignWithMargins = True
-        Left = 220
+        Left = 265
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 119
+        Height = 33
         Cursor = crHandPoint
+        Margins.Left = 4
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
@@ -70,13 +86,13 @@ object FrmPlaCon: TFrmPlaCon
         Caption = 'Salvar'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -140,26 +156,26 @@ object FrmPlaCon: TFrmPlaCon
       end
       object btExcluir: TAdvGlowButton
         AlignWithMargins = True
-        Left = 111
+        Left = 134
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 120
+        Height = 33
         Cursor = crHandPoint
         Margins.Left = 2
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Align = alRight
         Caption = 'Excluir'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 5723991
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -226,25 +242,26 @@ object FrmPlaCon: TFrmPlaCon
       end
       object btNovo: TAdvGlowButton
         AlignWithMargins = True
-        Left = 3
+        Left = 6
         Top = 0
-        Width = 100
-        Height = 28
+        Width = 119
+        Height = 33
         Cursor = crHandPoint
+        Margins.Left = 4
         Margins.Top = 0
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 0
         Align = alRight
         Caption = 'Novo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7039851
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Font.Quality = fqClearType
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -306,29 +323,31 @@ object FrmPlaCon: TFrmPlaCon
     end
     object PanelTop: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 6
-      Top = 6
-      Width = 610
-      Height = 37
-      Margins.Left = 5
-      Margins.Top = 5
+      Left = 7
+      Top = 4
+      Width = 731
+      Height = 45
+      Margins.Left = 6
+      Margins.Right = 4
       Margins.Bottom = 0
       Align = alTop
       ParentColor = True
       TabOrder = 4
       object LMDLabel2: TLMDLabel
         AlignWithMargins = True
-        Left = 10
-        Top = 6
-        Width = 119
-        Height = 28
-        Margins.Left = 10
-        Margins.Top = 6
+        Left = 12
+        Top = 7
+        Width = 143
+        Height = 34
+        Margins.Left = 12
+        Margins.Top = 7
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alLeft
         Alignment = agCenterLeft
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 8811110
-        Font.Height = -16
+        Font.Height = -19
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
@@ -338,21 +357,21 @@ object FrmPlaCon: TFrmPlaCon
       object btFechar: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 586
+        Left = 702
         Top = 1
-        Width = 24
-        Height = 28
+        Width = 29
+        Height = 34
         Cursor = crHandPoint
         Margins.Left = 0
         Margins.Top = 1
         Margins.Right = 0
-        Margins.Bottom = 8
+        Margins.Bottom = 10
         Align = alRight
         AntiAlias = aaAntiAlias
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -376,7 +395,7 @@ object FrmPlaCon: TFrmPlaCon
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -442,11 +461,15 @@ object FrmPlaCon: TFrmPlaCon
       end
     end
     object LMDDBLabeledEdit1: TLMDDBLabeledEdit
-      Left = 67
-      Top = 108
-      Width = 77
-      Height = 23
+      Left = 80
+      Top = 129
+      Width = 93
+      Height = 28
       Hint = 'N'#250'mero documento'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -461,25 +484,34 @@ object FrmPlaCon: TFrmPlaCon
       OnExit = LMDDBLabeledEdit1Exit
       ValidationMsgString = 'o c'#243'digo da conta'
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'Codcon'
       DataSource = SouPlco
-      EditLabel.Width = 42
-      EditLabel.Height = 15
+      EditLabel.Width = 50
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'C'#211'DIGO'
     end
     object LMDDBLabeledEdit2: TLMDDBLabeledEdit
-      Left = 150
-      Top = 108
-      Width = 353
-      Height = 23
+      Left = 180
+      Top = 129
+      Width = 423
+      Height = 28
       Hint = 'Parcela / Desdobramento'
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -494,24 +526,33 @@ object FrmPlaCon: TFrmPlaCon
       ValidationMsgString = 'a descri'#231#227'o da conta'
       CharCase = ecUpperCase
       CustomButtons = <>
+      CustomButtonWidth = 19
       TabOnEnter = True
       DataField = 'Nomcon'
       DataSource = SouPlco
-      EditLabel.Width = 117
-      EditLabel.Height = 15
+      EditLabel.Width = 135
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
       EditLabel.Caption = 'DESCRI'#199#195'O DA CONTA'
     end
     object LMDDBLabeledEdit0: TLMDDBLabeledEdit
-      Left = 14
-      Top = 108
-      Width = 45
-      Height = 23
+      Left = 17
+      Top = 129
+      Width = 54
+      Height = 28
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.StyleOuter = bvNormal
       Bevel.WidthOuter = 0
       Bevel.BorderColor = 15657192
@@ -525,22 +566,27 @@ object FrmPlaCon: TFrmPlaCon
       TabStop = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7039851
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
       Alignment = taCenter
       CustomButtons = <>
+      CustomButtonWidth = 19
       DataField = 'IDCon'
       DataSource = SouPlco
       ReadOnly = True
       OnDataChange = LMDDBLabeledEdit0DataChange
-      EditLabel.Width = 12
-      EditLabel.Height = 15
+      EditLabel.Width = 15
+      EditLabel.Height = 17
+      EditLabel.Margins.Left = 4
+      EditLabel.Margins.Top = 4
+      EditLabel.Margins.Right = 4
+      EditLabel.Margins.Bottom = 4
       EditLabel.AutoSize = False
       EditLabel.Font.Charset = DEFAULT_CHARSET
       EditLabel.Font.Color = 9600112
-      EditLabel.Font.Height = -11
+      EditLabel.Font.Height = -13
       EditLabel.Font.Name = 'Roboto'
       EditLabel.Font.Style = [fsBold]
       EditLabel.ParentFont = False
@@ -549,13 +595,12 @@ object FrmPlaCon: TFrmPlaCon
     object DBGrid1: TDBGrid
       Tag = 1
       AlignWithMargins = True
-      Left = 1
-      Top = 186
-      Width = 618
-      Height = 403
-      Margins.Left = 0
-      Margins.Right = 0
-      Margins.Bottom = 2
+      Left = 4
+      Top = 221
+      Width = 735
+      Height = 483
+      Margins.Top = 4
+      Margins.Bottom = 4
       Align = alBottom
       BorderStyle = bsNone
       Color = clWhite
@@ -567,7 +612,7 @@ object FrmPlaCon: TFrmPlaCon
       GradientStartColor = 16447736
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Tahoma'
       Font.Style = []
       Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleHotTrack]
@@ -577,7 +622,7 @@ object FrmPlaCon: TFrmPlaCon
       TabOrder = 6
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = 5131854
-      TitleFont.Height = -15
+      TitleFont.Height = -18
       TitleFont.Name = 'Roboto'
       TitleFont.Style = []
       OnDrawColumnCell = DBGrid1DrawColumnCell
@@ -588,17 +633,17 @@ object FrmPlaCon: TFrmPlaCon
           FieldName = 'Codcon'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'C'#211'DIGO'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = 5131854
-          Title.Font.Height = -12
+          Title.Font.Height = -14
           Title.Font.Name = 'Roboto'
           Title.Font.Style = [fsBold]
-          Width = 110
+          Width = 132
           Visible = True
         end
         item
@@ -606,17 +651,17 @@ object FrmPlaCon: TFrmPlaCon
           FieldName = 'Nomcon'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'DESCRI'#199#195'O DA CONTA'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = 5131854
-          Title.Font.Height = -12
+          Title.Font.Height = -14
           Title.Font.Name = 'Roboto'
           Title.Font.Style = [fsBold]
-          Width = 450
+          Width = 539
           Visible = True
         end
         item
@@ -625,29 +670,30 @@ object FrmPlaCon: TFrmPlaCon
           FieldName = 'DevCre'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Roboto'
           Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'D/C'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = 5131854
-          Title.Font.Height = -12
+          Title.Font.Height = -14
           Title.Font.Name = 'Roboto'
           Title.Font.Style = [fsBold]
-          Width = 35
+          Width = 39
           Visible = True
         end>
     end
     object PanelBckBut: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 14
-      Top = 43
-      Width = 595
-      Height = 37
-      Margins.Left = 13
-      Margins.Top = 0
-      Margins.Right = 10
+      Left = 17
+      Top = 51
+      Width = 713
+      Height = 44
+      Margins.Left = 16
+      Margins.Top = 2
+      Margins.Right = 12
+      Margins.Bottom = 4
       Align = alTop
       Bevel.StyleOuter = bvNormal
       Bevel.WidthInner = 0
@@ -658,13 +704,15 @@ object FrmPlaCon: TFrmPlaCon
       TabOrder = 7
       object edBusPlc: TLMDLabeledEdit
         AlignWithMargins = True
-        Left = 93
-        Top = 4
-        Width = 434
-        Height = 21
+        Left = 111
+        Top = 9
+        Width = 520
+        Height = 28
         Hint = 'Busca natureza financeira'
-        Margins.Top = 4
-        Margins.Bottom = 4
+        Margins.Left = 4
+        Margins.Top = 5
+        Margins.Right = 4
+        Margins.Bottom = 5
         Bevel.StyleOuter = bvNormal
         Bevel.WidthInner = 0
         Bevel.WidthOuter = 0
@@ -679,7 +727,7 @@ object FrmPlaCon: TFrmPlaCon
         OnKeyPress = edBusPlcKeyPress
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         CharCase = ecUpperCase
@@ -690,24 +738,37 @@ object FrmPlaCon: TFrmPlaCon
             Cursor = crHandPoint
             ParentFont = False
             PngGlyph.Data = {
-              89504E470D0A1A0A0000000D494844520000001200000014080600000080976D
-              4A000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              00097048597300000EC300000EC301C76FA864000001C44944415478DAD592BD
-              CB816114C6AF6751468324B37C44A48430B029038A0C2CFE006236C83FC0C840
-              210C762329313019503E2265A0641386F77DEF3328799EB7F76B79CF76779FF3
-              3BE75CE7E2DE3E027F10DCFF02CD6633E4723974BB5D5CAF57701C07B7DB8D44
-              2201A3D1F835102B0E068390C96454ACD3E930994C301C0EB15C2E51A954E0F7
-              FB3F076D361B58AD562A6E369B904AA58F3F3659281442A7D341BFDF87C16010
-              06259349D46A352C160B48249297692F970B012C160BE5F1824EA7136C361BEC
-              763BCAE5B2A0B8A9540AAD560BBBDD8E1FB4DD6EA1D7EB91C9642859288AC522
-              D2E9348EC7233FE876BBC1E17040A954A25EAF0B82E2F138DAED36092FA8513E
-              9F47369BC56030805AAD7E819CCF67984C26B85C2E944A256110EB140E874927
-              0655A9548FBFF57A4DC7604D7ABD1EB45A2D3F68341A21128960BFDFD35B2C16
-              231008D0AAABD58AAEC42EC934F2783CFC3E1A8FC7E4112620F34EA150C0743A
-              45A3D1C07C3E8742A180D7EB452C168346A379DAE20162A346A3511C0E077233
-              33A2D96CA6A4FBFD4E676693F0F9EA09C40CC6F697CBE5A856ABE4ECEFC403E4
-              F3F9A82B13D7E9747E0B2278B59FC4138899512412FD1EF49B7807C22803D414
-              9A2D2C0000000049454E44AE426082}
+              89504E470D0A1A0A0000000D4948445200000016000000180806000000FEBE0D
+              4B000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              000970485973000011AF000011AF01F7FD4B840000018769545874584D4C3A63
+              6F6D2E61646F62652E786D7000000000003C3F787061636B657420626567696E
+              3D27EFBBBF272069643D2757354D304D7043656869487A7265537A4E54637A6B
+              633964273F3E0D0A3C783A786D706D65746120786D6C6E733A783D2261646F62
+              653A6E733A6D6574612F223E3C7264663A52444620786D6C6E733A7264663D22
+              687474703A2F2F7777772E77332E6F72672F313939392F30322F32322D726466
+              2D73796E7461782D6E7323223E3C7264663A4465736372697074696F6E207264
+              663A61626F75743D22757569643A66616635626464352D626133642D31316461
+              2D616433312D6433336437353138326631622220786D6C6E733A746966663D22
+              687474703A2F2F6E732E61646F62652E636F6D2F746966662F312E302F223E3C
+              746966663A4F7269656E746174696F6E3E313C2F746966663A4F7269656E7461
+              74696F6E3E3C2F7264663A4465736372697074696F6E3E3C2F7264663A524446
+              3E3C2F783A786D706D6574613E0D0A3C3F787061636B657420656E643D277727
+              3F3E2C94980B000001C44944415478DAED93BDAB816118C6AF77341A2499E523
+              222584814D19506460F10710B341FE0146060A61B01B498981C980F211290325
+              9B309C739E7B38CBCBE93D4EEA0CAEEDED7E9FDF733FD77DDDDCC797F002716F
+              F0FF004FA75364B359743A1D5C2E17701C0797CB85783C0E83C1F01C98C10281
+              00A45229C1B45A2DC6E331068301168B05CAE5327C3EDFEFC0EBF51A168B8560
+              8D46031289E4BBC63A0F068368B7DBE8F57AD0EBF5C2C1894402D56A15F3F91C
+              62B198573F9FCF04349BCDF49F20F0F17884D56A85CD6643A9547A6855329944
+              B3D9C476BB1506DE6C36D0E97448A7D374F8910A850252A9140E878330F0F57A
+              85DD6E8742A140AD567B088EC56268B55A3448C11EE77239643219F4FB7DA854
+              2A5EFD743AC16834C2E974A2582C0A07B34E42A110F9CC2E512A95DFB5D56A45
+              C3659776BB5D68341A61E0E1708870388CDD6E47DF2291087EBF9FAC592E9794
+              029614E6B1DBEDE69DBF0B1E8D469451361096DD7C3E8FC964827ABD8ED96C06
+              B95C0E8FC78368340AB55A7DF7B53C307B5A2412C17EBFA76D638B613299A876
+              BBDD2856ACD37BB9FE11CC02CFFC93C964A8542AB479CF8807F67ABDD4151B96
+              C3E1780AFAE3F0FEAA37F8F5E04F763110C8804E7E0F0000000049454E44AE42
+              6082}
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -718,7 +779,7 @@ object FrmPlaCon: TFrmPlaCon
             OnClick = edBusPlcCustomButtons0Click
             UsePngGlyph = True
           end>
-        CustomButtonWidth = 18
+        CustomButtonWidth = 23
         PasswordChar = #0
         Spelling.LiveSpell = True
         TabOnEnter = True
@@ -726,17 +787,25 @@ object FrmPlaCon: TFrmPlaCon
         LabelPosition = lpLeft
         LabelSpacing = 2
         LabelSync = True
-        EditLabel.Width = 38
-        EditLabel.Height = 21
+        EditLabel.Width = 46
+        EditLabel.Height = 28
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Caption = 'Busca'
       end
     end
     object LMDDBRadioGroup1: TLMDDBRadioGroup
-      Left = 508
-      Top = 89
-      Width = 103
-      Height = 62
+      Left = 609
+      Top = 107
+      Width = 123
+      Height = 74
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Bevel.BorderColor = 16382200
       Bevel.Mode = bmCustom
       BtnAlignment.Alignment = agCenterLeft
@@ -748,7 +817,7 @@ object FrmPlaCon: TFrmPlaCon
       CaptionParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 9600112
-      Font.Height = -12
+      Font.Height = -14
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ImageIndex = 1
@@ -769,8 +838,8 @@ object FrmPlaCon: TFrmPlaCon
   object timAlpha: TTimer
     Interval = 250
     OnTimer = timAlphaTimer
-    Left = 42
-    Top = 308
+    Left = 665
+    Top = 290
   end
   object SouPlco: TDataSource
     DataSet = TabPlco
@@ -863,15 +932,14 @@ object FrmPlaCon: TFrmPlaCon
     DataBase = DM.DWDataBase
     SQL.Strings = (
       'SELECT * FROM arqplacon ORDER BY Codcon')
-    UpdateTableName = 'arqplacon'
     CacheUpdateRecords = True
     AutoCommitData = False
     AutoRefreshAfterCommit = False
     ThreadRequest = False
     RaiseErrors = True
     ReflectChanges = True
-    Left = 45
-    Top = 237
+    Left = 52
+    Top = 268
     object TabAuxPlcoIDCon: TFDAutoIncField
       FieldName = 'IDCon'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -904,7 +972,7 @@ object FrmPlaCon: TFrmPlaCon
   object SouAuxPlc: TDataSource
     AutoEdit = False
     DataSet = TabAuxPlco
-    Left = 117
-    Top = 236
+    Left = 41
+    Top = 362
   end
 end

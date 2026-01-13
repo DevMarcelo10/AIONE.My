@@ -1,27 +1,36 @@
 object FrmMenu: TFrmMenu
   Left = 0
   Top = 0
+  Margins.Left = 4
+  Margins.Top = 4
+  Margins.Right = 4
+  Margins.Bottom = 4
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'Menu Geral '
-  ClientHeight = 50
-  ClientWidth = 560
+  ClientHeight = 60
+  ClientWidth = 671
   Color = 4144959
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Segoe UI'
   Font.Style = []
+  PixelsPerInch = 115
   DesignSize = (
-    560
-    50)
-  TextHeight = 15
+    671
+    60)
+  TextHeight = 19
   object PanelMenu: TLMDSimplePanel
-    Left = 8
+    Left = 10
     Top = 0
-    Width = 554
-    Height = 50
+    Width = 663
+    Height = 60
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Anchors = [akLeft, akTop, akBottom]
     Color = 4144959
     TabOrder = 0
@@ -30,8 +39,8 @@ object FrmMenu: TFrmMenu
       AlignWithMargins = True
       Left = 0
       Top = 0
-      Width = 60
-      Height = 50
+      Width = 72
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -42,7 +51,7 @@ object FrmMenu: TFrmMenu
       Caption = 'VENDA'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -50,7 +59,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -189,10 +198,10 @@ object FrmMenu: TFrmMenu
     object btCaixa: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 60
+      Left = 72
       Top = 0
-      Width = 60
-      Height = 50
+      Width = 72
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -203,7 +212,7 @@ object FrmMenu: TFrmMenu
       Caption = 'CAIXA'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -211,70 +220,51 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
       Picture.Data = {
-        89504E470D0A1A0A0000000D494844520000002000000020100600000023EAA6
-        B7000000206348524D00007A26000080840000FA00000080E8000075300000EA
-        6000003A98000017709CBA513C00000006624B4744000000000000F943BB7F00
-        00000970485973000000600000006000F06B42CF000006C74944415468DEED98
-        7F4C95D719C73FE7BD5C01295C10DCDA509326ADE29D2634CD80B480C54B5DAA
-        916E26D868494CA6CD8C491BB3AC8DE8D2B4AB46974EB775AE5BB76EA13A69A9
-        CEAAB169B31F49B3C01A2C3545ED2A34634DBA2AD85B1484C1BDF7DCFB3EFBE3
-        BC2F70810B5C6E1D6EEBF3CF93F39CE739CF39DFF39CE73CE7C097F4FF4D6AAE
-        2720F2E2DFA0BA5A06A24BE0D4296E891C84AC2CD0DA68C47311B71D8900704D
-        EF8250483E8E1C838D1BD34A7EB9154E9E9CA97F6BAE0100EBE7505ECE2DFCCA
-        2C3C49CAE3079091613DA6F2A0AA2A69EF73BD7C90565073168969294F5FFE5A
-        0C6BD640F82770FBEDA3211B6981FE7EA56A76C36BAF4D3144377477A73C8F43
-        F2367477B33439BB949117BB65210483A8701314148C9E51C315F63EC8C951D6
-        37DF81818189008A8052C8C17F424505C496437A3A442B8C4668A7E1A61DAB8C
-        C5C93D2D61CBF8EA69809616A58E1D83586CA6F34F390250B26CEA10F6BEECF4
-        2F99D45C290522A6D5DC3C0ACCBE1D1008C821950E3B7702EB00F8696C13BCF0
-        425AC9FEB570F264AA5B38630044DE17B8E30E041FDC751774BFE74CF83B33B3
-        3F7A14020164B80C2C0BDC9D1CBFD3462E5F89B44120C09558081E78002806B0
-        BEA14AA1B3335AFEC41B3038386A1FAE07F0B4683F0C0E2AF59BEDD0DA3AEDFE
-        CD1C800B7E38750A2247E0A18790E8C3B068112AB208DADB21F214E4E74F3C02
-        9E22F0F9243CD00AC120D7F40EE8EFA72FF2A23912D14D463F52E2F052C7DE91
-        EB92B16DB9A8E3F5F3B51FD2D3A9D4D55058E8FAB594771564672BEB170F1BA0
-        528C00900566E75223759BDA0F4545DCC663909707D17DA6C71D5AD51B6E671B
-        EED9E500500FA0FCB69B138ACCB4723BE0D34FEDB78316747551C5A32619F737
-        CF64BEB3C90167CD999512D01A517E387C18452D6465518B13010E3F7E250491
-        087ABEB92132067F07E1B004BDC7A0AD0DE5C930394237C4BBB19C9C112F975E
-        579E761F8055D47F2F949773553E817018783699C5CC1E0025BBA1AE0EA4073A
-        3A405502A8E3CA01C0E5BE5761CB16B4BE0ED128CC7F13EEBE5B2DD47BA0A404
-        62CE8E5A45F16EEC8F9C08281F8BA72A70E5D1771C485E01AF9725EA1FE0F325
-        BB982472C0F972387D1AF4CF60EDDA89A5AA294DC7E780447AB3ED9F500A27D0
-        B3D45006F87CCA6A3C08D7AF275A57321170147272801EA7DD069B372B55F938
-        34342431CE174A22DBB6415E9E1D547F864B97C8A70A323351EA4FA3A5756200
-        A68D00B1BBFE0E3E1FEA5F97E1B3CF4067C1BC79A0CFC1D010E8C5E6EC457E04
-        209F474F1BCB88038A7B86B52BDF3FB95C8FD39FDC5E7A47FACD38962E07A5B8
-        537B21377724523E8F94416D6DDA570F3D0AC78F275ADFF411A0C2FDF0E08340
-        AE5938AD260946D7C1E2C54007646480F402A802CF7D8E61810361AFE3CA9147
-        77C63B88396779963940D24B211894233A174E9C903A8AA1BADAAA532B61E54A
-        A39B1880E923402E36416323E8AFC1238F80BE0A172F42EC28AC5F0FE18DF0C1
-        07739503D4425D0C7BF74A877E168686C8D755B0670FBFD67F810F3FF46C7BF9
-        2358B62CD1FA12DE9362BFD7065E2FA8E760F5EA315DD9A60294C7A1B2723A00
-        6F34C96AF93A54565A05AA646C29CD165E02BF5F64FD7AB8F5D6A40140E5B5C3
-        8A15208DA660713D52E80050733300C04175044A4B51698D70FE3CD7580EA110
-        1E1A40293B67DE2770FFFD89CCA7C801EAB7505303548CC3AC09CE9C416433F4
-        F400E2FCC00880426CC77E1432C3EC783EBB7EDB76E50ECF66C0E97E0B6C9BDD
-        1C8073E7F83101282B53ABE44E0804789D33933DCBA7004076C03DF74C22FF83
-        19C81A80DEDE5180D4010039ACF63A7A0E57971CEEB42D87471D8E2B77F59C17
-        BDEDF6C7D95B237289E362C56A61EB569EE27B505C0CBC0F2099F26DF0FB8157
-        928C00D6C2D9B388FA965362BA0EDD6A6B809B896C9E0711F5067BA1A56504A0
-        4E4E98243D392506403860B2BFBDC6DCAF2E596F3A1EEBC7CDE03A80DA449369
-        2BE7D5E63E5E5C79EC25A7ED464E45BCDC6D7B82866BD7FE0440ACD253112FB7
-        729C09BB11B361ACDCF3AE14425F5FA26C97F01A14E9EA32C92E12313F3533BB
-        DE6E965278846F0AD74173B3A7F1D55526A9C7D38DFB146DE569B87021E571DE
-        E58F538570AA74C30050F746CFC28A155CE50AF4F5253DC0559E87BE3E55E659
-        3DD9CE7D5194FA9F60E2A1B7C2F6ED6AC170B5F9398A464D61E57E52A4A71B1E
-        0A19EECAC3610016842E81D6E2F10EC1934F12E5B9FF2C00C2D3D0DD8DE2FBB3
-        1958841A78E61986BD4F407D3D43D206C3C3131F439E718FA10CC3E75BEB2033
-        93A8FEBD796BCC8ED42296C3E5CB09FB132FE06381A54B21B4199A9A407FD7DC
-        AFFF2549F0873A0FDADBAD5D7A3B6CD8A05463217476CE16C82FE97F95FE0DF2
-        8A681E9CA324360000000049454E44AE426082}
+        89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+        F4000000097048597300000EC300000EC301C76FA8640000001974455874536F
+        667477617265007777772E696E6B73636170652E6F72679BEE3C1A0000046F49
+        4441545885BD974B685C5518C77FE7DE3BF735339957276DA6264D5B5B943EA0
+        B4555C6885BA72A59BA80852410A16B7E2A6A00B91823BDD5817BA105408D89D
+        20B45857A5D852298AD21712D3485E934C92993B731FE7B898CC23CD2433D304
+        3F385CBEEF9EFFF9FEF77FCEFDEE77055B30F5C33339D0DF06A1F7818A08F94A
+        8C5D2B02185B2180D2CFFA55EF939AE7F50CB11C07D3720CE0C2D60920AC9AE7
+        71EBF82F0CE61C06B34E77C8F747306DD76EB85B24D0B295728D98AE9A7E26E5
+        F684D3B68B80EA3EA5A36D9B024BCB1EA8A8E9F7AAC0B611B02C9B91429A9821
+        FAC2752430BF5CFB6833502E69ADBB2FA562626A89E1A12466ACF79DEDAC8010
+        1F76C1AD2300E0D522EE4E941888C7B04C1DD1418C424F0480FB13F36BFCFD23
+        B92E9CEAA6A4A2B4EC6F78BF6702D9540FEF34AA66390EC76E9EEA891CD40B11
+        4A55BB12E8C9222E9AB6AB9BB69D6884FE7A307B7CB6B872A0E1E7B389BB4FED
+        CBDF6C81B41522F565C3EB7864E7577CB550AA502CAD2DB1D9944326E5924B98
+        1B1EF5EFDEB1AFD67C752A61091060687CF3CA17D5B7369ADF54201A3F7941A8
+        E828C0C246B3574D5D19FBA0637CFEDEA9EBB7270B53334BA45777B0303C1CAA
+        2BC71E99AFEE88D3E39760550175E9D9E3D1C2CC8D463D2B8DDD61330532D7DF
+        6C2D35F53B2A68CDABA95865B9C642DC353D003337E2C5DCC49147B84A0123E2
+        F4F8430340863C0F8AC57218FD5B89D70AB06919BB71E3DEEC9E818A9D3F7834
+        496A08E1B708D8E0DA0DBCE522DC44A72534A43A003CAC578C283A0C30594E7A
+        EF5D7EDA9D9E2BE1070109D75833FC20607AAEC4FB97F7E4EF9792650011CFE1
+        851A655FAE1FCB2BAC4C4F3447656EAA4541687B60F50C48153D290099188D9D
+        39779EDB7F4E6F260067DE3D8F317DC101503262CE3EB1907CE9D30CC04CD163
+        30EB34AFED31EDA7D71F2819ED139A8E1472B44940207703E4E5DFC6E1A98F7B
+        EA2EF2DAA4067B916140680E89D9853AACE285CC2E78CD6B7B2C113F6827C23F
+        D04D1D106D04A270870286129E3EC46F8EB007C08C6F9C5D3710037B01904180
+        1AC8C97CA6FEB44A79E4334EF3DA1ED35CB72C4B3EBA6923A0B5054A06CD9322
+        E259C48EFDBD88502710FAD4CC82D58B029673286DCF5D5D4D445D01F5F5A81D
+        457EAB22BA999E93034461801EDFB5EE693B2920C2DD91FC3BA80315C3EAE717
+        0D83D41327589C6CADA8C5FA2220A3808A9E777A51409323B95D61D0801AC8EC
+        6E4346C189F60585DEDFE7C14E663970EBD55E1B80989DD9D99E6CD468D480A6
+        F5A980E1C44938FBFAC2344D8A51A3562B0F406CB11133FDA5DB08ED717BCCBE
+        4C84D5A451595C1CF48330DD080E12BCF07F2407908AABEB365C298578A497FA
+        F1DA624595CCB09FC545CA375E7E2EDDB5355E47C00F25566CEDAF9E2C5A41F5
+        D76C6AE78083D1A9D16BB3404A6696ABD8278BA56EC9A5528621A0D61E5C5AAE
+        625B069AD63AD85ABA6ABB278B9E391C54BA2D6A01EE3F319774D52E7B9BBF51
+        0A7948143F2BBC51F5C36F1FFFDFE6714DE0BAB1310130FF79E135943C2BBAF4
+        01DB650ACABAA15F4C9F7B38FE1F5BF6ED7EA625A7B40000000049454E44AE42
+        6082}
       Rounded = False
       ShowCaption = False
       Spacing = 4
@@ -324,10 +314,10 @@ object FrmMenu: TFrmMenu
     object btCompras: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 120
+      Left = 144
       Top = 0
-      Width = 60
-      Height = 50
+      Width = 72
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -338,7 +328,7 @@ object FrmMenu: TFrmMenu
       Caption = 'COMPRAS'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -346,7 +336,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -464,10 +454,10 @@ object FrmMenu: TFrmMenu
     object btFinanceiro: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 240
+      Left = 288
       Top = 0
-      Width = 60
-      Height = 50
+      Width = 71
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -478,7 +468,7 @@ object FrmMenu: TFrmMenu
       Caption = 'FINAN'#199'AS'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -486,7 +476,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -596,15 +586,14 @@ object FrmMenu: TFrmMenu
       Appearance.TextColorHot = 49151
       Appearance.TextColorDisabled = 49151
       Layout = blGlyphTopAdjusted
-      ExplicitLeft = 180
     end
     object btCadastro: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 300
+      Left = 359
       Top = 0
-      Width = 60
-      Height = 50
+      Width = 72
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -615,7 +604,7 @@ object FrmMenu: TFrmMenu
       Caption = 'CADASTROS'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -623,7 +612,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -702,26 +691,25 @@ object FrmMenu: TFrmMenu
       Appearance.TextColorHot = 49151
       Appearance.TextColorDisabled = 49151
       Layout = blGlyphTopAdjusted
-      ExplicitLeft = 240
     end
     object btIA: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 421
+      Left = 504
       Top = 0
-      Width = 63
-      Height = 50
+      Width = 76
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
-      Margins.Right = 4
+      Margins.Right = 5
       Margins.Bottom = 0
       Align = alLeft
       BorderStyle = bsNone
       Caption = 'IA'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -729,7 +717,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -827,15 +815,14 @@ object FrmMenu: TFrmMenu
       Appearance.TextColorHot = 49151
       Appearance.TextColorDisabled = 49151
       Layout = blGlyphTopAdjusted
-      ExplicitLeft = 361
     end
     object btFiscal: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 360
+      Left = 431
       Top = 0
-      Width = 61
-      Height = 50
+      Width = 73
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -846,7 +833,7 @@ object FrmMenu: TFrmMenu
       Caption = 'FISCAL'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -854,7 +841,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -937,15 +924,14 @@ object FrmMenu: TFrmMenu
       Appearance.TextColorHot = 49151
       Appearance.TextColorDisabled = 49151
       Layout = blGlyphTopAdjusted
-      ExplicitLeft = 300
     end
     object btEstoque: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 180
+      Left = 216
       Top = 0
-      Width = 60
-      Height = 50
+      Width = 72
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -956,7 +942,7 @@ object FrmMenu: TFrmMenu
       Caption = 'ESTOQUE'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -964,7 +950,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -1075,26 +1061,25 @@ object FrmMenu: TFrmMenu
       Appearance.TextColorHot = 49151
       Appearance.TextColorDisabled = 49151
       Layout = blGlyphTopAdjusted
-      ExplicitLeft = 210
     end
     object btConfig: TAdvGlowButton
       Tag = 3099
       AlignWithMargins = True
-      Left = 488
+      Left = 585
       Top = 0
-      Width = 63
-      Height = 50
+      Width = 75
+      Height = 60
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
-      Margins.Right = 4
+      Margins.Right = 5
       Margins.Bottom = 0
       Align = alLeft
       BorderStyle = bsNone
       Caption = 'CONFIG'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1019391
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -1102,7 +1087,7 @@ object FrmMenu: TFrmMenu
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -12
+      NotesFont.Height = -16
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -1298,8 +1283,6 @@ object FrmMenu: TFrmMenu
       Appearance.TextColorHot = 49151
       Appearance.TextColorDisabled = 49151
       Layout = blGlyphTopAdjusted
-      ExplicitLeft = 428
-      ExplicitHeight = 51
     end
   end
 end

@@ -1,31 +1,39 @@
 object FrmTitCad: TFrmTitCad
   Left = 470
   Top = 249
+  Margins.Left = 4
+  Margins.Top = 4
+  Margins.Right = 4
+  Margins.Bottom = 4
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'Cadastro de Titulos'
-  ClientHeight = 502
-  ClientWidth = 770
+  ClientHeight = 603
+  ClientWidth = 922
   Color = 16381167
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 4276545
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Roboto'
   Font.Style = []
   KeyPreview = True
-  Position = poOwnerFormCenter
+  Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  TextHeight = 14
+  PixelsPerInch = 115
+  TextHeight = 17
   object PanelCadastro: TLMDSimplePanel
     Left = 0
     Top = 0
-    Width = 770
-    Height = 502
-    Margins.Right = 4
+    Width = 922
+    Height = 603
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 5
+    Margins.Bottom = 4
     Align = alClient
     Bevel.StyleOuter = bvNormal
     Bevel.WidthOuter = 0
@@ -34,55 +42,55 @@ object FrmTitCad: TFrmTitCad
     Color = 16382200
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 7039851
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 766
-    ExplicitHeight = 500
+    ExplicitHeight = 601
     object PanelTop: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 6
-      Top = 6
-      Width = 760
-      Height = 37
-      Margins.Left = 5
-      Margins.Top = 5
+      Left = 7
+      Top = 7
+      Width = 910
+      Height = 45
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alTop
       ParentColor = True
       TabOrder = 1
-      ExplicitWidth = 756
       object LMDLabel2: TLMDLabel
         AlignWithMargins = True
-        Left = 10
-        Top = 6
-        Width = 223
-        Height = 28
-        Margins.Left = 10
-        Margins.Top = 6
+        Left = 12
+        Top = 7
+        Width = 267
+        Height = 34
+        Margins.Left = 12
+        Margins.Top = 7
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alLeft
         Alignment = agCenterLeft
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 8811110
-        Font.Height = -16
+        Font.Height = -19
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
         ParentFont = False
         Caption = 'T'#237'tulos '#224' Pagar / Receber'
-        ExplicitTop = 9
       end
       object btFechar: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 736
-        Top = 1
-        Width = 24
-        Height = 28
+        Left = 882
+        Top = 3
+        Width = 28
+        Height = 34
         Cursor = crHandPoint
         Margins.Left = 0
-        Margins.Top = 1
         Margins.Right = 0
         Margins.Bottom = 8
         Align = alRight
@@ -90,7 +98,7 @@ object FrmTitCad: TFrmTitCad
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -114,7 +122,7 @@ object FrmTitCad: TFrmTitCad
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -177,27 +185,26 @@ object FrmTitCad: TFrmTitCad
         Appearance.TextColorDown = 2303013
         Appearance.TextColorHot = 2303013
         Appearance.TextColorDisabled = 13948116
-        ExplicitLeft = 732
+        ExplicitTop = 1
       end
       object btBusca: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 708
-        Top = 1
-        Width = 24
-        Height = 28
+        Left = 848
+        Top = 3
+        Width = 29
+        Height = 34
         Cursor = crHandPoint
         Hint = 'Procurar por t'#237'tulos'
         Margins.Left = 0
-        Margins.Top = 1
-        Margins.Right = 4
+        Margins.Right = 5
         Margins.Bottom = 8
         Align = alRight
         AntiAlias = aaAntiAlias
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -226,7 +233,7 @@ object FrmTitCad: TFrmTitCad
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -294,27 +301,26 @@ object FrmTitCad: TFrmTitCad
         Appearance.TextColorDown = 2303013
         Appearance.TextColorHot = 2303013
         Appearance.TextColorDisabled = 13948116
-        ExplicitLeft = 704
+        ExplicitTop = 1
       end
       object btMulti: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 650
-        Top = 1
-        Width = 24
-        Height = 28
+        Left = 780
+        Top = 3
+        Width = 28
+        Height = 34
         Cursor = crHandPoint
         Hint = 'Gerar multi t'#237'tulos'
         Margins.Left = 0
-        Margins.Top = 1
-        Margins.Right = 6
+        Margins.Right = 7
         Margins.Bottom = 8
         Align = alRight
         AntiAlias = aaAntiAlias
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -333,7 +339,7 @@ object FrmTitCad: TFrmTitCad
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -390,27 +396,26 @@ object FrmTitCad: TFrmTitCad
         Appearance.TextColorDown = 2303013
         Appearance.TextColorHot = 2303013
         Appearance.TextColorDisabled = 13948116
-        ExplicitLeft = 646
+        ExplicitTop = 1
       end
       object btNegocios: TAdvGlowButton
         Tag = 3099
         AlignWithMargins = True
-        Left = 680
-        Top = 1
-        Width = 24
-        Height = 28
+        Left = 815
+        Top = 3
+        Width = 28
+        Height = 34
         Cursor = crHandPoint
         Hint = 'Renegocia'#231#227'o de t'#237'tulos'
         Margins.Left = 0
-        Margins.Top = 1
-        Margins.Right = 4
+        Margins.Right = 5
         Margins.Bottom = 8
         Align = alRight
         AntiAlias = aaAntiAlias
         BorderStyle = bsNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = []
         Font.Quality = fqClearType
@@ -446,7 +451,7 @@ object FrmTitCad: TFrmTitCad
         MarginHorz = 0
         NotesFont.Charset = DEFAULT_CHARSET
         NotesFont.Color = clWindowText
-        NotesFont.Height = -12
+        NotesFont.Height = -16
         NotesFont.Name = 'Tahoma'
         NotesFont.Style = []
         ParentFont = False
@@ -522,30 +527,36 @@ object FrmTitCad: TFrmTitCad
         Appearance.TextColorDown = 2303013
         Appearance.TextColorHot = 2303013
         Appearance.TextColorDisabled = 13948116
-        ExplicitLeft = 676
+        ExplicitTop = 1
       end
     end
     object PanelEdits: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 6
-      Top = 49
-      Width = 760
-      Height = 403
-      Margins.Left = 5
-      Margins.Bottom = 4
+      Left = 7
+      Top = 60
+      Width = 910
+      Height = 482
+      Margins.Left = 6
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 5
       Align = alClient
       Color = 16382200
       TabOrder = 0
-      ExplicitWidth = 756
-      ExplicitHeight = 401
+      ExplicitLeft = 8
+      ExplicitHeight = 480
       object LMDLabel1: TLMDLabel
-        Left = 442
-        Top = 184
-        Width = 71
-        Height = 15
+        Left = 529
+        Top = 220
+        Width = 81
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9600112
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
@@ -553,14 +564,18 @@ object FrmTitCad: TFrmTitCad
         Caption = 'VENCIMENTO'
       end
       object LMDLabel3: TLMDLabel
-        Left = 442
-        Top = 128
-        Width = 50
-        Height = 15
+        Left = 529
+        Top = 153
+        Width = 57
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         FontFX.LightColor = clGray
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9600112
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
@@ -569,28 +584,30 @@ object FrmTitCad: TFrmTitCad
       end
       object Shape2: TShape
         AlignWithMargins = True
-        Left = 13
+        Left = 16
         Top = 0
-        Width = 734
+        Width = 878
         Height = 1
-        Margins.Left = 13
+        Margins.Left = 16
         Margins.Top = 0
-        Margins.Right = 13
+        Margins.Right = 16
         Margins.Bottom = 0
         Align = alTop
         Pen.Color = 13682625
-        ExplicitLeft = 2
-        ExplicitTop = 3
-        ExplicitWidth = 670
+        ExplicitWidth = 879
       end
       object lbDataDoc: TLMDLabel
-        Left = 442
-        Top = 72
-        Width = 71
-        Height = 15
+        Left = 529
+        Top = 86
+        Width = 83
+        Height = 17
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9600112
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Options = []
@@ -599,25 +616,28 @@ object FrmTitCad: TFrmTitCad
       end
       object Shape1: TShape
         AlignWithMargins = True
-        Left = 13
-        Top = 402
-        Width = 734
+        Left = 16
+        Top = 481
+        Width = 878
         Height = 1
-        Margins.Left = 13
+        Margins.Left = 16
         Margins.Top = 0
-        Margins.Right = 13
+        Margins.Right = 16
         Margins.Bottom = 0
         Align = alBottom
         Pen.Color = 13682625
-        ExplicitLeft = 2
-        ExplicitTop = 3
-        ExplicitWidth = 670
+        ExplicitTop = 482
+        ExplicitWidth = 879
       end
       object rgPagRec: TLMDDBRadioGroup
-        Left = 653
-        Top = 17
-        Width = 100
-        Height = 53
+        Left = 782
+        Top = 20
+        Width = 120
+        Height = 64
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.BorderColor = 16382200
         Bevel.Mode = bmCustom
         BtnAlignment.Alignment = agCenterLeft
@@ -629,7 +649,7 @@ object FrmTitCad: TFrmTitCad
         CaptionParentFont = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9600112
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ImageIndex = 1
@@ -646,11 +666,15 @@ object FrmTitCad: TFrmTitCad
           'R')
       end
       object edNroTit: TLMDDBLabeledEdit
-        Left = 363
-        Top = 32
-        Width = 138
-        Height = 23
+        Left = 435
+        Top = 38
+        Width = 165
+        Height = 28
         Hint = 'N'#250'mero documento'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -664,30 +688,39 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o N'#250'mero do Docto'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'Nrotit'
         DataSource = SouTitu
-        EditLabel.Width = 64
-        EditLabel.Height = 15
+        EditLabel.Width = 74
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'NRO.DOCTO'
       end
       object LMDDBLabeledEdit3: TLMDDBLabeledEdit
-        Left = 507
-        Top = 32
-        Width = 29
-        Height = 23
+        Left = 607
+        Top = 38
+        Width = 35
+        Height = 28
         Hint = 'Parcela / Desdobramento'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -700,30 +733,39 @@ object FrmTitCad: TFrmTitCad
         TabOrder = 2
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'Destit'
         DataSource = SouTitu
-        EditLabel.Width = 23
-        EditLabel.Height = 15
+        EditLabel.Width = 26
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'PAR'
       end
       object edTiptit: TLMDDBLabeledEdit
-        Left = 96
-        Top = 32
-        Width = 261
-        Height = 23
+        Left = 115
+        Top = 38
+        Width = 313
+        Height = 28
         Hint = 'Tipo do t'#237'tulo'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -739,7 +781,7 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Tipo do t'#237'tulo'
         Font.Charset = ANSI_CHARSET
         Font.Color = 2236186
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -1306,27 +1348,35 @@ object FrmTitCad: TFrmTitCad
             UsePngGlyph = True
           end>
         CustomButtonsStyle = ubsExplorer
-        CustomButtonWidth = 18
+        CustomButtonWidth = 22
         CustomButtonParentCtlXP = False
         TabOnEnter = True
         DataField = 'DesTiptit'
         DataSource = SouTitu
-        EditLabel.Width = 84
-        EditLabel.Height = 15
+        EditLabel.Width = 97
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Font.Charset = ANSI_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'TIPO DO T'#205'TULO'
       end
       object LMDDBLabeledEdit0: TLMDDBLabeledEdit
-        Left = 20
-        Top = 32
-        Width = 64
-        Height = 23
+        Left = 24
+        Top = 38
+        Width = 77
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -1340,32 +1390,41 @@ object FrmTitCad: TFrmTitCad
         TabStop = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         Alignment = taCenter
         CustomButtons = <>
+        CustomButtonWidth = 19
         DataField = 'IDTitu'
         DataSource = SouTitu
         ReadOnly = True
         OnDataChange = LMDDBLabeledEdit0DataChange
-        EditLabel.Width = 12
-        EditLabel.Height = 15
+        EditLabel.Width = 15
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'ID'
       end
       object LMDSimplePanel2: TLMDSimplePanel
-        Left = 442
-        Top = 200
-        Width = 94
-        Height = 23
+        Left = 529
+        Top = 240
+        Width = 113
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -1374,12 +1433,14 @@ object FrmTitCad: TFrmTitCad
         TabOrder = 15
         object DBDateEdit1: TDBDateEdit
           AlignWithMargins = True
-          Left = 4
+          Left = 5
           Top = 3
-          Width = 87
-          Height = 19
+          Width = 105
+          Height = 22
+          Margins.Left = 4
           Margins.Top = 2
           Margins.Right = 2
+          Margins.Bottom = 4
           Align = alClient
           DataField = 'Datven'
           DataSource = SouTitu
@@ -1390,103 +1451,118 @@ object FrmTitCad: TFrmTitCad
           DialogTitle = 'Entre com Data'
           Font.Charset = ANSI_CHARSET
           Font.Color = 2236186
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Tahoma'
           Font.Style = []
           GlyphKind = gkCustom
           Glyph.Data = {
-            5E0B0000424D5E0B00000000000036000000280000002D000000150000000100
-            180000000000280B000000000000000000000000000000000000241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED24
-            1CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            360D0000424D360D00000000000036000000280000002A0000001A0000000100
+            180000000000000D0000000000000000000000000000000000000000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+            FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00
+            00FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77
-            686B77686B77686B77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFA6A8AFC0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0
-            B9B5C0B9B5A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77F7EFEAF5ECE7F4E8E2F2E5DEF1E3DBF0E1D8EFDFD6F2E5DEF2E5DE686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77F9F2EFC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACBCB0A9BD
-            B2ACF2E5DE686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6
-            E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FAF5F3C3BEBBFFFFFFC0B9B5FFFF
-            FFBEB4AEFFFFFFBCB0A9EFDFD6686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0
-            B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FCF8F7C4C0BF
-            C3BEBBC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACF0E1D8686B77FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6
-            E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77FDFBFAC6C3C2FFFFFFC3BEBBFFFFFFC0B9B5FFFFFFBEB4AEF1E3DB686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6
-            E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77FEFEFDC6C5C4C6C3C2C4C0BFC3BEBBC2BBB8C0B9B5BF
-            B6B1F2E5DE686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6
-            FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC7C7C6FFFFFFC6C3C2FFFF
-            FFC3BEBBFFFFFFC0B9B5F4E8E2686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0
-            B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC8C8C8
-            C7C7C6C6C5C4C6C3C2C4C0BFC3BEBBC2BBB8F5ECE7686B77FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6
-            E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77FFFFFFFFFFFFFFFFFFFEFEFDFDFBFAFCF8F7FAF5F3F9F2EFF7EFEA686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6
-            E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77FFFFFFC8C8C8C8C8C8C8C8C8C7C7C6C6C5C4C6C3C2C4
-            C0BFF9F2EF686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77686B77686B77686B
-            77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6
-            A8AFC0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5A6A8AF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFC0C0C08080808080808080808080808080808080808080
+            80808080808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFC0C0C08080808080808080808080808080808080808080
+            80808080808080C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED24
-            1CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED00}
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+            FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00
+            00FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000}
+          ButtonWidth = 18
           NumGlyphs = 2
           ParentCtl3D = False
           ParentFont = False
@@ -1495,10 +1571,14 @@ object FrmTitCad: TFrmTitCad
         end
       end
       object edValorTit: TLMDDBLabeledEdit
-        Left = 546
-        Top = 364
-        Width = 91
-        Height = 23
+        Left = 654
+        Top = 436
+        Width = 109
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -1511,31 +1591,40 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Valor do T'#237'tulo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'Vlrtit'
         DataSource = SouTitu
-        EditLabel.Width = 77
-        EditLabel.Height = 15
+        EditLabel.Width = 88
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'VALOR T'#205'TULO'
       end
       object edPessoa: TLMDDBLabeledEdit
-        Left = 20
-        Top = 88
-        Width = 413
-        Height = 23
+        Left = 24
+        Top = 105
+        Width = 495
+        Height = 28
         Hint = 'Fornecedor, Cliente, Funcion'#225'rio...'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -1551,7 +1640,7 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'a Pessoa'
         Font.Charset = ANSI_CHARSET
         Font.Color = 2236186
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Tahoma'
         Font.Style = []
         CharCase = ecLowerCase
@@ -2158,26 +2247,34 @@ object FrmTitCad: TFrmTitCad
             UsePngGlyph = True
           end>
         CustomButtonsStyle = ubsExplorer
-        CustomButtonWidth = 20
+        CustomButtonWidth = 24
         CustomButtonParentCtlXP = False
         DataField = 'Nompes'
         DataSource = SouTitu
-        EditLabel.Width = 44
-        EditLabel.Height = 15
+        EditLabel.Width = 50
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Font.Charset = ANSI_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'PESSOA'
       end
       object LMDSimplePanel1: TLMDSimplePanel
-        Left = 442
-        Top = 144
-        Width = 94
-        Height = 23
+        Left = 529
+        Top = 173
+        Width = 113
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -2186,12 +2283,14 @@ object FrmTitCad: TFrmTitCad
         TabOrder = 14
         object DBDateEdit2: TDBDateEdit
           AlignWithMargins = True
-          Left = 4
+          Left = 5
           Top = 3
-          Width = 87
-          Height = 19
+          Width = 105
+          Height = 22
+          Margins.Left = 4
           Margins.Top = 2
           Margins.Right = 2
+          Margins.Bottom = 4
           Align = alClient
           DataField = 'Datemi'
           DataSource = SouTitu
@@ -2202,103 +2301,118 @@ object FrmTitCad: TFrmTitCad
           DialogTitle = 'Entre com Data'
           Font.Charset = ANSI_CHARSET
           Font.Color = 2236186
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Tahoma'
           Font.Style = []
           GlyphKind = gkCustom
           Glyph.Data = {
-            5E0B0000424D5E0B00000000000036000000280000002D000000150000000100
-            180000000000280B000000000000000000000000000000000000241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED24
-            1CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            360D0000424D360D00000000000036000000280000002A0000001A0000000100
+            180000000000000D0000000000000000000000000000000000000000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+            FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00
+            00FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77
-            686B77686B77686B77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFA6A8AFC0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0
-            B9B5C0B9B5A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77F7EFEAF5ECE7F4E8E2F2E5DEF1E3DBF0E1D8EFDFD6F2E5DEF2E5DE686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77F9F2EFC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACBCB0A9BD
-            B2ACF2E5DE686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6
-            E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FAF5F3C3BEBBFFFFFFC0B9B5FFFF
-            FFBEB4AEFFFFFFBCB0A9EFDFD6686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0
-            B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FCF8F7C4C0BF
-            C3BEBBC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACF0E1D8686B77FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6
-            E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77FDFBFAC6C3C2FFFFFFC3BEBBFFFFFFC0B9B5FFFFFFBEB4AEF1E3DB686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6
-            E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77FEFEFDC6C5C4C6C3C2C4C0BFC3BEBBC2BBB8C0B9B5BF
-            B6B1F2E5DE686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6
-            FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC7C7C6FFFFFFC6C3C2FFFF
-            FFC3BEBBFFFFFFC0B9B5F4E8E2686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0
-            B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC8C8C8
-            C7C7C6C6C5C4C6C3C2C4C0BFC3BEBBC2BBB8F5ECE7686B77FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6
-            E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77FFFFFFFFFFFFFFFFFFFEFEFDFDFBFAFCF8F7FAF5F3F9F2EFF7EFEA686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6
-            E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77FFFFFFC8C8C8C8C8C8C8C8C8C7C7C6C6C5C4C6C3C2C4
-            C0BFF9F2EF686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77686B77686B77686B
-            77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6
-            A8AFC0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5A6A8AF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFC0C0C08080808080808080808080808080808080808080
+            80808080808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFC0C0C08080808080808080808080808080808080808080
+            80808080808080C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED24
-            1CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED00}
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+            FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00
+            00FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000}
+          ButtonWidth = 18
           NumGlyphs = 2
           ParentCtl3D = False
           ParentFont = False
@@ -2307,10 +2421,14 @@ object FrmTitCad: TFrmTitCad
         end
       end
       object LMDDBLabeledEdit4: TLMDDBLabeledEdit
-        Left = 647
-        Top = 364
-        Width = 81
-        Height = 23
+        Left = 775
+        Top = 436
+        Width = 97
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -2322,32 +2440,41 @@ object FrmTitCad: TFrmTitCad
         TabStop = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'Saltit'
         DataSource = SouTitu
         ReadOnly = True
-        EditLabel.Width = 77
-        EditLabel.Height = 15
+        EditLabel.Width = 89
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'SALDO T'#205'TULO'
       end
       object edNatFin: TLMDDBLabeledEdit
-        Left = 20
-        Top = 143
-        Width = 413
-        Height = 23
+        Left = 24
+        Top = 171
+        Width = 495
+        Height = 28
         Hint = 'Natureza financeira...'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -2361,7 +2488,7 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'a Natureza financeira'
         Font.Charset = ANSI_CHARSET
         Font.Color = 2236186
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Tahoma'
         Font.Style = []
         CharCase = ecLowerCase
@@ -2393,29 +2520,37 @@ object FrmTitCad: TFrmTitCad
             UsePngGlyph = True
           end>
         CustomButtonsStyle = ubsExplorer
-        CustomButtonWidth = 20
+        CustomButtonWidth = 24
         CustomButtonParentCtlXP = False
         TabOnEnter = True
         DataField = 'Desnat'
         DataSource = SouTitu
         ReadOnly = True
-        EditLabel.Width = 122
-        EditLabel.Height = 15
+        EditLabel.Width = 140
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Font.Charset = ANSI_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'NATUREZA FINANCEIRA'
       end
       object edNomFil: TLMDDBLabeledEdit
-        Left = 20
-        Top = 200
-        Width = 413
-        Height = 23
+        Left = 24
+        Top = 240
+        Width = 495
+        Height = 27
         Hint = 'Filial da Empresa'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -2430,7 +2565,7 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'a Nome da filial'
         Font.Charset = ANSI_CHARSET
         Font.Color = 2236186
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Tahoma'
         Font.Style = []
         CharCase = ecLowerCase
@@ -2998,28 +3133,36 @@ object FrmTitCad: TFrmTitCad
             UsePngGlyph = True
           end>
         CustomButtonsStyle = ubsExplorer
-        CustomButtonWidth = 18
+        CustomButtonWidth = 22
         CustomButtonParentCtlXP = False
         TabOnEnter = True
         DataField = 'Nomfil'
         DataSource = SouTitu
-        EditLabel.Width = 85
-        EditLabel.Height = 15
+        EditLabel.Width = 98
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Font.Charset = ANSI_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'NOME DA FILIAL'
       end
       object edDescAssoc: TLMDDBLabeledEdit
-        Left = 546
-        Top = 200
-        Width = 91
-        Height = 23
+        Left = 654
+        Top = 240
+        Width = 109
+        Height = 27
         Hint = 'Desconto rede associativa'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3033,31 +3176,40 @@ object FrmTitCad: TFrmTitCad
         OnExit = edValorTitExit
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'DesAsso'
         DataSource = SouTitu
-        EditLabel.Width = 66
-        EditLabel.Height = 15
+        EditLabel.Width = 76
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'DESCONTOS'
       end
       object edDespAcesso: TLMDDBLabeledEdit
-        Left = 546
-        Top = 144
-        Width = 91
-        Height = 23
+        Left = 654
+        Top = 173
+        Width = 109
+        Height = 27
         Hint = 'Despesas acess'#243'rias'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3071,31 +3223,40 @@ object FrmTitCad: TFrmTitCad
         OnExit = edValorTitExit
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'VlrAces'
         DataSource = SouTitu
-        EditLabel.Width = 91
-        EditLabel.Height = 15
+        EditLabel.Width = 106
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'DESP.ACESS'#211'RIA'
       end
       object LMDDBLabeledEdit5: TLMDDBLabeledEdit
-        Left = 546
-        Top = 88
-        Width = 91
-        Height = 23
+        Left = 654
+        Top = 105
+        Width = 109
+        Height = 28
         Hint = 'Fornecedor, Cliente, Funcion'#225'rio...'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3109,7 +3270,7 @@ object FrmTitCad: TFrmTitCad
         OnExit = edValorTitExit
         Font.Charset = ANSI_CHARSET
         Font.Color = 2236186
-        Font.Height = -12
+        Font.Height = -14
         Font.Name = 'Tahoma'
         Font.Style = []
         CharCase = ecLowerCase
@@ -3139,28 +3300,36 @@ object FrmTitCad: TFrmTitCad
             UsePngGlyph = True
           end>
         CustomButtonsStyle = ubsExplorer
-        CustomButtonWidth = 22
+        CustomButtonWidth = 26
         CustomButtonParentCtlXP = False
         TabOnEnter = True
         DataField = 'VlrDevo'
         DataSource = SouTitu
         ReadOnly = True
-        EditLabel.Width = 72
-        EditLabel.Height = 15
+        EditLabel.Width = 83
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.AutoSize = False
         EditLabel.Font.Charset = ANSI_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'DEVOLU'#199#213'ES'
       end
       object edHist: TLMDDBLabeledEdit
-        Left = 20
-        Top = 364
-        Width = 516
-        Height = 23
+        Left = 24
+        Top = 436
+        Width = 618
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3172,30 +3341,39 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Endere'#231'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         CharCase = ecUpperCase
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'Histit'
         DataSource = SouTitu
-        EditLabel.Width = 59
-        EditLabel.Height = 15
+        EditLabel.Width = 68
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'HIST'#211'RICO'
       end
       object LMDDBLabeledEdit9: TLMDDBLabeledEdit
-        Left = 546
-        Top = 32
-        Width = 96
-        Height = 23
+        Left = 654
+        Top = 38
+        Width = 115
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3209,29 +3387,38 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o N'#250'mero do Docto'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'NotFis'
         DataSource = SouTitu
-        EditLabel.Width = 70
-        EditLabel.Height = 15
+        EditLabel.Width = 80
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'NOTA FISCAL'
       end
       object edCodBarra: TLMDDBLabeledEdit
-        Left = 20
-        Top = 255
-        Width = 516
-        Height = 23
+        Left = 24
+        Top = 305
+        Width = 618
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3244,21 +3431,26 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Endere'#231'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         CharCase = ecUpperCase
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'CodBarra'
         DataSource = SouTitu
-        EditLabel.Width = 111
-        EditLabel.Height = 15
+        EditLabel.Width = 129
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Color = 16382200
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentColor = False
@@ -3266,10 +3458,14 @@ object FrmTitCad: TFrmTitCad
         EditLabel.Caption = 'C'#211'DIGO BARRAS/ PIX'
       end
       object edValJuro: TLMDDBLabeledEdit
-        Left = 546
-        Top = 255
-        Width = 91
-        Height = 23
+        Left = 654
+        Top = 305
+        Width = 109
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3282,21 +3478,26 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Valor do T'#237'tulo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'ValorJuros'
         DataSource = SouTitu
-        EditLabel.Width = 55
-        EditLabel.Height = 15
+        EditLabel.Width = 62
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Color = 16382200
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentColor = False
@@ -3304,10 +3505,14 @@ object FrmTitCad: TFrmTitCad
         EditLabel.Caption = 'JUROS R$'
       end
       object edValMulta: TLMDDBLabeledEdit
-        Left = 546
-        Top = 311
-        Width = 91
-        Height = 23
+        Left = 654
+        Top = 373
+        Width = 109
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3320,30 +3525,39 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Valor do T'#237'tulo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'ValorMulta'
         DataSource = SouTitu
-        EditLabel.Width = 56
-        EditLabel.Height = 15
+        EditLabel.Width = 63
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'MULTA R$'
       end
       object edPerJuro: TLMDDBLabeledEdit
-        Left = 647
-        Top = 255
-        Width = 51
-        Height = 23
+        Left = 775
+        Top = 305
+        Width = 61
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3356,30 +3570,39 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Valor do T'#237'tulo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'PercenJuros'
         DataSource = SouTitu
-        EditLabel.Width = 49
-        EditLabel.Height = 15
+        EditLabel.Width = 56
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'JUROS %'
       end
       object edPerMulta: TLMDDBLabeledEdit
-        Left = 647
-        Top = 311
-        Width = 51
-        Height = 23
+        Left = 775
+        Top = 373
+        Width = 61
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3392,31 +3615,40 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o Valor do T'#237'tulo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         Alignment = taRightJustify
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'PercenMulta'
         DataSource = SouTitu
-        EditLabel.Width = 50
-        EditLabel.Height = 15
+        EditLabel.Width = 57
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'MULTA %'
       end
       object edNosNum: TLMDDBLabeledEdit
-        Left = 251
-        Top = 311
-        Width = 140
-        Height = 23
+        Left = 301
+        Top = 373
+        Width = 167
+        Height = 27
         Hint = 'Nosso N'#250'mero no Boleto'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3430,30 +3662,39 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o N'#250'mero do Docto'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'NossoNro'
         DataSource = SouTitu
-        EditLabel.Width = 90
-        EditLabel.Height = 15
+        EditLabel.Width = 101
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'NOSSO N'#218'MERO'
       end
       object edCodRec: TLMDDBLabeledEdit
-        Left = 20
-        Top = 311
-        Width = 75
-        Height = 23
+        Left = 24
+        Top = 373
+        Width = 90
+        Height = 27
         Hint = 'C'#243'digo da Receita no Darf'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3467,29 +3708,38 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o C'#243'digo da Receita'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'CodRec'
         DataSource = SouTitu
-        EditLabel.Width = 72
-        EditLabel.Height = 15
+        EditLabel.Width = 84
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'C'#211'D. RECEITA'
       end
       object edNumRef: TLMDDBLabeledEdit
-        Left = 103
-        Top = 311
-        Width = 140
-        Height = 23
+        Left = 123
+        Top = 373
+        Width = 168
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3503,29 +3753,38 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o N'#250'mero do Docto'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'NumReferencia'
         DataSource = SouTitu
-        EditLabel.Width = 81
-        EditLabel.Height = 15
+        EditLabel.Width = 93
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
         EditLabel.Caption = 'N'#186' REFER'#202'NCIA'
       end
       object pnDatDoc: TLMDSimplePanel
-        Left = 442
-        Top = 88
-        Width = 94
-        Height = 23
+        Left = 529
+        Top = 105
+        Width = 113
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3534,12 +3793,14 @@ object FrmTitCad: TFrmTitCad
         TabOrder = 13
         object edDatDoc: TDBDateEdit
           AlignWithMargins = True
-          Left = 4
+          Left = 5
           Top = 3
-          Width = 87
-          Height = 19
+          Width = 105
+          Height = 22
+          Margins.Left = 4
           Margins.Top = 2
           Margins.Right = 2
+          Margins.Bottom = 4
           Align = alClient
           DataField = 'DatCompApur'
           DataSource = SouTitu
@@ -3550,103 +3811,118 @@ object FrmTitCad: TFrmTitCad
           DialogTitle = 'Entre com Data'
           Font.Charset = ANSI_CHARSET
           Font.Color = 2236186
-          Font.Height = -12
+          Font.Height = -14
           Font.Name = 'Tahoma'
           Font.Style = []
           GlyphKind = gkCustom
           Glyph.Data = {
-            5E0B0000424D5E0B00000000000036000000280000002D000000150000000100
-            180000000000280B000000000000000000000000000000000000241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED24
-            1CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            360D0000424D360D00000000000036000000280000002A0000001A0000000100
+            180000000000000D0000000000000000000000000000000000000000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+            FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00
+            00FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77
-            686B77686B77686B77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFA6A8AFC0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0
-            B9B5C0B9B5A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77F7EFEAF5ECE7F4E8E2F2E5DEF1E3DBF0E1D8EFDFD6F2E5DEF2E5DE686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77F9F2EFC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACBCB0A9BD
-            B2ACF2E5DE686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6
-            E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FAF5F3C3BEBBFFFFFFC0B9B5FFFF
-            FFBEB4AEFFFFFFBCB0A9EFDFD6686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0
-            B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FCF8F7C4C0BF
-            C3BEBBC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACF0E1D8686B77FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6
-            E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77FDFBFAC6C3C2FFFFFFC3BEBBFFFFFFC0B9B5FFFFFFBEB4AEF1E3DB686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6
-            E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77FEFEFDC6C5C4C6C3C2C4C0BFC3BEBBC2BBB8C0B9B5BF
-            B6B1F2E5DE686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6
-            FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC7C7C6FFFFFFC6C3C2FFFF
-            FFC3BEBBFFFFFFC0B9B5F4E8E2686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0
-            B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC8C8C8
-            C7C7C6C6C5C4C6C3C2C4C0BFC3BEBBC2BBB8F5ECE7686B77FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6E6E6FFFFFFE6
-            E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF68
-            6B77FFFFFFFFFFFFFFFFFFFEFEFDFDFBFAFCF8F7FAF5F3F9F2EFF7EFEA686B77
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFE6E6E6E6E6E6E6E6E6E6E6
-            E6E6E6E6E6E6E6E6E6E6FFFFFFC0B9B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF686B77FFFFFFC8C8C8C8C8C8C8C8C8C7C7C6C6C5C4C6C3C2C4
-            C0BFF9F2EF686B77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0B9B5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77686B77686B77686B
-            77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6
-            A8AFC0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5C0B9B5A6A8AF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241C
-            ED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CEDFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFC0C0C08080808080808080808080808080808080808080
+            80808080808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0FFFFFFC0C0C0FFFFFFC0C0C0FFFF
+            FFC0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFF808080FFFFFFC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0C0FFFFFF808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFC0C0C08080808080808080808080808080808080808080
+            80808080808080C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF241CED00241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED24
-            1CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED
-            241CED241CED241CED241CED241CED241CED241CED241CED241CED241CED241C
-            ED00}
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF00000000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+            FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF00
+            00FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF
+            0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000}
+          ButtonWidth = 18
           NumGlyphs = 2
           ParentCtl3D = False
           ParentFont = False
@@ -3655,10 +3931,14 @@ object FrmTitCad: TFrmTitCad
         end
       end
       object edPIX: TLMDLabeledEdit
-        Left = 434
-        Top = 256
-        Width = 100
-        Height = 21
+        Left = 520
+        Top = 307
+        Width = 120
+        Height = 25
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3670,16 +3950,21 @@ object FrmTitCad: TFrmTitCad
         TabOrder = 26
         Visible = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         PasswordChar = #0
         ReadOnly = True
         Spelling.LiveSpell = True
         Text = ''
-        EditLabel.Width = 57
-        EditLabel.Height = 15
+        EditLabel.Width = 65
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Enabled = False
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
@@ -3687,10 +3972,14 @@ object FrmTitCad: TFrmTitCad
         EditLabel.Caption = 'CHAVE PIX'
       end
       object edAgBenef: TLMDDBLabeledEdit
-        Left = 403
-        Top = 311
-        Width = 133
-        Height = 23
+        Left = 483
+        Top = 373
+        Width = 159
+        Height = 27
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Bevel.StyleOuter = bvNormal
         Bevel.WidthOuter = 0
         Bevel.BorderColor = 15657192
@@ -3705,19 +3994,24 @@ object FrmTitCad: TFrmTitCad
         ValidationMsgString = 'o C'#243'digo da Receita'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2236186
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         CustomButtons = <>
+        CustomButtonWidth = 19
         TabOnEnter = True
         DataField = 'AgBenef'
         DataSource = SouTitu
-        EditLabel.Width = 53
-        EditLabel.Height = 15
+        EditLabel.Width = 62
+        EditLabel.Height = 17
+        EditLabel.Margins.Left = 4
+        EditLabel.Margins.Top = 4
+        EditLabel.Margins.Right = 4
+        EditLabel.Margins.Bottom = 4
         EditLabel.Font.Charset = DEFAULT_CHARSET
         EditLabel.Font.Color = 9600112
-        EditLabel.Font.Height = -11
+        EditLabel.Font.Height = -13
         EditLabel.Font.Name = 'Roboto'
         EditLabel.Font.Style = [fsBold]
         EditLabel.ParentFont = False
@@ -3726,49 +4020,54 @@ object FrmTitCad: TFrmTitCad
     end
     object PanelRodape: TLMDSimplePanel
       AlignWithMargins = True
-      Left = 6
-      Top = 461
-      Width = 760
-      Height = 32
-      Margins.Left = 5
-      Margins.Top = 5
-      Margins.Bottom = 8
+      Left = 7
+      Top = 553
+      Width = 910
+      Height = 39
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 4
+      Margins.Bottom = 10
       Align = alBottom
       Color = 16382200
       TabOrder = 2
-      ExplicitTop = 459
-      ExplicitWidth = 756
+      ExplicitLeft = -26
+      ExplicitTop = 546
       object PanelButtons: TLMDSimplePanel
         AlignWithMargins = True
-        Left = 398
-        Top = 3
-        Width = 359
-        Height = 26
+        Left = 476
+        Top = 4
+        Width = 430
+        Height = 31
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alRight
         ParentColor = True
         TabOrder = 0
-        ExplicitLeft = 394
         object btNovo: TAdvGlowButton
           AlignWithMargins = True
-          Left = 18
+          Left = 23
           Top = 0
-          Width = 100
-          Height = 26
+          Width = 119
+          Height = 31
           Cursor = crHandPoint
+          Margins.Left = 4
           Margins.Top = 0
-          Margins.Right = 6
+          Margins.Right = 7
           Margins.Bottom = 0
           Align = alRight
           Caption = 'Novo'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 7039851
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Roboto'
           Font.Style = [fsBold]
           Font.Quality = fqClearType
           NotesFont.Charset = DEFAULT_CHARSET
           NotesFont.Color = clWindowText
-          NotesFont.Height = -12
+          NotesFont.Height = -16
           NotesFont.Name = 'Tahoma'
           NotesFont.Style = []
           ParentFont = False
@@ -3829,25 +4128,26 @@ object FrmTitCad: TFrmTitCad
         end
         object btSalvar: TAdvGlowButton
           AlignWithMargins = True
-          Left = 235
+          Left = 282
           Top = 0
-          Width = 100
-          Height = 26
+          Width = 119
+          Height = 31
           Cursor = crHandPoint
+          Margins.Left = 4
           Margins.Top = 0
-          Margins.Right = 24
+          Margins.Right = 29
           Margins.Bottom = 0
           Align = alRight
           Caption = 'Salvar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 7039851
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Roboto'
           Font.Style = [fsBold]
           Font.Quality = fqClearType
           NotesFont.Charset = DEFAULT_CHARSET
           NotesFont.Color = clWindowText
-          NotesFont.Height = -12
+          NotesFont.Height = -16
           NotesFont.Name = 'Tahoma'
           NotesFont.Style = []
           ParentFont = False
@@ -3911,26 +4211,26 @@ object FrmTitCad: TFrmTitCad
         end
         object btExcluir: TAdvGlowButton
           AlignWithMargins = True
-          Left = 126
+          Left = 151
           Top = 0
-          Width = 100
-          Height = 26
+          Width = 120
+          Height = 31
           Cursor = crHandPoint
           Margins.Left = 2
           Margins.Top = 0
-          Margins.Right = 6
+          Margins.Right = 7
           Margins.Bottom = 0
           Align = alRight
           Caption = 'Excluir'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 5723991
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Roboto'
           Font.Style = [fsBold]
           Font.Quality = fqClearType
           NotesFont.Charset = DEFAULT_CHARSET
           NotesFont.Color = clWindowText
-          NotesFont.Height = -12
+          NotesFont.Height = -16
           NotesFont.Name = 'Tahoma'
           NotesFont.Style = []
           ParentFont = False

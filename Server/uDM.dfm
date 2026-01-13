@@ -3,8 +3,9 @@ object DMServer: TDMServer
   OnDestroy = ServerMethodDataModuleDestroy
   Encoding = esUtf8
   QueuedRequest = False
-  Height = 234
-  Width = 284
+  Height = 280
+  Width = 340
+  PixelsPerInch = 115
   object RESTDWPoolerDB: TRESTDWPoolerDB
     RESTDriver = RESTDWDriverFD
     Compression = True
@@ -15,17 +16,17 @@ object DMServer: TDMServer
     Active = False
     PoolerOffMessage = 'RESTPooler not active.'
     ParamCreate = True
-    Left = 44
-    Top = 161
+    Left = 53
+    Top = 193
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 181
-    Top = 89
+    Left = 217
+    Top = 107
   end
   object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
-    Left = 176
-    Top = 17
+    Left = 211
+    Top = 20
   end
   object FDConnect: TFDConnection
     ConnectionName = 'dbaiserver'
@@ -39,16 +40,16 @@ object DMServer: TDMServer
     UpdateOptions.AssignedValues = [uvCountUpdatedRecords]
     UpdateOptions.CountUpdatedRecords = False
     LoginPrompt = False
-    Left = 48
-    Top = 24
+    Left = 58
+    Top = 29
   end
   object RESTDWDriverFD: TRESTDWDriverFD
     CommitRecords = 100
     Connection = FDConnect
-    Left = 48
-    Top = 88
+    Left = 58
+    Top = 105
   end
-  object DWServerEvents: TRESTDWServerEvents
+  object DWServerEvents1: TRESTDWServerEvents
     IgnoreInvalidParams = False
     Events = <
       item
@@ -319,7 +320,7 @@ object DMServer: TDMServer
         OnlyPreDefinedParams = False
         OnReplyEvent = DWServerEventsEventsValidaKeyReplyEvent
       end>
-    Left = 184
-    Top = 160
+    Left = 219
+    Top = 191
   end
 end

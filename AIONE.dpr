@@ -3,9 +3,9 @@ program AIONE;
 uses
   Vcl.Forms,
   uTraducao,
-  uDM in 'uBasico\uDM.pas' {DM: TDataModule},
-  uPrincipal in 'uBasico\uPrincipal.pas' {FrmPrincipal},
-  uMenCad in 'uBasico\uMenCad.pas' {FrmMenCad},
+  uDM in 'uniBasico\uDM.pas' {DM: TDataModule},
+  uPrincipal in 'uniBasico\uPrincipal.pas' {FrmPrincipal},
+  uMenCad in 'uniBasico\uMenCad.pas' {FrmMenCad},
   uLibFarm in 'uniAuxilia\uLibFarm.pas',
   uInfoIni in 'uniAuxilia\uInfoIni.pas' {FrmInfoIni},
   uBusca in 'uniAuxilia\uBusca.pas' {FrmBusca},

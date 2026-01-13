@@ -22,6 +22,8 @@ type
     procedure timAlphaTimer(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btOperaClick(Sender: TObject);
+    procedure btBalanClick(Sender: TObject);
   private
     procedure AbreForm(Formu:TForm; TFormu:TFormClass);
     procedure FechaForms;
@@ -55,6 +57,16 @@ begin
 //   AbreForm(FrmTraEsto, TFrmTraEsto);
 end;
 
+procedure TFrmMenEsto.btOperaClick(Sender: TObject);
+begin
+//   AbreForm(FrmOpeEsto, TFrmOpeEsto);
+end;
+
+procedure TFrmMenEsto.btBalanClick(Sender: TObject);
+begin
+//   AbreForm(FrmBalEsto, TFrmBalEsto);
+end;
+
 procedure TFrmMenEsto.AbreForm(Formu: TForm; TFormu: TFormClass);
 begin
    PanelBtMenu.Visible := False;
@@ -68,7 +80,7 @@ end;
 
 procedure TFrmMenEsto.FormResize(Sender: TObject);
 begin
-   btTransf.Margins.Top := (PanelBtMenu.ClientHeight - (7 * (btTransf.Height+2))) div 2;
+   btTransf.Margins.Top := (PanelBtMenu.ClientHeight - (3 * (btTransf.Height+2))) div 2;
 end;
 
 procedure TFrmMenEsto.FechaForms;

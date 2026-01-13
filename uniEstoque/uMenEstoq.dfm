@@ -2,36 +2,37 @@ object FrmMenEsto: TFrmMenEsto
   AlignWithMargins = True
   Left = 0
   Top = 0
-  Margins.Left = 5
-  Margins.Top = 5
-  Margins.Right = 5
-  Margins.Bottom = 5
+  Margins.Left = 6
+  Margins.Top = 6
+  Margins.Right = 6
+  Margins.Bottom = 6
   Align = alClient
   AlphaBlend = True
   AlphaBlendValue = 0
   BorderStyle = bsNone
   Caption = 'ESTOQUE - Menu Estoque'
-  ClientHeight = 611
-  ClientWidth = 980
+  ClientHeight = 732
+  ClientWidth = 1174
   Color = clFuchsia
   TransparentColor = True
   TransparentColorValue = clFuchsia
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 5395026
-  Font.Height = -12
+  Font.Height = -14
   Font.Name = 'Roboto'
   Font.Style = []
   Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
-  TextHeight = 14
+  PixelsPerInch = 115
+  TextHeight = 17
   object PanelShow: TAdvSmoothPanel
     AlignWithMargins = True
-    Left = 88
+    Left = 105
     Top = 1
-    Width = 891
-    Height = 609
+    Width = 1068
+    Height = 730
     Cursor = crDefault
     Margins.Left = 0
     Margins.Top = 1
@@ -44,7 +45,7 @@ object FrmMenEsto: TFrmMenEsto
     Caption.HTMLFont.Style = []
     Caption.Font.Charset = DEFAULT_CHARSET
     Caption.Font.Color = clWindowText
-    Caption.Font.Height = -16
+    Caption.Font.Height = -19
     Caption.Font.Name = 'Tahoma'
     Caption.Font.Style = []
     Caption.ColorStart = 4474440
@@ -72,8 +73,8 @@ object FrmMenEsto: TFrmMenEsto
     AlignWithMargins = True
     Left = 1
     Top = 1
-    Width = 87
-    Height = 609
+    Width = 104
+    Height = 730
     Cursor = crDefault
     Margins.Left = 1
     Margins.Top = 1
@@ -86,7 +87,7 @@ object FrmMenEsto: TFrmMenEsto
     Caption.HTMLFont.Style = []
     Caption.Font.Charset = DEFAULT_CHARSET
     Caption.Font.Color = clWindowText
-    Caption.Font.Height = -16
+    Caption.Font.Height = -19
     Caption.Font.Name = 'Tahoma'
     Caption.Font.Style = []
     Caption.ColorStart = 4474440
@@ -112,15 +113,13 @@ object FrmMenEsto: TFrmMenEsto
     Version = '1.7.1.6'
     Align = alLeft
     TabOrder = 1
-    ExplicitLeft = 2
-    ExplicitTop = -4
     TMSStyle = 0
     object AdvSmoothPanel3: TAdvSmoothPanel
       AlignWithMargins = True
-      Left = 87
-      Top = 405
+      Left = 104
+      Top = 480
       Width = 0
-      Height = 204
+      Height = 250
       Cursor = crDefault
       Margins.Left = 0
       Margins.Top = 0
@@ -134,7 +133,7 @@ object FrmMenEsto: TFrmMenEsto
       Caption.HTMLFont.Style = []
       Caption.Font.Charset = DEFAULT_CHARSET
       Caption.Font.Color = clWindowText
-      Caption.Font.Height = -16
+      Caption.Font.Height = -19
       Caption.Font.Name = 'Tahoma'
       Caption.Font.Style = []
       Caption.ColorStart = 4474440
@@ -148,7 +147,7 @@ object FrmMenEsto: TFrmMenEsto
       Fill.GradientType = gtVertical
       Fill.GradientMirrorType = gtVertical
       Fill.BorderColor = 16382200
-      Fill.Rounding = 8
+      Fill.Rounding = 10
       Fill.ShadowColor = 13748681
       Fill.ShadowOffset = 0
       Fill.ShadowType = stSurround
@@ -158,19 +157,19 @@ object FrmMenEsto: TFrmMenEsto
       Version = '1.7.1.6'
       Align = alRight
       TabOrder = 0
-      ExplicitTop = 504
-      ExplicitHeight = 57
+      ExplicitTop = 485
+      ExplicitHeight = 245
       TMSStyle = 0
     end
     object btTransf: TAdvGlowButton
       AlignWithMargins = True
       Left = 0
-      Top = 160
-      Width = 87
-      Height = 83
+      Top = 192
+      Width = 104
+      Height = 99
       Cursor = crHandPoint
       Margins.Left = 0
-      Margins.Top = 160
+      Margins.Top = 192
       Margins.Right = 0
       Margins.Bottom = 0
       Align = alTop
@@ -179,7 +178,7 @@ object FrmMenEsto: TFrmMenEsto
       Caption = 'Transfere'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqAntialiased
@@ -214,11 +213,11 @@ object FrmMenEsto: TFrmMenEsto
         D76C485D013889C6A88F7E478F77BBE54A2BC2CDD9DE30BA8E138E71C82B5CFE
         E1D139D6E35287E6CDC8A68768705D221E13F54A844B958719F13772E68F80DF
         73C0FF0700D18F270B32F6F0E30000000049454E44AE426082}
-      MarginVert = 12
+      MarginVert = 19
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -11
+      NotesFont.Height = -13
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -245,8 +244,7 @@ object FrmMenEsto: TFrmMenEsto
         E00F86F02C1C07A225DABB88D2437884AB9526598EBF39170BC7B3FACAFD1CC9
         7D0D371999AF3E9EE4406E0CBB677279B429EC8DF5A8728A789DE2E0F53FC185
         2BE0F94EF0DF00284C3202405BA5DA0000000049454E44AE426082}
-      Rounded = False
-      Spacing = 0
+      Rounded = True
       Transparent = True
       TabOrder = 1
       OnClick = btTransfClick
@@ -268,8 +266,8 @@ object FrmMenEsto: TFrmMenEsto
       Appearance.ColorHot = 14674687
       Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
-      Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorTo = 14674687
+      Appearance.ColorMirrorHot = 12046079
       Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
@@ -291,9 +289,9 @@ object FrmMenEsto: TFrmMenEsto
     object btOpera: TAdvGlowButton
       AlignWithMargins = True
       Left = 0
-      Top = 243
-      Width = 87
-      Height = 87
+      Top = 291
+      Width = 104
+      Height = 99
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -305,7 +303,7 @@ object FrmMenEsto: TFrmMenEsto
       Caption = 'Opera'#231#245'es'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -370,11 +368,11 @@ object FrmMenEsto: TFrmMenEsto
         51A437F702C806312D90684EF24A010A0C094FF98988CBF935DBB2168E1B4193
         319F76FA6E73688E6213B49C5233AEB154F863CA5B3E5B9C9E03931ED13F2A7F
         4FFF7700F8F2BAE9E09C21FD0000000049454E44AE426082}
-      MarginVert = 12
+      MarginVert = 18
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -11
+      NotesFont.Height = -13
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -426,11 +424,13 @@ object FrmMenEsto: TFrmMenEsto
         954A5EACCA0DBB76C955CD22A9540A5555A5AAAA4829B97FFF7ED9D1CB8A5C55
         7D249148183D069CAD969CA51068F7DBEF7F45FF0C00E183592B7252AE310000
         000049454E44AE426082}
-      Rounded = False
+      Rounded = True
+      Spacing = 3
       Transparent = True
       TabOrder = 2
+      OnClick = btOperaClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -447,8 +447,8 @@ object FrmMenEsto: TFrmMenEsto
       Appearance.ColorHot = 14674687
       Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
-      Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorTo = 14674687
+      Appearance.ColorMirrorHot = 12046079
       Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
@@ -470,9 +470,9 @@ object FrmMenEsto: TFrmMenEsto
     object btBalan: TAdvGlowButton
       AlignWithMargins = True
       Left = 0
-      Top = 330
-      Width = 87
-      Height = 75
+      Top = 390
+      Width = 104
+      Height = 90
       Cursor = crHandPoint
       Margins.Left = 0
       Margins.Top = 0
@@ -484,7 +484,7 @@ object FrmMenEsto: TFrmMenEsto
       Caption = 'Balan'#231'o'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqClearType
@@ -517,11 +517,11 @@ object FrmMenEsto: TFrmMenEsto
         2AE8AA6C09FC30296711F53B15FEB7FB02D964B7F67AC77F9512EAA1DBAF0EF7
         09CE7144EDF9A710D978D30ED3A1ECF118853337E2E72F2CE5BD0743E0FBEE34
         007B880000000049454E44AE426082}
-      MarginVert = 12
+      MarginVert = 19
       MarginHorz = 0
       NotesFont.Charset = DEFAULT_CHARSET
       NotesFont.Color = clWindowText
-      NotesFont.Height = -11
+      NotesFont.Height = -13
       NotesFont.Name = 'Tahoma'
       NotesFont.Style = []
       ParentFont = False
@@ -547,11 +547,13 @@ object FrmMenEsto: TFrmMenEsto
         84665659EFC1EA0CF104C7E14D410023C20909D772C4F7A3A5843958AA18FB10
         415A701D3B6AC4BDC676BC2D4837D34AD88D8742DD8CE0294E080F0D7E025A59
         0B574F7EAB160000000049454E44AE426082}
-      Rounded = False
+      Rounded = True
+      Spacing = 3
       Transparent = True
       TabOrder = 3
+      OnClick = btBalanClick
       Appearance.BorderColor = 12046079
-      Appearance.BorderColorHot = 12046079
+      Appearance.BorderColorHot = 14674687
       Appearance.BorderColorCheckedHot = 12046079
       Appearance.BorderColorDown = 12046079
       Appearance.BorderColorChecked = 12046079
@@ -568,8 +570,8 @@ object FrmMenEsto: TFrmMenEsto
       Appearance.ColorHot = 14674687
       Appearance.ColorHotTo = 14674687
       Appearance.ColorMirror = 12046079
-      Appearance.ColorMirrorTo = 12046079
-      Appearance.ColorMirrorHot = 14674687
+      Appearance.ColorMirrorTo = 14674687
+      Appearance.ColorMirrorHot = 12046079
       Appearance.ColorMirrorHotTo = 14674687
       Appearance.ColorMirrorDown = 12046079
       Appearance.ColorMirrorDownTo = 12046079
@@ -587,13 +589,13 @@ object FrmMenEsto: TFrmMenEsto
       Appearance.TextColorHot = 30433
       Appearance.TextColorDisabled = 3191038
       Layout = blGlyphTopAdjusted
-      ExplicitTop = 329
+      ExplicitTop = 394
     end
   end
   object timAlpha: TTimer
     Interval = 250
     OnTimer = timAlphaTimer
-    Left = 29
-    Top = 32
+    Left = 1063
+    Top = 41
   end
 end
