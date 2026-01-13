@@ -33,7 +33,7 @@ AIONE.My é um ERP completo para farmácias desenvolvido em Delphi com arquitetu
 
 ### Estrutura Principal (Cliente)
 ```
-uBasico/      → DataModule, formulário e menu principal
+uniBasico/    → DataModule, formulário e menu principal
 uniAuxilia/   → Serviços auxiliares (config, logging, IA)
 uniCaixa/     → Operações de caixa e PDV
 uniComi/      → Comissões
